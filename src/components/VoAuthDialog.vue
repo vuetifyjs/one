@@ -1,5 +1,4 @@
 <template>
-
   <v-dialog
     v-if="!auth.user && !auth.isLoading"
     max-width="480"
@@ -80,6 +79,20 @@
 
 <script setup lang="ts">
   // Components
+  import {
+    VBtn,
+    VCard,
+    VCardSubtitle,
+    VCardTitle,
+    VDialog,
+    VImg,
+    VList,
+    VListSubheader,
+    VMenu,
+    VAvatar,
+    VSkeletonLoader,
+  } from 'vuetify/components'
+
   import VoGithubLogin from '@/components/VoGithubLogin.vue'
   import VoDiscordLogin from '@/components/VoDiscordLogin.vue'
 

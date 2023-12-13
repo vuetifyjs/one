@@ -15,9 +15,8 @@ export default defineConfig({
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     Vuetify({
-      styles: {
-        configFile: 'src/styles/settings.scss',
-      },
+      autoImport: false,
+      styles: "none",
     }),
   ],
   resolve: {
@@ -42,6 +41,14 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['vue', 'vuetify', '@mdi/js', 'pinia'],
+      output: {
+        globals: {
+          vue: 'vue',
+          vuetify: 'vuetify',
+          '@mdi/js': '@mdi/js',
+          pinia: 'pinia'
+        }
+      }
     },
   },
 })

@@ -51,7 +51,6 @@ export const useAuthStore = defineStore('auth', () => {
     if (JSON.stringify(user.settings, null, 2) === local) return
     externalUpdate = true
 
-    console.log(user.settings)
     Object.assign(userStore, user.settings)
   })
 
@@ -100,7 +99,7 @@ export const useAuthStore = defineStore('auth', () => {
         }
       },
       () => {},
-    ).then(() => {
+    ).finally(() => {
       isLoading.value = false
       verify.promise = null
     })
@@ -188,6 +187,10 @@ export const useAuthStore = defineStore('auth', () => {
   const lastLoginProvider = () => (
     localStorage.getItem('vuetify@lastLoginProvider')
   )
+
+  if (lastLoginProvider()) {
+    verify()
+  }
 
   return {
     user,

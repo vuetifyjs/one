@@ -14,5 +14,8 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Testimonial: typeof import('./src/components/Testimonial.vue')['default']
+    VoAuthDialog: typeof import('./src/components/VoAuthDialog.vue')['default']
+    VoDiscordLogin: typeof import('./src/components/VoDiscordLogin.vue')['default']
+    VoGithubLogin: typeof import('./src/components/VoGithubLogin.vue')['default']
   }
 }
