@@ -22,12 +22,12 @@ interface User {
   sponsorships: {
     id: string
     platform: string
+    recurring: boolean
     target: string
     tierName: string
     amount: number
     isActive: boolean
-    firstPayment: Date
-    lastPayment: Date
+    createdAt: Date
   }[]
 }
 
