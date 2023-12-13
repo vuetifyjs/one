@@ -32,9 +32,13 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await fetch(`${url}/one/activate?sessionId=${sessionId}`, {
-        method: 'GET',
+      const res = await fetch(`${url}/one/activate`, {
+        method: 'POST',
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sessionId }),
       }).then(res => res.json())
 
       auth.user = res.user
@@ -77,7 +81,7 @@ export const useOneStore = defineStore('one', () => {
       isLoading.value = true
 
       const res = await fetch(`${url}/one/verify?subscriptionId=${subscription.value?.tierName}`, {
-        method: 'GET',
+        method: 'POST',
         credentials: 'include',
       }).then(res => res.json())
 
