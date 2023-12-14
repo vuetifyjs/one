@@ -5,12 +5,15 @@ import { useUserStore } from '@/store/user'
 import { defineStore } from 'pinia'
 import { computed, ref, shallowRef, watch } from 'vue'
 
+// Types
+import type { DEFAULT_SETTINGS } from './user'
+
 interface User {
   id: string
   isAdmin: boolean
   name: string
   picture: string | null
-  settings: Record<string, any> | null
+  settings: typeof DEFAULT_SETTINGS | null
   identities: {
     id: string
     emails: string[]
@@ -47,17 +50,17 @@ export const useAuthStore = defineStore('auth', () => {
   let externalUpdate = false
   watch(user, user => {
     if (!user?.settings) return
-    const local = localStorage.getItem('vuetify@user') || '{}'
-    if (JSON.stringify(user.settings, null, 2) === local) return
-    externalUpdate = true
 
-    Object.assign(userStore, user.settings)
+    const local = localStorage.getItem('vuetify:one@user') || '{}'
+
+    if (JSON.stringify(user.settings, null, 2) === local) return
+
+    externalUpdate = true
+    userStore.settings = user.settings
   })
 
   userStore.$subscribe(() => {
-    if (!externalUpdate) {
-      pushSettings()
-    }
+    if (!externalUpdate) pushSettings()
     externalUpdate = false
   })
 
@@ -70,7 +73,7 @@ export const useAuthStore = defineStore('auth', () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          settings: userStore.$state,
+          settings: userStore.settings,
         }),
       })
     } catch (err: any) {
@@ -108,8 +111,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login (provider: 'github' | 'discord' = 'github') {
     isLoading.value = true
-    const redirectUrl = `${url}/auth/${provider}/redirect`
 
+    const redirectUrl = `${url}/auth/${provider}/redirect`
     const width = 400
     const height = 600
     const left = window.screenX + (window.innerWidth - width) / 2
@@ -121,10 +124,7 @@ export const useAuthStore = defineStore('auth', () => {
       `popup,left=${left},top=${top},width=${width},height=${height},resizable`
     )
 
-    if (!ctx) {
-      console.error('Failed to open popup')
-      return
-    }
+    if (!ctx) return console.error('Failed to open popup')
 
     ctx.location.href = redirectUrl
 
@@ -170,6 +170,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function logout () {
     isLoading.value = true
+
     try {
       await fetch(`${url}/auth/logout`, {
         method: 'POST',
@@ -188,9 +189,7 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.getItem('vuetify@lastLoginProvider')
   )
 
-  if (lastLoginProvider()) {
-    verify()
-  }
+  if (lastLoginProvider()) verify()
 
   return {
     user,

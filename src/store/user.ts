@@ -3,195 +3,82 @@ import { defineStore } from 'pinia'
 
 // Utilities
 import { merge } from 'lodash-es'
-import { reactive, toRefs } from 'vue'
+import { ref, reactive, toRefs } from 'vue'
 
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'
 
-export type RootState = {
-  v: 2 | 3 | 4
-  api: 'link-only' | 'inline'
-  avatar: string
-  dev: boolean
-  disableAds: boolean
-  composition: ('options' | 'composition')
-  pwaRefresh: boolean
-  slashSearch: boolean
-  syncSettings: boolean
-  theme: string
-  mixedTheme: boolean
-  direction: 'rtl' | 'ltr'
-  quickbar: boolean
-  railDrawer: boolean
-  notifications: {
-    show: boolean
-    read: string[]
-    last: {
-      banner: string[]
-      v2banner: null | number
-      install: null | number
-      notification: null | number
-      promotion: null | number
-      jobs: null | number
-    }
-  }
-}
-
-export type SavedState = {
-  api: boolean
-  drawer: { alphabetical: boolean, mini: boolean }
-  last: {
-    install: null | number
-    notification: null | number
-    promotion: null | number
-    jobs: null | number
-  }
-  pwaRefresh: boolean
-  rtl: boolean
-  theme: {
-    dark: boolean
-    system: boolean
-    mixed: boolean
-  }
-} | {
-  api: 'link-only' | 'inline'
-  pwaRefresh: boolean
-  theme: string
-  mixedTheme: boolean
-  direction: 'rtl' | 'ltr'
-  notifications: {
-    read: string[]
-    last: {
-      install: null | number
-      notification: null | number
-      promotion: null | number
-      jobs: null | number
-    }
-  }
-} | {
-  v: 1
-  api: 'link-only' | 'inline'
-  dev?: boolean
-  composition?: ('options' | 'composition') | ('options' | 'composition')[]
-  pwaRefresh: boolean
-  theme: string
-  mixedTheme: boolean
-  direction: 'rtl' | 'ltr'
-  notifications: {
-    show?: boolean
-    read: string[]
-    last: {
-      banner?: null | number | string[]
-      v2banner?: null | number
-      install: null | number
-      notification: null | number
-      promotion: null | number
-      jobs: null | number
-    }
-  }
-} | RootState
-
-export const DEFAULT_USER: RootState = {
-  v: 4,
+export const DEFAULT_SETTINGS = {
   api: 'link-only',
   avatar: '',
-  dev: false,
-  disableAds: false,
-  composition: 'options',
-  pwaRefresh: true,
-  theme: 'system',
-  mixedTheme: true,
-  direction: 'ltr',
-  slashSearch: false,
-  syncSettings: true,
-  quickbar: false,
-  railDrawer: false,
+  banners: {
+    show: true,
+    last: null,
+    read: [],
+  },
+  compositionType: 'composition',
+  devMode: false,
+  ads: {
+    show: true,
+    discovery: true,
+  },
+  jobs: {
+    show: true,
+    bookmarks: [],
+  },
   notifications: {
     show: true,
+    last: null,
     read: [],
-    last: {
-      banner: [],
-      v2banner: null,
-      install: null,
-      notification: null,
-      promotion: null,
-      jobs: null,
-    },
   },
+  pinned: {
+    show: false,
+    pages: [],
+  },
+  quickbar: true,
+  railDrawer: false,
+  searches: {
+    last: [],
+    bookmarks: [],
+  },
+  slashSearch: false,
+  theme: {
+    name: 'light',
+    mixedTheme: false,
+    colors: {},
+    dark: false,
+  },
+} as const
+
+export const DEFAULT_USER = {
+  v: 5,
+  settings: merge({}, DEFAULT_SETTINGS),
 }
 
 export const useUserStore = defineStore('user', () => {
-  const state = reactive(merge({}, DEFAULT_USER))
+  const user = ref(merge({}, DEFAULT_USER))
 
   function load () {
     if (!IN_BROWSER) return
 
-    const stored = localStorage.getItem('vuetify@user')
-    const data = stored ? JSON.parse(stored) : {}
-    const needsRefresh = data.v === state.v
+    const stored = localStorage.getItem('vuetify:one@user')
+    const data = stored ? JSON.parse(stored) : null
 
-    if (!data.v) {
-      data.pwaRefresh = true
-      if (typeof data.api === 'boolean') {
-        data.api = data.api ? 'inline' : 'link-only'
-      }
-      if (typeof data.rtl === 'boolean') {
-        data.direction = data.rtl ? 'rtl' : 'ltr'
-        delete data.rtl
-      }
-      if (typeof data.theme === 'object') {
-        data.mixedTheme = data.theme.mixed
-        data.theme = data.theme.system ? 'system'
-          : data.theme.dark ? 'dark'
-            : 'light'
-      }
-      if (Array.isArray(data.notifications)) {
-        data.notifications = { read: data.notifications }
-      }
-      if (typeof data.last === 'object') {
-        data.notifications.last = data.last
-        delete data.last
-      }
-    }
+    user.value.settings = merge({}, DEFAULT_SETTINGS, data?.settings ?? {})
 
-    if (data.v === 1) {
-      if (Array.isArray(data.composition)) {
-        data.composition = 'composition'
-      }
-      if (!Array.isArray(data.notifications.last.banner)) {
-        data.notifications = data.notifications || {}
-        data.notifications.last = data.notifications.last || {}
-        data.notifications.last.banner = []
-      }
-    }
-
-    if (data.v === 2) {
-      data.syncSettings = true
-      data.disableAds = false
-      data.v = 3
-    }
-
-    if (data.v === 3) {
-      data.quickbar = false
-    }
-
-    data.v = state.v
-    Object.assign(state, merge(state, data))
-    if (needsRefresh) {
-      save()
-    }
+    if (!data) save()
   }
 
   function save () {
     if (!IN_BROWSER) return
 
-    localStorage.setItem('vuetify@user', JSON.stringify(state, null, 2))
+    localStorage.setItem('vuetify:one@user', JSON.stringify(user.value.settings, null, 2))
   }
 
   function reset () {
     if (!IN_BROWSER) return
 
-    Object.assign(state, merge({}, DEFAULT_USER))
+    user.value.settings = merge({}, DEFAULT_SETTINGS)
 
     save()
   }
@@ -199,7 +86,7 @@ export const useUserStore = defineStore('user', () => {
   load()
 
   return {
-    ...state,
+    ...toRefs(user.value),
     load,
     save,
     reset,
