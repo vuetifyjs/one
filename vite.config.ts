@@ -41,6 +41,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@/types': fileURLToPath(new URL('./index.d.ts', import.meta.url)),
     },
     extensions: [
       '.js',

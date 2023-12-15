@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 // Utilities
 import { merge } from 'lodash-es'
-import { reactive, toRefs } from 'vue'
+import { reactive } from 'vue'
 
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'
