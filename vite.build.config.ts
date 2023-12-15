@@ -16,7 +16,7 @@ export default defineConfig({
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     Vuetify({
       autoImport: false,
-      styles: "none",
+      styles: 'none',
     }),
   ],
   resolve: {
@@ -40,15 +40,22 @@ export default defineConfig({
       fileName: 'v-one',
     },
     rollupOptions: {
-      external: ['vue', 'vuetify', '@mdi/js', 'pinia'],
+      external: [
+        'vue',
+        'vuetify',
+        '@mdi/js',
+        'pinia',
+        'lodash-es',
+      ],
       output: {
         globals: {
           vue: 'vue',
           vuetify: 'vuetify',
           '@mdi/js': '@mdi/js',
-          pinia: 'pinia'
-        }
-      }
+          pinia: 'pinia',
+          'lodash-es': 'lodash-es',
+        },
+      },
     },
   },
 })

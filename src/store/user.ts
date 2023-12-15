@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 // Utilities
 import { merge } from 'lodash-es'
-import { reactive } from 'vue'
+import { reactive, toRefs } from 'vue'
 
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'
@@ -199,7 +199,7 @@ export const useUserStore = defineStore('user', () => {
   load()
 
   return {
-    ...state,
+    ...toRefs(state),
     load,
     save,
     reset,

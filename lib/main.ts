@@ -1,15 +1,14 @@
-import { App } from 'vue'
-
 // Components
 import VoAuthDialog from '../src/components/VoAuthDialog.vue'
 
+// Types
+import type { App } from 'vue'
+
 // Stores
-import { useAuthStore } from '../src/store/auth'
-import { useOneStore } from '../src/store/one'
-import { useUserStore } from '../src/store/user'
+export { useAuthStore } from '../src/store/auth'
+export { useOneStore } from '../src/store/one'
+export { useUserStore } from '../src/store/user'
 
 export function install (app: App) {
   app.component('VoAuthDialog', VoAuthDialog)
 }
-
-export { useAuthStore, useOneStore, useUserStore }

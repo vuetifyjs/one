@@ -1,7 +1,9 @@
+// Stores
+import { useAuthStore } from '@/store/auth'
+
 // Utilities
 import { defineStore } from 'pinia'
 import { computed, onBeforeMount, shallowRef, watch } from 'vue'
-import { useAuthStore } from './auth'
 
 const url = import.meta.env.VITE_API_SERVER_URL
 
