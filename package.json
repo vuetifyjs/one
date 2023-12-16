@@ -3,8 +3,8 @@
   "version": "0.0.5",
   "type": "module",
   "files": [
-    "dist/**/*",
-    "types/**/*"
+    "dist",
+    "./index.d.ts"
   ],
   "main": "./dist/v-one.umd.cjs",
   "module": "./dist/v-one.js",
