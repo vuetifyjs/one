@@ -3,7 +3,8 @@
   "version": "0.0.4",
   "type": "module",
   "files": [
-    "dist"
+    "dist/**/*",
+    "types/**/*"
   ],
   "main": "./dist/v-one.umd.cjs",
   "module": "./dist/v-one.js",
