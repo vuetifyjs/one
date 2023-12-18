@@ -1,6 +1,6 @@
 <template>
   <v-footer
-    id="vo-footer"
+    class="vo-footer"
     theme="dark"
     height="40"
   >

@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    id="vo-user-btn"
+    class="vo-user-btn"
     :loading="auth.isLoading"
     icon
   >
@@ -77,7 +77,7 @@
 </script>
 
 <style lang="sass" scoped>
-  #vo-user-btn
+  .vo-user-btn
     .v-skeleton-loader__avatar
       min-height: 40px
       height: 40px
