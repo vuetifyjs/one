@@ -5,7 +5,6 @@
   >
     <template #activator="{ props: activatorProps }">
       <v-btn
-        v-badge
         v-bind="{
           ...activatorProps,
           [`${lgAndUp ? 'append-' : ''}icon`]: `svg:${mdiLogin}`,
