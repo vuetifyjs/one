@@ -13,6 +13,10 @@
     ".": {
       "import": "./dist/v-one.js",
       "require": "./dist/v-one.umd.cjs"
+    },
+    "./styles": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
   "scripts": {

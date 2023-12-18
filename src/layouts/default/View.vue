@@ -1,6 +1,8 @@
 <template>
   <v-main>
     <router-view />
+
+    <VoFooter app />
   </v-main>
 </template>
 
