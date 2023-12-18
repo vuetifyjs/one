@@ -47,21 +47,23 @@ export const useAuthStore = defineStore('auth', () => {
   let externalUpdate = false
   watch(user, user => {
     if (!user?.settings) return
+
     const local = localStorage.getItem('vuetify@user') || '{}'
+
     if (JSON.stringify(user.settings, null, 2) === local) return
+
     externalUpdate = true
 
     Object.assign(userStore, user.settings)
   })
 
   userStore.$subscribe(() => {
-    if (!externalUpdate) {
-      pushSettings()
-    }
+    if (!externalUpdate) sync()
+
     externalUpdate = false
   })
 
-  async function pushSettings () {
+  async function sync () {
     try {
       await fetch(`${url}/user/settings`, {
         method: 'POST',
@@ -108,8 +110,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login (provider: 'github' | 'discord' = 'github') {
     isLoading.value = true
-    const redirectUrl = `${url}/auth/${provider}/redirect`
 
+    const redirectUrl = `${url}/auth/${provider}/redirect`
     const width = 400
     const height = 600
     const left = window.screenX + (window.innerWidth - width) / 2
@@ -135,7 +137,7 @@ export const useAuthStore = defineStore('auth', () => {
       if (e.data?.type !== 'auth-response') return
       if (e.data.status === 'success') {
         if (!user.value) {
-          window.localStorage.setItem('vuetify@lastLoginProvider', provider)
+          localStorage.setItem('vuetify@lastLoginProvider', provider)
         }
         user.value = e.data.body.user
       } else {
@@ -150,6 +152,7 @@ export const useAuthStore = defineStore('auth', () => {
       window.clearInterval(interval)
       window.clearTimeout(timeout)
       ctx?.close()
+
       isLoading.value = false
     }
 
@@ -170,6 +173,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function logout () {
     isLoading.value = true
+
     try {
       await fetch(`${url}/auth/logout`, {
         method: 'POST',
@@ -184,13 +188,11 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  const lastLoginProvider = () => (
-    localStorage.getItem('vuetify@lastLoginProvider')
-  )
-
-  if (lastLoginProvider()) {
-    verify()
+  function lastLoginProvider () {
+    return localStorage.getItem('vuetify@lastLoginProvider')
   }
+
+  if (lastLoginProvider()) verify()
 
   return {
     user,

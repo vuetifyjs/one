@@ -8,7 +8,7 @@
     slim
     variant="flat"
     @click="auth.login('github')"
-  ></v-list-item>
+  />
 </template>
 
 <script setup lang="ts">

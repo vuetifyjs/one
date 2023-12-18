@@ -5,13 +5,14 @@
   >
     <template #activator="{ props: activatorProps }">
       <v-btn
+        v-badge
         v-bind="{
           ...activatorProps,
           [`${lgAndUp ? 'append-' : ''}icon`]: `svg:${mdiLogin}`,
           text: lgAndUp ? 'Login' : undefined,
         }"
         :rounded="mdAndDown"
-        class="ms-1 text-none"
+        class="text-none"
         color="primary"
         variant="outlined"
       />
@@ -34,7 +35,11 @@
         </v-card-subtitle>
       </div>
 
-      <v-list class="mx-auto" max-width="300" width="100%">
+      <v-list
+        class="mx-auto"
+        max-width="300"
+        width="100%"
+      >
         <VoGithubLogin class="mb-3" />
 
         <VoDiscordLogin />
@@ -42,39 +47,7 @@
     </v-card>
   </v-dialog>
 
-  <v-btn
-    v-else
-    id="login-btn"
-    :loading="auth.isLoading"
-    class="ms-1"
-    icon
-  >
-    <v-menu
-      :disabled="!auth.user || auth.isLoading"
-      activator="parent"
-      location="bottom end"
-    >
-      <v-list
-        :items="items"
-        :lines="false"
-        item-props
-        density="compact"
-        nav
-      >
-        <template #subheader="{ props: subheaderProps }">
-          <v-list-subheader class="text-high-emphasis text-uppercase font-weight-black">
-            {{ subheaderProps.title }}
-          </v-list-subheader>
-        </template>
-      </v-list>
-    </v-menu>
-
-    <v-avatar v-if="auth.user" :image="user.avatar || auth.user.picture || ''" />
-
-    <template #loader>
-      <v-skeleton-loader type="avatar" />
-    </template>
-  </v-btn>
+  <VoUserBtn v-else />
 </template>
 
 <script setup lang="ts">
@@ -87,59 +60,23 @@
     VDialog,
     VImg,
     VList,
-    VListSubheader,
-    VMenu,
-    VAvatar,
-    VSkeletonLoader,
   } from 'vuetify/components'
 
-  import VoGithubLogin from '@/components/VoGithubLogin.vue'
   import VoDiscordLogin from '@/components/VoDiscordLogin.vue'
+  import VoGithubLogin from '@/components/VoGithubLogin.vue'
+  import VoUserBtn from '@/components/VoUserBtn.vue'
 
   // Composables
   import { useDisplay, useTheme } from 'vuetify'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
 
   // Icons
-  import { mdiLogin, mdiLogoutVariant, mdiViewDashboard } from '@mdi/js'
-
-  const emit = defineEmits(['click:dashboard'])
+  import { mdiLogin } from '@mdi/js'
 
   const auth = useAuthStore()
-  const user = useUserStore()
 
   const { mdAndDown, lgAndUp } = useDisplay()
   const theme = useTheme()
-
-  const items = [
-    { title: 'Options', type: 'subheader' },
-    {
-      title: 'My Dashboard',
-      appendIcon: `svg:${mdiViewDashboard}`,
-      onClick: () => {
-        emit('click:dashboard')
-      },
-    },
-    {
-      title: 'Logout',
-      appendIcon: `svg:${mdiLogoutVariant}`,
-      onClick: () => {
-        auth.logout()
-      },
-    },
-  ]
 </script>
-
-<style lang="sass">
-  #login-btn
-    .v-skeleton-loader__avatar
-      min-height: 40px
-      height: 40px
-      width: 40px
-      max-height: 40px
-      min-width: 40px
-      max-width: 40px
-</style>

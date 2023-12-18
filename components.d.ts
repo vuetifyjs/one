@@ -17,5 +17,6 @@ declare module 'vue' {
     VoAuthDialog: typeof import('./src/components/VoAuthDialog.vue')['default']
     VoDiscordLogin: typeof import('./src/components/VoDiscordLogin.vue')['default']
     VoGithubLogin: typeof import('./src/components/VoGithubLogin.vue')['default']
+    VoUserBtn: typeof import('./src/components/VoUserBtn.vue')['default']
   }
 }
