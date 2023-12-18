@@ -50,7 +50,9 @@
   // Icons
   import { mdiLogoutVariant, mdiViewDashboard } from '@mdi/js'
 
-  const emit = defineEmits(['click:dashboard'])
+  const props = defineProps({
+    external: Boolean,
+  })
 
   const auth = useAuthStore()
   const user = useUserStore()
@@ -60,9 +62,9 @@
     {
       title: 'My Dashboard',
       appendIcon: `svg:${mdiViewDashboard}`,
-      onClick: () => {
-        emit('click:dashboard')
-      },
+      to: props.external ? undefined : '/user/dashboard',
+      href: props.external ? 'https://vuetifyjs.com/user/dashboard/' : undefined,
+      target: props.external ? '_blank' : undefined,
     },
     {
       title: 'Logout',
