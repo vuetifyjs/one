@@ -21,8 +21,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --config vite.build.config.ts && yarn build:types",
+    "build:dev": "vite build --mode development --config vite.build.config.ts ",
     "build:types": "rimraf types-temp && vue-tsc --pretty -p tsconfig.json && rollup --config rollup.types.config.js && rimraf types-temp",
-    "watch": "yarn build --mode development --watch",
+    "watch": "yarn build:dev --watch",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.vue --fix --ignore-path .gitignore"
   },
