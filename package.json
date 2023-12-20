@@ -13,6 +13,9 @@
   "exports": {
     ".": {
       "import": "./dist/index.js"
+    },
+    "./styles": {
+      "import": "./dist/style.css"
     }
   },
   "scripts": {
