@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    tags: [v*]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn build
+      - run: npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
+        env:
+          NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish
+      - name: GitHub release
+        run: yarn conventional-github-releaser -p vuetify
+        env:
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
