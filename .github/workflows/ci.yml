@@ -15,6 +15,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn build
+        env:
+          VITE_API_SERVER_URL: https://api.vuetifyjs.com
       - run: npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
         env:
           NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
