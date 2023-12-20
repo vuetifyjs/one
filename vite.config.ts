@@ -16,18 +16,16 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
-    VueRouter(),
+    VueRouter({
+      root: 'dev',
+      routesFolder: [{ src: 'pages' }],
+    }),
     Layouts({
+      layoutsDirs: 'dev/layouts',
       defaultLayout: 'default/index',
     }),
     Components(),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
-    Vuetify({
-      autoImport: true,
-      styles: {
-        configFile: 'src/styles/settings.scss',
-      },
-    }),
+    Vuetify(),
     ViteFonts({
       google: {
         families: [{
@@ -41,7 +39,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@/types': fileURLToPath(new URL('./index.d.ts', import.meta.url)),
     },
     extensions: [
       '.js',

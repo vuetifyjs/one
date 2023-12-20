@@ -12,9 +12,6 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import { VListItem } from 'vuetify/components'
-
   // Stores
   import { useAuthStore } from '@/store/auth'
 

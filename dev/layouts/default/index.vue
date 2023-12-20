@@ -1,9 +1,12 @@
 <template>
   <v-app>
-    <DefaultView />
+    <v-main>
+      <router-view />
+
+      <VoFooter app />
+    </v-main>
   </v-app>
 </template>
 
 <script lang="ts" setup>
-  import DefaultView from './View.vue'
 </script>

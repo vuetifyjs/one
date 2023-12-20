@@ -13,11 +13,7 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
-    Vuetify({
-      autoImport: false,
-      styles: 'none',
-    }),
+    Vuetify(),
   ],
   resolve: {
     alias: {
@@ -35,27 +31,19 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'lib/main.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'VuetifyOne',
-      fileName: 'v-one',
+      fileName: 'index',
+      formats: ['es'],
     },
     rollupOptions: {
       external: [
         'vue',
-        'vuetify',
+        /^vuetify($|\/)/,
         '@mdi/js',
         'pinia',
         'lodash-es',
       ],
-      output: {
-        globals: {
-          vue: 'vue',
-          vuetify: 'vuetify',
-          '@mdi/js': '@mdi/js',
-          pinia: 'pinia',
-          'lodash-es': 'lodash-es',
-        },
-      },
     },
   },
 })

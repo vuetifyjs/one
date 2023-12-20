@@ -7,13 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    GetAQuote: typeof import('./src/components/GetAQuote.vue')['default']
-    Heading: typeof import('./src/components/Heading.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    Jumbotron: typeof import('./src/components/Jumbotron.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Testimonial: typeof import('./src/components/Testimonial.vue')['default']
     VoAuthDialog: typeof import('./src/components/VoAuthDialog.vue')['default']
     VoDiscordLogin: typeof import('./src/components/VoDiscordLogin.vue')['default']
     VoFooter: typeof import('./src/components/VoFooter.vue')['default']

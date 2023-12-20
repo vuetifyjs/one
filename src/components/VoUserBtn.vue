@@ -33,16 +33,6 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import {
-    VAvatar,
-    VBtn,
-    VList,
-    VListSubheader,
-    VMenu,
-    VSkeletonLoader,
-  } from 'vuetify/components'
-
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useUserStore } from '@/store/user'
@@ -78,7 +68,7 @@
 
 <style lang="sass" scoped>
   .vo-user-btn
-    .v-skeleton-loader__avatar
+    :deep(.v-skeleton-loader__avatar)
       min-height: 40px
       height: 40px
       width: 40px

@@ -1,33 +1,29 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "outDir": "./types-temp",
     "target": "esnext",
     "useDefineForClassFields": true,
     "allowSyntheticDefaultImports": true,
     "composite": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "node",
-      "vuetify",
-      "vite-plugin-vue-layouts/client"
-    ],
+    "types": ["vite/client"],
     "paths": {
       "@/*": ["src/*"],
     },
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "./index.d.ts",
-    "vite.config.ts"
+    "src/**/*.vue"
   ]
 }

@@ -50,17 +50,6 @@
 </template>
 
 <script setup lang="ts">
-  // Components
-  import {
-    VBtn,
-    VCard,
-    VCardSubtitle,
-    VCardTitle,
-    VDialog,
-    VImg,
-    VList,
-  } from 'vuetify/components'
-
   import VoDiscordLogin from '@/components/VoDiscordLogin.vue'
   import VoGithubLogin from '@/components/VoGithubLogin.vue'
   import VoUserBtn from '@/components/VoUserBtn.vue'

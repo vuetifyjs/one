@@ -78,8 +78,8 @@
   ]
 </script>
 
-<style lang="sass">
-  .social-link svg
+<style scoped lang="sass">
+  .social-link :deep(.v-icon)
     color: rgba(25, 118, 210, .32)
     text-decoration: none
     transition: .2s ease-in-out
