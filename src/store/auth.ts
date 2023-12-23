@@ -1,4 +1,5 @@
 // Stores
+import { useHttpStore } from '@/store/http'
 import { useUserStore } from '@/store/user'
 
 // Utilities
@@ -31,15 +32,14 @@ interface User {
   }[]
 }
 
-const url = import.meta.env.VITE_API_SERVER_URL
-
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
+  const http = useHttpStore()
   const userStore = useUserStore()
   const isLoading = shallowRef(false)
 
   const isSubscriber = computed(() => (
-    !url ||
+    !http.url ||
     user.value?.isAdmin ||
     user.value?.sponsorships.some(s => s.isActive)
   ))
@@ -65,16 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function sync () {
     try {
-      await fetch(`${url}/user/settings`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          settings: userStore.$state,
-        }),
-      })
+      await http.post('/user/settings', { settings: userStore.$state })
     } catch (err: any) {
       console.error(err)
     }
@@ -85,7 +76,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     isLoading.value = true
 
-    verify.promise = fetch(`${url}/auth/verify`, {
+    verify.promise = fetch(`${http.url}/auth/verify`, {
       credentials: 'include',
       headers: force ? {
         'Cache-Control': 'no-cache',
@@ -111,7 +102,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function login (provider: 'github' | 'discord' = 'github') {
     isLoading.value = true
 
-    const redirectUrl = `${url}/auth/${provider}/redirect`
+    const redirectUrl = `${http.url}/auth/${provider}/redirect`
     const width = 400
     const height = 600
     const left = window.screenX + (window.innerWidth - width) / 2
@@ -133,7 +124,7 @@ export const useAuthStore = defineStore('auth', () => {
     let interval = -1
     let timeout = -1
     function messageHandler (e: MessageEvent) {
-      if (e.origin !== url) return
+      if (e.origin !== http.url) return
       if (e.data?.type !== 'auth-response') return
       if (e.data.status === 'success') {
         if (!user.value) {
@@ -175,10 +166,7 @@ export const useAuthStore = defineStore('auth', () => {
     isLoading.value = true
 
     try {
-      await fetch(`${url}/auth/logout`, {
-        method: 'POST',
-        credentials: 'include',
-      })
+      await http.post('/auth/logout')
       await verify(true)
       user.value = null
     } catch (err: any) {
@@ -196,7 +184,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user,
-    url,
+    url: http.url,
     isLoading,
     verify,
     login,

@@ -1,17 +1,17 @@
 // Stores
 import { useAuthStore } from '@/store/auth'
+import { useHttpStore } from '@/store/http'
 
 // Utilities
 import { defineStore } from 'pinia'
 import { computed, onBeforeMount, shallowRef, watch } from 'vue'
-
-const url = import.meta.env.VITE_API_SERVER_URL
 
 export const useOneStore = defineStore('one', () => {
   const params = new URLSearchParams(window.location.search)
   const sessionId = params.get('session_id')
 
   const auth = useAuthStore()
+  const http = useHttpStore()
 
   const isLoading = shallowRef(false)
 
@@ -34,14 +34,7 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await fetch(`${url}/one/activate`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ sessionId }),
-      }).then(res => res.json())
+      const res = await http.post('/one/activate', { sessionId })
 
       auth.user = res.user
     } catch (e) {
@@ -54,7 +47,7 @@ export const useOneStore = defineStore('one', () => {
   async function subscribe () {
     isLoading.value = true
 
-    window.location.href = `${url}/one/subscribe`
+    window.location.href = `${http.url}/one/subscribe`
   }
 
   async function cancel () {
@@ -63,10 +56,9 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await fetch(`${url}/one/cancel?subscriptionId=${subscription.value?.tierName}`, {
-        method: 'POST',
-        credentials: 'include',
-      }).then(res => res.json())
+      const res = await http.post(
+        `/one/cancel?subscriptionId=${subscription.value?.tierName}`
+      )
 
       auth.user = res.user
     } catch (e) {
@@ -82,10 +74,9 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await fetch(`${url}/one/verify?subscriptionId=${subscription.value?.tierName}`, {
-        method: 'POST',
-        credentials: 'include',
-      }).then(res => res.json())
+      const res = await http.post(
+        `/one/verify?subscriptionId=${subscription.value?.tierName}`
+      )
 
       auth.user = res.user
     } catch (e) {
