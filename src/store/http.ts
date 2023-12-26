@@ -5,7 +5,7 @@ export const useHttpStore = defineStore('http', {
     url: '',
   }),
   actions: {
-    async fetch (url: string, options: RequestInit = {}) {
+    async fetch<T = any> (url: string, options: RequestInit = {}): Promise<T> {
       const res = await fetch(`${this.url}${url}`, {
         credentials: 'include',
         ...options,
@@ -13,8 +13,8 @@ export const useHttpStore = defineStore('http', {
 
       return res.json()
     },
-    async post (url: string, body?: any, options: RequestInit = {}) {
-      const res = await this.fetch(url, {
+    async post<T = any> (url: string, body?: any, options: RequestInit = {}): Promise<T> {
+      return this.fetch<T>(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,13 +22,9 @@ export const useHttpStore = defineStore('http', {
         body: JSON.stringify(body),
         ...options,
       })
-
-      return res.json()
     },
-    async get (url: string, options: RequestInit = {}) {
-      const res = await this.fetch(url, options)
-
-      return res.json()
+    async get<T = any> (url: string, options: RequestInit = {}): Promise<T> {
+      return this.fetch<T>(url, options)
     },
   },
 })
