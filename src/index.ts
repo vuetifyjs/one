@@ -7,6 +7,7 @@ import type { App } from 'vue'
 
 // Stores
 export { useAuthStore } from '@/store/auth'
+export { useHttpStore } from '@/store/http'
 export { useOneStore } from '@/store/one'
 export { useUserStore } from '@/store/user'
 
