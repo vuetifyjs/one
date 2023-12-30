@@ -26,5 +26,11 @@ export const useHttpStore = defineStore('http', {
     async get<T = any> (url: string, options: RequestInit = {}): Promise<T> {
       return this.fetch<T>(url, options)
     },
+    async delete (url: string, options: RequestInit = {}): Promise<Response> {
+      return this.fetch(url, {
+        method: 'DELETE',
+        ...options,
+      })
+    },
   },
 })
