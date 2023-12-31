@@ -25,7 +25,9 @@
     "build:types": "rimraf types-temp && vue-tsc --pretty -p tsconfig.json && rollup --config rollup.types.config.js && rimraf types-temp",
     "watch": "yarn build:dev --watch",
     "preview": "vite preview",
-    "lint": "eslint . --ext .ts,.vue --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .ts,.vue --fix --ignore-path .gitignore",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "peerDependencies": {
     "@mdi/js": "6.2.95",
@@ -52,6 +54,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.16.1",
+    "jsdom": "^23.0.1",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.0",
     "rimraf": "^5.0.5",
@@ -66,6 +69,7 @@
     "vite": "^4.2.0",
     "vite-plugin-vue-layouts": "^0.8.0",
     "vite-plugin-vuetify": "^1.0.0",
+    "vitest": "^1.1.0",
     "vue": "^3.2.0",
     "vue-router": "^4.0.0",
     "vue-tsc": "^1.2.0",
