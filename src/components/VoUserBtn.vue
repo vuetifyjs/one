@@ -33,6 +33,9 @@
 </template>
 
 <script setup lang="ts">
+  // Utilities
+  import { computed } from 'vue'
+
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useUserStore } from '@/store/user'
@@ -47,23 +50,25 @@
   const auth = useAuthStore()
   const user = useUserStore()
 
-  const items = [
-    { title: 'Options', type: 'subheader' },
-    {
-      title: 'My Dashboard',
-      appendIcon: `svg:${mdiViewDashboard}`,
-      to: props.external ? undefined : '/user/dashboard',
-      href: props.external ? 'https://vuetifyjs.com/user/dashboard/' : undefined,
-      target: props.external ? '_blank' : undefined,
-    },
-    {
-      title: 'Logout',
-      appendIcon: `svg:${mdiLogoutVariant}`,
-      onClick: () => {
-        auth.logout()
+  const items = computed(() => {
+    return [
+      { title: 'Options', type: 'subheader' },
+      {
+        title: 'My Dashboard',
+        appendIcon: `svg:${mdiViewDashboard}`,
+        to: props.external ? undefined : '/user/dashboard',
+        href: props.external ? 'https://vuetifyjs.com/user/dashboard/' : undefined,
+        target: props.external ? '_blank' : undefined,
       },
-    },
-  ]
+      {
+        title: 'Logout',
+        appendIcon: `svg:${mdiLogoutVariant}`,
+        onClick: () => {
+          auth.logout()
+        },
+      },
+    ]
+  })
 </script>
 
 <style lang="sass" scoped>
