@@ -5,20 +5,6 @@
     height="40"
   >
     <a
-      class="d-inline-block me-2 text-decoration-none text-primary"
-      href="https://vuetifyjs.com/"
-      target="_blank"
-      title="Vuetify Documentation"
-      rel="noopener noreferrer"
-    >
-      <v-img
-        alt="Vuetify logo"
-        src="https://cdn.vuetifyjs.com/docs/images/logos/v.svg"
-        width="32"
-      />
-    </a>
-
-    <a
       v-for="item in items"
       :key="item.title"
       :href="item.href"
@@ -27,13 +13,14 @@
       target="_blank"
       rel="noopener noreferrer"
     >
-      <v-icon size="18">
-        {{ item.icon }}
-      </v-icon>
+      <v-icon
+        :icon="item.icon"
+        :size="item.icon === '$vuetify' ? 24 : 16"
+      />
     </a>
 
     <div
-      class="text-caption"
+      class="text-caption text-disabled"
       style="position: absolute; right: 16px;"
     >
       &copy; 2016-{{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">Vuetify, LLC</span>
@@ -50,6 +37,11 @@
   } from '@mdi/js'
 
   const items = [
+    {
+      title: 'Vuetify Documentation',
+      icon: `$vuetify`,
+      href: 'https://vuetifyjs.com/',
+    },
     {
       title: 'Vuetify Support',
       icon: `svg:${mdiShieldStarOutline}`,
@@ -80,7 +72,7 @@
 
 <style scoped lang="sass">
   .social-link :deep(.v-icon)
-    color: rgba(25, 118, 210, .32)
+    color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity))
     text-decoration: none
     transition: .2s ease-in-out
 
