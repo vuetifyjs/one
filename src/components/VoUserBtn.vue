@@ -61,6 +61,12 @@
         target: props.external ? '_blank' : undefined,
       },
       {
+        title: 'My Subscriptions',
+        appendIcon: '$vuetify',
+        href: 'https://vuetifyjs.com/user/subscriptions/',
+        target: '_blank',
+      },
+      {
         title: 'Logout',
         appendIcon: `svg:${mdiLogoutVariant}`,
         onClick: () => {
