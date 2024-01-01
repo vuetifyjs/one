@@ -4,6 +4,7 @@ import VoFooter from '@/components/VoFooter.vue'
 
 // Types
 import type { App } from 'vue'
+import type { PiniaPluginContext } from 'pinia'
 
 // Stores
 export { useAuthStore } from '@/store/auth'
@@ -19,4 +20,8 @@ export function createOne () {
   }
 
   return { install }
+}
+
+export function one (ctx: PiniaPluginContext) {
+  ctx.store.url = import.meta.env.VITE_API_SERVER_URL
 }
