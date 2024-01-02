@@ -23,6 +23,7 @@ export type RootState = {
   direction: 'rtl' | 'ltr'
   quickbar: boolean
   railDrawer: boolean
+  pinned: Record<string, unknown>[]
   notifications: {
     show: boolean
     read: string[]
@@ -102,6 +103,7 @@ export const DEFAULT_USER: RootState = {
   theme: 'system',
   mixedTheme: true,
   direction: 'ltr',
+  pinned: [],
   slashSearch: false,
   syncSettings: true,
   quickbar: false,
