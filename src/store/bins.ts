@@ -2,9 +2,10 @@
 import { defineStore } from 'pinia'
 
 // Composables
-import { ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 
 // Stores
+import { useAuthStore } from './auth'
 import { useHttpStore } from './http'
 
 type Bin = {
@@ -12,21 +13,29 @@ type Bin = {
   content: string
   favorite: boolean
   pinned: boolean
+  owner: Record<string, unknown>
   visibility: 'private' | 'public'
 }
 
 export const useBinsStore = defineStore('bins', () => {
+  const auth = useAuthStore()
   const http = useHttpStore()
 
   const all = ref<Bin[]>([])
   const current = ref<Bin>()
   const timeout = shallowRef(-1)
 
+  const isOwner = computed(() => {
+    if (!auth.user || !current.value) return false
+
+    return auth.user.id === current.value.owner.id
+  })
+
   watch(() => current, () => {
     window.clearTimeout(timeout.value)
 
     timeout.value = window.setTimeout(() => {
-      if (!current.value) return
+      if (!current.value || !isOwner.value) return
 
       update(current.value, current.value.id)
     }, 100)
@@ -83,6 +92,7 @@ export const useBinsStore = defineStore('bins', () => {
   }
 
   return {
+    isOwner,
     all,
     create,
     delete: _delete,
