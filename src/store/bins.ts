@@ -31,6 +31,9 @@ export const useBinsStore = defineStore('bins', () => {
     return auth.user.id === current.value.owner.id
   })
 
+  const favorites = computed(() => all.value.filter(b => b.favorite))
+  const pinned = computed(() => all.value.filter(b => b.pinned))
+
   watch(() => current, () => {
     window.clearTimeout(timeout.value)
 
@@ -93,6 +96,8 @@ export const useBinsStore = defineStore('bins', () => {
 
   return {
     isOwner,
+    pinned,
+    favorites,
     all,
     create,
     delete: _delete,
