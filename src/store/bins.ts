@@ -23,6 +23,7 @@ export const useBinsStore = defineStore('bins', () => {
 
   const all = ref<Bin[]>([])
   const current = ref<Bin>()
+  const isLoading = shallowRef(false)
   const timeout = shallowRef(-1)
 
   const isOwner = computed(() => {
@@ -34,7 +35,7 @@ export const useBinsStore = defineStore('bins', () => {
   const favorites = computed(() => all.value.filter(b => b.favorite))
   const pinned = computed(() => all.value.filter(b => b.pinned))
 
-  watch(() => current, () => {
+  watch(current, () => {
     window.clearTimeout(timeout.value)
 
     timeout.value = window.setTimeout(() => {
@@ -45,56 +46,107 @@ export const useBinsStore = defineStore('bins', () => {
   }, { deep: true })
 
   async function get () {
-    const res = await http.get<{ bins: Bin[] }>('/one/bins')
+    try {
+      isLoading.value = true
 
-    all.value = res.bins
+      const res = await http.get<{ bins: Bin[] }>('/one/bins')
 
-    return res.bins
+      all.value = res.bins
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return all.value
   }
 
   async function _delete (id: string) {
-    const res = await http.delete(`/one/bins/${id}`)
+    try {
+      isLoading.value = true
 
-    all.value = all.value.filter(b => b.id !== id)
+      await http.delete(`/one/bins/${id}`)
 
-    return res
+      all.value = all.value.filter(b => b.id !== id)
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return true
   }
 
   async function create (bin: Bin) {
-    const res = await http.post<{ bin: Bin }>('/one/bins', { bin })
+    try {
+      isLoading.value = true
 
-    all.value.push(res.bin)
-    current.value = res.bin
+      const res = await http.post<{ bin: Bin }>('/one/bins', { bin })
 
-    return res
+      all.value.push(res.bin)
+      current.value = res.bin
+
+      return res
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return { bin }
   }
 
   async function update (bin: Bin, id: string) {
-    const res = await http.post<{ bin: Bin }>(`/one/bins/${id}`, { bin })
-    const index = all.value.findIndex(b => b.id === id)
+    try {
+      isLoading.value = true
 
-    all.value.splice(index, 1, res.bin)
+      const res = await http.post<{ bin: Bin }>(`/one/bins/${id}`, { bin })
 
-    return res
+      const index = all.value.findIndex(b => b.id === id)
+
+      all.value.splice(index, 1, res.bin)
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return { bin }
   }
 
   async function updateOrCreate (bin: Bin, id?: string) {
-    const res = id ? await update(bin, id) : await create(bin)
+    try {
+      isLoading.value = true
 
-    current.value = res.bin
+      const res = id ? await update(bin, id) : await create(bin)
 
-    return res
+      current.value = res.bin
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return { bin }
   }
 
   async function find (id: string) {
-    const res = await http.get<{ bin: Bin }>(`/one/bins/${id}`)
+    try {
+      isLoading.value = true
+      const res = await http.get<{ bin: Bin }>(`/one/bins/${id}`)
 
-    current.value = res.bin
+      current.value = res.bin
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
 
-    return res
+    return { bin: current.value }
   }
 
   return {
+    isLoading,
     isOwner,
     pinned,
     favorites,
