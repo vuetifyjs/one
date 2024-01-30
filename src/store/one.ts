@@ -44,6 +44,12 @@ export const useOneStore = defineStore('one', () => {
     }
   }
 
+  async function manage () {
+    isLoading.value = true
+
+    window.location.href = `${http.url}/one/manage`
+  }
+
   async function subscribe () {
     isLoading.value = true
 
@@ -88,6 +94,7 @@ export const useOneStore = defineStore('one', () => {
 
   return {
     activate,
+    manage,
     cancel,
     subscribe,
     verify,
