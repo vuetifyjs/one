@@ -24,11 +24,7 @@ export const useOneStore = defineStore('one', () => {
     if (sessionId) await activate()
   })
 
-  watch(isSubscriber, val => {
-    if (!val) return
-
-    verify()
-  })
+  watch(isSubscriber, verify)
 
   async function activate () {
     try {
