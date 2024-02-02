@@ -1,5 +1,6 @@
 <template>
-  <v-container class="d-flex fill-height justify-center">
+  <v-container class="d-flex">
+    <VoUserMenu />
     <VoAuthDialog />
   </v-container>
 </template>

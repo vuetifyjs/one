@@ -10,9 +10,14 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VoAuthDialog: typeof import('./src/components/VoAuthDialog.vue')['default']
+    VoDashboardListItem: typeof import('./src/components/VoDashboardListItem.vue')['default']
     VoDiscordLogin: typeof import('./src/components/VoDiscordLogin.vue')['default']
     VoFooter: typeof import('./src/components/VoFooter.vue')['default']
     VoGithubLogin: typeof import('./src/components/VoGithubLogin.vue')['default']
+    VoNotificationsDialog: typeof import('./src/components/VoNotificationsDialog.vue')['default']
+    'VoNotificationsDialog.1': typeof import('./src/components/VoNotificationsDialog.1.vue')['default']
+    VoNotificationsListItem: typeof import('./src/components/VoNotificationsListItem.vue')['default']
     VoUserBtn: typeof import('./src/components/VoUserBtn.vue')['default']
+    VoUserMenu: typeof import('./src/components/VoUserMenu.vue')['default']
   }
 }

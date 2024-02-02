@@ -162,11 +162,13 @@ export const useAuthStore = defineStore('auth', () => {
     }, 120 * 1000)
   }
 
-  async function logout () {
+  async function logout (identity?: string) {
     isLoading.value = true
 
+    const url = identity ? `/auth/${identity}/logout` : '/auth/logout'
+
     try {
-      await http.post('/auth/logout')
+      await http.post(url)
       await verify(true)
       user.value = null
     } catch (err: any) {
@@ -174,6 +176,10 @@ export const useAuthStore = defineStore('auth', () => {
     } finally {
       isLoading.value = false
     }
+  }
+
+  function findIdentity (provider: string) {
+    return user.value?.identities.find(i => i.provider === provider)
   }
 
   function lastLoginProvider () {
@@ -186,6 +192,7 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     url: http.url,
     isLoading,
+    findIdentity,
     verify,
     login,
     logout,
