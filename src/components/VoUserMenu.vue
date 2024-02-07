@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="pb-6"
+    class="pb-3"
     rounded="lg"
     width="300"
   >
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class="d-flex align-center justify-center pa-4 ga-2">
+    <div class="d-flex align-center justify-center pa-4 ga-2 mb-2">
       <v-btn
         density="comfortable"
         :icon="`svg:${mdiCogOutline}`"
@@ -33,7 +33,7 @@
         class="text-caption"
       />
 
-      <!-- <v-btn
+      <v-btn
         density="comfortable"
         :icon="`svg:${mdiBellOutline}`"
         color="primary"
@@ -45,12 +45,12 @@
         :icon="`svg:${mdiCreditCardOutline}`"
         color="primary"
         class="text-caption"
-      /> -->
+      />
     </div>
 
     <v-card
-      class="ma-3 mb-6"
-      :color="social || (!auth.user && !auth.isLoading) ? 'surface-light' : 'surface'"
+      class="mx-3"
+      color="surface-light"
       variant="tonal"
       rounded="lg"
     >
@@ -60,8 +60,8 @@
         slim
       >
         <v-list-item
-          :link="auth.user"
-          @click="social = !social"
+          :link="!!auth.user"
+          @click="onClickSync"
         >
           <template #prepend>
             <v-icon :icon="`svg:${auth.user && user.syncSettings ? mdiSync : mdiSyncOff}`" size="x-small" />
@@ -92,40 +92,49 @@
         </v-list-item>
 
         <v-expand-transition>
-          <div v-if="(!auth.user && !auth.isLoading) || social">
-            <v-divider />
-
+          <v-card
+            v-if="(!auth.user && !auth.isLoading) || social"
+            color="primary"
+            variant="tonal"
+            flat
+            rounded="0"
+          >
             <div class="pa-4 d-flex flex-column ga-4">
               <VoGithubLogin />
 
               <VoDiscordLogin />
             </div>
-          </div>
+          </v-card>
         </v-expand-transition>
+
+        <template v-if="auth.user">
+          <v-divider />
+
+          <v-list-item
+            v-if="auth.user"
+            @click="() => auth.logout()"
+          >
+            <template #prepend>
+              <v-icon :icon="`svg:${mdiLogoutVariant}`" size="x-small" />
+            </template>
+
+            <v-list-title class="text-caption">Logout</v-list-title>
+          </v-list-item>
+        </template>
       </v-list>
     </v-card>
 
-    <v-card-subtitle class="text-wrap text-caption text-center px-10">
+    <v-card-subtitle
+      v-if="!auth.user"
+      class="text-wrap text-caption text-center px-10 mt-5 mb-2"
+    >
       Sign in with to save your settings and unlock exclusive subscriber perks.
     </v-card-subtitle>
-
-    <!-- <div class="d-flex justify-center">
-      <v-btn></v-btn>
-    </div> -->
-
-    <!-- <v-list
-      class="py-1"
-      rounded="t"
-    >
-      <VoDashboardListItem />
-
-      <VoNotificationsListItem />
-    </v-list> -->
   </v-card>
 </template>
 
 <script setup>
-  import { mdiBellOutline, mdiCogOutline, mdiCreditCardOutline, mdiSync, mdiSyncOff, mdiViewDashboardOutline, mdiWeatherNight } from '@mdi/js'
+  import { mdiBellOutline, mdiCogOutline, mdiCreditCardOutline, mdiLogoutVariant, mdiSync, mdiSyncOff } from '@mdi/js'
   import VoDiscordLogin from '@/components/VoDiscordLogin.vue'
   import { useAuthStore } from '@/store/auth'
   import { useUserStore } from '@/store/user'
@@ -135,11 +144,22 @@
 
   const auth = useAuthStore()
   const user = useUserStore()
-  const social = shallowRef(false)
+  const social = shallowRef(!auth.user)
 
   watch(() => user.syncSettings, (val, oldVal) => {
     if (val && oldVal === false) social.value = true
   })
+
+  watch(() => auth.user, val => {
+    if (val) social.value = false
+  })
+
+  function onClickSync () {
+    if (!auth.user) return
+
+    social.value = !social.value
+  }
+
   const items = [
     {
       title: 'Dashboard',
