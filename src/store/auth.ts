@@ -10,7 +10,7 @@ interface User {
   id: string
   isAdmin: boolean
   name: string
-  picture: string | null
+  picture: string
   settings: Record<string, any> | null
   identities: {
     id: string
@@ -41,7 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
   const isSubscriber = computed(() => (
     !http.url ||
     user.value?.isAdmin ||
-    user.value?.sponsorships.some(s => s.isActive)
+    !!user.value?.sponsorships.some(s => s.isActive)
   ))
 
   let externalUpdate = false

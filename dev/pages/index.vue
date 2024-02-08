@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex">
     <VoUserMenu />
-    <VoAuthDialog />
+    <!-- <VoAuthDialog /> -->
   </v-container>
 </template>
 

@@ -14,10 +14,16 @@ declare module 'vue' {
     VoDiscordLogin: typeof import('./src/components/VoDiscordLogin.vue')['default']
     VoFooter: typeof import('./src/components/VoFooter.vue')['default']
     VoGithubLogin: typeof import('./src/components/VoGithubLogin.vue')['default']
+    VoListItem: typeof import('./src/components/VoListItem.vue')['default']
+    VoLogoutListItem: typeof import('./src/components/VoLogoutListItem.vue')['default']
     VoNotificationsDialog: typeof import('./src/components/VoNotificationsDialog.vue')['default']
     'VoNotificationsDialog.1': typeof import('./src/components/VoNotificationsDialog.1.vue')['default']
     VoNotificationsListItem: typeof import('./src/components/VoNotificationsListItem.vue')['default']
+    VoSyncCard: typeof import('./src/components/VoSyncCard.vue')['default']
+    VoUserAvatar: typeof import('./src/components/VoUserAvatar.vue')['default']
     VoUserBtn: typeof import('./src/components/VoUserBtn.vue')['default']
+    VoUserList: typeof import('./src/components/VoUserList.vue')['default']
     VoUserMenu: typeof import('./src/components/VoUserMenu.vue')['default']
+    VoUserQuickActions: typeof import('./src/components/VoUserQuickActions.vue')['default']
   }
 }

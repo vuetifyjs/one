@@ -2,7 +2,6 @@
   <v-list-item
     title="Notifications"
     :prepend-icon="`svg:${mdiInboxOutline}`"
-    slim
     link
   >
     <template #prepend>
