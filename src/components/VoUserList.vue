@@ -1,13 +1,28 @@
 <template>
-  <v-list slim nav>
+  <v-list
+    density="compact"
+    nav
+    slim
+  >
     <VoDashboardListItem />
 
     <VoNotificationsListItem />
 
-    <VoLogoutListItem />
+    <VoSettingsListItem />
+
+    <v-expand-transition appear>
+      <div v-if="auth.user">
+        <VoSubscriptionListItem />
+
+        <VoLogoutListItem />
+      </div>
+    </v-expand-transition>
   </v-list>
 </template>
 
 <script lang="ts" setup>
-  import { mdiLogoutVariant } from '@mdi/js'
+  // Stores
+  import { useAuthStore } from '@/store/auth'
+
+  const auth = useAuthStore()
 </script>

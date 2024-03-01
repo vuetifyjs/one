@@ -1,28 +1,91 @@
 <template>
-  <v-list-item
+  <VoListItem
+    v-if="user.notifications.show"
+    :prepend-icon="`svg:${mdiBellOutline}`"
     title="Notifications"
-    :prepend-icon="`svg:${mdiInboxOutline}`"
     link
   >
-    <template #prepend>
-      <v-badge content="2" color="red">
+    <template v-if="notifications.unread.length" #prepend>
+      <v-badge :content="notifications.unread.length" color="error">
         <v-icon />
       </v-badge>
     </template>
-    <v-dialog
-      activator="parent"
-      max-width="500"
+
+    <VoDialog
+      :prepend-icon="`svg:${mdiBell}`"
+      title="Notifications"
     >
-      <v-card
-        title="Notifications"
-        :prepend-icon="`svg:${mdiInboxOutline}`"
-        height="inherit"
-        width="inherit"
-      />
-    </v-dialog>
-  </v-list-item>
+      <v-layout>
+        <v-navigation-drawer
+          width="175"
+          absolute
+          floating
+        >
+          <v-list
+            v-model:selected="list"
+            class="px-4 pt-4"
+            density="compact"
+            mandatory
+            nav
+          >
+            <VoListItem
+              :prepend-icon="`svg:${mdiInboxOutline}`"
+              title="Unread"
+              value="0"
+            >
+              <template v-if="notifications.unread.length > 0" #append>
+                <span class="text-caption">
+                  {{ notifications.unread.length }}
+                </span>
+              </template>
+            </VoListItem>
+
+            <VoListItem
+              :prepend-icon="`svg:${mdiInboxFullOutline}`"
+              title="Read"
+              value="1"
+              mdi-archive-outline
+            />
+          </v-list>
+        </v-navigation-drawer>
+
+        <v-main scrollable>
+          <v-window v-model="list">
+            <v-window-item value="0">
+              <VoNotificationList :items="notifications.unread" />
+            </v-window-item>
+
+            <v-window-item value="1">
+              <VoNotificationList :items="notifications.read" />
+            </v-window-item>
+          </v-window>
+        </v-main>
+      </v-layout>
+    </VoDialog>
+  </VoListItem>
 </template>
 
-<script setup>
-  import { mdiInboxOutline } from '@mdi/js'
+<script setup lang="ts">
+  // Utilities
+  import { onMounted, shallowRef } from 'vue'
+
+  // Stores
+  import { useNotificationsStore } from '@/store/notifications'
+  import { useUserStore } from '@/store/user'
+
+  // Icons
+  import {
+    mdiBell,
+    mdiBellOutline,
+    mdiInboxFullOutline,
+    mdiInboxOutline,
+  } from '@mdi/js'
+
+  const user = useUserStore()
+  const notifications = useNotificationsStore()
+  const list = shallowRef(['0'])
+
+  onMounted(async () => {
+    await notifications.get()
+  })
 </script>

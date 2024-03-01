@@ -1,25 +1,26 @@
 <template>
   <v-card
-    border
     rounded="lg"
     width="300"
+    border
   >
-    <v-sheet
+    <v-img
       color="surface-light"
-      height="88"
+      max-height="88"
+      rounded="0"
+      cover
+      flat
     />
 
-    <div class="text-center mt-n9">
+    <div class="text-center mt-n9 mb-4">
       <VoUserAvatar />
     </div>
 
-    <VoUserQuickActions />
+    <v-divider />
 
-    <template v-if="auth.user">
-      <VoUserList />
+    <VoUserList />
 
-      <v-divider />
-    </template>
+    <v-divider />
 
     <div class="py-3">
       <VoSyncCard />
@@ -29,11 +30,13 @@
 
 <script setup>
   import { useAuthStore } from '@/store/auth'
+  import { useOneStore } from '@/store/one'
   import { useUserStore } from '@/store/user'
 
   import { shallowRef, watch } from 'vue'
 
   const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
   const social = shallowRef(!auth.user)
 

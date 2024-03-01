@@ -12,13 +12,6 @@ module.exports = {
     'no-var': 'error',
     // allow paren-less arrow functions
     'arrow-parens': ['error', 'as-needed'],
-    // set maximum line characters
-    'max-len': ['error', {
-      code: 140,
-      ignoreUrls: true,
-      ignoreTemplateLiterals: true,
-      ignoreTrailingComments: true,
-    }],
     complexity: ['error', 32],
     quotes: ['error', 'single', {
       avoidEscape: true,
@@ -68,6 +61,14 @@ module.exports = {
     'vue/require-prop-types': 'off',
     'vue/one-component-per-file': 'off',
     'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
+
+    'vue/attributes-order': ['error', {
+      order: [
+        'DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'UNIQUE', 'GLOBAL', 'SLOT',
+        'TWO_WAY_BINDING', 'ATTR_DYNAMIC', 'ATTR_STATIC', 'ATTR_SHORTHAND_BOOL', 'OTHER_DIRECTIVES', 'EVENTS', 'CONTENT',
+      ],
+      alphabetical: true,
+    }],
   },
   overrides: [
     {
@@ -85,7 +86,7 @@ module.exports = {
         }],
         'vue/html-closing-bracket-spacing': 'error',
         'vue/max-attributes-per-line': ['error', {
-          singleline: 5,
+          singleline: 4,
           multiline: 1,
         }],
         'vue/valid-v-on': 'off', // This rule doesn't allow empty event listeners

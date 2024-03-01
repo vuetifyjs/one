@@ -1,19 +1,18 @@
 <template>
-
   <div class="d-flex align-center justify-center pa-4 ga-2">
     <v-btn
-      density="comfortable"
       :icon="`svg:${mdiCogOutline}`"
-      color="primary"
       class="text-caption"
+      color="primary"
+      density="comfortable"
     />
 
     <v-btn
       v-if="auth.user"
-      density="comfortable"
       :icon="`svg:${mdiCreditCardOutline}`"
-      color="primary"
       class="text-caption"
+      color="primary"
+      density="comfortable"
     />
   </div>
 </template>

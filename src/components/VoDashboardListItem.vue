@@ -1,7 +1,7 @@
 <template>
-  <v-list-item
-    title="Dashboard"
+  <VoListItem
     :prepend-icon="`svg:${mdiViewDashboardOutline}`"
+    title="Dashboard"
     to="/user/dashboard"
   />
 </template>

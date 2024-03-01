@@ -1,7 +1,7 @@
 <template>
   <v-btn
-    class="vo-user-btn"
     :loading="auth.isLoading"
+    class="vo-user-btn"
     icon
   >
     <v-menu

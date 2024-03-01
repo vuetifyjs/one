@@ -1,16 +1,16 @@
 <template>
   <v-avatar
-    v-ripple="auth.isSubscriber"
-    size="72"
-    color="surface"
     :class="[
-      'border-surface-light border-lg border-opacity-100',
+      'border-lg border-opacity-100 border-surface-light',
       {
         'cursor-pointer': auth.isSubscriber,
       }
     ]"
+    color="surface"
+    size="72"
     text="Foobar"
-    @click="onClickAvatar"
+    v-ripple="auth.isSubscriber"
+    @click.prevent.stop="onClickAvatar"
   >
     <v-img
       v-if="auth.user && user.avatar"
@@ -20,34 +20,39 @@
 
     <v-icon
       v-else
-      size="x-large"
-      icon="$vuetify"
       class="mt-1"
+      icon="$vuetify"
+      size="x-large"
     />
   </v-avatar>
 
-  <div class="py-2">
+  <div class="mb-4">
     <v-expand-transition>
-      <div v-if="expanded" v-click-outside="onClickOutside">
+      <div v-if="expanded">
         <v-card
-          class="d-flex ga-4 flex-wrap justify-center py-6"
+          class="pt-6 pb-1 mt-4"
           color="rgba(var(--v-theme-primary), 0.5)"
           rounded="0"
           variant="tonal"
         >
-          <template
-            v-for="(avatar, i) in avatars"
-            :key="i"
-          >
-            <v-btn
-              :active="user.avatar === avatar"
-              icon
-              variant="flat"
-              @click="onClickSelectAvatar(avatar)"
+          <div class="d-flex ga-4 flex-wrap justify-center mb-4">
+            <template
+              v-for="(avatar, i) in avatars"
+              :key="i"
             >
-              <v-avatar :image="avatar" />
-            </v-btn>
-          </template>
+              <v-btn
+                :active="user.avatar === avatar"
+                variant="flat"
+                icon
+                @click="onClickSelectAvatar(avatar)"
+              >
+                <v-avatar
+                  :image="avatar"
+                  eager
+                />
+              </v-btn>
+            </template>
+          </div>
         </v-card>
       </div>
     </v-expand-transition>
@@ -105,7 +110,7 @@
   }
 
   function onClickAvatar () {
-    if (!auth.user) return
+    if (!auth.isSubscriber) return
 
     expanded.value = !expanded.value
   }

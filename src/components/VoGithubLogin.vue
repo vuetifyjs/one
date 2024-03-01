@@ -2,9 +2,9 @@
   <v-list-item
     :prepend-icon="`svg:${mdiGithub}`"
     base-color="#2a2a2a"
-    slim
     rounded="pill"
     variant="flat"
+    slim
     @click="auth.login('github')"
   >
     <template #title>

@@ -1,6 +1,7 @@
 <template>
-  <v-list-item
+  <VoListItem
     :prepend-icon="`svg:${mdiLogoutVariant}`"
+    class="mb-0"
     title="Logout"
     link
     @click="() => auth.logout()"

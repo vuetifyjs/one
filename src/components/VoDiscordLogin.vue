@@ -2,9 +2,9 @@
   <v-list-item
     :prepend-icon="`svg:${mdiDiscord}`"
     base-color="#5865F2"
-    slim
     rounded="pill"
     variant="flat"
+    slim
     @click="auth.login('discord')"
   >
     <template #title>
