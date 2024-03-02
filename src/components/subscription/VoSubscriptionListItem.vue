@@ -2,7 +2,7 @@
   <VoListItem
     :active="dialog"
     :prepend-icon="`svg:${mdiCreditCardOutline}`"
-    title="Subscriptions"
+    title="Your Subscriptions"
     link
   >
     <VoSubscriptionDialog v-model="dialog" />
