@@ -111,6 +111,25 @@ export const useOneStore = defineStore('one', () => {
     }
   }
 
+  async function modify (interval: SubscriptionItemPlan['interval']) {
+    if (!subscription.value) return
+
+    try {
+      isLoading.value = true
+
+      const res = await http.post('/one/modify', {
+        subscriptionId: subscription.value.tierName,
+        interval,
+      })
+
+      auth.user = res.user
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   async function verify () {
     if (!subscription.value) return
 
@@ -130,12 +149,10 @@ export const useOneStore = defineStore('one', () => {
   }
 
   async function subscriptionInfo () {
-    if (info.value) return
-
     try {
       isLoading.value = true
 
-      const res = await http.get('/one/subscription-info')
+      const res = await http.get('/one/info')
 
       info.value = res.subscription
       invoices.value = res.invoices
@@ -149,19 +166,22 @@ export const useOneStore = defineStore('one', () => {
   }
 
   return {
-    activate,
-    manage,
-    cancel,
-    subscribe,
     info,
     interval,
     invoices,
-    verify,
-    subscription,
-    subscriptionInfo,
     sessionId,
+    subscription,
+
     hasBilling,
     isLoading,
     isSubscriber,
+
+    activate,
+    cancel,
+    manage,
+    modify,
+    subscribe,
+    subscriptionInfo,
+    verify,
   }
 })
