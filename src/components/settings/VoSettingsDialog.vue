@@ -23,14 +23,30 @@
               >
                 <v-item :value="item.value">
                   <template #default="{ toggle, isSelected }">
-                    <v-card
-                      :color="isSelected ? 'primary' : 'surface-variant'"
-                      :prepend-icon="item.prependIcon"
-                      :subtitle="item.subtitle"
-                      :title="item.title"
-                      variant="tonal"
-                      @click="toggle"
-                    />
+                    <v-hover>
+                      <template #default="{ props: activatorProps, isHovering }">
+                        <v-card
+                          :color="isSelected ? 'primary' : 'surface-variant'"
+                          :image="item.image"
+                          :prepend-icon="item.prependIcon"
+                          :subtitle="item.subtitle"
+                          :title="item.title"
+                          height="76"
+                          variant="tonal"
+                          v-bind="activatorProps"
+                          @click="toggle"
+                        >
+                          <template #image>
+                            <v-img
+                              :style="{
+                                filter: isSelected || isHovering ? 'none' : 'grayscale(100%)',
+                              }"
+                              class="transition-fast-in-fast-out"
+                            />
+                          </template>
+                        </v-card>
+                      </template>
+                    </v-hover>
                   </template>
                 </v-item>
               </v-col>
@@ -48,8 +64,8 @@
           </div>
 
           <VoSwitch
+            v-if="auth.isSubscriber"
             v-model="user.disableAds"
-            :disabled="!auth.isSubscriber"
             class="mb-2"
             label="Disable Ads"
             messages="Disable traditional advertisements on all documentation pages."
@@ -78,7 +94,6 @@
 
           <VoSwitch
             v-model="user.quickbar"
-            :disabled="!auth.isSubscriber"
             label="Enable Quick Actions"
             messages="Quick actions are located on the Vuetify One user menu and provide quick access to common tasks."
           />
@@ -86,7 +101,7 @@
 
         <v-divider />
 
-        <v-card-text class="px-7">
+        <v-card-text v-if="auth.isSubscriber" class="px-7">
           <v-label class="font-weight-black">Communication</v-label>
 
           <div class="mb-3 text-caption text-medium-emphasis">
@@ -100,14 +115,14 @@
             messages="Notifications are short form messages that provide information about new releases, updates, and other important information."
           />
 
-          <!-- <br>
+          <br>
 
-            <VoSwitch
-              v-model="user.showBanners"
-              :disabled="!auth.isSubscriber"
-              label="Enable Banners"
-              messages="Banners are located at the top of the screen and provide a callout for important information."
-            /> -->
+          <VoSwitch
+            v-model="user.showBanners"
+            :disabled="!auth.isSubscriber"
+            label="Enable Banners"
+            messages="Banners are located at the top of the screen and provide a callout for important information."
+          />
         </v-card-text>
       </v-main>
     </v-layout>
@@ -128,7 +143,9 @@
   // Icons
   import {
     mdiCog,
+    mdiContrastCircle,
     mdiDesktopTowerMonitor,
+    mdiImageFilterHdr,
     mdiRocketLaunchOutline,
     mdiSpaceInvaders,
     mdiWeatherNight,
@@ -216,38 +233,95 @@
         'theme-on-code': '#CCCCCC',
       },
     },
+    highContrast: {
+      dark: true,
+      colors: {
+        background: '#000000',
+        surface: '#000000',
+        primary: '#ffD700',
+        'primary-darken-1': '#e6c300',
+        secondary: '#00ff00',
+        'secondary-darken-1': '#00e600',
+        accent: '#ff00ff',
+        info: '#31aaff',
+        warning: '#ffaa00',
+        error: '#ff0000',
+        success: '#00ff00',
+        'on-surface-variant': '#000000',
+        'surface-light': '#f2f2f2',
+        'surface-bright': '#e6e6e6',
+        'surface-variant': '#cccccc',
+      },
+      variables: {
+        'border-color': '#ffffff',
+        'border-opacity': 0.87,
+        'high-emphasis-opacity': 1.0,
+        'medium-emphasis-opacity': 0.87,
+        'disabled-opacity': 0.5,
+        'idle-opacity': 0.1,
+        'hover-opacity': 0.2,
+        'focus-opacity': 0.3,
+        'selected-opacity': 0.3,
+        'activated-opacity': 0.3,
+        'pressed-opacity': 0.4,
+        'dragged-opacity': 0.2,
+        'theme-kbd': '#000000',
+        'theme-on-kbd': '#ffffff',
+        'theme-code': '#000000',
+        'theme-on-code': '#ffffff',
+      },
+    },
   }
 
   const items = [
     {
       title: 'Light',
       subtitle: 'A standard light theme.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/4a3c1c07-fccc-48aa-a21a-fada102d5335',
       prependIcon: `svg:${mdiWhiteBalanceSunny}`,
       value: 'light',
     },
     {
       title: 'Dark',
       subtitle: 'A standard dark theme.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/2bab9057-ec65-49f3-b112-7256670750b5',
       prependIcon: `svg:${mdiWeatherNight}`,
       value: 'dark',
     },
     {
-      title: 'Blackguard',
-      subtitle: 'A theme for the v3.4 Blackguard release.',
-      prependIcon: `svg:${mdiSpaceInvaders}`,
-      value: 'blackguard',
-    },
-    {
-      title: 'Nebula',
-      subtitle: 'A theme for the v3.5 Nebula release.',
-      prependIcon: `svg:${mdiRocketLaunchOutline}`,
-      value: 'nebula',
+      title: 'High Contrast',
+      subtitle: 'A theme for high contrast.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/cdc13d85-2241-48a3-88cd-3797892f182e',
+      prependIcon: `svg:${mdiContrastCircle}`,
+      value: 'highContrast',
     },
     {
       title: 'System',
       subtitle: 'A theme based on the system preference.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/8657c3e2-21ff-4313-af1c-59bd7aa693a8',
       prependIcon: `svg:${mdiDesktopTowerMonitor}`,
       value: 'system',
+    },
+    {
+      title: 'Blackguard',
+      subtitle: 'A theme for v3.4 Blackguard.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/80c9c2d7-5ad0-4c4b-b8bc-5835f6339f7f',
+      prependIcon: `svg:${mdiSpaceInvaders}`,
+      value: 'blackguard',
+    },
+    {
+      title: 'Polaris',
+      subtitle: 'A theme for v3.5 Polaris.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/d9fc169c-cba5-436c-96a9-d0a9ae5fb697',
+      prependIcon: `svg:${mdiImageFilterHdr}`,
+      value: 'polaris',
+    },
+    {
+      title: 'Nebula',
+      subtitle: 'A theme for v3.6 Nebula.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/a984068c-3180-4041-86ba-3c15a9293dfc',
+      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      value: 'nebula',
     },
   ]
 
