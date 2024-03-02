@@ -8,11 +8,10 @@
     <v-layout>
       <v-main scrollable>
         <v-card-text class="px-7">
-          <v-label class="font-weight-black">Theme</v-label>
-
-          <div class="mb-3 text-caption text-medium-emphasis">
-            Customize your documentation experience with light and dark themes, as well as a combination of both named.
-          </div>
+          <VoDialogSubheader
+            text="Customize your documentation experience with light and dark themes, as well as a combination of both named."
+            title="Theme"
+          />
 
           <v-item-group v-model="user.theme" mandatory>
             <v-row dense>
@@ -56,11 +55,10 @@
         <v-divider />
 
         <v-card-text class="px-7">
-          <v-label class="font-weight-black">Experience</v-label>
-
-          <div class="mb-3 text-caption text-medium-emphasis">
-            These options change your browsing experience within Vuetify properties
-          </div>
+          <VoDialogSubheader
+            text="These options change your browsing experience within Vuetify properties"
+            title="Experience"
+          />
 
           <VoSwitch
             v-if="auth.isSubscriber"
@@ -101,11 +99,10 @@
         <v-divider />
 
         <v-card-text v-if="auth.isSubscriber" class="px-7">
-          <v-label class="font-weight-black">Communication</v-label>
-
-          <div class="mb-3 text-caption text-medium-emphasis">
-            Vuetify will communicate with you through banners and notifications. You can disable these features here or reset your local notification cache.
-          </div>
+          <VoDialogSubheader
+            text="Vuetify will communicate with you through banners and notifications. You can disable these features here or reset your local notification cache."
+            title="Communication"
+          />
 
           <VoSwitch
             v-model="user.notifications.show"

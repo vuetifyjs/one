@@ -1,11 +1,10 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-label class="font-weight-black">Invoice History</v-label>
-
-      <div class="mb-3 text-caption text-medium-emphasis">
-        View and download your invoice history.
-      </div>
+      <VoDialogSubheader
+        text="View and download your invoice history."
+        title="Invoice History"
+      />
 
       <v-card
         height="350"

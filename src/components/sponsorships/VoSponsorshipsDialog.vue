@@ -7,11 +7,10 @@
   >
     <div class="px-3 d-flex flex-column">
       <v-card-text>
-        <v-label class="font-weight-black">Support Vuetify</v-label>
-
-        <div class="mb-3 text-caption text-medium-emphasis">
-          Support Vuetify through GitHub Sponsors, Discord, or Patreon to unlock exclusive benefits and content.
-        </div>
+        <VoDialogSubheader
+          text="Support Vuetify through GitHub Sponsors, Discord, or Patreon to unlock exclusive benefits and content."
+          title="Support Vuetify"
+        />
 
         <v-timeline
           class="justify-start ms-n7"
@@ -187,7 +186,7 @@
 
         <template #headline>
           <div class="py-4">
-            ${{ parseFloat(one.monthlyTotal).toFixed(2) }}
+            ${{ parseFloat(String(one.monthlyTotal)).toFixed(2) }}
           </div>
         </template>
 
@@ -214,7 +213,7 @@
   const adapter = useDate()
   const one = useOneStore()
 
-  function format (created: string) {
+  function format (created: Date) {
     return adapter.format(created, 'fullDateWithWeekday')
   }
 </script>

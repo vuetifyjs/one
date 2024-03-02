@@ -7,11 +7,10 @@
   >
     <div class="px-3 h-screen">
       <v-card-text>
-        <v-label class="font-weight-black">Vuetify One</v-label>
-
-        <div class="mb-3 text-caption text-medium-emphasis">
-          The Vuetify One subsription is a great way to support the Vuetify team and get access to exclusive features and content.
-        </div>
+        <VoDialogSubheader
+          text="The Vuetify One subscription is a great way to support the Vuetify team and get access to exclusive features and content."
+          title="Vuetify One"
+        />
 
         <v-window :model-value="window">
           <v-window-item value="subscribe">
