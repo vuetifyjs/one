@@ -39,9 +39,9 @@
         max-width="300"
         width="100%"
       >
-        <VoGithubLogin class="mb-3" />
+        <VoAuthGithub class="mb-3" />
 
-        <VoDiscordLogin />
+        <VoAuthDiscord />
       </v-list>
     </v-card>
   </v-dialog>
@@ -50,10 +50,6 @@
 </template>
 
 <script setup lang="ts">
-  import VoDiscordLogin from '@/components/VoDiscordLogin.vue'
-  import VoGithubLogin from '@/components/VoGithubLogin.vue'
-  import VoUserBtn from '@/components/VoUserBtn.vue'
-
   // Composables
   import { useDisplay, useTheme } from 'vuetify'
 

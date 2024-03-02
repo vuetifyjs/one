@@ -8,15 +8,13 @@
 
     <VoNotificationsListItem />
 
+    <VoSponsorshipsListItem />
+
+    <VoSubscriptionListItem v-if="auth.user" />
+
     <VoSettingsListItem />
 
-    <v-expand-transition appear>
-      <div v-if="auth.user">
-        <VoSubscriptionListItem />
-
-        <VoLogoutListItem />
-      </div>
-    </v-expand-transition>
+    <VoAuthLogoutListItem v-if="auth.user" />
   </v-list>
 </template>
 

@@ -72,7 +72,7 @@
 
 <script lang="ts" setup>
   // Utilities
-  import { shallowRef, watch } from 'vue'
+  import { onMounted, shallowRef, watch } from 'vue'
 
   // Stores
   import { useOneStore } from '@/store/one'
@@ -95,6 +95,19 @@
     if (!one.isSubscriber || !one.interval) return
 
     isUpdatingSubscription.value = val !== one.interval
+  })
+
+  watch(dialog, async val => {
+    if (!val || !one.isSubscriber) return
+
+    one.subscriptionInfo()
+  })
+
+  onMounted(() => {
+    if (!one.sessionId) return
+
+    window.value = 'status'
+    dialog.value = true
   })
 
   async function onClickModify () {

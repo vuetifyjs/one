@@ -1,18 +1,18 @@
 <template>
   <v-list-item
-    :prepend-icon="`svg:${mdiDiscord}`"
-    base-color="#5865F2"
+    :prepend-icon="`svg:${mdiGithub}`"
+    base-color="#2a2a2a"
     rounded="pill"
     variant="flat"
     slim
-    @click="auth.login('discord')"
+    @click="auth.login('github')"
   >
     <template #title>
       <span class="text-body-2">{{ text }}</span>
     </template>
 
     <template
-      v-if="(!auth.user && auth.lastLoginProvider() === 'discord')"
+      v-if="(!auth.user && auth.lastLoginProvider() === 'github')"
       #subtitle
     >
       <div class="text-caption mt-n1">Last Used</div>
@@ -21,24 +21,25 @@
 </template>
 
 <script setup lang="ts">
-    // Stores
+  // Utilities
+  import { computed } from 'vue'
+
+  // Stores
   import { useAuthStore } from '@/store/auth'
 
   // Icons
-  import { mdiCloseCircle, mdiDiscord } from '@mdi/js'
-  import { computed } from 'vue'
+  import { mdiGithub } from '@mdi/js'
 
   const auth = useAuthStore()
 
   const hasIdentity = computed(() => {
-    return auth.user && auth.findIdentity('discord')
+    return auth.user && auth.findIdentity('github')
   })
 
   const text = computed(() => {
-    if (!auth.user) return 'Log in with Discord'
+    if (!auth.user) return 'Log in with GitHub'
+    if (hasIdentity.value) return 'Connected to GitHub'
 
-    if (hasIdentity.value) return 'Connected to Discord'
-
-    return 'Connect Discord'
+    return 'Connect GitHub'
   })
 </script>

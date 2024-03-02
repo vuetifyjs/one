@@ -2,8 +2,9 @@
   <v-dialog
     v-model="model"
     activator="parent"
-    height="700"
-    width="800"
+    height="100%"
+    max-height="700"
+    max-width="800"
   >
     <template #default="{ isActive }">
       <v-card

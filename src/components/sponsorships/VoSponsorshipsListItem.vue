@@ -1,20 +1,20 @@
 <template>
   <VoListItem
     :active="dialog"
-    :prepend-icon="`svg:${mdiCreditCardOutline}`"
-    title="Subscriptions"
+    :prepend-icon="`svg:${mdiHandHeartOutline}`"
+    title="Sponsorships"
     link
   >
-    <VoSubscriptionDialog v-model="dialog" />
+    <VoSponsorshipsDialog v-model="dialog" />
   </VoListItem>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   // Utilities
   import { shallowRef } from 'vue'
 
   // Icons
-  import { mdiCreditCardOutline } from '@mdi/js'
+  import { mdiHandHeartOutline } from '@mdi/js'
 
   const dialog = shallowRef(false)
 </script>

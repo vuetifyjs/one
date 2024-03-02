@@ -78,7 +78,6 @@
   })
 
   watch(() => one.interval, val => {
-    console.log('interval', val)
     subscription.value = val
   }, { immediate: true })
 </script>

@@ -1,12 +1,11 @@
 <template>
   <v-list
     class="py-0"
-    height="637"
+    height="100%"
     lines="three"
   >
     <v-empty-state
       v-if="!items.length"
-      class="mt-n16"
       icon="$vuetify"
       size="256"
     >

@@ -41,7 +41,6 @@
                               :style="{
                                 filter: isSelected || isHovering ? 'none' : 'grayscale(100%)',
                               }"
-                              class="transition-fast-in-fast-out"
                             />
                           </template>
                         </v-card>
@@ -134,7 +133,7 @@
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { shallowRef, watch } from 'vue'
+  import { watch } from 'vue'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
@@ -170,7 +169,7 @@
         success: '#84b38a',
         'surface-light': '#362b89',
         'surface-bright': '#564f8a',
-        'surface-variant': '#3a3368',
+        'surface-variant': '#6458b4',
         'on-surface-variant': '#FFFFFF',
         'primary-darken-1': '#c56e0b',
         secondary: '#8A2BE2',

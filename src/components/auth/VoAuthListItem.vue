@@ -1,14 +1,10 @@
 <template>
   <v-card
-    class="mx-3"
-    color="surface-light"
+    :variant="social ? 'tonal' : 'text'"
+    class="ma-2"
     rounded="lg"
-    variant="tonal"
   >
-    <v-list
-      class="py-0"
-      color="surface-light"
-    >
+    <v-list class="py-0">
       <v-list-item
         :link="!!auth.user"
         :prepend-icon="`svg:${auth.user && user.syncSettings ? mdiSync : mdiSyncOff}`"
@@ -19,10 +15,6 @@
         slim
         @click="onClickSync"
       >
-        <template #prepend>
-          <v-icon class="me-n1" />
-        </template>
-
         <template #append>
           <v-fade-transition>
             <v-switch
@@ -43,19 +35,17 @@
       </v-list-item>
 
       <v-expand-transition>
-        <v-card
+        <v-sheet
           v-if="(!auth.user && !auth.isLoading) || social"
-          color="rgba(var(--v-theme-primary), 0.5)"
-          rounded="0"
-          variant="tonal"
-          flat
+          border="t"
+          color="transparent"
         >
           <div class="pa-4 d-flex flex-column ga-4">
-            <VoGithubLogin />
+            <VoAuthGithub @click="social = false" />
 
-            <VoDiscordLogin />
+            <VoAuthDiscord @click="social = false" />
           </div>
-        </v-card>
+        </v-sheet>
       </v-expand-transition>
     </v-list>
   </v-card>
@@ -77,7 +67,7 @@
   const social = shallowRef(!auth.user && !auth.isLoading)
 
   watch(() => auth.user, val => {
-    if (val) social.value = false
+    social.value = !val
   })
 
   function onClickSync () {

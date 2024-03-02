@@ -54,6 +54,23 @@ export const useOneStore = defineStore('one', () => {
   const hasBilling = computed(() => !!subscription.value?.tierName)
   const isSubscriber = computed(() => subscription.value?.isActive)
 
+  const github = computed(() => {
+    return auth.user?.sponsorships.find((s: any) => s.platform === 'github')
+  })
+  const discord = computed(() => {
+    return auth.user?.sponsorships.find((s: any) => s.platform === 'discord')
+  })
+  const patreon = computed(() => {
+    return auth.user?.sponsorships.find((s: any) => s.platform === 'patreon')
+  })
+  const monthlyTotal = computed(() => {
+    return auth.user?.sponsorships.reduce((acc: number, s: any) => {
+      if (s.platform !== 'stripe') acc += s.amount
+
+      return acc
+    }, 0)
+  })
+
   onBeforeMount(async () => {
     if (sessionId) await activate()
   })
@@ -76,6 +93,7 @@ export const useOneStore = defineStore('one', () => {
       const params = url.searchParams
       params.delete('session_id')
       history.pushState(null, '', url.toString())
+      subscriptionInfo()
     } catch (e) {
       //
     } finally {
@@ -87,10 +105,10 @@ export const useOneStore = defineStore('one', () => {
     window.open(`${http.url}/one/manage`, '_blank')
   }
 
-  async function subscribe (price: string) {
+  async function subscribe (interval: string) {
     isLoading.value = true
 
-    window.location.href = `${http.url}/one/subscribe?price=${price}`
+    window.location.href = `${http.url}/one/subscribe?interval=${interval}`
   }
 
   async function cancel () {
@@ -171,10 +189,15 @@ export const useOneStore = defineStore('one', () => {
     invoices,
     sessionId,
     subscription,
+    monthlyTotal,
 
     hasBilling,
     isLoading,
     isSubscriber,
+
+    github,
+    patreon,
+    discord,
 
     activate,
     cancel,

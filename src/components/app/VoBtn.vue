@@ -3,6 +3,7 @@
     :style="{
       pointerEvents: props.readonly ? 'none' : undefined,
     }"
+    :tabindex="props.readonly ? -1 : undefined"
     class="text-none font-weight-regular"
     color="primary"
     size="small"
