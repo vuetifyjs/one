@@ -7,6 +7,7 @@
     <v-img
       color="surface-light"
       max-height="88"
+      min-height="88"
       rounded="0"
       cover
       flat

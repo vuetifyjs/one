@@ -58,7 +58,7 @@
 
 <script lang="ts" setup>
   // Utilities
-  import { shallowRef, watch } from 'vue'
+  import { PropType, shallowRef, watch } from 'vue'
 
   // Stores
   import { useOneStore } from '@/store/one'
@@ -67,11 +67,18 @@
   import { mdiCheckCircleOutline } from '@mdi/js'
 
   const dialog = shallowRef(false)
-  const subscription = defineModel()
+  const subscription = defineModel({
+    type: String as PropType<'month' | 'year' | undefined>,
+  })
 
   const one = useOneStore()
 
   watch(dialog, async val => {
     if (val) one.subscriptionInfo()
   })
+
+  watch(() => one.interval, val => {
+    console.log('interval', val)
+    subscription.value = val
+  }, { immediate: true })
 </script>

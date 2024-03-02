@@ -34,11 +34,15 @@
     <v-card-actions v-if="window === 'subscribe'" class="overflow-hidden">
       <div class="flex-grow-1 px-4 pb-3 overflow-hidden">
         <VoBtn
-          v-if="isUpdatingSubscription"
+          v-if="isUpdatingSubscription !== false"
+          :loading="one.isLoading"
+          :prepend-icon="`svg:${isUpdatingSubscription !== null ? mdiReload : mdiCheckCircleOutline}`"
+          :readonly="isUpdatingSubscription === null"
+          :text="isUpdatingSubscription !== null ? 'Modify Subscription' : 'Success'"
           color="success"
           size="default"
-          text="Update Subscription"
           block
+          @click="onClickModify"
         />
 
         <VoBtn
@@ -46,6 +50,7 @@
           :color="!subscription ? 'disabled' : 'primary'"
           :disabled="!subscription"
           :loading="one.isLoading"
+          prepend-icon="$vuetify"
           size="default"
           text="Activate Subscription"
           block
@@ -54,6 +59,7 @@
 
         <VoBtn
           v-else
+          :prepend-icon="`svg:${mdiPlaylistCheck}`"
           size="default"
           text="Manage Subscription"
           block
@@ -72,20 +78,37 @@
   import { useOneStore } from '@/store/one'
 
   // Icons
-  import { mdiCreditCard } from '@mdi/js'
+  import { mdiCheckCircleOutline, mdiCreditCard, mdiPlaylistCheck, mdiReload } from '@mdi/js'
+
+  function wait (ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
   const one = useOneStore()
   const subscription = shallowRef(one.interval)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
-  const isUpdatingSubscription = shallowRef(false)
-
-  watch(dialog, async val => {
-    if (val) one.subscriptionInfo()
-  })
+  const isUpdatingSubscription = shallowRef<boolean | null>(false)
 
   watch(subscription, val => {
+    if (!one.isSubscriber || !one.interval) return
+
     isUpdatingSubscription.value = val !== one.interval
   })
+
+  async function onClickModify () {
+    await one.modify(subscription.value!)
+    await one.subscriptionInfo()
+
+    isUpdatingSubscription.value = null
+
+    await wait(3000)
+
+    window.value = 'status'
+
+    await wait(300)
+
+    isUpdatingSubscription.value = false
+  }
 </script>

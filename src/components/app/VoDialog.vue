@@ -9,6 +9,7 @@
       <v-card
         :prepend-icon="prependIcon"
         :title="title"
+        class="overflow-hidden"
         height="inherit"
         width="inherit"
       >

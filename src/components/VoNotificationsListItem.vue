@@ -1,6 +1,7 @@
 <template>
   <VoListItem
     v-if="user.notifications.show"
+    :active="dialog"
     :prepend-icon="`svg:${mdiBellOutline}`"
     title="Notifications"
     link
@@ -12,6 +13,7 @@
     </template>
 
     <VoDialog
+      v-model="dialog"
       :prepend-icon="`svg:${mdiBell}`"
       title="Notifications"
     >
@@ -84,6 +86,7 @@
   const user = useUserStore()
   const notifications = useNotificationsStore()
   const list = shallowRef(['0'])
+  const dialog = shallowRef(false)
 
   onMounted(async () => {
     await notifications.get()

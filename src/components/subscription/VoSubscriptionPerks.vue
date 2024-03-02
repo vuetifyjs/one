@@ -49,9 +49,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useDate } from 'vuetify'
-
   // Utilities
   import { shallowRef, watch } from 'vue'
 
@@ -64,11 +61,10 @@
   const perks = [
     'Ad Free Experience on all Vuetify properties',
     'Save and share code snippets with <a href="https://vbin.io/" target="_blank">VBin</a>',
-    'Pinned Navigation Items and Rail drawer in Documentation',
-    'Subscriber only features such as pinned navigation items, rail mode, custom avatars, and more',
+    'Pinned Navigation Items and Rail drawer in <a href="https://vuetifyjs.com/" target="_blank">Documentation</a>',
   ]
   const upnext = [
-    'Special role in the Vuetify Discord',
+    'Special role in the <a href="https://discord.vuetifyjs.com/" target="_blank">Vuetify Discord</a>',
     'Save and share your playgrounds with <a href="https://play.vuetifyjs.com" target="_blank">Vuetify Play</a>',
     'Receive a special label on GitHub created issues and pull requests',
   ]

@@ -1,5 +1,8 @@
 <template>
   <v-btn
+    :style="{
+      pointerEvents: props.readonly ? 'none' : undefined,
+    }"
     class="text-none font-weight-regular"
     color="primary"
     size="small"
@@ -20,5 +23,9 @@
 </template>
 
 <script setup lang="ts">
-  //
+  interface Props {
+    readonly?: boolean
+  }
+
+  const props = defineProps<Props>()
 </script>
