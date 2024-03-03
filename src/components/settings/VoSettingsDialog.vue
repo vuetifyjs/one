@@ -284,13 +284,13 @@
       prependIcon: `svg:${mdiWeatherNight}`,
       value: 'dark',
     },
-    // {
-    //   title: 'High Contrast',
-    //   subtitle: 'A theme for high contrast.',
-    //   image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/cdc13d85-2241-48a3-88cd-3797892f182e',
-    //   prependIcon: `svg:${mdiContrastCircle}`,
-    //   value: 'highContrast',
-    // },
+    {
+      title: 'High Contrast',
+      subtitle: 'A theme for high contrast.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/cdc13d85-2241-48a3-88cd-3797892f182e',
+      prependIcon: `svg:${mdiContrastCircle}`,
+      value: 'highContrast',
+    },
     {
       title: 'System',
       subtitle: 'A theme based on the system preference.',
@@ -305,20 +305,20 @@
       prependIcon: `svg:${mdiSpaceInvaders}`,
       value: 'blackguard',
     },
-    // {
-    //   title: 'Polaris',
-    //   subtitle: 'A theme for v3.5 Polaris.',
-    //   image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/d9fc169c-cba5-436c-96a9-d0a9ae5fb697',
-    //   prependIcon: `svg:${mdiImageFilterHdr}`,
-    //   value: 'polaris',
-    // },
-    // {
-    //   title: 'Nebula',
-    //   subtitle: 'A theme for v3.6 Nebula.',
-    //   image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/a984068c-3180-4041-86ba-3c15a9293dfc',
-    //   prependIcon: `svg:${mdiRocketLaunchOutline}`,
-    //   value: 'nebula',
-    // },
+    {
+      title: 'Polaris',
+      subtitle: 'A theme for v3.5 Polaris.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/d9fc169c-cba5-436c-96a9-d0a9ae5fb697',
+      prependIcon: `svg:${mdiImageFilterHdr}`,
+      value: 'polaris',
+    },
+    {
+      title: 'Nebula',
+      subtitle: 'A theme for v3.6 Nebula.',
+      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/a984068c-3180-4041-86ba-3c15a9293dfc',
+      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      value: 'nebula',
+    },
   ]
 
   watch(() => user.theme, val => {

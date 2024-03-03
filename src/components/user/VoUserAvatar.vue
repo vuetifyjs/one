@@ -2,7 +2,7 @@
   <div>
     <v-avatar
       :class="[
-        'border-lg border-opacity-100 border-surface-light',
+        'border-md border-opacity-100 border-surface-variant',
         {
           'cursor-pointer': auth.isSubscriber,
         }
@@ -31,10 +31,9 @@
       <v-expand-transition>
         <div v-if="expanded">
           <v-card
-            class="pt-6 pb-1 mt-4"
-            color="rgba(var(--v-theme-primary), 0.5)"
+            class="pt-6 pb-1"
             rounded="0"
-            variant="tonal"
+            flat
           >
             <div class="d-flex ga-4 flex-wrap justify-center mb-4">
               <template

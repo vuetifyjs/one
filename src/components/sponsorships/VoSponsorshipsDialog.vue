@@ -178,7 +178,7 @@
         class="mt-auto"
         min-height="auto"
         size="64"
-        title="Monthly Contributions"
+        title="Your Monthly Contributions"
       >
         <template #media>
           <v-icon color="success" />
@@ -186,8 +186,13 @@
 
         <template #headline>
           <div class="py-4">
-            ${{ parseFloat(String(one.monthlyTotal)).toFixed(2) }}
-          </div>
+            <template v-if="auth.isSubscriber">
+              ${{ parseFloat(String(one.monthlyTotal)).toFixed(2) }}
+            </template>
+
+            <template v-else>
+              $0.00
+            </template></div>
         </template>
 
         <template #text>
@@ -205,12 +210,14 @@
   import { useDate } from 'vuetify'
 
   // Stores
+  import { useAuthStore } from '@/store/auth'
   import { useOneStore } from '@/store/one'
 
   // Icons
   import { mdiChartLine, mdiCheck, mdiCheckCircleOutline, mdiHandHeart, mdiInformationOutline, mdiMedal } from '@mdi/js'
 
   const adapter = useDate()
+  const auth = useAuthStore()
   const one = useOneStore()
 
   function format (created: Date) {

@@ -44,6 +44,7 @@ declare module 'vue' {
     VoSyncCard: typeof import('./src/components/VoSyncCard.vue')['default']
     VoUserAvatar: typeof import('./src/components/user/VoUserAvatar.vue')['default']
     VoUserBtn: typeof import('./src/components/user/VoUserBtn.vue')['default']
+    VoUserColors: typeof import('./src/components/user/VoUserColors.vue')['default']
     VoUserList: typeof import('./src/components/user/VoUserList.vue')['default']
     VoUserMenu: typeof import('./src/components/user/VoUserMenu.vue')['default']
     VoUserQuickActions: typeof import('./src/components/user/VoUserQuickActions.vue')['default']

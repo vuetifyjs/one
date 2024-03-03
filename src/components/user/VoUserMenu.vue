@@ -4,17 +4,10 @@
     width="280"
     border
   >
-    <v-img
-      color="surface-light"
-      max-height="88"
-      min-height="88"
-      rounded="0"
-      cover
-      flat
-    />
+    <VoUserColors />
 
     <div class="text-center mt-n9 mb-4">
-      <VoUserAvatar class="mb-2" />
+      <VoUserAvatar />
 
       <VoUserQuickActions />
     </div>
