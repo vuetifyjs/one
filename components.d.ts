@@ -31,6 +31,7 @@ declare module 'vue' {
     VoNotificationsListItem: typeof import('./src/components/notifications/VoNotificationsListItem.vue')['default']
     VoSettingsDialog: typeof import('./src/components/settings/VoSettingsDialog.vue')['default']
     VoSettingsListItem: typeof import('./src/components/settings/VoSettingsListItem.vue')['default']
+    VoSettingsPageSuitOption: typeof import('./src/components/settings/VoSettingsPageSuitOption.vue')['default']
     VoSponsorshipListItem: typeof import('./src/components/sponsorships/VoSponsorshipListItem.vue')['default']
     VoSponsorshipsDialog: typeof import('./src/components/sponsorships/VoSponsorshipsDialog.vue')['default']
     VoSponsorshipsListItem: typeof import('./src/components/sponsorships/VoSponsorshipsListItem.vue')['default']

@@ -2,8 +2,8 @@
   <VoDialog
     v-model="dialog"
     :prepend-icon="`svg:${mdiCog}`"
+    max-height="900"
     title="Settings"
-    scrollable
   >
     <v-layout>
       <v-main scrollable>
@@ -50,6 +50,10 @@
               </v-col>
             </v-row>
           </v-item-group>
+
+          <v-divider class="mt-6 mb-4 " />
+
+          <VoSettingsPageSuitOption />
         </v-card-text>
 
         <v-divider />
@@ -106,16 +110,15 @@
 
           <VoSwitch
             v-model="user.notifications.show"
-            :disabled="!auth.isSubscriber"
+            class="mb-2"
             label="Enable Notifications"
             messages="Notifications are short form messages that provide information about new releases, updates, and other important information."
           />
 
-          <br>
-
           <VoSwitch
-            v-model="user.showBanners"
-            :disabled="!auth.isSubscriber"
+            v-if="user.notifications.show"
+            v-model="user.notifications.banners"
+            class="mb-2"
             label="Enable Banners"
             messages="Banners are located at the top of the screen and provide a callout for important information."
           />

@@ -5,11 +5,14 @@ import { defineStore } from 'pinia'
 import { merge } from 'lodash-es'
 import { reactive, toRefs } from 'vue'
 
+// Types
+import type { Suit } from './settings'
+
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'
 
 export type RootState = {
-  v: 2 | 3 | 4
+  v: 2 | 3 | 4 | 5
   api: 'link-only' | 'inline'
   avatar: string
   dev: boolean
@@ -25,8 +28,14 @@ export type RootState = {
   railDrawer: boolean
   pins: boolean
   pinned: Record<string, unknown>[]
+  suits: {
+    show: boolean
+    elements: (keyof Suit)[]
+    suit: string
+  }
   notifications: {
     show: boolean
+    banners: boolean
     read: string[]
     last: {
       banner: string[]
@@ -94,7 +103,7 @@ export type SavedState = {
 } | RootState
 
 export const DEFAULT_USER: RootState = {
-  v: 4,
+  v: 5,
   api: 'link-only',
   avatar: '',
   dev: false,
@@ -110,8 +119,14 @@ export const DEFAULT_USER: RootState = {
   syncSettings: true,
   quickbar: false,
   railDrawer: false,
+  suits: {
+    show: false,
+    elements: ['app-bar'],
+    suit: '',
+  },
   notifications: {
     show: true,
+    banners: true,
     read: [],
     last: {
       banner: [],
@@ -132,7 +147,7 @@ export const useUserStore = defineStore('user', () => {
 
     const stored = localStorage.getItem('vuetify@user')
     const data = stored ? JSON.parse(stored) : {}
-    const needsRefresh = data.v === state.v
+    let needsRefresh = data.v === state.v
 
     if (!data.v) {
       data.pwaRefresh = true
@@ -177,6 +192,12 @@ export const useUserStore = defineStore('user', () => {
 
     if (data.v === 3) {
       data.quickbar = false
+    }
+
+    if (data.v === 4) {
+      data.suits = DEFAULT_USER.suits
+      data.notifications.banners = DEFAULT_USER.notifications.banners
+      needsRefresh = true
     }
 
     data.v = state.v
