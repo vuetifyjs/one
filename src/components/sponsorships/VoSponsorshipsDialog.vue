@@ -5,7 +5,7 @@
     max-height="820"
     title="Sponsorships"
   >
-    <div class="px-3 d-flex flex-column">
+    <div class="px-3 pb-5 d-flex flex-column">
       <v-card-text>
         <VoDialogSubheader
           text="Support Vuetify through GitHub Sponsors, Discord, or Patreon to unlock exclusive benefits and content."
