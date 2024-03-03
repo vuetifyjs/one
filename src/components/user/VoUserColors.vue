@@ -35,7 +35,7 @@
   <v-expand-transition>
     <v-color-picker
       v-if="colors"
-      v-model="color"
+      :model-value="color !== 'surface-light' ? color : undefined"
       elevation="0"
       height="250"
       swatches-max-height="200"
@@ -44,6 +44,7 @@
       hide-inputs
       hide-sliders
       show-swatches
+      @update:model-value="color = $event"
     />
   </v-expand-transition>
 </template>
