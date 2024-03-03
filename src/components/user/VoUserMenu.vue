@@ -14,7 +14,9 @@
     />
 
     <div class="text-center mt-n9 mb-4">
-      <VoUserAvatar />
+      <VoUserAvatar class="mb-2" />
+
+      <VoUserQuickActions />
     </div>
 
     <v-divider />
