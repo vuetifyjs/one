@@ -13,10 +13,9 @@ export interface Suit {
 }
 
 export interface State {
+  CDN_URL: string
   suit: Suit | {}
 }
-
-const CDN_URL = 'https://cdn.vuetifyjs.com/docs/images/one/suits/'
 
 function genThemes () {
   return {
@@ -136,6 +135,8 @@ function genThemes () {
 }
 
 export const useSettingsStore = defineStore('settings', () => {
+  const CDN_URL = 'https://cdn.vuetifyjs.com/docs/images/one/'
+
   const auth = useAuthStore()
   const user = useUserStore()
   const theme = useTheme()
@@ -144,8 +145,8 @@ export const useSettingsStore = defineStore('settings', () => {
 
   const suits = {
     blackguard: {
-      'app-bar': CDN_URL + 'blackguard/blackguard-app-bar.png',
-      drawer: CDN_URL + 'blackguard/blackguard-app-drawer.png',
+      'app-bar': CDN_URL + 'suits/blackguard/blackguard-app-bar.png',
+      drawer: CDN_URL + 'suits/blackguard/blackguard-app-drawer.png',
       footer: '',
     },
     // polaris: {
@@ -190,5 +191,6 @@ export const useSettingsStore = defineStore('settings', () => {
 
   return {
     suit,
+    CDN_URL,
   } satisfies State
 })
