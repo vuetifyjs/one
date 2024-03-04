@@ -90,7 +90,7 @@
                     <div class="ps-16">
                       <VoBtn
                         :color="one.discord?.isActive ? 'success' : 'primary'"
-                        :href="one.discord?.isActive ? 'https://discord.com/servers/vuetify-340160225338195969' : undefined"
+                        :href="one.discord?.isActive ? undefined : 'https://discord.com/servers/vuetify-340160225338195969'"
                         :prepend-icon="`svg:${one.discord?.isActive ? mdiCheckCircleOutline : mdiInformationOutline}`"
                         :readonly="one.discord?.isActive"
                         :target="one.discord?.isActive ? '_blank' : undefined"
