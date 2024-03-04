@@ -33,6 +33,9 @@ export type RootState = {
     elements: (keyof Suit)[]
     suit: string
   }
+  colors: {
+    one: string
+  }
   notifications: {
     show: boolean
     banners: boolean
@@ -123,6 +126,9 @@ export const DEFAULT_USER: RootState = {
     show: false,
     elements: ['app-bar'],
     suit: '',
+  },
+  colors: {
+    one: 'surface-light',
   },
   notifications: {
     show: true,
