@@ -6,9 +6,9 @@
   >
     <v-layout>
       <v-navigation-drawer
-        width="175"
-        absolute
-        floating
+        :location="display.mobile.value ? 'top' : 'start'"
+        :width="display.mobile.value ? 128 : 168"
+        permanent
       >
         <v-list
           v-model:selected="list"
@@ -54,6 +54,8 @@
 </template>
 
 <script setup lang="ts">
+  // Composables
+  import { useDisplay } from 'vuetify'
   // Utilities
   import { shallowRef } from 'vue'
 
@@ -64,6 +66,8 @@
   import { mdiBell, mdiInboxFullOutline, mdiInboxOutline } from '@mdi/js'
 
   const notifications = useNotificationsStore()
+  const display = useDisplay()
+
   const list = shallowRef(['0'])
   const dialog = shallowRef(false)
 </script>

@@ -62,6 +62,8 @@
     'Ad Free Experience on all Vuetify properties',
     'Save and share code snippets with <a href="https://vbin.io/" target="_blank">VBin</a>',
     'Pinned Navigation Items and Rail drawer in <a href="https://vuetifyjs.com/" target="_blank">Documentation</a>',
+    'Customize Navigation components with Page Suits',
+    'Custom Vuetify One menu avatar',
   ]
   const upnext = [
     'Special role in the <a href="https://discord.vuetifyjs.com/" target="_blank">Vuetify Discord</a>',

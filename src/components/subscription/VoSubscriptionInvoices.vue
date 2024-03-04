@@ -7,14 +7,13 @@
       />
 
       <v-card
-        height="350"
+        height="450"
         rounded="lg"
         border
       >
         <v-data-table-virtual
           :items="one.invoices"
           :loading="one.isLoading"
-          height="348"
           sticky
         >
           <template #item.date="{ item }">

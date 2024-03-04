@@ -1,6 +1,5 @@
 <template>
   <VoSwitch
-    v-if="auth.isSubscriber"
     v-model="user.suits.show"
     class="mb-2"
     label="Enable Page suits"

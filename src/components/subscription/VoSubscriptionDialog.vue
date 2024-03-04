@@ -3,7 +3,6 @@
     v-model="dialog"
     :prepend-icon="`svg:${mdiCreditCard}`"
     title="Subscriptions"
-    scrollable
   >
     <div class="px-3 h-screen">
       <v-card-text>
@@ -30,7 +29,7 @@
       </v-card-text>
     </div>
 
-    <v-card-actions v-if="window === 'subscribe'" class="overflow-hidden">
+    <template v-if="window === 'subscribe'" #actions>
       <div class="flex-grow-1 px-4 pb-3 overflow-hidden">
         <VoBtn
           v-if="isUpdatingSubscription !== false"
@@ -65,7 +64,10 @@
           @click="window = 'status'"
         />
       </div>
-    </v-card-actions>
+    </template>
+    <!-- <v-card-actions v-if="window === 'subscribe'" class="overflow-hidden">
+
+    </v-card-actions> -->
   </VoDialog>
 </template>
 

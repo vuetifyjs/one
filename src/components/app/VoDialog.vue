@@ -3,7 +3,7 @@
     v-model="model"
     activator="parent"
     height="100%"
-    max-height="700"
+    max-height="800"
     max-width="800"
   >
     <template #default="{ isActive }">
@@ -12,7 +12,6 @@
         :title="title"
         class="overflow-hidden"
         height="inherit"
-        width="inherit"
       >
         <template v-if="$slots.prepend" #prepend>
           <slot name="prepend" />

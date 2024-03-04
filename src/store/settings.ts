@@ -8,7 +8,7 @@ import { useTheme } from 'vuetify'
 
 export interface Suit {
   'app-bar': string
-  'navigation-drawer': string
+  'drawer': string
   footer: string
 }
 
@@ -145,17 +145,17 @@ export const useSettingsStore = defineStore('settings', () => {
   const suits = {
     blackguard: {
       'app-bar': CDN_URL + 'blackguard/blackguard-app-bar.png',
-      'navigation-drawer': CDN_URL + 'blackguard/blackguard-app-drawer.png',
+      drawer: CDN_URL + 'blackguard/blackguard-app-drawer.png',
       footer: '',
     },
     // polaris: {
     //   'app-bar': '',
-    //   'navigation-drawer': '',
+    //   'drawer': '',
     //   footer: '',
     // },
     // nebula: {
     //   'app-bar': '',
-    //   'navigation-drawer': '',
+    //   'drawer': '',
     //   footer: '',
     // },
   } as Record<string, Suit>

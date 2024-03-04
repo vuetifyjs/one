@@ -1,9 +1,12 @@
 <template>
-  <v-app-bar :image="settings.suit['app-bar']" />
-  <v-container class="d-flex">
-    <VoAuthBtn />
-    <!-- <VoAuthDialog /> -->
-  </v-container>
+  <v-app-bar :image="settings.suit['app-bar']">
+    <template #append>
+      <VoAuthBtn />
+    </template>
+  </v-app-bar>
+  <v-navigation-drawer :image="settings.suit['drawer']" />
+
+  <v-container class="d-flex" />
 </template>
 
 <script lang="ts" setup>

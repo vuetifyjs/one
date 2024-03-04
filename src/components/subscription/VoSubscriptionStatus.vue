@@ -10,10 +10,10 @@
       >
         <template v-if="one.info" #subtitle>
           <div class="d-flex align-center">
-            <span key="status" class="text-capitalize">{{ one.info.status }}</span>
+            <span key="status" class="text-capitalize hidden-sm-and-down">{{ one.info.status }}</span>
 
             <template v-if="one.info.items.length">
-              <span class="mx-1">—</span>
+              <span class="mx-1 hidden-sm-and-down">—</span>
 
               <span class="me-1">
                 ${{ one.info.items[0].plan.amount / 100 }}<span class="text-medium-emphasis text-caption">/{{ one.interval }}</span>

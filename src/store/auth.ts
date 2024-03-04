@@ -198,5 +198,6 @@ export const useAuthStore = defineStore('auth', () => {
     logout,
     isSubscriber,
     lastLoginProvider,
+    sync,
   }
 })

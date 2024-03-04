@@ -2,7 +2,6 @@
   <VoDialog
     v-model="dialog"
     :prepend-icon="`svg:${mdiCog}`"
-    max-height="900"
     title="Settings"
   >
     <v-layout>
@@ -51,9 +50,11 @@
             </v-row>
           </v-item-group>
 
-          <v-divider class="mt-6 mb-4 " />
+          <template v-if="auth.isSubscriber">
+            <v-divider class="mt-6 mb-4 " />
 
-          <VoSettingsPageSuitOption />
+            <VoSettingsPageSuitOption />
+          </template>
         </v-card-text>
 
         <v-divider />

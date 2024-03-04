@@ -6,6 +6,7 @@
   >
     <v-empty-state
       v-if="!items.length"
+      class="mt-16"
       icon="$vuetify"
       size="256"
     >

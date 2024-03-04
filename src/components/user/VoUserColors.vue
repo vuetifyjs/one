@@ -39,7 +39,7 @@
       elevation="0"
       height="250"
       swatches-max-height="200"
-      width="280"
+      width="278"
       hide-canvas
       hide-inputs
       hide-sliders
