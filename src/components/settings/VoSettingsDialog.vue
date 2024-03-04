@@ -25,9 +25,11 @@
                       <template #default="{ props: activatorProps, isHovering }">
                         <v-card
                           :color="isSelected ? 'primary' : 'surface-variant'"
+                          :disabled="item.disabled"
                           :image="item.image"
                           :prepend-icon="item.prependIcon"
-                          :subtitle="item.subtitle"
+                          :ripple="!item.disabled"
+                          :subtitle="!item.disabled ? item.subtitle : 'In Development'"
                           :title="item.title"
                           height="76"
                           variant="tonal"
@@ -132,6 +134,7 @@
 <script setup lang="ts">
   // Stores
   import { useAuthStore } from '@/store/auth'
+  import { useSettingsStore } from '@/store/settings'
   import { useUserStore } from '@/store/user'
 
   // Icons
@@ -148,57 +151,61 @@
 
   const dialog = defineModel('modelValue', { type: Boolean })
   const auth = useAuthStore()
+  const settings = useSettingsStore()
   const user = useUserStore()
 
   const items = [
     {
       title: 'Light',
       subtitle: 'A standard light theme.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/4a3c1c07-fccc-48aa-a21a-fada102d5335',
+      image: settings.CDN_URL + 'themes/light.png',
       prependIcon: `svg:${mdiWhiteBalanceSunny}`,
       value: 'light',
     },
     {
       title: 'Dark',
       subtitle: 'A standard dark theme.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/2bab9057-ec65-49f3-b112-7256670750b5',
+      image: settings.CDN_URL + 'themes/dark.png',
       prependIcon: `svg:${mdiWeatherNight}`,
       value: 'dark',
     },
     {
-      title: 'High Contrast',
-      subtitle: 'A theme for high contrast.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/cdc13d85-2241-48a3-88cd-3797892f182e',
-      prependIcon: `svg:${mdiContrastCircle}`,
-      value: 'highContrast',
-    },
-    {
       title: 'System',
       subtitle: 'A theme based on the system preference.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/8657c3e2-21ff-4313-af1c-59bd7aa693a8',
+      image: settings.CDN_URL + 'themes/system.png',
       prependIcon: `svg:${mdiDesktopTowerMonitor}`,
       value: 'system',
     },
     {
       title: 'Blackguard',
       subtitle: 'A theme for v3.4 Blackguard.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/80c9c2d7-5ad0-4c4b-b8bc-5835f6339f7f',
+      image: settings.CDN_URL + 'themes/blackguard.png',
       prependIcon: `svg:${mdiSpaceInvaders}`,
       value: 'blackguard',
     },
     {
       title: 'Polaris',
       subtitle: 'A theme for v3.5 Polaris.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/d9fc169c-cba5-436c-96a9-d0a9ae5fb697',
+      image: settings.CDN_URL + 'themes/polaris.png',
       prependIcon: `svg:${mdiImageFilterHdr}`,
       value: 'polaris',
+      disabled: true,
     },
     {
       title: 'Nebula',
       subtitle: 'A theme for v3.6 Nebula.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/a984068c-3180-4041-86ba-3c15a9293dfc',
+      image: settings.CDN_URL + 'themes/nebula.png',
       prependIcon: `svg:${mdiRocketLaunchOutline}`,
       value: 'nebula',
+      disabled: true,
+    },
+    {
+      title: 'High Contrast',
+      subtitle: 'A theme for high contrast.',
+      image: settings.CDN_URL + 'themes/high-contrast.png',
+      prependIcon: `svg:${mdiContrastCircle}`,
+      value: 'highContrast',
+      disabled: true,
     },
   ]
 </script>
