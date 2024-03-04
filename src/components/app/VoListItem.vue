@@ -1,7 +1,5 @@
 <template>
-  <v-list-item
-    slim
-  >
+  <v-list-item slim>
     <template v-if="$slots.prepend" #prepend>
       <slot name="prepend" />
     </template>
@@ -18,6 +16,6 @@
   </v-list-item>
 </template>
 
-<script setup>
+<script setup lang="ts">
   //
 </script>

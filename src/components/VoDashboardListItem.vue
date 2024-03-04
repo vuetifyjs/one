@@ -6,6 +6,7 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
+  // Icons
   import { mdiViewDashboardOutline } from '@mdi/js'
 </script>
