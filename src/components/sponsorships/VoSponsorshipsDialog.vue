@@ -31,16 +31,17 @@
                   rounded="lg"
                   subtitle="Support Vuetify through GitHub sponsors."
                   title="GitHub Sponsors"
+                  variant="text"
                   border
                 >
                   <template #append>
                     <div class="ps-16">
                       <VoBtn
                         :color="one.github?.isActive ? 'success' : 'primary'"
-                        :href="one.github?.isActive ? 'https://github.com/sponsors/johnleider' : undefined"
+                        :href="one.github?.isActive ? undefined : 'https://github.com/sponsors/johnleider'"
                         :prepend-icon="`svg:${one.github?.isActive ? mdiCheckCircleOutline : mdiInformationOutline}`"
                         :readonly="one.github?.isActive"
-                        :target="one.github?.isActive ? '_blank' : undefined"
+                        :target="one.github?.isActive ? undefined : '_blank'"
                         :text="one.github?.isActive ? 'Active' : 'Info'"
                         width="88"
                       />
@@ -93,7 +94,7 @@
                         :href="one.discord?.isActive ? undefined : 'https://discord.com/servers/vuetify-340160225338195969'"
                         :prepend-icon="`svg:${one.discord?.isActive ? mdiCheckCircleOutline : mdiInformationOutline}`"
                         :readonly="one.discord?.isActive"
-                        :target="one.discord?.isActive ? '_blank' : undefined"
+                        :target="one.discord?.isActive ? undefined : '_blank'"
                         :text="one.discord?.isActive ? 'Active' : 'Info'"
                         width="88"
                       />
@@ -135,6 +136,7 @@
                 <v-card
                   :prepend-avatar="settings.CDN_URL + '/logos/patreon.png'"
                   rounded="lg"
+                  subtitle="Support Vuetify through Patreon."
                   title="Patreon Subscriber"
                   variant="text"
                   border
