@@ -1,5 +1,5 @@
 <template>
-  <v-menu :close-on-content-click="false">
+  <v-menu :close-on-content-click="false" eager>
     <template #activator="{ props: activatorProps }">
       <v-btn
         v-if="!auth.user && !auth.isLoading"
