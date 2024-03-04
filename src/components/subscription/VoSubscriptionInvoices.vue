@@ -18,7 +18,7 @@
         >
           <template #item.date="{ item }">
             <div class="text-caption">
-              {{ date.format(item.date, 'fullDateWithWeekday') }}
+              {{ date.format(new Date(item.date * 1000), 'fullDateWithWeekday') }}
             </div>
           </template>
 
