@@ -1,7 +1,6 @@
 <template>
   <v-footer
     class="vo-footer"
-    theme="dark"
     height="40"
   >
     <a
@@ -10,8 +9,8 @@
       :href="item.href"
       :title="item.title"
       class="d-inline-block mx-2 social-link"
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <v-icon
         :icon="item.icon"

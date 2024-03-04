@@ -1,4 +1,5 @@
 // Plugins
+import Components from 'unplugin-vue-components/vite'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { resolve } from 'path'
@@ -13,6 +14,7 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
+    Components(),
     Vuetify(),
   ],
   resolve: {

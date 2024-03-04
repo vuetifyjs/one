@@ -10,7 +10,7 @@ interface User {
   id: string
   isAdmin: boolean
   name: string
-  picture: string | null
+  picture: string
   settings: Record<string, any> | null
   identities: {
     id: string
@@ -41,7 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
   const isSubscriber = computed(() => (
     !http.url ||
     user.value?.isAdmin ||
-    user.value?.sponsorships.some(s => s.isActive)
+    !!user.value?.sponsorships.some(s => s.isActive)
   ))
 
   let externalUpdate = false
@@ -162,11 +162,13 @@ export const useAuthStore = defineStore('auth', () => {
     }, 120 * 1000)
   }
 
-  async function logout () {
+  async function logout (identity?: string) {
     isLoading.value = true
 
+    const url = identity ? `/auth/${identity}/logout` : '/auth/logout'
+
     try {
-      await http.post('/auth/logout')
+      await http.post(url)
       await verify(true)
       user.value = null
     } catch (err: any) {
@@ -174,6 +176,10 @@ export const useAuthStore = defineStore('auth', () => {
     } finally {
       isLoading.value = false
     }
+  }
+
+  function findIdentity (provider: string) {
+    return user.value?.identities.find(i => i.provider === provider)
   }
 
   function lastLoginProvider () {
@@ -186,10 +192,12 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     url: http.url,
     isLoading,
+    findIdentity,
     verify,
     login,
     logout,
     isSubscriber,
     lastLoginProvider,
+    sync,
   }
 })
