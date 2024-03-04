@@ -202,7 +202,7 @@
 
             <template #text>
               <div class="text-caption text-medium-emphasis">
-                A total of $2.99 or more unlocks all Vuetify One benefits
+                A total of $2.99 or more unlocks <span class="font-weight-black">all</span> Vuetify One benefits
               </div>
             </template>
           </v-empty-state>
