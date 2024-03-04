@@ -4,22 +4,23 @@
     height="100%"
     lines="three"
   >
-    <v-empty-state
-      v-if="!items.length"
-      class="mt-16"
-      icon="$vuetify"
-      size="256"
-    >
-      <template #media>
-        <v-icon color="medium-emphasis" />
-      </template>
+    <div v-if="!items.length" class="pt-16">
+      <v-empty-state
 
-      <template #title>
-        <div class="text-medium-emphasis">
-          All caught up
-        </div>
-      </template>
-    </v-empty-state>
+        icon="$vuetify"
+        size="256"
+      >
+        <template #media>
+          <v-icon color="medium-emphasis" />
+        </template>
+
+        <template #title>
+          <div class="text-medium-emphasis">
+            All caught up
+          </div>
+        </template>
+      </v-empty-state>
+    </div>
 
     <template
       v-for="(notification, i) in items"
