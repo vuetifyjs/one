@@ -27,7 +27,7 @@
                 width="100%"
               >
                 <v-card
-                  prepend-avatar="https://github.com/vuetifyjs/vuetify/assets/9064066/55b6647d-714e-4ad0-ba77-c3a1be9cac2c"
+                  :prepend-avatar="settings.CDN_URL + '/logos/github.png'"
                   rounded="lg"
                   subtitle="Support Vuetify through GitHub sponsors."
                   title="GitHub Sponsors"
@@ -79,7 +79,7 @@
                 width="100%"
               >
                 <v-card
-                  prepend-avatar="https://github.com/vuetifyjs/vuetify/assets/9064066/0d6760cd-b8c9-4cc2-99cb-7477b2603153"
+                  :prepend-avatar="settings.CDN_URL + '/logos/discord.png'"
                   rounded="lg"
                   subtitle="Support Vuetify through Discord."
                   title="Discord Subscriber"
@@ -133,7 +133,7 @@
                 width="100%"
               >
                 <v-card
-                  prepend-avatar="https://github.com/vuetifyjs/vuetify/assets/9064066/bd1a24f8-3643-42a0-ac2f-c60aacb759ec"
+                  :prepend-avatar="settings.CDN_URL + '/logos/patreon.png'"
                   rounded="lg"
                   title="Patreon Subscriber"
                   variant="text"
@@ -217,6 +217,7 @@
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useOneStore } from '@/store/one'
+  import { useSettingsStore } from '@/store/settings'
 
   // Icons
   import { mdiChartLine, mdiCheck, mdiCheckCircleOutline, mdiHandHeart, mdiInformationOutline, mdiMedal } from '@mdi/js'
@@ -224,6 +225,7 @@
   const adapter = useDate()
   const auth = useAuthStore()
   const one = useOneStore()
+  const settings = useSettingsStore()
 
   function format (created: Date) {
     return adapter.format(created, 'fullDateWithWeekday')
