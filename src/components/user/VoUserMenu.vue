@@ -1,27 +1,39 @@
 <template>
-  <v-card
-    rounded="lg"
-    width="280"
-    border
+  <v-menu
+    v-model="one.isOpen"
+    :close-on-click="false"
+    :close-on-content-click="false"
+    activator="parent"
+    location="bottom end"
+    eager
   >
-    <VoUserColors />
+    <v-card
+      rounded="lg"
+      width="280"
+      border
+    >
+      <VoUserColors />
 
-    <div class="text-center mt-n9 mb-4">
-      <VoUserAvatar />
+      <div class="text-center mt-n9 mb-4">
+        <VoUserAvatar />
 
-      <VoUserQuickActions />
-    </div>
+        <VoUserQuickActions />
+      </div>
 
-    <v-divider />
+      <v-divider />
 
-    <VoUserList />
+      <VoUserList />
 
-    <v-divider />
+      <v-divider />
 
-    <VoAuthListItem />
-  </v-card>
+      <VoAuthListItem />
+    </v-card>
+  </v-menu>
 </template>
 
 <script setup lang="ts">
-  //
+  // Stores
+  import { useOneStore } from '@/store/one'
+
+  const one = useOneStore()
 </script>
