@@ -1,5 +1,5 @@
 <template>
-  <v-item-group v-model="subscription">
+  <v-item-group v-model="subscription" mandatory>
     <v-row>
       <v-col cols="12" md="6">
         <v-item value="month">
