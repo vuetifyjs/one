@@ -3,7 +3,7 @@
     v-bind="{
       [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
     }"
-    :color="one.isOpen ? 'primary' : 'surface-light'"
+    :color="one.isOpen || !auth.user ? 'primary' : 'surface-light'"
     :icon="auth.user"
     :rounded="mdAndDown"
     class="vo-auth-btn"
