@@ -17,7 +17,8 @@
               <v-col
                 v-for="(item, i) in items"
                 :key="i"
-                cols="6"
+                cols="12"
+                md="6"
               >
                 <v-item :value="item.value">
                   <template #default="{ toggle, isSelected }">
