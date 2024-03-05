@@ -4,7 +4,7 @@
       v-bind="{
         [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
       }"
-      :color="one.isOpen || !auth.user ? 'primary' : 'surface-light'"
+      :color="color"
       :icon="auth.user || auth.isLoading"
       :loading="auth.isLoading"
       :rounded="mdAndDown"
@@ -28,6 +28,7 @@
 
 <script lang="ts" setup>
   // Utilities
+  import { computed } from 'vue'
   import { useDisplay } from 'vuetify'
 
   // Stores
@@ -47,4 +48,12 @@
   const user = useUserStore()
 
   const { lgAndUp, mdAndDown } = useDisplay()
+
+  const color = computed(() => {
+    return one.isOpen || !auth.user
+      ? user.colors.one === 'surface-light'
+        ? 'primary'
+        : user.colors.one
+      : 'surface-light'
+  })
 </script>
