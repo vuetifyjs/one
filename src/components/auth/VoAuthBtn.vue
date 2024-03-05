@@ -4,7 +4,8 @@
       [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
     }"
     :color="one.isOpen || !auth.user ? 'primary' : 'surface-light'"
-    :icon="auth.user"
+    :icon="auth.user || auth.isLoading"
+    :loading="auth.isLoading"
     :rounded="mdAndDown"
     :variant="auth.user ? 'outlined' : 'flat'"
     class="vo-auth-btn"
@@ -19,10 +20,6 @@
     />
 
     <VoUserMenu />
-
-    <template #loader>
-      <v-skeleton-loader type="avatar" />
-    </template>
   </VoBtn>
 </template>
 
@@ -33,7 +30,6 @@
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useOneStore } from '@/store/one'
-  import { useSettingsStore } from '@/store/settings'
   import { useUserStore } from '@/store/user'
 
   // Icons
