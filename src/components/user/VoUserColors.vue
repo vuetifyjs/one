@@ -7,13 +7,83 @@
     cover
     flat
   >
-    <div class="d-flex">
+    <div class="d-flex flex-grow-1 justify-end fill-height align-start">
+      <v-sheet
+        class="align-center position-absolute ms-2 d-flex ga-2 pa-2"
+        color="rgba(0,0,0,.36)"
+        rounded="lg"
+        style="left: 0;"
+      >
+        <v-tooltip
+          v-if="auth.user?.isAdmin"
+          location="bottom"
+          text="Vuetify Administrator"
+        >
+          <template #activator="{ props: activatorProps }">
+            <v-icon
+              color="blue"
+              icon="$vuetify"
+              v-bind="activatorProps"
+              size="16"
+            />
+          </template>
+        </v-tooltip>
+
+        <v-tooltip
+          v-if="one.isSubscriber"
+          location="bottom"
+          text="Vuetify One Subscriber"
+        >
+          <template #activator="{ props: activatorProps }">
+            <v-icon
+              :icon="`svg:${mdiCrown}`"
+              color="amber-darken-2"
+              v-bind="activatorProps"
+              size="16"
+            />
+          </template>
+        </v-tooltip>
+
+        <v-tooltip
+          v-if="one.github"
+          location="bottom"
+          text="GitHub Sponsor"
+        >
+          <template #activator="{ props: activatorProps }">
+            <v-icon
+              :icon="`svg:${mdiGithub}`"
+              color="medium-emphasis"
+              v-bind="activatorProps"
+              size="16"
+            />
+          </template>
+        </v-tooltip>
+
+        <v-tooltip
+          v-if="one.discord"
+          location="bottom"
+          text="Discord Subscriber"
+        >
+          <template #activator="{ props: activatorProps }">
+            <v-icon
+              :icon="`svg:${mdiDiscord}`"
+              color="medium-emphasis"
+              v-bind="activatorProps"
+              size="16"
+            />
+          </template>
+        </v-tooltip>
+      </v-sheet>
+
       <VoBtn
         v-if="auth.isSubscriber"
         :active="colors"
         :icon="colors ? `svg:${mdiCheck}` : '$edit'"
         :variant="colors ? 'text' : 'plain'"
+        class="align-self-end"
         color="inherit"
+        density="comfortable"
+        title="Edit One Header Color"
         @click="colors = !colors"
       >
         <v-fade-transition leave-absolute>
@@ -22,12 +92,18 @@
       </VoBtn>
 
       <v-expand-x-transition>
-        <div v-show="colors" key="reset">
+        <div
+          v-show="colors"
+          key="reset"
+          class="align-self-end"
+        >
           <VoBtn
             :disabled="user.colors.one === 'surface-light'"
             :icon="`svg:${mdiArrowULeftBottom}`"
-            class="ms-1"
+            class="ms-2 me-1"
             color="inherit"
+            density="comfortable"
+            title="Revert to Default"
             variant="text"
             @click="reset"
           />
@@ -56,14 +132,16 @@
 
 <script lang="ts" setup>
   // Utilities
-  import { mdiArrowULeftBottom, mdiCheck } from '@mdi/js'
+  import { mdiArrowULeftBottom, mdiCheck, mdiCrown, mdiDiscord, mdiGithub } from '@mdi/js'
   import { shallowRef } from 'vue'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
+  import { useOneStore } from '@/store/one'
   import { useUserStore } from '@/store/user'
 
   const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 
   const colors = shallowRef(false)

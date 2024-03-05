@@ -9,7 +9,7 @@
   </v-badge>
 </template>
 
-<script setup>
+<script setup lang="ts">
   // Utilities
   import { computed } from 'vue'
 
