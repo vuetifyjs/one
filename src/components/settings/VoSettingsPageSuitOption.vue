@@ -12,7 +12,7 @@
         v-model="user.suits.suit"
         :items="suits"
         density="compact"
-        placeholder="Choose page suit"
+        placeholder="Choose a page suit"
         style="max-width: 300px;"
         variant="outlined"
         clearable
@@ -81,15 +81,24 @@
 
 <script lang="ts" setup>
   // Stores
-  import { useAuthStore } from '@/store/auth'
   import { useUserStore } from '@/store/user'
 
   // Icons
-  import { mdiHome, mdiImageFilterHdr, mdiRocketLaunchOutline, mdiSpaceInvaders, mdiTextBox } from '@mdi/js'
+  import {
+    mdiHome,
+    // mdiImageFilterHdr,
+    // mdiRocketLaunchOutline,
+    mdiSpaceInvaders,
+    mdiTextBox,
+  } from '@mdi/js'
 
-  const auth = useAuthStore()
   const user = useUserStore()
   const suits = [
+    {
+      title: 'Choose a page suit',
+      value: '',
+      disabled: true,
+    },
     {
       title: 'Blackguard',
       prependIcon: `svg:${mdiSpaceInvaders}`,
