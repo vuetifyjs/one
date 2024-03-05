@@ -15,10 +15,13 @@
 
     <template #loader>
       <v-progress-circular
+        v-if="!$slots.loader"
         indeterminate="disable-shrink"
         size="16"
         width="2"
       />
+
+      <slot name="loader" />
     </template>
   </v-btn>
 </template>
