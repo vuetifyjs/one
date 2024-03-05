@@ -1,8 +1,8 @@
 <template>
   <VoDialog
-    :max-height="display.xs.value ? undefined : 820"
+    :max-height="display.xs.value ? undefined : 900"
     :prepend-icon="`svg:${mdiHandHeart}`"
-    title="Sponsorships"
+    title="Subscriptions"
   >
     <v-layout>
       <v-main scrollable>
@@ -20,6 +20,54 @@
               style="grid-template-columns: auto auto 1fr;"
               truncate-line="both"
             >
+              <v-timeline-item
+                :dot-color="one.subscription?.isActive ? 'success' : 'transparent'"
+                :icon="one.subscription?.isActive ? `svg:${mdiCheck}` : undefined"
+                size="x-small"
+                width="100%"
+              >
+                <v-card
+                  :prepend-avatar="settings.CDN_URL + '/logos/vuetify-one.png'"
+                  rounded="lg"
+                  title="Vuetify One"
+                  variant="text"
+                  border
+                >
+                  <template #append>
+                    <div class="ps-16">
+                      <VoBtn
+                        :text="one.subscription?.isActive ? 'Active' : 'Info'"
+                        color="surface-variant"
+                        readonly
+                      />
+
+                    </div>
+                  </template>
+
+                  <template v-if="one.subscription?.isActive">
+                    <v-divider />
+
+                    <v-card-text class="d-flex justify-space-between align-center flex-wrap">
+                      <v-chip
+                        :prepend-icon="`svg:${mdiMedal}`"
+                        :text="one.subscription.tierName"
+                        color="success"
+                        variant="text"
+                        label
+                      />
+
+                      <div class="text-caption text-end">
+                        Subscriber since
+
+                        <span class="font-weight-bold">
+                          {{ format(one.subscription.createdAt) }}
+                        </span>
+                      </div>
+                    </v-card-text>
+                  </template>
+                </v-card>
+              </v-timeline-item>
+
               <v-timeline-item
                 :dot-color="one.github?.isActive ? 'success' : 'transparent'"
                 :icon="one.github?.isActive ? `svg:${mdiCheck}` : undefined"

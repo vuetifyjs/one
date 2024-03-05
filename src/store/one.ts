@@ -66,7 +66,7 @@ export const useOneStore = defineStore('one', () => {
   })
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s: any) => {
-      if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') return acc
+      if (!s.isActive || s.interval === 'once') return acc
       const amount = s.interval === 'month' ? s.amount : s.amount / 12
       return acc + amount / 100
     }, 0)
