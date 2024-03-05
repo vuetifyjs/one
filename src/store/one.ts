@@ -44,6 +44,7 @@ export const useOneStore = defineStore('one', () => {
   const http = useHttpStore()
 
   const isLoading = shallowRef(false)
+  const isOpen = ref(false)
   const info = ref<Info>()
   const invoices = ref<Invoice[]>([])
   const interval = computed(() => info.value?.items[0].plan.interval)
@@ -193,6 +194,7 @@ export const useOneStore = defineStore('one', () => {
 
     hasBilling,
     isLoading,
+    isOpen,
     isSubscriber,
 
     github,

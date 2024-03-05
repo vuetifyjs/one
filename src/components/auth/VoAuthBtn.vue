@@ -1,24 +1,29 @@
 <template>
-  <v-menu :close-on-content-click="false" eager>
-    <template #activator="{ props: activatorProps }">
-      <v-btn
-        v-if="!auth.user && !auth.isLoading"
-        v-bind="{
-          ...activatorProps,
-          [`${lgAndUp ? 'append-' : ''}icon`]: `svg:${mdiLogin}`,
-          text: lgAndUp ? 'Login' : undefined,
-        }"
-        :rounded="mdAndDown"
-        class="text-none"
-        color="primary"
-        variant="outlined"
-      />
+  <VoBtn
+    v-bind="{
+      [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
+    }"
+    :color="one.isOpen ? 'primary' : 'surface-light'"
+    :icon="auth.user"
+    :rounded="mdAndDown"
+    class="vo-auth-btn"
+    size="default"
+    variant="outlined"
+    active
+  >
+    <span v-if="!auth.user">Login</span>
 
-      <VoUserBtn v-else />
-    </template>
+    <v-avatar
+      v-if="auth.user"
+      :image="user.avatar || auth.user.picture || ''"
+    />
 
     <VoUserMenu />
-  </v-menu>
+
+    <template #loader>
+      <v-skeleton-loader type="avatar" />
+    </template>
+  </VoBtn>
 </template>
 
 <script lang="ts" setup>
@@ -27,15 +32,30 @@
 
   // Stores
   import { useAuthStore } from '@/store/auth'
+  import { useOneStore } from '@/store/one'
+  import { useUserStore } from '@/store/user'
 
   // Icons
   import { mdiLogin } from '@mdi/js'
 
-  const props = defineProps({
+  defineProps({
     external: Boolean,
   })
 
   const auth = useAuthStore()
+  const one = useOneStore()
+  const user = useUserStore()
 
   const { lgAndUp, mdAndDown } = useDisplay()
 </script>
+
+<style lang="sass" scoped>
+  .vo-auth-btn
+    :deep(.v-skeleton-loader__avatar)
+      min-height: 40px
+      height: 40px
+      width: 40px
+      max-height: 40px
+      min-width: 40px
+      max-width: 40px
+</style>
