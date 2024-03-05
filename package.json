@@ -27,7 +27,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.vue --fix --ignore-path .gitignore",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
     "@mdi/js": "6.2.95",
