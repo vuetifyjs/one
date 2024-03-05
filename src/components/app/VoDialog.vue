@@ -1,10 +1,11 @@
 <template>
   <v-dialog
     v-model="model"
+    :fullscreen="display.xs.value"
+    :max-height="display.xs.value ? '100%' : 800"
+    :max-width="display.xs.value ? '100%' : 800"
     activator="parent"
     height="100%"
-    max-height="800"
-    max-width="800"
   >
     <template #default="{ isActive }">
       <v-card
@@ -42,6 +43,9 @@
 </template>
 
 <script lang="ts" setup>
+  // Composables
+  import { useDisplay } from 'vuetify'
+
   interface Props {
     prependIcon: string
     title: string
@@ -50,4 +54,5 @@
   defineProps<Props>()
 
   const model = defineModel('modelValue', { type: Boolean })
+  const display = useDisplay()
 </script>

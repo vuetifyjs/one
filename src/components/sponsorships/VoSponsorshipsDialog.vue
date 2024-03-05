@@ -1,7 +1,7 @@
 <template>
   <VoDialog
+    :max-height="display.xs.value ? undefined : 820"
     :prepend-icon="`svg:${mdiHandHeart}`"
-    max-height="820"
     title="Sponsorships"
   >
     <v-layout>
@@ -214,7 +214,7 @@
 
 <script lang="ts" setup>
   // Composables
-  import { useDate } from 'vuetify'
+  import { useDate, useDisplay } from 'vuetify'
 
   // Stores
   import { useAuthStore } from '@/store/auth'
@@ -225,6 +225,7 @@
   import { mdiChartLine, mdiCheck, mdiCheckCircleOutline, mdiHandHeart, mdiInformationOutline, mdiMedal } from '@mdi/js'
 
   const adapter = useDate()
+  const display = useDisplay()
   const auth = useAuthStore()
   const one = useOneStore()
   const settings = useSettingsStore()
