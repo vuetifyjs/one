@@ -1,26 +1,29 @@
 <template>
-  <VoBtn
-    v-bind="{
-      [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
-    }"
-    :color="one.isOpen || !auth.user ? 'primary' : 'surface-light'"
-    :icon="auth.user || auth.isLoading"
-    :loading="auth.isLoading"
-    :rounded="mdAndDown"
-    :variant="auth.user ? 'outlined' : 'flat'"
-    class="vo-auth-btn"
-    size="default"
-    active
-  >
-    <span v-if="!auth.user">Login</span>
+  <VoNotificationsTotalBadge :offset-y="auth.user ? 5 : 0">
+    <VoBtn
+      v-bind="{
+        [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
+      }"
+      :color="one.isOpen || !auth.user ? 'primary' : 'surface-light'"
+      :icon="auth.user || auth.isLoading"
+      :loading="auth.isLoading"
+      :rounded="mdAndDown"
+      :variant="auth.user ? 'outlined' : 'flat'"
+      class="vo-auth-btn"
+      size="default"
+      style="transition: .2s ease;"
+      active
+    >
+      <span v-if="!auth.user">Login</span>
 
-    <v-avatar
-      v-if="auth.user"
-      :image="user.avatar || auth.user.picture || ''"
-    />
+      <v-avatar
+        v-if="auth.user"
+        :image="user.avatar || auth.user.picture || ''"
+      />
 
-    <VoUserMenu />
-  </VoBtn>
+      <VoUserMenu />
+    </VoBtn>
+  </VoNotificationsTotalBadge>
 </template>
 
 <script lang="ts" setup>
@@ -45,14 +48,3 @@
 
   const { lgAndUp, mdAndDown } = useDisplay()
 </script>
-
-<style lang="sass" scoped>
-  .vo-auth-btn
-    :deep(.v-skeleton-loader__avatar)
-      min-height: 40px
-      height: 40px
-      width: 40px
-      max-height: 40px
-      min-width: 40px
-      max-width: 40px
-</style>

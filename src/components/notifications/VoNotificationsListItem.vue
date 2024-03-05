@@ -7,9 +7,9 @@
     link
   >
     <template v-if="notifications.unread.length" #prepend>
-      <v-badge :content="notifications.unread.length" color="error">
+      <VoNotificationsBadge>
         <v-icon />
-      </v-badge>
+      </VoNotificationsBadge>
     </template>
 
     <VoNotificationsDialog v-model="dialog" />
