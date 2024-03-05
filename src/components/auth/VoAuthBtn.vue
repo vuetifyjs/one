@@ -6,9 +6,9 @@
     :color="one.isOpen || !auth.user ? 'primary' : 'surface-light'"
     :icon="auth.user"
     :rounded="mdAndDown"
+    :variant="auth.user ? 'outlined' : 'flat'"
     class="vo-auth-btn"
     size="default"
-    variant="outlined"
     active
   >
     <span v-if="!auth.user">Login</span>
