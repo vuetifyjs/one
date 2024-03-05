@@ -4,6 +4,7 @@
     :model-value="items > 0"
     color="error"
     location="start top"
+    dot
   >
     <slot />
   </v-badge>
