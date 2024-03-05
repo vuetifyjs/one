@@ -37,7 +37,6 @@ declare module 'vue' {
     VoSwitch: typeof import('./src/components/app/VoSwitch.vue')['default']
     VoUserAvatar: typeof import('./src/components/user/VoUserAvatar.vue')['default']
     VoUserColors: typeof import('./src/components/user/VoUserColors.vue')['default']
-    VoUserDialog: typeof import('./src/components/user/VoUserDialog.vue')['default']
     VoUserList: typeof import('./src/components/user/VoUserList.vue')['default']
     VoUserMenu: typeof import('./src/components/user/VoUserMenu.vue')['default']
     VoUserQuickActions: typeof import('./src/components/user/VoUserQuickActions.vue')['default']
