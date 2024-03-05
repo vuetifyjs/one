@@ -33,6 +33,7 @@
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useOneStore } from '@/store/one'
+  import { useSettingsStore } from '@/store/settings'
   import { useUserStore } from '@/store/user'
 
   // Icons

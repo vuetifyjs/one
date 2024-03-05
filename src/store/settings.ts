@@ -187,7 +187,7 @@ export const useSettingsStore = defineStore('settings', () => {
     }
 
     user.theme = val
-  })
+  }, { immediate: true })
 
   return {
     suit,
