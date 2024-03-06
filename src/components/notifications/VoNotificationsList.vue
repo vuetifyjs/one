@@ -47,7 +47,7 @@
                   <template #activator="{ props: tooltipActivatorProps }">
                     <v-fade-transition hide-on-leave>
                       <v-btn
-                        v-show="isHovering"
+                        v-show="isHovering || display.mobile.value"
                         v-bind="tooltipActivatorProps"
                         :icon="`svg:${!isRead(notification.slug) ? mdiEmailOpenOutline : mdiEmailVariant}`"
                         class="ms-auto"
@@ -98,7 +98,7 @@
 
 <script setup lang="ts">
   // Composables
-  import { useDate } from 'vuetify'
+  import { useDate, useDisplay } from 'vuetify'
 
   // Icons
   import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
@@ -113,8 +113,10 @@
     items: Notification[]
   }
 
-  const user = useUserStore()
   const date = useDate()
+  const display = useDisplay()
+
+  const user = useUserStore()
 
   defineProps<Props>()
 
