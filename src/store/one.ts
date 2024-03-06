@@ -4,7 +4,7 @@ import { useHttpStore } from '@/store/http'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, shallowRef, watch } from 'vue'
 
 // Types
 
@@ -74,6 +74,13 @@ export const useOneStore = defineStore('one', () => {
 
   onBeforeMount(async () => {
     if (sessionId) await activate()
+  })
+
+  onMounted(() => {
+    const url = new URL(window.location.href)
+    const params = url.searchParams
+    params.delete('one')
+    history.pushState(null, '', url.toString())
   })
 
   watch(isSubscriber, (val, oldVal) => {
