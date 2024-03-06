@@ -14,169 +14,7 @@
               title="Support Vuetify"
             />
 
-            <v-timeline
-              class="justify-start ms-n7"
-              line-inset="12"
-              side="end"
-              style="grid-template-columns: auto auto 1fr;"
-              truncate-line="both"
-            >
-              <v-timeline-item
-                :dot-color="one.github?.isActive ? 'success' : 'transparent'"
-                :icon="one.github?.isActive ? `svg:${mdiCheck}` : undefined"
-                size="x-small"
-                width="100%"
-              >
-                <v-card
-                  :prepend-avatar="settings.CDN_URL + '/logos/github.png'"
-                  rounded="lg"
-                  subtitle="Support Vuetify through GitHub sponsors."
-                  title="GitHub Sponsors"
-                  variant="text"
-                  border
-                >
-                  <template #append>
-                    <div class="ps-16">
-                      <VoBtn
-                        :color="one.github?.isActive ? 'success' : 'primary'"
-                        :href="one.github?.isActive ? undefined : 'https://github.com/sponsors/johnleider'"
-                        :prepend-icon="`svg:${one.github?.isActive ? mdiCheckCircleOutline : mdiInformationOutline}`"
-                        :readonly="one.github?.isActive"
-                        :target="one.github?.isActive ? undefined : '_blank'"
-                        :text="one.github?.isActive ? 'Active' : 'Info'"
-                        width="88"
-                      />
-                    </div>
-                  </template>
-
-                  <template v-if="one.github?.isActive">
-                    <v-divider />
-
-                    <v-card-text class="d-flex justify-space-between align-center flex-wrap">
-                      <v-chip
-                        :prepend-icon="`svg:${mdiMedal}`"
-                        :text="one.github.tierName"
-                        color="surface-variant"
-                        size="small"
-                        variant="text"
-                        label
-                      />
-
-                      <div class="text-caption text-end">
-                        Sponsor since
-
-                        <span class="font-weight-bold">
-                          {{ format(one.github.createdAt) }}
-                        </span>
-                      </div>
-                    </v-card-text>
-                  </template>
-                </v-card>
-              </v-timeline-item>
-
-              <v-timeline-item
-                :dot-color="one.discord?.isActive ? 'success' : 'transparent'"
-                :icon="one.discord?.isActive ? `svg:${mdiCheck}` : undefined"
-                size="x-small"
-                width="100%"
-              >
-                <v-card
-                  :prepend-avatar="settings.CDN_URL + '/logos/discord.png'"
-                  rounded="lg"
-                  subtitle="Support Vuetify through Discord."
-                  title="Discord Subscriber"
-                  variant="text"
-                  border
-                >
-                  <template #append>
-                    <div class="ps-16">
-                      <VoBtn
-                        :color="one.discord?.isActive ? 'success' : 'primary'"
-                        :href="one.discord?.isActive ? undefined : 'https://discord.com/servers/vuetify-340160225338195969'"
-                        :prepend-icon="`svg:${one.discord?.isActive ? mdiCheckCircleOutline : mdiInformationOutline}`"
-                        :readonly="one.discord?.isActive"
-                        :target="one.discord?.isActive ? undefined : '_blank'"
-                        :text="one.discord?.isActive ? 'Active' : 'Info'"
-                        width="88"
-                      />
-
-                    </div>
-                  </template>
-
-                  <template v-if="one.discord?.isActive">
-                    <v-divider />
-
-                    <v-card-text class="d-flex justify-space-between align-center flex-wrap">
-                      <v-chip
-                        :prepend-icon="`svg:${mdiMedal}`"
-                        :text="one.discord.tierName"
-                        color="surface-variant"
-                        size="small"
-                        variant="text"
-                        label
-                      />
-
-                      <div class="text-caption text-end">
-                        Subscriber since
-
-                        <span class="font-weight-bold">
-                          {{ format(one.discord.createdAt) }}
-                        </span>
-                      </div>
-                    </v-card-text>
-                  </template>
-                </v-card>
-              </v-timeline-item>
-
-              <v-timeline-item
-                :dot-color="one.patreon?.isActive ? 'success' : 'transparent'"
-                :icon="one.patreon?.isActive ? `svg:${mdiCheck}` : undefined"
-                size="x-small"
-                width="100%"
-              >
-                <v-card
-                  :prepend-avatar="settings.CDN_URL + '/logos/patreon.png'"
-                  rounded="lg"
-                  subtitle="Support Vuetify through Patreon."
-                  title="Patreon Subscriber"
-                  variant="text"
-                  border
-                >
-                  <template #append>
-                    <div class="ps-16">
-                      <VoBtn
-                        :text="one.patreon?.isActive ? 'Active' : 'Coming Soon'"
-                        color="surface-variant"
-                        readonly
-                      />
-
-                    </div>
-                  </template>
-
-                  <template v-if="one.patreon?.isActive">
-                    <v-divider />
-
-                    <v-card-text class="d-flex justify-space-between align-center flex-wrap">
-                      <v-chip
-                        :prepend-icon="`svg:${mdiMedal}`"
-                        :text="one.patreon.tierName"
-                        color="success"
-                        variant="text"
-                        label
-                      />
-
-                      <div class="text-caption text-end">
-                        Sponsor since
-
-                        <span class="font-weight-bold">
-                          {{ format(one.patreon.createdAt) }}
-                        </span>
-                      </div>
-                    </v-card-text>
-                  </template>
-                </v-card>
-              </v-timeline-item>
-            </v-timeline>
+            <VoSponsorshipsTimeline />
           </v-card-text>
 
           <v-empty-state
@@ -215,7 +53,7 @@
 
 <script lang="ts" setup>
   // Composables
-  import { useDate, useDisplay } from 'vuetify'
+  import { useDisplay } from 'vuetify'
 
   // Utilities
   import { useQuery } from '@/composables/route'
@@ -224,23 +62,16 @@
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useOneStore } from '@/store/one'
-  import { useSettingsStore } from '@/store/settings'
 
   // Icons
-  import { mdiChartLine, mdiCheck, mdiCheckCircleOutline, mdiHandHeart, mdiInformationOutline, mdiMedal } from '@mdi/js'
+  import { mdiChartLine, mdiHandHeart } from '@mdi/js'
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
-  const adapter = useDate()
   const display = useDisplay()
   const query = useQuery()
   const auth = useAuthStore()
   const one = useOneStore()
-  const settings = useSettingsStore()
-
-  function format (created: Date) {
-    return adapter.format(created, 'fullDateWithWeekday')
-  }
 
   watch(query, async () => {
     if (query.value.one !== 'sponsorships') return
