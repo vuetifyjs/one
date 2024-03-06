@@ -38,6 +38,7 @@ declare module 'vue' {
     VoSubscriptionSubscribe: typeof import('./src/components/subscription/VoSubscriptionSubscribe.vue')['default']
     VoSwitch: typeof import('./src/components/app/VoSwitch.vue')['default']
     VoUserAvatar: typeof import('./src/components/user/VoUserAvatar.vue')['default']
+    VoUserBadges: typeof import('./src/components/user/VoUserBadges.vue')['default']
     VoUserColors: typeof import('./src/components/user/VoUserColors.vue')['default']
     VoUserList: typeof import('./src/components/user/VoUserList.vue')['default']
     VoUserMenu: typeof import('./src/components/user/VoUserMenu.vue')['default']
