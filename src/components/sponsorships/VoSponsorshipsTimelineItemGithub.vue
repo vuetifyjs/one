@@ -18,7 +18,7 @@
           <VoBtn
             :color="one.github?.isActive ? 'success' : 'primary'"
             :href="one.github?.isActive ? undefined : 'https://github.com/sponsors/johnleider'"
-            :prepend-icon="`svg:${one.github?.isActive ? mdiCheckCircleOutline : mdiInformationOutline}`"
+            :prepend-icon="`svg:${one.github?.isActive ? mdiCheckCircleOutline : mdiOpenInNew }`"
             :readonly="one.github?.isActive"
             :target="one.github?.isActive ? undefined : '_blank'"
             :text="one.github?.isActive ? 'Active' : 'Info'"
@@ -51,7 +51,7 @@
   import { useSettingsStore } from '@/store/settings'
 
   // Icons
-  import { mdiCheck, mdiCheckCircleOutline, mdiInformationOutline, mdiMedal } from '@mdi/js'
+  import { mdiCheck, mdiCheckCircleOutline, mdiMedal, mdiOpenInNew } from '@mdi/js'
 
   const one = useOneStore()
   const settings = useSettingsStore()

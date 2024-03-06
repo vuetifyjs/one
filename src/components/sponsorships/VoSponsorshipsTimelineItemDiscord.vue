@@ -18,7 +18,7 @@
           <VoBtn
             :color="one.discord?.isActive ? 'success' : 'primary'"
             :href="one.discord?.isActive ? undefined : 'https://discord.com/servers/vuetify-340160225338195969'"
-            :prepend-icon="`svg:${one.discord?.isActive ? mdiCheckCircleOutline : mdiInformationOutline}`"
+            :prepend-icon="`svg:${one.discord?.isActive ? mdiCheckCircleOutline : mdiOpenInNew}`"
             :readonly="one.discord?.isActive"
             :target="one.discord?.isActive ? undefined : '_blank'"
             :text="one.discord?.isActive ? 'Active' : 'Info'"
@@ -52,7 +52,7 @@
   import { useSettingsStore } from '@/store/settings'
 
   // Icons
-  import { mdiCheck, mdiCheckCircleOutline, mdiInformationOutline, mdiMedal } from '@mdi/js'
+  import { mdiCheck, mdiCheckCircleOutline, mdiMedal, mdiOpenInNew } from '@mdi/js'
 
   const one = useOneStore()
   const settings = useSettingsStore()
