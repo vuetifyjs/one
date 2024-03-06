@@ -44,6 +44,7 @@ export default defineConfig({
         /^vuetify($|\/)/,
         '@mdi/js',
         'pinia',
+        'vue-router',
         'lodash-es',
       ],
     },
