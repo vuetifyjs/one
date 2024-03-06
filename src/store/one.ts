@@ -68,7 +68,7 @@ export const useOneStore = defineStore('one', () => {
     return auth.user?.sponsorships.reduce((acc: number, s: any) => {
       if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') return acc
       const amount = s.interval === 'month' ? s.amount : s.amount / 12
-      return acc + amount
+      return acc + amount / 100
     }, 0)
   })
 
