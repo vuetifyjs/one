@@ -1,5 +1,6 @@
 // Components
 import VoAuthBtn from '@/components/auth/VoAuthBtn.vue'
+import VoAuthListItem from '@/components/auth/VoAuthListItem.vue'
 import VoFooter from '@/components/app/VoFooter.vue'
 
 // Types
@@ -17,6 +18,7 @@ export { useSettingsStore } from '@/store/settings'
 export function createOne () {
   function install (app: App) {
     app.component('VoAuthBtn', VoAuthBtn)
+    app.component('VoAuthListItem', VoAuthListItem)
     app.component('VoFooter', VoFooter)
   }
 
