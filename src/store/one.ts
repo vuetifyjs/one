@@ -4,7 +4,7 @@ import { useHttpStore } from '@/store/http'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { computed, onBeforeMount, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
 
 // Types
 
@@ -76,7 +76,9 @@ export const useOneStore = defineStore('one', () => {
     if (sessionId) await activate()
   })
 
-  onMounted(() => {
+  watch(isOpen, val => {
+    if (!val) return
+
     const url = new URL(window.location.href)
     const params = url.searchParams
     params.delete('one')
