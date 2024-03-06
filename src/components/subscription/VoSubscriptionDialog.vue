@@ -4,30 +4,34 @@
     :prepend-icon="`svg:${mdiCreditCard}`"
     title="Subscriptions"
   >
-    <div class="px-3 h-screen">
-      <v-card-text>
-        <VoDialogSubheader
-          text="The Vuetify One subscription is a great way to support the Vuetify team and get access to exclusive features and content."
-          title="Vuetify One"
-        />
+    <v-layout>
+      <v-main scrollable>
+        <div class="px-3">
+          <v-card-text>
+            <VoDialogSubheader
+              text="The Vuetify One subscription is a great way to support the Vuetify team and get access to exclusive features and content."
+              title="Vuetify One"
+            />
 
-        <v-window :model-value="window">
-          <v-window-item value="subscribe">
-            <VoSubscriptionSubscribe v-model="subscription" />
+            <v-window :model-value="window">
+              <v-window-item value="subscribe">
+                <VoSubscriptionSubscribe v-model="subscription" />
 
-            <br>
+                <br>
 
-            <VoSubscriptionPerks />
-          </v-window-item>
+                <VoSubscriptionPerks />
+              </v-window-item>
 
-          <v-window-item value="status">
-            <VoSubscriptionStatus @change:subscription="window = 'subscribe'" />
+              <v-window-item value="status">
+                <VoSubscriptionStatus @change:subscription="window = 'subscribe'" />
 
-            <VoSubscriptionInvoices />
-          </v-window-item>
-        </v-window>
-      </v-card-text>
-    </div>
+                <VoSubscriptionInvoices />
+              </v-window-item>
+            </v-window>
+          </v-card-text>
+        </div>
+      </v-main>
+    </v-layout>
 
     <template v-if="window === 'subscribe'" #actions>
       <div class="flex-grow-1 px-4 pb-3 overflow-hidden">
@@ -65,9 +69,6 @@
         />
       </div>
     </template>
-    <!-- <v-card-actions v-if="window === 'subscribe'" class="overflow-hidden">
-
-    </v-card-actions> -->
   </VoDialog>
 </template>
 
