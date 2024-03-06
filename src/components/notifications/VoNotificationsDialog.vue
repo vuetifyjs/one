@@ -33,8 +33,13 @@
             :prepend-icon="`svg:${mdiInboxFullOutline}`"
             title="Read"
             value="1"
-            mdi-archive-outline
-          />
+          >
+            <template v-if="notifications.read.length > 0" #append>
+              <span class="text-caption">
+                {{ notifications.read.length }}
+              </span>
+            </template>
+          </VoListItem>
         </v-list>
       </v-navigation-drawer>
 
