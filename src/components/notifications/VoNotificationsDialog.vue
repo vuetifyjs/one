@@ -56,18 +56,34 @@
 <script setup lang="ts">
   // Composables
   import { useDisplay } from 'vuetify'
+
   // Utilities
-  import { shallowRef } from 'vue'
+  import { nextTick, shallowRef, watch } from 'vue'
+  import { useQuery } from '@/composables/route'
 
   // Stores
   import { useNotificationsStore } from '@/store/notifications'
+  import { useOneStore } from '@/store/one'
 
   // Icons
   import { mdiBell, mdiInboxFullOutline, mdiInboxOutline } from '@mdi/js'
 
-  const notifications = useNotificationsStore()
   const display = useDisplay()
+  const query = useQuery()
+
+  const one = useOneStore()
+  const notifications = useNotificationsStore()
 
   const list = shallowRef(['0'])
-  const dialog = shallowRef(false)
+  const dialog = defineModel('modelValue', { type: Boolean })
+
+  watch(query, async () => {
+    if (query.value.one !== 'notifications') return
+
+    one.isOpen = true
+
+    await nextTick()
+
+    dialog.value = true
+  }, { immediate: true })
 </script>

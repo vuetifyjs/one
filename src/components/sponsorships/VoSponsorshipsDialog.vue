@@ -1,5 +1,6 @@
 <template>
   <VoDialog
+    v-model="dialog"
     :max-height="display.xs.value ? undefined : 820"
     :prepend-icon="`svg:${mdiHandHeart}`"
     title="Sponsorships"
@@ -216,6 +217,10 @@
   // Composables
   import { useDate, useDisplay } from 'vuetify'
 
+  // Utilities
+  import { useQuery } from '@/composables/route'
+  import { nextTick, watch } from 'vue'
+
   // Stores
   import { useAuthStore } from '@/store/auth'
   import { useOneStore } from '@/store/one'
@@ -224,8 +229,11 @@
   // Icons
   import { mdiChartLine, mdiCheck, mdiCheckCircleOutline, mdiHandHeart, mdiInformationOutline, mdiMedal } from '@mdi/js'
 
+  const dialog = defineModel('modelValue', { type: Boolean })
+
   const adapter = useDate()
   const display = useDisplay()
+  const query = useQuery()
   const auth = useAuthStore()
   const one = useOneStore()
   const settings = useSettingsStore()
@@ -233,4 +241,14 @@
   function format (created: Date) {
     return adapter.format(created, 'fullDateWithWeekday')
   }
+
+  watch(query, async () => {
+    if (query.value.one !== 'sponsorships') return
+
+    one.isOpen = true
+
+    await nextTick()
+
+    dialog.value = true
+  }, { immediate: true })
 </script>

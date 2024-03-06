@@ -133,8 +133,13 @@
 </template>
 
 <script setup lang="ts">
+  // Utilities
+  import { nextTick, watch } from 'vue'
+  import { useQuery } from '@/composables/route'
+
   // Stores
   import { useAuthStore } from '@/store/auth'
+  import { useOneStore } from '@/store/one'
   import { useSettingsStore } from '@/store/settings'
   import { useUserStore } from '@/store/user'
 
@@ -152,6 +157,7 @@
 
   const dialog = defineModel('modelValue', { type: Boolean })
   const auth = useAuthStore()
+  const one = useOneStore()
   const settings = useSettingsStore()
   const user = useUserStore()
 
@@ -209,4 +215,15 @@
       disabled: true,
     },
   ]
+  const query = useQuery<{ one: string }>()
+
+  watch(query, async () => {
+    if (query.value.one !== 'settings') return
+
+    one.isOpen = true
+
+    await nextTick()
+
+    dialog.value = true
+  }, { immediate: true })
 </script>

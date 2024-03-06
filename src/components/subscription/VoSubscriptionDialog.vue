@@ -74,7 +74,8 @@
 
 <script lang="ts" setup>
   // Utilities
-  import { onMounted, shallowRef, watch } from 'vue'
+  import { nextTick, shallowRef, watch } from 'vue'
+  import { useQuery } from '@/composables/route'
 
   // Stores
   import { useOneStore } from '@/store/one'
@@ -89,6 +90,7 @@
   const dialog = defineModel('modelValue', { type: Boolean })
 
   const one = useOneStore()
+  const query = useQuery<{ one: string }>()
   const subscription = shallowRef(one.interval)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
   const isUpdatingSubscription = shallowRef<boolean | null>(false)
@@ -105,12 +107,17 @@
     one.subscriptionInfo()
   })
 
-  onMounted(() => {
-    if (!one.sessionId) return
+  watch(query, async () => {
+    if (!one.sessionId && !['subscribe', 'status'].includes(query.value.one)) return
 
-    window.value = 'status'
+    window.value = one.sessionId || query.value.one === 'status' ? 'status' : 'subscribe'
+
+    one.isOpen = true
+
+    await nextTick()
+
     dialog.value = true
-  })
+  }, { immediate: true })
 
   async function onClickModify () {
     await one.modify(subscription.value!)
