@@ -2,7 +2,7 @@
   <v-sheet
     v-if="hasBadges"
     class="align-center position-absolute ms-2 d-flex ga-2 pa-2"
-    color="rgba(0,0,0,.36)"
+    color="rgba(0,0,0,.54)"
     rounded="lg"
     style="left: 0;"
   >
@@ -44,7 +44,7 @@
       <template #activator="{ props: activatorProps }">
         <v-icon
           :icon="`svg:${mdiGithub}`"
-          color="medium-emphasis"
+          color="white"
           v-bind="activatorProps"
           size="16"
         />
@@ -59,7 +59,7 @@
       <template #activator="{ props: activatorProps }">
         <v-icon
           :icon="`svg:${mdiDiscord}`"
-          color="medium-emphasis"
+          color="white"
           v-bind="activatorProps"
           size="16"
         />
