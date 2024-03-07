@@ -63,7 +63,6 @@ export const useBannersStore = defineStore('banners', () => {
   const isLoading = shallowRef(false)
 
   const banner = computed(() => {
-    console.log(all.value)
     if (server.value) return server.value
 
     return all.value.find(({
