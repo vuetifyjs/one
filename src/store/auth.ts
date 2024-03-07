@@ -44,7 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
     !!user.value?.sponsorships.some(s => s.isActive)
   ))
 
-  let externalUpdate = false
+  let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
     if (!user?.settings) return
 
