@@ -11,6 +11,7 @@ import type { PiniaPluginContext } from 'pinia'
 
 // Stores
 export { useAuthStore } from '@/store/auth'
+export { useBannersStore } from '@/store/banners'
 export { useBinsStore } from '@/store/bins'
 export { useHttpStore } from '@/store/http'
 export { useOneStore } from '@/store/one'
