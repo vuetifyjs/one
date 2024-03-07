@@ -1,7 +1,9 @@
 <template>
-  <Index />
+  <v-container>
+    Dashboard
+  </v-container>
 </template>
 
 <script lang="ts" setup>
-  import Index from './index.vue'
+  //
 </script>
