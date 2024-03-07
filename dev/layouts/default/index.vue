@@ -5,7 +5,7 @@
     <v-app-bar :image="settings.suit['app-bar']">
       <template #prepend>
         <router-link class="ps-2" to="/">
-          <v-img :src="image" width="200" />
+          <v-img :src="image" width="128" />
         </router-link>
       </template>
 
@@ -45,6 +45,6 @@
     { title: 'Dashboard', to: '/user/dashboard/', prependIcon: `svg:${mdiViewDashboardOutline}` },
   ]
   const image = computed(() => {
-    return `https://vuetifyjs.b-cdn.net/docs/images/one/logos/vuetify-logo-one-${theme.current.value.dark ? 'dark' : 'light'}.png`
+    return `https://cdn.vuetifyjs.com/docs/images/one/logos/vone-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
   })
 </script>
