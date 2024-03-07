@@ -25,6 +25,14 @@ export function createOne () {
   return { install }
 }
 
-export function one (ctx: PiniaPluginContext) {
-  ctx.store.url = import.meta.env.VITE_API_SERVER_URL
+export function one (id: string[], url: string) {
+  return function (context: PiniaPluginContext) {
+    const store = context.store
+
+    store.url = url
+
+    if (store.$id !== 'site') return
+
+    store.id = id
+  }
 }

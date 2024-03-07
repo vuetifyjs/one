@@ -1,5 +1,6 @@
 <template>
   <v-menu
+    ref="menu"
     v-model="one.isOpen"
     :close-on-click="false"
     :close-on-content-click="false"
@@ -32,8 +33,26 @@
 </template>
 
 <script setup lang="ts">
+  // Components
+  import { VMenu } from 'vuetify/components'
+
+  // Utilities
+  import { ref, watch } from 'vue'
+
   // Stores
+  import { useBannersStore } from '@/store/banners'
   import { useOneStore } from '@/store/one'
 
+  const banners = useBannersStore()
   const one = useOneStore()
+
+  const menu = ref<typeof VMenu>()
+
+  watch(() => banners.banner, async () => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+
+    if (!one.isOpen) return
+
+    menu.value?.updateLocation?.()
+  }, { flush: 'pre' })
 </script>

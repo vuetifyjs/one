@@ -79,10 +79,7 @@ export const useOneStore = defineStore('one', () => {
   watch(isOpen, val => {
     if (!val) return
 
-    const url = new URL(window.location.href)
-    const params = url.searchParams
-    params.delete('one')
-    history.pushState(null, '', url.toString())
+    resetQuery()
   })
 
   watch(isSubscriber, (val, oldVal) => {
@@ -193,6 +190,12 @@ export const useOneStore = defineStore('one', () => {
     }
   }
 
+  function resetQuery () {
+    const url = new URL(window.location.href)
+    url.searchParams.delete('one')
+    history.pushState(null, '', url.toString())
+  }
+
   return {
     info,
     interval,
@@ -214,6 +217,7 @@ export const useOneStore = defineStore('one', () => {
     cancel,
     manage,
     modify,
+    resetQuery,
     subscribe,
     subscriptionInfo,
     verify,

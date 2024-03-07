@@ -82,4 +82,8 @@
 
     dialog.value = true
   }, { immediate: true })
+
+  watch(dialog, () => {
+    one.resetQuery()
+  })
 </script>

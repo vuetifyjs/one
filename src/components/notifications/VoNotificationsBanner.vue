@@ -1,0 +1,116 @@
+<template>
+  <v-app-bar
+    v-if="banner"
+    :color="banner.metadata.color"
+    :height="height"
+    :image="banner.metadata.images.bg?.url"
+    :model-value="hasPromotion"
+    :theme="banner.metadata.theme.key"
+    flat
+  >
+    <v-list-item
+      v-bind="link"
+      :active="false"
+      class="flex-grow-1"
+      lines="two"
+      @click="onClick"
+    >
+      <template v-if="banner.metadata.images.logo" #prepend>
+        <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
+      </template>
+
+      <v-list-item-title
+        v-if="banner.metadata.text"
+        class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
+      >
+        {{ banner.metadata.text }}
+      </v-list-item-title>
+
+      <v-list-item-subtitle v-if="banner.metadata.subtext">
+        {{ banner.metadata.subtext }}
+      </v-list-item-subtitle>
+
+      <template #append>
+        <v-hover v-if="mdAndUp && banner.metadata.link && banner.metadata.link_text">
+          <template #default="{ isHovering, props: activatorProps }">
+            <v-btn
+              v-bind="{
+                ...activatorProps,
+                ...link
+              }"
+              :append-icon="`svg:${mdiOpenInNew}`"
+              :color="banner.metadata.link_color"
+              :elevation="isHovering ? 8 : 0"
+              :title="banner.metadata.link_text"
+              class="text-none me-2"
+              variant="elevated"
+              @click="onClick"
+            >
+              {{ banner.metadata.link_text }}
+            </v-btn>
+
+          </template>
+        </v-hover>
+
+        <v-btn
+          v-if="banner.metadata.closable"
+          class="ms-6 me-2"
+          density="comfortable"
+          icon="$clear"
+          size="small"
+          variant="plain"
+          @click.prevent="onClose"
+        />
+      </template>
+    </v-list-item>
+  </v-app-bar>
+</template>
+
+<script setup lang="ts">
+  // Composables
+  import { useDisplay } from 'vuetify'
+
+  // Utilities
+  import { computed } from 'vue'
+
+  // Stores
+  import { useBannersStore } from '@/store/banners'
+  import { useUserStore } from '@/store/user'
+
+  // Icons
+  import { mdiOpenInNew } from '@mdi/js'
+
+  const { mdAndUp } = useDisplay()
+  const user = useUserStore()
+  const banners = useBannersStore()
+  user.notifications.last.banner = []
+
+  const banner = computed(() => banners.banner)
+  const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
+  const hasPromotion = computed(() => {
+    return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
+  })
+
+  function onClick () {
+    if (!banner.value) return
+
+    onClose()
+  }
+
+  function onClose () {
+    if (!banner.value) return
+
+    user.notifications.last.banner.push(banner.value.slug)
+  }
+
+  const link = computed(() => {
+    const metadata = banner.value?.metadata ?? { link: '' }
+
+    return {
+      href: metadata.link.startsWith('http') ? metadata.link : undefined,
+      target: metadata.link.startsWith('http') ? '_blank' : undefined,
+      to: !metadata.link.startsWith('http') ? metadata.link : undefined,
+      ...banner.value?.metadata.attributes,
+    }
+  })
+</script>

@@ -21,17 +21,20 @@
   import { onMounted, shallowRef } from 'vue'
 
   // Stores
+  import { useBannersStore } from '@/store/banners'
   import { useNotificationsStore } from '@/store/notifications'
   import { useUserStore } from '@/store/user'
 
   // Icons
   import { mdiBellOutline } from '@mdi/js'
 
+  const banners = useBannersStore()
   const user = useUserStore()
   const notifications = useNotificationsStore()
   const dialog = shallowRef(false)
 
   onMounted(async () => {
-    await notifications.get()
+    notifications.get()
+    banners.get()
   })
 </script>
