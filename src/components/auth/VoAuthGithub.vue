@@ -37,7 +37,7 @@
   })
 
   const text = computed(() => {
-    if (!auth.user) return 'Log in with GitHub'
+    if (!auth.user) return 'Login with GitHub'
     if (hasIdentity.value) return 'Connected to GitHub'
 
     return 'Connect GitHub'

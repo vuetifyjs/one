@@ -35,7 +35,7 @@
   })
 
   const text = computed(() => {
-    if (!auth.user) return 'Log in with Discord'
+    if (!auth.user) return 'Login with Discord'
 
     if (hasIdentity.value) return 'Connected to Discord'
 
