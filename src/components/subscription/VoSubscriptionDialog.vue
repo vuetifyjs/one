@@ -102,8 +102,6 @@
   })
 
   watch(dialog, async val => {
-    one.resetQuery()
-
     if (!val || !one.isSubscriber) return
 
     one.subscriptionInfo()
