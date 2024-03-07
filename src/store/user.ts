@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 // Utilities
 import { merge } from 'lodash-es'
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, watch } from 'vue'
 
 // Types
 import type { Suit } from './settings'
@@ -147,6 +147,8 @@ export const DEFAULT_USER: RootState = {
 
 export const useUserStore = defineStore('user', () => {
   const state = reactive(merge({}, DEFAULT_USER))
+
+  watch(state, save)
 
   function load () {
     if (!IN_BROWSER) return

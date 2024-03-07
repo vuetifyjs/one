@@ -10,6 +10,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VoAuthBtn: typeof import('./src/components/auth/VoAuthBtn.vue')['default']
+    VoAuthDialog: typeof import('./src/components/auth/VoAuthDialog.vue')['default']
     VoAuthDiscord: typeof import('./src/components/auth/VoAuthDiscord.vue')['default']
     VoAuthGithub: typeof import('./src/components/auth/VoAuthGithub.vue')['default']
     VoAuthListItem: typeof import('./src/components/auth/VoAuthListItem.vue')['default']

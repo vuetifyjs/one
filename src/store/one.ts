@@ -1,3 +1,7 @@
+// Composables
+import { useRouter } from 'vue-router'
+import { useQuery } from '@/composables/route'
+
 // Stores
 import { useAuthStore } from '@/store/auth'
 import { useHttpStore } from '@/store/http'
@@ -37,8 +41,9 @@ interface Invoice {
 }
 
 export const useOneStore = defineStore('one', () => {
-  const params = new URLSearchParams(window.location.search)
-  const sessionId = params.get('session_id')
+  const query = useQuery()
+  const sessionId = query.value.session_id
+  const router = useRouter()
 
   const auth = useAuthStore()
   const http = useHttpStore()
@@ -81,6 +86,21 @@ export const useOneStore = defineStore('one', () => {
 
     resetQuery()
   })
+
+  watch(query, val => {
+    if (val.one !== 'subscribe' || auth.user) return
+    console.log(val.one)
+
+    auth.dialog = true
+
+    const unwatch = watch(() => auth.user, val => {
+      if (!val) return
+
+      auth.dialog = false
+
+      unwatch()
+    })
+  }, { immediate: true })
 
   watch(isSubscriber, (val, oldVal) => {
     if (val === false && oldVal !== true) return
@@ -191,9 +211,7 @@ export const useOneStore = defineStore('one', () => {
   }
 
   function resetQuery () {
-    const url = new URL(window.location.href)
-    url.searchParams.delete('one')
-    history.pushState(null, '', url.toString())
+    router.push({ query: {} })
   }
 
   return {

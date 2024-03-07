@@ -59,7 +59,7 @@
           icon="$clear"
           size="small"
           variant="plain"
-          @click.prevent="onClose"
+          @click.prevent.stop="onClose"
         />
       </template>
     </v-list-item>
@@ -69,9 +69,10 @@
 <script setup lang="ts">
   // Composables
   import { useDisplay } from 'vuetify'
+  import { useRouter } from 'vue-router'
 
   // Utilities
-  import { computed } from 'vue'
+  import { computed, nextTick } from 'vue'
 
   // Stores
   import { useBannersStore } from '@/store/banners'
@@ -81,9 +82,9 @@
   import { mdiOpenInNew } from '@mdi/js'
 
   const { mdAndUp } = useDisplay()
+  const router = useRouter()
   const user = useUserStore()
   const banners = useBannersStore()
-  user.notifications.last.banner = []
 
   const banner = computed(() => banners.banner)
   const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
@@ -91,16 +92,29 @@
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })
 
-  function onClick () {
-    if (!banner.value) return
-
-    onClose()
-  }
-
   function onClose () {
     if (!banner.value) return
 
     user.notifications.last.banner.push(banner.value.slug)
+  }
+
+  async function onClick (e: MouseEvent | KeyboardEvent) {
+    if (!banner.value) return
+
+    onClose()
+
+    await nextTick()
+
+    const metadata = banner.value?.metadata ?? { link: '' }
+
+    if (metadata.link.indexOf('?one=') === -1) return
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    const one = metadata.link.split('?one=')[1]
+
+    router.push({ query: { one } })
   }
 
   const link = computed(() => {
@@ -111,6 +125,7 @@
       target: metadata.link.startsWith('http') ? '_blank' : undefined,
       to: !metadata.link.startsWith('http') ? metadata.link : undefined,
       ...banner.value?.metadata.attributes,
+      onClick,
     }
   })
 </script>

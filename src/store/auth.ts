@@ -33,6 +33,7 @@ interface User {
 }
 
 export const useAuthStore = defineStore('auth', () => {
+  const dialog = ref(false)
   const user = ref<User | null>(null)
   const http = useHttpStore()
   const userStore = useUserStore()
@@ -64,6 +65,8 @@ export const useAuthStore = defineStore('auth', () => {
   })
 
   async function sync () {
+    if (!user.value || !userStore.syncSettings) return
+
     try {
       await http.post('/user/settings', { settings: userStore.$state })
     } catch (err: any) {
@@ -131,6 +134,7 @@ export const useAuthStore = defineStore('auth', () => {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
         }
         user.value = e.data.body.user
+        sync()
       } else {
         console.error(e.data.message)
       }
@@ -191,6 +195,7 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     user,
     url: http.url,
+    dialog,
     isLoading,
     findIdentity,
     verify,
