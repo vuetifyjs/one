@@ -65,16 +65,20 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAuthStore: typeof import('@vuetify/one')['useAuthStore']
+  const useBannersStore: typeof import('@vuetify/one')['useBannersStore']
   const useBinsStore: typeof import('@vuetify/one')['useBinsStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDate: typeof import('vuetify')['useDate']
   const useDisplay: typeof import('vuetify')['useDisplay']
   const useLink: typeof import('vue-router')['useLink']
+  const useNotificationsStore: typeof import('@vuetify/one')['useNotificationsStore']
   const useOneStore: typeof import('@vuetify/one')['useOneStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
+  const useSettingsStore: typeof import('@vuetify/one')['useSettingsStore']
   const useSlots: typeof import('vue')['useSlots']
+  const useTheme: typeof import('vuetify')['useTheme']
   const useUserStore: typeof import('@vuetify/one')['useUserStore']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
@@ -152,16 +156,20 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
+    readonly useBannersStore: UnwrapRef<typeof import('@vuetify/one')['useBannersStore']>
     readonly useBinsStore: UnwrapRef<typeof import('@vuetify/one')['useBinsStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
+    readonly useNotificationsStore: UnwrapRef<typeof import('@vuetify/one')['useNotificationsStore']>
     readonly useOneStore: UnwrapRef<typeof import('@vuetify/one')['useOneStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
+    readonly useSettingsStore: UnwrapRef<typeof import('@vuetify/one')['useSettingsStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('@vuetify/one')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
@@ -232,16 +240,20 @@ declare module '@vue/runtime-core' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('@vuetify/one')['useAuthStore']>
+    readonly useBannersStore: UnwrapRef<typeof import('@vuetify/one')['useBannersStore']>
     readonly useBinsStore: UnwrapRef<typeof import('@vuetify/one')['useBinsStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
+    readonly useNotificationsStore: UnwrapRef<typeof import('@vuetify/one')['useNotificationsStore']>
     readonly useOneStore: UnwrapRef<typeof import('@vuetify/one')['useOneStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
+    readonly useSettingsStore: UnwrapRef<typeof import('@vuetify/one')['useSettingsStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('@vuetify/one')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>

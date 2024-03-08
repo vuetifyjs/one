@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+  // Icons
   import { mdiCheck } from '@mdi/js'
 
   interface Props {

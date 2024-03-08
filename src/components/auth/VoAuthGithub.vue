@@ -21,12 +21,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-
   // Icons
   import { mdiGithub } from '@mdi/js'
 
@@ -42,4 +36,4 @@
 
     return 'Connect GitHub'
   })
-</script>@/stores/auth
+</script>

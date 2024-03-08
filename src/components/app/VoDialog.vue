@@ -43,9 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-
   interface Props {
     prependIcon: string
     title: string

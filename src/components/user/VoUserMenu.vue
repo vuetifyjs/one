@@ -36,13 +36,6 @@
   // Components
   import { VMenu } from 'vuetify/components'
 
-  // Utilities
-  import { ref, watch } from 'vue'
-
-  // Stores
-  import { useBannersStore } from '@/stores/banners'
-  import { useOneStore } from '@/stores/one'
-
   const banners = useBannersStore()
   const one = useOneStore()
 

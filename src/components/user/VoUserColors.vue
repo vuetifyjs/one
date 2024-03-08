@@ -66,13 +66,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { shallowRef } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import { mdiArrowULeftBottom, mdiCheck } from '@mdi/js'
 

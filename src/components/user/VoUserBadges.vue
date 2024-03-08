@@ -69,13 +69,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import { mdiCrown, mdiDiscord, mdiGithub } from '@mdi/js'
 

@@ -49,12 +49,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { shallowRef, watch } from 'vue'
-
-  // Stores
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import { mdiCheck, mdiRocketOutline } from '@mdi/js'
 

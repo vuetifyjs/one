@@ -45,17 +45,22 @@ export default defineConfig({
         {
           '@vuetify/one': [
             'useAuthStore',
+            'useBannersStore',
             'useBinsStore',
+            'useNotificationsStore',
             'useOneStore',
+            'useSettingsStore',
             'useUserStore',
           ],
           vuetify: [
             'useDisplay',
             'useDate',
+            'useTheme',
           ],
         },
       ],
       dirs: [
+        './src/components',
         './src/store',
       ],
       dts: true,
@@ -69,6 +74,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@vuetify/one': fileURLToPath(new URL('./src', import.meta.url)),
     },
     extensions: [
       '.js',

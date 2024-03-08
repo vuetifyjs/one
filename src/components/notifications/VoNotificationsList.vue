@@ -97,14 +97,8 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useDate, useDisplay } from 'vuetify'
-
   // Icons
   import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
-
-  // Stores
-  import { useUserStore } from '@/stores/user'
 
   // Types
   import type { Notification } from '@/stores/notifications'

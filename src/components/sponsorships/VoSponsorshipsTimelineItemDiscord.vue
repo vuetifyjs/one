@@ -47,10 +47,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Stores
-  import { useOneStore } from '@/stores/one'
-  import { useSettingsStore } from '@/stores/settings'
-
   // Icons
   import { mdiCheck, mdiCheckCircleOutline, mdiMedal, mdiOpenInNew } from '@mdi/js'
 

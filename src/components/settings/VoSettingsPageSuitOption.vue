@@ -80,9 +80,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Stores
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import {
     mdiHome,

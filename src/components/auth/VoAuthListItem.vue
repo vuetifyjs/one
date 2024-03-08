@@ -52,13 +52,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { shallowRef, watch } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import { mdiSync, mdiSyncOff } from '@mdi/js'
 

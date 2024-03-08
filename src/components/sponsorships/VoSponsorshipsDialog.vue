@@ -53,15 +53,7 @@
 
 <script lang="ts" setup>
   // Composables
-  import { useDisplay } from 'vuetify'
-
-  // Utilities
   import { useQuery } from '@/composables/route'
-  import { nextTick, watch } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiChartLine, mdiHandHeart } from '@mdi/js'

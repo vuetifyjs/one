@@ -133,15 +133,7 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { nextTick, watch } from 'vue'
   import { useQuery } from '@/composables/route'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useOneStore } from '@/stores/one'
-  import { useSettingsStore } from '@/stores/settings'
-  import { useUserStore } from '@/stores/user'
 
   // Icons
   import {

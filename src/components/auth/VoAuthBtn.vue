@@ -27,15 +27,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { computed } from 'vue'
-  import { useDisplay } from 'vuetify'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useOneStore } from '@/stores/one'
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import { mdiLogin } from '@mdi/js'
 

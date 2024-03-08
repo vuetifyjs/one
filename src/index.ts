@@ -15,9 +15,10 @@ export { useAuthStore } from '@/stores/auth'
 export { useBannersStore } from '@/stores/banners'
 export { useBinsStore } from '@/stores/bins'
 export { useHttpStore } from '@/stores/http'
+export { useNotificationsStore } from '@/stores/notifications'
 export { useOneStore } from '@/stores/one'
-export { useUserStore } from '@/stores/user'
 export { useSettingsStore } from '@/stores/settings'
+export { useUserStore } from '@/stores/user'
 
 export function createOne () {
   function install (app: App) {

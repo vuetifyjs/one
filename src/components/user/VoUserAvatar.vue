@@ -65,13 +65,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed, shallowRef } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useUserStore } from '@/stores/user'
-
   const auth = useAuthStore()
   const user = useUserStore()
 

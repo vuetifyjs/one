@@ -13,7 +13,5 @@
   // Icons
   import { mdiCogOutline } from '@mdi/js'
 
-  import { shallowRef } from 'vue'
-
   const dialog = shallowRef(false)
 </script>

@@ -58,9 +58,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Stores
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import { mdiSpider } from '@mdi/js'
 
