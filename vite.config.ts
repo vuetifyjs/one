@@ -17,8 +17,7 @@ export default defineConfig({
       template: { transformAssetUrls },
     }),
     VueRouter({
-      root: 'src',
-      routesFolder: [{ src: 'pages' }],
+      dts: 'src/typed-router.d.ts',
     }),
     Layouts({
       layoutsDirs: 'src/layouts',
@@ -26,6 +25,7 @@ export default defineConfig({
     }),
     Components({
       dirs: ['lib/components', 'src/components'],
+      dts: 'src/components.d.ts',
     }),
     Vuetify(),
     ViteFonts({
