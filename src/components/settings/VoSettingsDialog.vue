@@ -138,10 +138,10 @@
   import { useQuery } from '@/composables/route'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useOneStore } from '@/store/one'
-  import { useSettingsStore } from '@/store/settings'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore } from '@/stores/auth'
+  import { useOneStore } from '@/stores/one'
+  import { useSettingsStore } from '@/stores/settings'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import {
@@ -227,3 +227,4 @@
     dialog.value = true
   }, { immediate: true })
 </script>
+@/stores/auth@/stores/one@/stores/settings@/stores/user

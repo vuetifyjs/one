@@ -1,6 +1,6 @@
 // Stores
-import { useHttpStore } from '@/store/http'
-import { useUserStore } from '@/store/user'
+import { useHttpStore } from '@/stores/http'
+import { useUserStore } from '@/stores/user'
 
 // Utilities
 import { defineStore } from 'pinia'

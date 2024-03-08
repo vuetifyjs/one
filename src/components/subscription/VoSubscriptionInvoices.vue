@@ -58,7 +58,7 @@
   import { useDate } from 'vuetify'
 
   // Stores
-  import { useOneStore } from '@/store/one'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiFileDocument } from '@mdi/js'
@@ -66,3 +66,4 @@
   const date = useDate()
   const one = useOneStore()
 </script>
+@/stores/one

@@ -61,7 +61,7 @@
   import { PropType, shallowRef, watch } from 'vue'
 
   // Stores
-  import { useOneStore } from '@/store/one'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiCheckCircleOutline } from '@mdi/js'
@@ -81,3 +81,4 @@
     subscription.value = val
   }, { immediate: true })
 </script>
+@/stores/one

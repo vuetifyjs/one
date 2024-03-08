@@ -15,7 +15,7 @@
   import { shallowRef } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@/stores/auth'
 
   // Icons
   import { mdiLogoutVariant } from '@mdi/js'
@@ -32,3 +32,4 @@
     isLoggingout.value = false
   }
 </script>
+@/stores/auth

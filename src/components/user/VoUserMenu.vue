@@ -40,8 +40,8 @@
   import { ref, watch } from 'vue'
 
   // Stores
-  import { useBannersStore } from '@/store/banners'
-  import { useOneStore } from '@/store/one'
+  import { useBannersStore } from '@/stores/banners'
+  import { useOneStore } from '@/stores/one'
 
   const banners = useBannersStore()
   const one = useOneStore()
@@ -56,3 +56,4 @@
     menu.value?.updateLocation?.()
   }, { flush: 'pre' })
 </script>
+@/stores/banners@/stores/one

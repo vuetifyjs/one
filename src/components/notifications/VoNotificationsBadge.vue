@@ -9,9 +9,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { useNotificationsStore } from '@/store/notifications'
-  import { useUserStore } from '@/store/user'
+  import { useNotificationsStore } from '@/stores/notifications'
+  import { useUserStore } from '@/stores/user'
 
   const notifications = useNotificationsStore()
   const user = useUserStore()
 </script>
+@/stores/notifications@/stores/user

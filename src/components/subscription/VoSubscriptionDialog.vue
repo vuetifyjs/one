@@ -78,7 +78,7 @@
   import { useQuery } from '@/composables/route'
 
   // Stores
-  import { useOneStore } from '@/store/one'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiCheckCircleOutline, mdiCreditCard, mdiPlaylistCheck, mdiReload } from '@mdi/js'
@@ -134,3 +134,4 @@
     isUpdatingSubscription.value = false
   }
 </script>
+@/stores/one

@@ -83,9 +83,9 @@
   import { useQuery } from '@/composables/route'
 
   // Stores
-  import { useBannersStore } from '@/store/banners'
-  import { useOneStore } from '@/store/one'
-  import { useNotificationsStore } from '@/store/notifications'
+  import { useBannersStore } from '@/stores/banners'
+  import { useOneStore } from '@/stores/one'
+  import { useNotificationsStore } from '@/stores/notifications'
 
   // Icons
   import { mdiBell, mdiBillboard, mdiInboxFullOutline, mdiInboxOutline } from '@mdi/js'
@@ -114,3 +114,4 @@
     dialog.value = true
   }, { immediate: true })
 </script>
+@/stores/banners@/stores/one@/stores/notifications

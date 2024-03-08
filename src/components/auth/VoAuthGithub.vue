@@ -25,7 +25,7 @@
   import { computed } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@/stores/auth'
 
   // Icons
   import { mdiGithub } from '@mdi/js'
@@ -42,4 +42,4 @@
 
     return 'Connect GitHub'
   })
-</script>
+</script>@/stores/auth

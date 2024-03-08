@@ -70,8 +70,8 @@
   import { shallowRef } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore } from '@/stores/auth'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import { mdiArrowULeftBottom, mdiCheck } from '@mdi/js'
@@ -85,3 +85,4 @@
     user.colors.one = 'surface-light'
   }
 </script>
+@/stores/auth@/stores/user

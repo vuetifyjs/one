@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
     // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@/stores/auth'
 
   // Icons
   import { mdiDiscord } from '@mdi/js'
@@ -41,4 +41,4 @@
 
     return 'Connect Discord'
   })
-</script>
+</script>@/stores/auth

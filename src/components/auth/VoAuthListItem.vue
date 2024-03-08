@@ -56,8 +56,8 @@
   import { shallowRef, watch } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore } from '@/stores/auth'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import { mdiSync, mdiSyncOff } from '@mdi/js'
@@ -76,3 +76,4 @@
     social.value = !social.value
   }
 </script>
+@/stores/auth@/stores/user

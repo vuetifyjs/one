@@ -15,9 +15,9 @@
   import { computed } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useNotificationsStore } from '@/store/notifications'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore } from '@/stores/auth'
+  import { useNotificationsStore } from '@/stores/notifications'
+  import { useUserStore } from '@/stores/user'
 
   const auth = useAuthStore()
   const notifications = useNotificationsStore()
@@ -27,3 +27,4 @@
     return user.notifications.show ? notifications.unread.length : 0
   })
 </script>
+@/stores/auth@/stores/notifications@/stores/user

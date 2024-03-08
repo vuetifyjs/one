@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    Home Page
+  <v-container class="d-flex fill-height align-center justify-center">
+    <VoAuthCard />
   </v-container>
 </template>
 

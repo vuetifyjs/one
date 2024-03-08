@@ -81,7 +81,7 @@
 
 <script lang="ts" setup>
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import {
@@ -116,3 +116,4 @@
     // },
   ]
 </script>
+@/stores/user

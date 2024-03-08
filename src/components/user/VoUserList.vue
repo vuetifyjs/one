@@ -20,7 +20,8 @@
 
 <script lang="ts" setup>
   // Stores
-  import { useAuthStore } from '@/store/auth'
+  import { useAuthStore } from '@/stores/auth'
 
   const auth = useAuthStore()
 </script>
+@/stores/auth

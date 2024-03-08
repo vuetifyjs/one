@@ -24,7 +24,9 @@ export default defineConfig({
       layoutsDirs: 'dev/layouts',
       defaultLayout: 'default/index',
     }),
-    Components(),
+    Components({
+      dirs: ['dev/components', 'src/components'],
+    }),
     Vuetify(),
     ViteFonts({
       google: {

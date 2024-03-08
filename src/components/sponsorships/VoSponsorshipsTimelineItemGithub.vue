@@ -47,8 +47,8 @@
 
 <script lang="ts" setup>
   // Stores
-  import { useOneStore } from '@/store/one'
-  import { useSettingsStore } from '@/store/settings'
+  import { useOneStore } from '@/stores/one'
+  import { useSettingsStore } from '@/stores/settings'
 
   // Icons
   import { mdiCheck, mdiCheckCircleOutline, mdiMedal, mdiOpenInNew } from '@mdi/js'
@@ -56,3 +56,4 @@
   const one = useOneStore()
   const settings = useSettingsStore()
 </script>
+@/stores/one@/stores/settings

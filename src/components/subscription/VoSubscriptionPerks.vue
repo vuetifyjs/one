@@ -53,7 +53,7 @@
   import { shallowRef, watch } from 'vue'
 
   // Stores
-  import { useOneStore } from '@/store/one'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiCheck, mdiRocketOutline } from '@mdi/js'
@@ -79,3 +79,4 @@
     if (val) one.subscriptionInfo()
   })
 </script>
+@/stores/one

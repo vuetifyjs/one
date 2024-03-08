@@ -9,10 +9,11 @@
 
 <script setup lang="ts">
   // Stores
-  import { useOneStore } from '@/store/one'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiViewDashboardOutline } from '@mdi/js'
 
   const one = useOneStore()
 </script>
+@/stores/one

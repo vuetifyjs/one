@@ -1,6 +1,6 @@
 // Utilities
 import { createPinia } from 'pinia'
-import { one } from '../../src/index'
+import { one } from '@'
 
 const pinia = createPinia()
 

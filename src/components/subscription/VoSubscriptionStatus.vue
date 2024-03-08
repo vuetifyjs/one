@@ -86,7 +86,7 @@
   import { computed } from 'vue'
 
   // Stores
-  import { useOneStore } from '@/store/one'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import {
@@ -113,3 +113,4 @@
     one.subscribe(one.interval)
   }
 </script>
+@/stores/one

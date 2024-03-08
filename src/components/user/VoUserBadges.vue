@@ -73,8 +73,8 @@
   import { computed } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useOneStore } from '@/store/one'
+  import { useAuthStore } from '@/stores/auth'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiCrown, mdiDiscord, mdiGithub } from '@mdi/js'
@@ -86,3 +86,4 @@
     return one.github || one.discord || one.isSubscriber || auth.user?.isAdmin
   })
 </script>
+@/stores/auth@/stores/one

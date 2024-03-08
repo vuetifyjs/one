@@ -69,8 +69,8 @@
   import { computed, shallowRef } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore } from '@/stores/auth'
+  import { useUserStore } from '@/stores/user'
 
   const auth = useAuthStore()
   const user = useUserStore()
@@ -112,3 +112,4 @@
     expanded.value = !expanded.value
   }
 </script>
+@/stores/auth@/stores/user

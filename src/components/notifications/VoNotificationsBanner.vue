@@ -75,8 +75,8 @@
   import { computed, nextTick } from 'vue'
 
   // Stores
-  import { useBannersStore } from '@/store/banners'
-  import { useUserStore } from '@/store/user'
+  import { useBannersStore } from '@/stores/banners'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import { mdiOpenInNew } from '@mdi/js'
@@ -128,4 +128,4 @@
       onClick,
     }
   })
-</script>
+</script>@/stores/banners@/stores/user

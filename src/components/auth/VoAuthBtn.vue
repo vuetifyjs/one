@@ -32,9 +32,9 @@
   import { useDisplay } from 'vuetify'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useOneStore } from '@/store/one'
-  import { useUserStore } from '@/store/user'
+  import { useAuthStore } from '@/stores/auth'
+  import { useOneStore } from '@/stores/one'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import { mdiLogin } from '@mdi/js'
@@ -57,3 +57,4 @@
       : 'surface-light'
   })
 </script>
+@/stores/auth@/stores/one@/stores/user

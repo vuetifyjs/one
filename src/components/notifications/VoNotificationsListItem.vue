@@ -21,9 +21,9 @@
   import { onMounted, shallowRef } from 'vue'
 
   // Stores
-  import { useBannersStore } from '@/store/banners'
-  import { useNotificationsStore } from '@/store/notifications'
-  import { useUserStore } from '@/store/user'
+  import { useBannersStore } from '@/stores/banners'
+  import { useNotificationsStore } from '@/stores/notifications'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import { mdiBellOutline } from '@mdi/js'
@@ -38,3 +38,4 @@
     banners.get()
   })
 </script>
+@/stores/banners@/stores/notifications@/stores/user

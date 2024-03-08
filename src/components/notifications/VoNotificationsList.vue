@@ -104,10 +104,10 @@
   import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@/stores/user'
 
   // Types
-  import type { Notification } from '@/store/notifications'
+  import type { Notification } from '@/stores/notifications'
 
   interface Props {
     items: Notification[]
@@ -132,3 +132,4 @@
     }
   }
 </script>
+@/stores/user@/stores/notifications

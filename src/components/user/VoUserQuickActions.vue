@@ -59,7 +59,7 @@
 
 <script lang="ts" setup>
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import { mdiSpider } from '@mdi/js'
@@ -73,3 +73,4 @@
     ['M12.353 16.0368C9.07567 12.843 3.90082 17.0493 6.66818 20.5975C9.94136 24.3844 15.773 19.6984 12.353 16.0368ZM11.1267 19.4129C10.2224 20.7664 7.79139 20.1099 7.82746 18.4686C8.04976 15.4897 12.7112 16.8495 11.1267 19.4129Z', 0.6],
   ] as any
 </script>
+@/stores/user

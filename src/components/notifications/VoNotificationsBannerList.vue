@@ -120,10 +120,10 @@
   import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 
   // Stores
-  import { useUserStore } from '@/store/user'
+  import { useUserStore } from '@/stores/user'
 
   // Types
-  import type { Banner } from '@/store/banners'
+  import type { Banner } from '@/stores/banners'
 
   interface Props {
     items: Banner[]
@@ -148,3 +148,4 @@
     }
   }
 </script>
+@/stores/user@/stores/banners

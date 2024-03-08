@@ -60,8 +60,8 @@
   import { nextTick, watch } from 'vue'
 
   // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useOneStore } from '@/store/one'
+  import { useAuthStore } from '@/stores/auth'
+  import { useOneStore } from '@/stores/one'
 
   // Icons
   import { mdiChartLine, mdiHandHeart } from '@mdi/js'
@@ -83,3 +83,4 @@
     dialog.value = true
   }, { immediate: true })
 </script>
+@/stores/auth@/stores/one

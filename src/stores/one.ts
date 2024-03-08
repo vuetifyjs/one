@@ -3,8 +3,8 @@ import { useRouter } from 'vue-router'
 import { useQuery } from '@/composables/route'
 
 // Stores
-import { useAuthStore } from '@/store/auth'
-import { useHttpStore } from '@/store/http'
+import { useAuthStore } from '@/stores/auth'
+import { useHttpStore } from '@/stores/http'
 
 // Utilities
 import { defineStore } from 'pinia'
