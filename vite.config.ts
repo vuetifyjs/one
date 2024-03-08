@@ -3,8 +3,9 @@ import Components from 'unplugin-vue-components/vite'
 import Layouts from 'vite-plugin-vue-layouts'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import ViteFonts from 'unplugin-fonts/vite'
+import Fonts from 'unplugin-fonts/vite'
 import VueRouter from 'unplugin-vue-router/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -28,13 +29,40 @@ export default defineConfig({
       dirs: ['dev/components', 'src/components'],
     }),
     Vuetify(),
-    ViteFonts({
+    Fonts({
       google: {
         families: [{
           name: 'Roboto',
           styles: 'wght@100;300;400;500;700;900',
         }],
       },
+    }),
+    AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+        'pinia',
+        {
+          '@vuetify/one': [
+            'useAuthStore',
+            'useBinsStore',
+            'useOneStore',
+            'useUserStore',
+          ],
+          vuetify: [
+            'useDisplay',
+            'useDate',
+          ],
+        },
+      ],
+      dirs: [
+        './src/store',
+      ],
+      dts: true,
+      eslintrc: {
+        enabled: true,
+      },
+      vueTemplate: true,
     }),
   ],
   define: { 'process.env': {} },
