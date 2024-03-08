@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { setupLayouts } from 'virtual:generated-layouts'
 
+// Stores
 import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
@@ -9,12 +10,16 @@ const router = createRouter({
   extendRoutes: (routes: any) => setupLayouts(routes),
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const auth = useAuthStore()
+
+  await auth.verify()
 
   // Redirect to login if not authenticated
   if (to.meta.requiresAuth && !auth.user) {
     next({ path: '/' })
+  } else if (!to.meta.guest && auth.user && to.path !== '/user/dashboard/') {
+    next({ path: '/user/dashboard/' })
   } else {
     next()
   }
