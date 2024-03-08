@@ -17,15 +17,15 @@ export default defineConfig({
       template: { transformAssetUrls },
     }),
     VueRouter({
-      root: 'dev',
+      root: 'src',
       routesFolder: [{ src: 'pages' }],
     }),
     Layouts({
-      layoutsDirs: 'dev/layouts',
+      layoutsDirs: 'src/layouts',
       defaultLayout: 'default/index',
     }),
     Components({
-      dirs: ['dev/components', 'src/components'],
+      dirs: ['lib/components', 'src/components'],
     }),
     Vuetify(),
     ViteFonts({
@@ -40,7 +40,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('./lib', import.meta.url)),
     },
     extensions: [
       '.js',

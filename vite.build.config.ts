@@ -19,7 +19,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('./lib', import.meta.url)),
     },
     extensions: [
       '.js',
@@ -33,7 +33,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, 'lib/index.ts'),
       name: 'VuetifyOne',
       fileName: 'index',
       formats: ['es'],
