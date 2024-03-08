@@ -18,7 +18,12 @@ router.beforeEach(async (to, from, next) => {
   // Redirect to login if not authenticated
   if (to.meta.requiresAuth && !auth.user) {
     next({ path: '/' })
-  } else if (!to.meta.guest && auth.user && to.path !== '/user/dashboard/') {
+  } else if (
+    !to.meta.guest &&
+    auth.user &&
+    to.name !== '/[...404]' &&
+    to.name !== '/user.dashboard'
+  ) {
     next({ path: '/user/dashboard/' })
   } else {
     next()
