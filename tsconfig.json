@@ -18,7 +18,8 @@
     "lib": ["esnext", "dom"],
     "types": [
       "vite/client",
-      "vitest/globals"
+      "vitest/globals",
+      "unplugin-vue-router/client"
     ],
     "paths": {
       "@/*": ["src/*"],
@@ -27,6 +28,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "./typed-router.d.ts",
   ]
 }
