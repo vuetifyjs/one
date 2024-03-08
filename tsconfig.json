@@ -19,17 +19,13 @@
     "types": [
       "vite/client",
       "vitest/globals",
-      "unplugin-vue-router/client"
+      "unplugin-vue-router/client",
+      "vite-plugin-vue-layouts/client"
     ],
     "paths": {
       "@/*": ["lib/*"],
     },
     "skipLibCheck": true
   },
-  "include": [
-    "lib/**/*.ts",
-    "lib/**/*.tsx",
-    "lib/**/*.vue",
-    "./typed-router.d.ts",
-  ]
+  "exclude": ["node_modules", "types-temp", "dist"]
 }

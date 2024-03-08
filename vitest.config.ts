@@ -7,9 +7,9 @@ export default defineConfig({
   plugins: [
     Vue(),
   ],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./test/setup.ts'],
-  },
+  // test: {
+  //   globals: true,
+  //   environment: 'jsdom',
+  //   setupFiles: ['./test/setup.ts'],
+  // },
 })
