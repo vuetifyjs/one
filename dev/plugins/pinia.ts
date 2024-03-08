@@ -6,7 +6,7 @@ const pinia = createPinia()
 
 pinia.use(
   one(
-    ['*'],
+    ['one'],
     import.meta.env.VITE_API_SERVER_URL,
   ),
 )
