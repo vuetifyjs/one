@@ -20,7 +20,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build --config vite.build.config.ts && yarn build:types",
+    "build": "vite build",
+    "build:one": "vite build --config vite.build.config.ts && yarn build:types",
     "build:dev": "vite build --mode development --config vite.build.config.ts ",
     "build:types": "rimraf types-temp && vue-tsc --pretty -p tsconfig.json && rollup --config rollup.types.config.js && rimraf types-temp",
     "watch": "yarn build:dev --watch",
@@ -28,7 +29,7 @@
     "lint": "eslint . --ext .ts,.vue --fix --ignore-path .gitignore",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build:one"
   },
   "peerDependencies": {
     "@mdi/js": "6.2.95",
