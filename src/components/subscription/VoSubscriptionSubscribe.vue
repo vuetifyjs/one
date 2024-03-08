@@ -81,4 +81,3 @@
     subscription.value = val
   }, { immediate: true })
 </script>
-@/stores/one

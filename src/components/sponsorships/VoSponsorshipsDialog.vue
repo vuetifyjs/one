@@ -83,4 +83,3 @@
     dialog.value = true
   }, { immediate: true })
 </script>
-@/stores/auth@/stores/one

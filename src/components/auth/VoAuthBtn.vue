@@ -57,4 +57,3 @@
       : 'surface-light'
   })
 </script>
-@/stores/auth@/stores/one@/stores/user

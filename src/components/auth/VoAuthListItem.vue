@@ -76,4 +76,3 @@
     social.value = !social.value
   }
 </script>
-@/stores/auth@/stores/user

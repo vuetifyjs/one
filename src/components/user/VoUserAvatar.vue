@@ -112,4 +112,3 @@
     expanded.value = !expanded.value
   }
 </script>
-@/stores/auth@/stores/user

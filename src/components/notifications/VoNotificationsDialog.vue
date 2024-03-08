@@ -114,4 +114,3 @@
     dialog.value = true
   }, { immediate: true })
 </script>
-@/stores/banners@/stores/one@/stores/notifications

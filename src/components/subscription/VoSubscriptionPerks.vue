@@ -79,4 +79,3 @@
     if (val) one.subscriptionInfo()
   })
 </script>
-@/stores/one

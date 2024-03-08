@@ -132,4 +132,3 @@
     }
   }
 </script>
-@/stores/user@/stores/notifications

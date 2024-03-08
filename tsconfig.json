@@ -22,13 +22,13 @@
       "unplugin-vue-router/client"
     ],
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["lib/*"],
     },
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
+    "lib/**/*.ts",
+    "lib/**/*.tsx",
+    "lib/**/*.vue",
     "./typed-router.d.ts",
   ]
 }

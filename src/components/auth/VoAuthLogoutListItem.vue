@@ -32,4 +32,3 @@
     isLoggingout.value = false
   }
 </script>
-@/stores/auth

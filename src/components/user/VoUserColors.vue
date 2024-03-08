@@ -85,4 +85,3 @@
     user.colors.one = 'surface-light'
   }
 </script>
-@/stores/auth@/stores/user

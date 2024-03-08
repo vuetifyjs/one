@@ -86,4 +86,3 @@
     return one.github || one.discord || one.isSubscriber || auth.user?.isAdmin
   })
 </script>
-@/stores/auth@/stores/one

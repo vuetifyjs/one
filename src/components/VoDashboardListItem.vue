@@ -16,4 +16,3 @@
 
   const one = useOneStore()
 </script>
-@/stores/one

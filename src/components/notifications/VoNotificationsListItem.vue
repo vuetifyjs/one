@@ -38,4 +38,3 @@
     banners.get()
   })
 </script>
-@/stores/banners@/stores/notifications@/stores/user
