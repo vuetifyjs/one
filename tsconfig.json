@@ -24,6 +24,7 @@
     "paths": {
       "@/*": ["lib/*"],
     },
+    "skipLibCheck": true
   },
   "include": [
     "lib/**/*.ts",
