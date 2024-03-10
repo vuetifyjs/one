@@ -49,6 +49,7 @@ export default defineConfig({
         'pinia',
         'vue-router',
         'vue-router/auto',
+        'unplugin-vue-router',
         'lodash-es',
       ],
     },

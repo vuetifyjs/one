@@ -27,5 +27,6 @@
     },
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "types-temp", "dist"]
+  "exclude": ["node_modules", "types-temp", "dist"],
+  "references": [{ "path": "./tsconfig.node.json" }],
 }
