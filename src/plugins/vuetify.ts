@@ -10,12 +10,68 @@ import 'vuetify/styles'
 // Composables
 import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import { VEmptyState } from 'vuetify/labs/components'
+import * as components from 'vuetify/components'
+import { VConfirmEdit, VEmptyState } from 'vuetify/labs/components'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
+  aliases: {
+    AppBtn: components.VBtn,
+    AppChip: components.VChip,
+  },
   components: {
+    VConfirmEdit,
     VEmptyState,
+  },
+  defaults: {
+    global: {
+      hideDetails: 'auto',
+    },
+    AppBtn: {
+      color: 'primary',
+      variant: 'flat',
+      density: 'compact',
+      class: 'text-none',
+      slim: true,
+      VIcon: {
+        class: 'ps-1',
+        size: 'small',
+      },
+    },
+    AppChip: {
+      size: 'x-small',
+      variant: 'outlined',
+    },
+    VBtn: {
+      class: 'text-none',
+    },
+    VTextField: {
+      variant: 'outlined',
+    },
+    VSelect: {
+      variant: 'outlined',
+    },
+    VTextarea: {
+      variant: 'outlined',
+    },
+    VAutocomplete: {
+      variant: 'outlined',
+    },
+    VFileInput: {
+      variant: 'outlined',
+    },
+    VSwitch: {
+      inset: true,
+      density: 'compact',
+    },
+    VDatePicker: {
+      hideHeader: true,
+    },
+    VDatePickerControls: {
+      VBtn: {
+        color: undefined,
+      },
+    },
   },
   icons: {
     aliases: {
