@@ -21,7 +21,7 @@ export default defineConfig({
     }),
     Layouts({
       layoutsDirs: 'src/layouts',
-      defaultLayout: 'default/index',
+      defaultLayout: 'default',
     }),
     Components({
       dirs: ['lib/components', 'src/components'],
