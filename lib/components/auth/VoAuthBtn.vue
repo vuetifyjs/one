@@ -24,6 +24,8 @@
       <VoUserMenu />
     </VoBtn>
   </VoNotificationsTotalBadge>
+
+  <VoAuthDialog />
 </template>
 
 <script lang="ts" setup>

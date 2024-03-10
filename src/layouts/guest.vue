@@ -2,8 +2,6 @@
   <v-app>
     <VoNotificationsBanner />
 
-    <VoAuthDialog />
-
     <AppBar />
 
     <v-main>
