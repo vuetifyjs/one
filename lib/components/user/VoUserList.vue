@@ -8,6 +8,8 @@
 
     <VoNotificationsListItem />
 
+    <VoStudioListItem />
+
     <VoSponsorshipsListItem />
 
     <VoSubscriptionListItem v-if="auth.user" />
