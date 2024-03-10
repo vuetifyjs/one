@@ -42,4 +42,4 @@
 
     return 'Connect GitHub'
   })
-</script>@/stores/auth
+</script>

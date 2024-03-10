@@ -41,4 +41,4 @@
 
     return 'Connect Discord'
   })
-</script>@/stores/auth
+</script>

@@ -26,11 +26,8 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useRouter } from 'vue-router'
-
   // Utilities
-  import { definePage } from 'vue-router/auto'
+  import { definePage, useRouter } from 'vue-router/auto'
 
   definePage({
     meta: {

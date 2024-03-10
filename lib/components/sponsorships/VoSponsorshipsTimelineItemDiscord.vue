@@ -57,4 +57,3 @@
   const one = useOneStore()
   const settings = useSettingsStore()
 </script>
-@/stores/one@/stores/settings

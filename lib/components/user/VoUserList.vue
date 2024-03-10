@@ -24,4 +24,3 @@
 
   const auth = useAuthStore()
 </script>
-@/stores/auth

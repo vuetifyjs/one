@@ -148,4 +148,3 @@
     }
   }
 </script>
-@/stores/user@/stores/banners

@@ -113,4 +113,3 @@
     one.subscribe(one.interval)
   }
 </script>
-@/stores/one

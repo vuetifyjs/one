@@ -227,4 +227,3 @@
     dialog.value = true
   }, { immediate: true })
 </script>
-@/stores/auth@/stores/one@/stores/settings@/stores/user

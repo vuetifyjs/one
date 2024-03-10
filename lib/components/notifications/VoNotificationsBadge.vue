@@ -15,4 +15,3 @@
   const notifications = useNotificationsStore()
   const user = useUserStore()
 </script>
-@/stores/notifications@/stores/user

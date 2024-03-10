@@ -27,4 +27,3 @@
     return user.notifications.show ? notifications.unread.length : 0
   })
 </script>
-@/stores/auth@/stores/notifications@/stores/user

@@ -69,7 +69,7 @@
 <script setup lang="ts">
   // Composables
   import { useDisplay } from 'vuetify'
-  import { useRouter } from 'vue-router'
+  import { useRouter } from 'vue-router/auto'
 
   // Utilities
   import { computed, nextTick } from 'vue'

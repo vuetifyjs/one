@@ -56,4 +56,3 @@
     menu.value?.updateLocation?.()
   }, { flush: 'pre' })
 </script>
-@/stores/banners@/stores/one

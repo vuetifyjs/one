@@ -66,4 +66,3 @@
   const date = useDate()
   const one = useOneStore()
 </script>
-@/stores/one

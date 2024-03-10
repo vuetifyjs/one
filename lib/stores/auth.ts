@@ -1,5 +1,5 @@
 // Composables
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router/auto'
 
 // Utilities
 import { defineStore } from 'pinia'
