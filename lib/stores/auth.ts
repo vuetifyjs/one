@@ -196,7 +196,7 @@ export const useAuthStore = defineStore('auth', () => {
     return localStorage.getItem('vuetify@lastLoginProvider')
   }
 
-  if (lastLoginProvider()) verify()
+  verify()
 
   return {
     user,
