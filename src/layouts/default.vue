@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <VoNotificationsBanner v-if="!banners.record" />
+    <VoNotificationsBanner />
 
     <VoAuthDialog />
 
@@ -17,8 +17,5 @@
 </template>
 
 <script lang="ts" setup>
-  // Stores
-  import { useBannersStore } from '@/stores/banners'
-
-  const banners = useBannersStore()
+  //
 </script>
