@@ -1,7 +1,6 @@
 <template>
   <VoDialog
     v-model="dialog"
-    :max-height="display.xs.value ? undefined : 820"
     :prepend-icon="`svg:${mdiHandHeart}`"
     title="Sponsorships"
   >
@@ -52,9 +51,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-
   // Utilities
   import { useQuery } from '@/composables/route'
   import { nextTick, watch } from 'vue'
@@ -68,7 +64,6 @@
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
-  const display = useDisplay()
   const query = useQuery()
   const auth = useAuthStore()
   const one = useOneStore()
