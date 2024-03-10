@@ -14,7 +14,10 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
-    Components(),
+    Components({
+      dirs: ['lib/components'],
+      dts: false,
+    }),
     Vuetify(),
   ],
   resolve: {
