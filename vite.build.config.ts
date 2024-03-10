@@ -45,6 +45,7 @@ export default defineConfig({
         '@mdi/js',
         'pinia',
         'vue-router',
+        'vue-router/auto',
         'lodash-es',
       ],
     },
