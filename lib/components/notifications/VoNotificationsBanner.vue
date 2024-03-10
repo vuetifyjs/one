@@ -5,7 +5,6 @@
     :height="height"
     :image="banner.metadata.images.bg?.url"
     :model-value="hasPromotion"
-    :theme="banner.metadata.theme.key"
     flat
   >
     <v-list-item
