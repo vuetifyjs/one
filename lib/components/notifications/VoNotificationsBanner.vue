@@ -10,6 +10,7 @@
     <v-list-item
       v-bind="link"
       :active="false"
+      :disabled="demo"
       class="flex-grow-1"
       lines="two"
       @click="onClick"
@@ -53,6 +54,7 @@
 
         <v-btn
           v-if="banner.metadata.closable"
+          :disabled="demo"
           class="ms-6 me-2"
           density="comfortable"
           icon="$clear"
@@ -80,6 +82,13 @@
   // Icons
   import { mdiOpenInNew } from '@mdi/js'
 
+  // Types
+  interface Props {
+    demo?: boolean
+  }
+
+  const props = defineProps<Props>()
+
   const { mdAndUp } = useDisplay()
   const router = useRouter()
   const user = useUserStore()
@@ -88,6 +97,8 @@
   const banner = computed(() => banners.banner)
   const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
   const hasPromotion = computed(() => {
+    if (props.demo) return true
+
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })
 

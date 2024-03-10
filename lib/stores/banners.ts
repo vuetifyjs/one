@@ -10,6 +10,7 @@ import { useHttpStore } from './http'
 
 // Types
 export interface Banner {
+  id: string
   status: 'published' | 'unpublished'
   created_at: string
   modified_at: string
@@ -47,11 +48,16 @@ export interface Banner {
 
 interface State {
   all: Ref<Banner[]>
+  aall: Ref<Banner[]>
   isLoading: ShallowRef<boolean>
   server: ComputedRef<Banner | undefined>
   banner: ComputedRef<Banner | undefined>
+  record: Ref<Banner | undefined>
 
+  admin: () => Promise<Banner[]>
   get: () => Promise<Banner[]>
+  edit: (slug: string) => Promise<Banner>
+  save: (slug: string) => Promise<Banner>
 }
 
 export const useBannersStore = defineStore('banners', () => {
@@ -60,9 +66,12 @@ export const useBannersStore = defineStore('banners', () => {
   const user = useUserStore()
 
   const all = ref<Banner[]>([])
+  const aall = ref<Banner[]>([])
+  const record = ref<Banner | null>()
   const isLoading = shallowRef(false)
 
   const banner = computed(() => {
+    if (record.value) return record.value
     if (server.value) return server.value
 
     return all.value.find(({
@@ -112,12 +121,73 @@ export const useBannersStore = defineStore('banners', () => {
     return all.value
   }
 
+  async function edit (id: string) {
+    try {
+      isLoading.value = true
+
+      const res = await http.get<{ banner: Banner }>(`/one/admin/banners/${id}/edit`)
+
+      record.value = res.banner
+
+      return res.banner
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function save (id: string, data: FormData) {
+    try {
+      isLoading.value = true
+
+      const res = await http.put<{ banner: Banner }>(
+        `/one/admin/banners/${id}/edit`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      )
+
+      record.value = res.banner
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return record.value
+  }
+
+  async function admin () {
+    try {
+      isLoading.value = true
+
+      const res = await http.get<{ banners: Banner[] }>('/one/admin/banners')
+
+      aall.value = res.banners
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return all.value
+  }
+
   return {
     all,
+    aall,
     isLoading,
     server,
     banner,
+    record,
 
+    admin,
     get,
+    edit,
+    save,
   } as State
 })
