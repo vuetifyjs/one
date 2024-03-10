@@ -9,12 +9,26 @@ const router = createRouter({
   extendRoutes: (routes: any) => setupLayouts(routes),
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const auth = useAuthStore()
 
-  // Redirect to login if not authenticated
-  if (to.meta.requiresAuth && !auth.user) {
+  await auth.verify()
+
+  if (
+    auth.user &&
+    to.meta.requiresAdmin &&
+    !auth.user?.isAdmin
+  ) {
+    next({ path: '/401' })
+  } else if (to.meta.requiresAuth && !auth.user) {
     next({ path: '/' })
+  } else if (
+    auth.user &&
+    !to.meta.requiresAuth &&
+    !to.meta.guest &&
+    to.path !== '/user/dashboard/'
+  ) {
+    next({ path: '/user/dashboard/' })
   } else {
     next()
   }
