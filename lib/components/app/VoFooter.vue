@@ -3,6 +3,12 @@
     class="vo-footer"
     height="40"
   >
+    <div v-if="image || $slots.image" class="v-footer__image">
+      <slot v-if="$slots.image" name="image" />
+
+      <v-img v-else :src="image" position="left" cover />
+    </div>
+
     <a
       v-for="item in items"
       :key="item.title"
@@ -28,12 +34,19 @@
 </template>
 
 <script setup lang="ts">
+  // Icons
   import {
     mdiDiscord,
     mdiGithub,
     mdiReddit,
     mdiShieldStarOutline,
   } from '@mdi/js'
+
+  interface Props {
+    image?: string
+  }
+
+  defineProps<Props>()
 
   const items = [
     {
@@ -77,4 +90,15 @@
 
     &:hover
       color: rgba(25, 118, 210, 1)
+
+  .v-footer__image
+    display: flex
+    height: 40px
+    flex: 1 1 auto
+    left: 0
+    overflow: hidden
+    position: absolute
+    top: 0
+    width: 100%
+    z-index: -1
 </style>
