@@ -10,7 +10,7 @@
     <v-list-item
       v-bind="link"
       :active="false"
-      class="flex-grow-1"
+      class="flex-grow-1 py-4"
       lines="two"
       @click="onClick"
     >
@@ -20,6 +20,7 @@
           :image="banner.metadata.images.logo.url"
           icon="$vuetify"
           size="x-large"
+          tile
         />
       </template>
 
