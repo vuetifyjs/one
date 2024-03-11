@@ -35,7 +35,7 @@
     "@mdi/js": "6.2.95",
     "lodash-es": "^4.17.21",
     "vue": "^3.4.0",
-    "vuetify": "^3.0.0"
+    "vuetify": "^3.5.0"
   },
   "devDependencies": {
     "@babel/types": "^7.24.0",
