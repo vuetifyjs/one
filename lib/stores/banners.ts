@@ -10,7 +10,8 @@ import { useHttpStore } from './http'
 
 // Types
 export interface Banner {
-  status: 'published' | 'unpublished'
+  id: string
+  status: 'published' | 'draft'
   created_at: string
   modified_at: string
   slug: string
@@ -29,17 +30,13 @@ export interface Banner {
     attributes: Record<string, any>
     start_date: string
     end_date: string
-    theme: {
-      key: 'light' | 'dark'
-      value: 'Light' | 'Dark'
-    }
     images: {
       bg: {
         url: string
-      }
+      } | null
       logo: {
         url: string
-      }
+      } | null
     }
     site: ('*' | 'dev' | 'vbin' | 'vplay' | 'docs' | 'home' | 'server')[]
   }
@@ -47,11 +44,50 @@ export interface Banner {
 
 interface State {
   all: Ref<Banner[]>
+  aall: Ref<Banner[]>
   isLoading: ShallowRef<boolean>
   server: ComputedRef<Banner | undefined>
   banner: ComputedRef<Banner | undefined>
+  record: Ref<Banner | undefined>
 
+  admin: () => Promise<Banner[]>
   get: () => Promise<Banner[]>
+  edit: (slug: string) => Promise<Banner>
+  create: (data: FormData) => Promise<Banner>
+  save: (slug: string, data: FormData) => Promise<Banner>
+}
+
+export const DEFAULT_BANNER: Banner = {
+  id: '',
+  status: 'draft',
+  created_at: '',
+  modified_at: '',
+  slug: '',
+  title: '',
+  metadata: {
+    active: false,
+    closable: false,
+    color: '',
+    label: '',
+    height: 88,
+    text: 'Enter text',
+    subtext: 'Detailed information about the banner.',
+    link: 'https://vuetifyjs.com',
+    link_text: 'Click me',
+    link_color: '',
+    attributes: {},
+    start_date: '',
+    end_date: '',
+    images: {
+      bg: {
+        url: '',
+      },
+      logo: {
+        url: '',
+      },
+    },
+    site: [],
+  },
 }
 
 export const useBannersStore = defineStore('banners', () => {
@@ -60,9 +96,12 @@ export const useBannersStore = defineStore('banners', () => {
   const user = useUserStore()
 
   const all = ref<Banner[]>([])
+  const aall = ref<Banner[]>([])
+  const record = ref<Banner | null>()
   const isLoading = shallowRef(false)
 
   const banner = computed(() => {
+    if (record.value) return record.value
     if (server.value) return server.value
 
     return all.value.find(({
@@ -112,12 +151,88 @@ export const useBannersStore = defineStore('banners', () => {
     return all.value
   }
 
+  async function edit (id: string) {
+    try {
+      isLoading.value = true
+
+      const res = await http.get<{ banner: Banner }>(`/one/admin/banners/${id}/edit`)
+
+      record.value = res.banner
+
+      return res.banner
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function save (id: string, data: FormData) {
+    try {
+      isLoading.value = true
+
+      const res = await http.put<{ banner: Banner }>(
+        `/one/admin/banners/${id}/edit`,
+        data,
+      )
+
+      record.value = res.banner
+
+      return res.banner
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function create (data: FormData) {
+    try {
+      isLoading.value = true
+
+      const res = await http.put<{ banner: Banner }>(
+        '/one/admin/banners',
+        data,
+      )
+
+      record.value = res.banner
+
+      return res.banner
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function admin () {
+    try {
+      isLoading.value = true
+
+      const res = await http.get<{ banners: Banner[] }>('/one/admin/banners')
+
+      aall.value = res.banners
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+
+    return all.value
+  }
+
   return {
     all,
+    aall,
     isLoading,
     server,
     banner,
+    record,
 
+    admin,
     get,
+    create,
+    edit,
+    save,
   } as State
 })

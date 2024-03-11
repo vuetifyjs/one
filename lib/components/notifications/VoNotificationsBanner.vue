@@ -10,12 +10,18 @@
     <v-list-item
       v-bind="link"
       :active="false"
-      class="flex-grow-1"
+      class="flex-grow-1 py-6"
       lines="two"
       @click="onClick"
     >
-      <template v-if="banner.metadata.images.logo" #prepend>
-        <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
+      <template #prepend>
+        <v-avatar
+          v-if="banner.metadata.images.logo"
+          :image="banner.metadata.images.logo.url"
+          icon="$vuetify"
+          size="x-large"
+          tile
+        />
       </template>
 
       <v-list-item-title
@@ -53,6 +59,7 @@
 
         <v-btn
           v-if="banner.metadata.closable"
+          :disabled="demo"
           class="ms-6 me-2"
           density="comfortable"
           icon="$clear"
@@ -80,6 +87,13 @@
   // Icons
   import { mdiOpenInNew } from '@mdi/js'
 
+  // Types
+  interface Props {
+    demo?: boolean
+  }
+
+  const props = defineProps<Props>()
+
   const { mdAndUp } = useDisplay()
   const router = useRouter()
   const user = useUserStore()
@@ -88,6 +102,8 @@
   const banner = computed(() => banners.banner)
   const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
   const hasPromotion = computed(() => {
+    if (props.demo) return true
+
     return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
   })
 

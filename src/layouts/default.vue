@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <VoNotificationsBanner />
-
     <AppBar />
 
     <AppDrawer />

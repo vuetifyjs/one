@@ -16,7 +16,6 @@ import { VConfirmEdit, VEmptyState } from 'vuetify/labs/components'
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   aliases: {
-    AppBtn: components.VBtn,
     AppChip: components.VChip,
   },
   components: {
@@ -27,17 +26,6 @@ export default createVuetify({
     global: {
       hideDetails: 'auto',
     },
-    AppBtn: {
-      color: 'primary',
-      variant: 'flat',
-      density: 'compact',
-      class: 'text-none',
-      slim: true,
-      VIcon: {
-        class: 'ps-1',
-        size: 'small',
-      },
-    },
     AppChip: {
       size: 'x-small',
       variant: 'outlined',
@@ -46,23 +34,30 @@ export default createVuetify({
       class: 'text-none',
     },
     VTextField: {
+      density: 'compact',
       variant: 'outlined',
     },
     VSelect: {
+      density: 'compact',
       variant: 'outlined',
     },
     VTextarea: {
+      density: 'compact',
       variant: 'outlined',
     },
     VAutocomplete: {
+      density: 'compact',
       variant: 'outlined',
     },
     VFileInput: {
+      density: 'compact',
       variant: 'outlined',
+      prependIcon: '',
+      prependInnerIcon: '$file',
     },
     VSwitch: {
-      inset: true,
       density: 'compact',
+      inset: true,
     },
     VDatePicker: {
       hideHeader: true,
