@@ -1,5 +1,4 @@
 <template>
-
   <v-app-bar :image="settings.suit['app-bar']">
     <template #prepend>
       <router-link class="ps-2" to="/">
