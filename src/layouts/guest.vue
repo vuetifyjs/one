@@ -7,7 +7,7 @@
     <v-main>
       <router-view />
 
-      <VoFooter app />
+      <AppFooter />
     </v-main>
   </v-app>
 </template>
