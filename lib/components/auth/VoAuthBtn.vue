@@ -4,7 +4,7 @@
       v-bind="{
         [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
       }"
-      :color="color"
+      :color="one.isOpen ? color : 'surface-variant'"
       :icon="auth.user || auth.isLoading"
       :loading="auth.isLoading"
       :rounded="mdAndDown"
