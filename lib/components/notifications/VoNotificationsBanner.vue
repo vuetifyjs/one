@@ -10,7 +10,7 @@
     <v-list-item
       v-bind="link"
       :active="false"
-      class="flex-grow-1 py-4"
+      class="flex-grow-1 py-6"
       lines="two"
       @click="onClick"
     >

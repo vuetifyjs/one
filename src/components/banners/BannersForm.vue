@@ -186,11 +186,11 @@
 
             <div class="d-flex align-center mb-2">
               <div class="text-truncate text-caption py-1">
-                {{ banners.record.metadata.images.logo?.url || 'Pending...' }}
+                {{ banners.record.metadata.images.logo?.url || 'Choose a file' }}
               </div>
 
               <VoBtn
-                v-if="banners.record.metadata.images.logo"
+                v-if="banners.record.metadata.images.logo?.url"
                 class="ms-6"
                 text="Clear"
                 variant="outlined"
@@ -211,11 +211,11 @@
 
             <div class="d-flex align-center mb-2">
               <div class="text-truncate text-caption py-1">
-                {{ banners.record.metadata.images.bg?.url || 'Pending...' }}
+                {{ banners.record.metadata.images.bg?.url || 'Choose a file' }}
               </div>
 
               <VoBtn
-                v-if="banners.record.metadata.images.bg"
+                v-if="banners.record.metadata.images.bg?.url"
                 class="ms-6"
                 text="Clear"
                 variant="outlined"
