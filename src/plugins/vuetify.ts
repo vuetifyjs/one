@@ -16,7 +16,6 @@ import { VConfirmEdit, VEmptyState } from 'vuetify/labs/components'
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   aliases: {
-    AppBtn: components.VBtn,
     AppChip: components.VChip,
   },
   components: {
@@ -26,17 +25,6 @@ export default createVuetify({
   defaults: {
     global: {
       hideDetails: 'auto',
-    },
-    AppBtn: {
-      color: 'primary',
-      variant: 'flat',
-      density: 'compact',
-      class: 'text-none',
-      slim: true,
-      VIcon: {
-        class: 'ps-1',
-        size: 'small',
-      },
     },
     AppChip: {
       size: 'x-small',

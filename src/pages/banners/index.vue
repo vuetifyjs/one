@@ -43,7 +43,7 @@
       </template>
 
       <template #item.actions="{ item }">
-        <AppBtn
+        <VoBtn
           :to="{
             name: '/banners/[id].edit',
             params: { id: item.id },

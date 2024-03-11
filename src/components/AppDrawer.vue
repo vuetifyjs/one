@@ -13,6 +13,7 @@
 <script lang="ts" setup>
   // Composables
   import { useAuthStore } from '@/stores/auth'
+  import { useRoute } from 'vue-router'
 
   // Utilities
   import { computed } from 'vue'
@@ -21,28 +22,28 @@
   // Icons
   import { mdiBillboard, mdiViewDashboardOutline } from '@mdi/js'
 
-  const settings = useSettingsStore()
-
   const auth = useAuthStore()
+  const route = useRoute()
+  const settings = useSettingsStore()
 
   const links = [
     { title: 'Dashboard', to: '/user/dashboard/', prependIcon: `svg:${mdiViewDashboardOutline}` },
   ]
 
-  const admin = [
+  const admin = computed(() => [
     { type: 'subheader', class: 'mt-4', title: 'Admin' },
     { type: 'divider', class: 'mb-2' },
     {
       title: 'Banners',
       prependIcon: `svg:${mdiBillboard}`,
       children: [
-        { title: 'List', to: '/banners/' },
+        { title: 'List', to: '/banners/', exact: route.name === '/banners/create' },
         { title: 'Create', to: '/banners/create' },
       ],
     },
-  ]
+  ])
 
   const items = computed(() => {
-    return (auth.user?.isAdmin) ? [...links, ...admin] : links
+    return (auth.user?.isAdmin) ? [...links, ...admin.value] : links
   })
 </script>

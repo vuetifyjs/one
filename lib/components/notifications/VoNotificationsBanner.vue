@@ -10,13 +10,17 @@
     <v-list-item
       v-bind="link"
       :active="false"
-      :disabled="demo"
       class="flex-grow-1"
       lines="two"
       @click="onClick"
     >
-      <template v-if="banner.metadata.images.logo" #prepend>
-        <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
+      <template #prepend>
+        <v-avatar
+          v-if="banner.metadata.images.logo"
+          :image="banner.metadata.images.logo.url"
+          icon="$vuetify"
+          size="x-large"
+        />
       </template>
 
       <v-list-item-title
