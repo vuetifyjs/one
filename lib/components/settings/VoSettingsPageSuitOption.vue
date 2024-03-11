@@ -86,8 +86,9 @@
   // Icons
   import {
     mdiHome,
-    // mdiImageFilterHdr,
-    // mdiRocketLaunchOutline,
+    mdiImageFilterHdr,
+    mdiRocketLaunchOutline,
+    mdiSelect,
     mdiSpaceInvaders,
     mdiTextBox,
   } from '@mdi/js'
@@ -97,6 +98,7 @@
     {
       title: 'Choose a page suit',
       value: '',
+      prependIcon: `svg:${mdiSelect}`,
       disabled: true,
     },
     {
@@ -104,15 +106,15 @@
       prependIcon: `svg:${mdiSpaceInvaders}`,
       value: 'blackguard',
     },
-    // {
-    //   title: 'Polaris',
-    //   prependIcon: `svg:${mdiImageFilterHdr}`,
-    //   value: 'polaris',
-    // },
-    // {
-    //   title: 'Nebula',
-    //   prependIcon: `svg:${mdiRocketLaunchOutline}`,
-    //   value: 'nebula',
-    // },
+    {
+      title: 'Polaris',
+      prependIcon: `svg:${mdiImageFilterHdr}`,
+      value: 'polaris',
+    },
+    {
+      title: 'Nebula',
+      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      value: 'nebula',
+    },
   ]
 </script>

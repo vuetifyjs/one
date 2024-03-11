@@ -57,25 +57,27 @@ function genThemes () {
         'theme-on-code': '#CCCCCC',
       },
     },
-    nebula: {
+    polaris: {
       dark: true,
       colors: {
-        background: '#0a0f1b',
-        surface: '#1c1f2a',
-        primary: '#4d5b9e',
-        'primary-darken-1': '#424a8c',
-        secondary: '#7a82d2',
-        accent: '#00eaff',
-        info: '#29b6f6',
-        warning: '#ffeb3b',
-        error: '#e91e63',
-        success: '#4caf50',
-        'on-surface-variant': '#5c6bc0',
-        'surface-light': '#2a3c66',
-        'secondary-darken-1': '#686f9a',
+        background: '#2a0e12',
+        primary: '#e73c00',
+        surface: '#4e221b',
+        info: '#e7810d',
+        accent: '#b35000',
+        success: '#486a2b',
+        'surface-light': '#773421',
+        'surface-bright': '#9c5233',
+        'surface-variant': '#924d2c',
+        'on-surface-variant': '#FFFFFF',
+        'primary-darken-1': '#c33100',
+        secondary: '#ac1900',
+        'secondary-darken-1': '#8a1600',
+        error: '#ff5555',
+        warning: '#ffa726',
       },
       variables: {
-        'border-color': '#FFFFFF',
+        'border-color': '#ffffff',
         'border-opacity': 0.12,
         'high-emphasis-opacity': 0.87,
         'medium-emphasis-opacity': 0.60,
@@ -88,9 +90,47 @@ function genThemes () {
         'pressed-opacity': 0.16,
         'dragged-opacity': 0.08,
         'theme-kbd': '#212529',
-        'theme-on-kbd': '#FFFFFF',
+        'theme-on-kbd': '#ffffff',
         'theme-code': '#343434',
-        'theme-on-code': '#CCCCCC',
+        'theme-on-code': '#cccccc',
+      },
+    },
+    nebula: {
+      dark: true,
+      colors: {
+        background: '#0f172a',
+        primary: '#1e3a8a',
+        surface: '#1e293b',
+        info: '#64748b',
+        accent: '#0ea5e9',
+        success: '#14b8a6',
+        'surface-light': '#2e3d59',
+        'surface-bright': '#3357b7',
+        'surface-variant': '#334155',
+        'on-surface-variant': '#FFFFFF',
+        'primary-darken-1': '#1c2d60',
+        secondary: '#0284c7',
+        'secondary-darken-1': '#0369a1',
+        error: '#ef4444',
+        warning: '#f97316',
+      },
+      variables: {
+        'border-color': '#ffffff',
+        'border-opacity': 0.2,
+        'high-emphasis-opacity': 0.87,
+        'medium-emphasis-opacity': 0.60,
+        'disabled-opacity': 0.38,
+        'idle-opacity': 0.10,
+        'hover-opacity': 0.08,
+        'focus-opacity': 0.12,
+        'selected-opacity': 0.12,
+        'activated-opacity': 0.12,
+        'pressed-opacity': 0.16,
+        'dragged-opacity': 0.08,
+        'theme-kbd': '#1e40af',
+        'theme-on-kbd': '#dbeafe',
+        'theme-code': '#0f172a',
+        'theme-on-code': '#93c5fd',
       },
     },
     highContrast: {
@@ -147,18 +187,18 @@ export const useSettingsStore = defineStore('settings', () => {
     blackguard: {
       'app-bar': CDN_URL + 'suits/blackguard/blackguard-app-bar.png',
       drawer: CDN_URL + 'suits/blackguard/blackguard-app-drawer.png',
-      footer: '',
+      footer: CDN_URL + 'suits/blackguard/blackguard-app-footer.png',
     },
-    // polaris: {
-    //   'app-bar': '',
-    //   'drawer': '',
-    //   footer: '',
-    // },
-    // nebula: {
-    //   'app-bar': '',
-    //   'drawer': '',
-    //   footer: '',
-    // },
+    polaris: {
+      'app-bar': CDN_URL + 'suits/polaris/polaris-app-bar.png',
+      drawer: CDN_URL + 'suits/polaris/polaris-app-drawer.png',
+      footer: CDN_URL + 'suits/polaris/polaris-app-footer.png',
+    },
+    nebula: {
+      'app-bar': CDN_URL + 'suits/nebula/nebula-app-bar.png',
+      drawer: CDN_URL + 'suits/nebula/nebula-app-drawer.png',
+      footer: CDN_URL + 'suits/nebula/nebula-app-footer.png',
+    },
   } as Record<string, Suit>
 
   const suit = computed(() => {
@@ -184,6 +224,7 @@ export const useSettingsStore = defineStore('settings', () => {
       theme.global.name.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     } else {
       theme.global.name.value = val
+      user.suits.suit = suits[val] ? val : ''
     }
 
     user.theme = val

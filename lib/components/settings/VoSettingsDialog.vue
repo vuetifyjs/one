@@ -196,7 +196,6 @@
       image: settings.CDN_URL + 'themes/polaris.png',
       prependIcon: `svg:${mdiImageFilterHdr}`,
       value: 'polaris',
-      disabled: true,
     },
     {
       title: 'Nebula',
@@ -204,7 +203,6 @@
       image: settings.CDN_URL + 'themes/nebula.png',
       prependIcon: `svg:${mdiRocketLaunchOutline}`,
       value: 'nebula',
-      disabled: true,
     },
     {
       title: 'High Contrast',
