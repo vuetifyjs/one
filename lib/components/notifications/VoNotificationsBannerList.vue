@@ -36,7 +36,7 @@
             flat
           >
             <template #prepend>
-              <v-avatar :image="banner.metadata.images.logo.url" />
+              <v-avatar :image="banner.metadata.images.logo?.url" />
             </template>
 
             <template #image>
