@@ -28,6 +28,7 @@ export default createVuetify({
     },
     AppChip: {
       size: 'x-small',
+      label: true,
       variant: 'outlined',
     },
     VBtn: {
