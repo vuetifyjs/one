@@ -6,7 +6,7 @@
   >
     <VoDashboardListItem />
 
-    <VoNotificationsListItem />
+    <VoNotificationsNavItem />
 
     <VoStudioListItem />
 

@@ -12,15 +12,17 @@
 
 <script lang="ts" setup>
   // Composables
-  import { useAuthStore } from '@/stores/auth'
   import { useRoute } from 'vue-router'
 
   // Utilities
   import { computed } from 'vue'
+
+  // Stores
+  import { useAuthStore } from '@/stores/auth'
   import { useSettingsStore } from '@/stores/settings'
 
   // Icons
-  import { mdiBillboard, mdiViewDashboardOutline } from '@mdi/js'
+  import { mdiBell, mdiBillboard, mdiViewDashboardOutline } from '@mdi/js'
 
   const auth = useAuthStore()
   const route = useRoute()
@@ -39,6 +41,14 @@
       children: [
         { title: 'List', to: '/banners/', exact: route.name === '/banners/create' },
         { title: 'Create', to: '/banners/create' },
+      ],
+    },
+    {
+      title: 'Notifications',
+      prependIcon: `svg:${mdiBell}`,
+      children: [
+        { title: 'List', to: '/notifications/', exact: route.name === '/notifications/create' },
+        { title: 'Create', to: '/notifications/create' },
       ],
     },
   ])

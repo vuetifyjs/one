@@ -1,40 +1,121 @@
 <template>
-  <VoListItem
-    v-if="user.notifications.show"
-    :active="dialog"
-    :prepend-icon="`svg:${mdiBellOutline}`"
-    title="Notifications"
-    link
-  >
-    <template v-if="notifications.unread.length" #prepend>
-      <VoNotificationsBadge>
-        <v-icon />
-      </VoNotificationsBadge>
-    </template>
+  <v-hover>
+    <template #default="{ isHovering, props: activatorProps }">
+      <VoListItem
+        v-bind="activatorProps"
+        class="py-4 mb-0"
+      >
+        <template #prepend>
+          <div class="ps-3 text-subtitle-2 pe-2">{{ notification.metadata.emoji }}</div>
+        </template>
 
-    <VoNotificationsDialog v-model="dialog" />
-  </VoListItem>
+        <template #append>
+          <v-responsive class="mt-n3" width="56">
+            <v-tooltip
+              :text="isRead(notification.slug) ? 'Mark as unread' : 'Mark as read'"
+              location="bottom"
+            >
+              <template #activator="{ props: tooltipActivatorProps }">
+                <v-fade-transition hide-on-leave>
+                  <v-btn
+                    v-show="isHovering || display.mobile.value"
+                    v-bind="tooltipActivatorProps"
+                    :icon="`svg:${!isRead(notification.slug) ? mdiEmailOpenOutline : mdiEmailVariant}`"
+                    class="ms-auto"
+                    size="small"
+                    variant="text"
+                    mdi-email-variant
+                    @click="onClick(notification)"
+                  />
+                </v-fade-transition>
+              </template>
+            </v-tooltip>
+          </v-responsive>
+        </template>
+
+        <v-list-item-title class="text-wrap text-h6 mb-1">
+          <div class=" text-truncate">{{ notification.title }}</div>
+        </v-list-item-title>
+
+        <div class="text-caption font-weight-bold text-medium-emphasis">
+          {{ date.format(notification.created_at, 'fullDateWithWeekday') }}
+        </div>
+
+        <div class="text-disabled text-caption my-2">
+          {{ notification.metadata.text }}
+        </div>
+
+        <v-chip
+          :append-icon="`svg:${mdiOpenInNew}`"
+          :text="notification.metadata.action_text"
+          v-bind="link"
+          size="small"
+          variant="text"
+          border
+          label
+        >
+          <template #append>
+            <v-icon size="12" />
+          </template>
+        </v-chip>
+      </VoListItem>
+    </template>
+  </v-hover>
 </template>
 
 <script setup lang="ts">
+  // Composables
+  import { useDate, useDisplay } from 'vuetify'
+
   // Utilities
-  import { onMounted, shallowRef } from 'vue'
+  import { computed } from 'vue'
 
   // Stores
-  import { useBannersStore } from '@/stores/banners'
-  import { useNotificationsStore } from '@/stores/notifications'
   import { useUserStore } from '@/stores/user'
 
   // Icons
-  import { mdiBellOutline } from '@mdi/js'
+  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 
-  const banners = useBannersStore()
+  // Types
+  import type { Notification } from '@/stores/notifications'
+
+  interface Props {
+    demo?: boolean
+    notification: Notification
+  }
+
+  const props = defineProps<Props>()
+
   const user = useUserStore()
-  const notifications = useNotificationsStore()
-  const dialog = shallowRef(false)
 
-  onMounted(async () => {
-    notifications.get()
-    banners.get()
+  const date = useDate()
+  const display = useDisplay()
+
+  const link = computed(() => {
+    const metadata = props.notification.metadata ?? { action: '' }
+
+    return {
+      href: metadata.action.startsWith('http') ? metadata.action : undefined,
+      target: metadata.action.startsWith('http') ? '_blank' : undefined,
+      to: !metadata.action.startsWith('http') ? metadata.action : undefined,
+      ...props.notification.metadata.attributes,
+      onClick () {
+        onClick(props.notification)
+      },
+    }
   })
+
+  function isRead (slug: string) {
+    return user.notifications.read.includes(slug)
+  }
+
+  function onClick (notification: Notification) {
+    if (props.demo) return
+
+    if (!isRead(notification.slug)) {
+      user.notifications.read.push(notification.slug)
+    } else {
+      user.notifications.read = user.notifications.read.filter(slug => slug !== notification.slug)
+    }
+  }
 </script>
