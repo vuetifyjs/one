@@ -23,7 +23,7 @@ export const useHttpStore = defineStore('http', {
         ...options,
       })
     },
-    async put<T = any> (url: string, body?: any, options: RequestInit = {}): Promise<T> {
+    async form<T = any> (url: string, body?: any, options: RequestInit = {}): Promise<T> {
       return this.fetch<T>(url, {
         method: 'POST',
         body,

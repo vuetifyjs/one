@@ -171,7 +171,7 @@ export const useBannersStore = defineStore('banners', () => {
     try {
       isLoading.value = true
 
-      const res = await http.put<{ banner: Banner }>(
+      const res = await http.form<{ banner: Banner }>(
         `/one/admin/banners/${id}/edit`,
         data,
       )
@@ -190,7 +190,7 @@ export const useBannersStore = defineStore('banners', () => {
     try {
       isLoading.value = true
 
-      const res = await http.put<{ banner: Banner }>(
+      const res = await http.form<{ banner: Banner }>(
         '/one/admin/banners',
         data,
       )
