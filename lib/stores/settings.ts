@@ -60,9 +60,9 @@ function genThemes () {
     polaris: {
       dark: true,
       colors: {
-        background: '#2a0e12',
-        primary: '#e73c00',
-        surface: '#4e221b',
+        background: '#1f0a0d',
+        primary: '#972800',
+        surface: '#29110e',
         info: '#e7810d',
         accent: '#b35000',
         success: '#486a2b',
@@ -99,13 +99,13 @@ function genThemes () {
       dark: true,
       colors: {
         background: '#0f172a',
-        primary: '#1e3a8a',
+        primary: '#3462e3',
         surface: '#1e293b',
         info: '#64748b',
         accent: '#0ea5e9',
         success: '#14b8a6',
         'surface-light': '#2e3d59',
-        'surface-bright': '#3357b7',
+        'surface-bright': '#6077b5',
         'surface-variant': '#334155',
         'on-surface-variant': '#FFFFFF',
         'primary-darken-1': '#1c2d60',
