@@ -51,7 +51,6 @@
               <v-badge offset-y="-3" dot />
             </template>
           </VoListItem>
-
         </v-list>
       </v-navigation-drawer>
 
