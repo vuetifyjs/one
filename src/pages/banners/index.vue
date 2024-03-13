@@ -7,9 +7,6 @@
       :items="banners.aall"
       :loading="banners.isLoading"
       :sort-by="[{ key: 'metadata.end_date', order: 'desc' }]"
-      density="compact"
-      items-per-page="50"
-      hover
     >
       <template #item.metadata.active="{ item }">
         <AppChip :color="item.metadata.active ? 'success' : 'error'">

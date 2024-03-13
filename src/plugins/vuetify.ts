@@ -34,6 +34,11 @@ export default createVuetify({
     VBtn: {
       class: 'text-none',
     },
+    VDataTable: {
+      density: 'compact',
+      itemsPerPage: 50,
+      hover: true,
+    },
     VTextField: {
       density: 'compact',
       variant: 'outlined',
