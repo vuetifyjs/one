@@ -42,9 +42,11 @@
             <v-container>
               <v-row align="center">
                 <v-col
-                  :order="i % 2 === 0 ? 0 : 1"
-                  cols="6"
-                  offset="1"
+                  :order="i % 2"
+                  cols="12"
+                  offset="0"
+                  offset-sm="1"
+                  sm="6"
                 >
                   <strong class="text-uppercase text-info">
                     {{ item.title }}
@@ -60,14 +62,16 @@
                 </v-col>
 
                 <v-col
-                  :offset="i % 2 === 0 ? 0 : 1"
-                  :order="i % 2 === 0 ? 1 : 0"
-                  cols="4"
+                  :offset-sm="i % 2"
+                  cols="12"
+                  offset="0"
+                  sm="4"
                 >
                   <v-img
+                    :height="smAndUp ? 180 : undefined"
                     :src="item.image"
-                    height="180"
                     rounded="lg"
+                    cover
                   />
                 </v-col>
               </v-row>
@@ -106,6 +110,7 @@
 
 <script lang="ts" setup>
   // Composables
+  import { useDisplay } from 'vuetify'
   import { useRouter } from 'vue-router'
 
   // Utilities
@@ -129,6 +134,7 @@
   const router = useRouter()
   const auth = useAuthStore()
   const one = useOneStore()
+  const { smAndUp } = useDisplay()
 
   const items = [
     {
