@@ -100,7 +100,12 @@
       to: !metadata.action.startsWith('http') ? metadata.action : undefined,
       ...props.notification.metadata.attributes,
       onClick () {
-        onClick(props.notification)
+        if (
+          props.demo ||
+          user.notifications.read.includes(props.notification.slug)
+        ) return
+
+        user.notifications.read.push(props.notification.slug)
       },
     }
   })
