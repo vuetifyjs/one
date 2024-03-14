@@ -1,6 +1,3 @@
-// Composables
-import { useRouter } from 'vue-router'
-
 // Utilities
 import { defineStore } from 'pinia'
 import { computed, ref, shallowRef, watch } from 'vue'
@@ -41,7 +38,6 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
   const http = useHttpStore()
   const userStore = useUserStore()
-  const router = useRouter()
   const isLoading = shallowRef(false)
 
   const isSubscriber = computed(() => (
@@ -139,7 +135,6 @@ export const useAuthStore = defineStore('auth', () => {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
         }
         user.value = e.data.body.user
-        router.push('/user/dashboard/')
         sync()
       } else {
         console.error(e.data.message)
@@ -184,7 +179,6 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (err: any) {
       console.error(err)
     } finally {
-      router.push('/')
       isLoading.value = false
     }
   }
