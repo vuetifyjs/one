@@ -9,12 +9,13 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { useHttpStore } from '@/stores/http'
 import { useUserStore } from '@/stores/user'
 
-interface User {
+export interface User {
   id: string
   isAdmin: boolean
   name: string
   picture: string
   settings: Record<string, any> | null
+  createdAt: string
   identities: {
     id: string
     emails: string[]

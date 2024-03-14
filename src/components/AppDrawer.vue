@@ -25,7 +25,7 @@
   import { useSettingsStore } from '@/stores/settings'
 
   // Icons
-  import { mdiBell, mdiBillboard, mdiViewDashboardOutline } from '@mdi/js'
+  import { mdiAccountGroup, mdiBell, mdiBillboard, mdiViewDashboardOutline } from '@mdi/js'
 
   const auth = useAuthStore()
   const route = useRoute()
@@ -53,6 +53,11 @@
         { title: 'List', to: '/notifications/', exact: route.name === '/notifications/create' },
         { title: 'Create', to: '/notifications/create' },
       ],
+    },
+    {
+      title: 'Users',
+      prependIcon: `svg:${mdiAccountGroup}`,
+      to: '/users/',
     },
   ])
 
