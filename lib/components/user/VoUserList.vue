@@ -16,7 +16,7 @@
 
     <VoSettingsListItem />
 
-    <VoAuthLogoutListItem v-if="auth.user" />
+    <VoAuthLogoutNavItem v-if="auth.user" />
   </v-list>
 </template>
 

@@ -21,6 +21,7 @@ declare module 'vue' {
     VoAuthGithub: typeof import('./lib/components/auth/VoAuthGithub.vue')['default']
     VoAuthListItem: typeof import('./lib/components/auth/VoAuthListItem.vue')['default']
     VoAuthLogoutListItem: typeof import('./lib/components/auth/VoAuthLogoutListItem.vue')['default']
+    VoAuthLogoutNavItem: typeof import('./lib/components/auth/VoAuthLogoutNavItem.vue')['default']
     VoBtn: typeof import('./lib/components/app/VoBtn.vue')['default']
     VoDashboardListItem: typeof import('./lib/components/VoDashboardListItem.vue')['default']
     VoDialog: typeof import('./lib/components/app/VoDialog.vue')['default']
