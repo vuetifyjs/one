@@ -7,7 +7,6 @@
       :color="color"
       :icon="auth.user || auth.isLoading"
       :loading="auth.isLoading"
-      :rounded="mdAndDown"
       :variant="auth.user ? 'outlined' : 'flat'"
       class="vo-auth-btn"
       size="default"
@@ -49,7 +48,7 @@
   const one = useOneStore()
   const user = useUserStore()
 
-  const { lgAndUp, mdAndDown } = useDisplay()
+  const { lgAndUp } = useDisplay()
 
   const color = computed(() => {
     return one.isOpen || !auth.user
