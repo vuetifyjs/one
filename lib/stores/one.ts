@@ -81,11 +81,7 @@ export const useOneStore = defineStore('one', () => {
     if (sessionId) await activate()
   })
 
-  watch(isOpen, val => {
-    if (!val) return
-
-    resetQuery()
-  })
+  watch(isOpen, resetQuery)
 
   watch(query, val => {
     if (val.one !== 'subscribe' || auth.user) return
