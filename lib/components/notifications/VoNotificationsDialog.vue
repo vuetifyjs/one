@@ -42,7 +42,7 @@
           </VoListItem>
 
           <VoListItem
-            v-if="banners.all.length > 0"
+            v-if="banners.all.length > 0 && user.notifications.banners"
             :prepend-icon="`svg:${mdiBillboard}`"
             title="Banners"
             value="banners"
@@ -85,6 +85,7 @@
   import { useBannersStore } from '@/stores/banners'
   import { useOneStore } from '@/stores/one'
   import { useNotificationsStore } from '@/stores/notifications'
+  import { useUserStore } from '@/stores/user'
 
   // Icons
   import { mdiBell, mdiBillboard, mdiInboxFullOutline, mdiInboxOutline } from '@mdi/js'
@@ -95,6 +96,7 @@
   const banners = useBannersStore()
   const notifications = useNotificationsStore()
   const one = useOneStore()
+  const user = useUserStore()
 
   const list = shallowRef(['read'])
   const dialog = defineModel('modelValue', { type: Boolean })

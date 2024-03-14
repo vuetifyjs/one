@@ -103,6 +103,7 @@ export const useBannersStore = defineStore('banners', () => {
   const banner = computed(() => {
     if (record.value) return record.value
     if (server.value) return server.value
+    if (!user.notifications.banners) return undefined
 
     return all.value.find(({
       slug,
