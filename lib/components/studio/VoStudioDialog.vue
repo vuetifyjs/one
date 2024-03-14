@@ -12,7 +12,7 @@
           height="350"
           max-height="350"
           position="top"
-          src="https://github.com/vuetifyjs/vuetify/assets/9064066/692a6daf-0999-4fa1-a8c8-b1653cf55ca8"
+          src="https://cdn.vuetifyjs.com/docs/images/one/studio/hero.png"
           cover
         >
           <v-card
@@ -79,7 +79,7 @@
           <v-container>
             <v-row justify="center">
               <v-col cols="6">
-                <v-avatar image="https://vuetifyjs.b-cdn.net/docs/images/avatars/one.png" size="64" />
+                <v-avatar image="https://cdn.vuetifyjs.com/docs/images/avatars/one.png" size="64" />
                 <div>
                   Become a subscriber and be the first to gain access to the Vuetify Studio Alpha when it releases in April 2024.
                 </div>
@@ -135,19 +135,19 @@
       title: 'Customize',
       subtitle: 'Customize your Vuetify theme, components, and more with the Vuetify Studio.',
       text: 'Vuetify Studio is a premium tool that allows you to customize your Vuetify theme, components, and more. Unlock Vuetify One status to gain access to the Vuetify Studio Alpha.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/816239b3-caf5-4108-b3e7-f5b453a430f1',
+      image: 'https://cdn.vuetifyjs.com/docs/images/one/studio/customize.png',
     },
     {
       title: 'Configure',
       subtitle: 'Configure every aspect of your application from a single interface.',
       text: 'Vuetify Studio allows you to configure every single property of your application, including global values, and more.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/0a082a25-7470-4d95-82e4-ed1ff44e9541',
+      image: 'https://cdn.vuetifyjs.com/docs/images/one/studio/configure.png',
     },
     {
       title: 'Export',
       subtitle: 'Export your configuration and easily implement your options.',
       text: 'Vuetify Studio allows you to export your options to a Vuetify configuration file for easy integration into your application.',
-      image: 'https://github.com/vuetifyjs/vuetify/assets/9064066/1549d67d-f5eb-444d-b817-d0447b30bf0a',
+      image: 'https://cdn.vuetifyjs.com/docs/images/one/studio/export.png',
     },
   ]
 
