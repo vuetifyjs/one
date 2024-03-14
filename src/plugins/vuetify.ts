@@ -34,6 +34,9 @@ export default createVuetify({
     VBtn: {
       class: 'text-none',
     },
+    VContainer: {
+      fluid: true,
+    },
     VDataTable: {
       density: 'compact',
       itemsPerPage: 50,
