@@ -89,7 +89,6 @@ export const useOneStore = defineStore('one', () => {
 
   watch(query, val => {
     if (val.one !== 'subscribe' || auth.user) return
-    console.log(val.one)
 
     auth.dialog = true
 
