@@ -1,5 +1,8 @@
 <template>
-  <v-navigation-drawer :image="settings.suit['drawer']">
+  <v-navigation-drawer
+    :floating="!!settings.suit['drawer']"
+    :image="settings.suit['drawer']"
+  >
     <v-list
       :items="items"
       density="compact"
