@@ -154,6 +154,8 @@
   watch(query, async () => {
     if (query.value.one !== 'studio') return
 
+    one.isOpen = true
+
     await nextTick()
 
     dialog.value = true
