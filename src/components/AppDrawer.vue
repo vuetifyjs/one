@@ -25,7 +25,7 @@
   import { useSettingsStore } from '@/stores/settings'
 
   // Icons
-  import { mdiAccountGroup, mdiBell, mdiBillboard, mdiViewDashboardOutline } from '@mdi/js'
+  import { mdiAccountGroup, mdiBank, mdiBell, mdiBillboard, mdiBullhorn, mdiStorefront, mdiTagMultiple, mdiViewDashboardOutline } from '@mdi/js'
 
   const auth = useAuthStore()
   const route = useRoute()
@@ -38,6 +38,15 @@
   const admin = computed(() => [
     { type: 'subheader', class: 'mt-4', title: 'Admin' },
     { type: 'divider', class: 'mb-2' },
+    {
+      title: 'Advertisements',
+      prependIcon: `svg:${mdiTagMultiple}`,
+      disabled: true,
+      children: [
+        { title: 'List', to: '/advertisements/', exact: route.name === '/advertisements/create' },
+        { title: 'Create', to: '/advertisements/create' },
+      ],
+    },
     {
       title: 'Banners',
       prependIcon: `svg:${mdiBillboard}`,
@@ -55,9 +64,36 @@
       ],
     },
     {
+      title: 'Sponsors',
+      prependIcon: `svg:${mdiBank}`,
+      disabled: true,
+      children: [
+        { title: 'List', to: '/sponsors/', exact: route.name === '/sponsors/create' },
+        { title: 'Create', to: '/sponsors/create' },
+      ],
+    },
+    {
+      title: 'Spots',
+      prependIcon: `svg:${mdiBullhorn}`,
+      disabled: true,
+      children: [
+        { title: 'List', to: '/spots/', exact: route.name === '/spots/create' },
+        { title: 'Create', to: '/spots/create' },
+      ],
+    },
+    {
       title: 'Users',
       prependIcon: `svg:${mdiAccountGroup}`,
       to: '/users/',
+    },
+    {
+      title: 'Vendors',
+      prependIcon: `svg:${mdiStorefront}`,
+      disabled: true,
+      children: [
+        { title: 'List', to: '/vendors/', exact: route.name === '/vendors/create' },
+        { title: 'Create', to: '/vendors/create' },
+      ],
     },
   ])
 
