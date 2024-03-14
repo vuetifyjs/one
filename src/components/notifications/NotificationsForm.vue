@@ -89,7 +89,7 @@
 
           <v-col cols="6">
             <v-list
-              bg-color="surface-variant"
+              bg-color="surface-light"
               lines="three"
               rounded
             >
