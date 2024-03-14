@@ -1,15 +1,11 @@
 <template>
-  <v-app>
-    <AppBar />
+  <AppDrawer />
 
-    <AppDrawer />
+  <v-main>
+    <router-view />
 
-    <v-main>
-      <router-view />
-
-      <AppFooter />
-    </v-main>
-  </v-app>
+    <AppFooter />
+  </v-main>
 </template>
 
 <script lang="ts" setup>

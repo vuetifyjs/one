@@ -1,5 +1,9 @@
 <template>
-  <router-view />
+  <v-app>
+    <AppBar />
+
+    <router-view />
+  </v-app>
 
   <SpeedInsights />
 </template>

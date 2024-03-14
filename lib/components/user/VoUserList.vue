@@ -8,7 +8,7 @@
 
     <VoNotificationsNavItem />
 
-    <VoStudioListItem />
+    <VoStudioNavItem />
 
     <VoSponsorshipsListItem />
 

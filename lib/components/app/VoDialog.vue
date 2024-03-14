@@ -61,7 +61,7 @@
   import { shallowRef } from 'vue'
 
   interface Props {
-    prependIcon: string
+    prependIcon?: any
     title: string
   }
 

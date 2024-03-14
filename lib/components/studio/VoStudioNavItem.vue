@@ -1,16 +1,24 @@
 <template>
   <VoListItem
+    :active="dialog"
     :prepend-icon="studio"
-    class="cursor-default"
     title="Vuetify Studio"
+    link
   >
     <template #append>
       <v-chip size="x-small" label>COMING SOON</v-chip>
     </template>
+
+    <VoStudioDialog v-model="dialog" :prepend-icon="studio" />
   </VoListItem>
 </template>
 
 <script lang="ts" setup>
+  // Utilities
+  import { shallowRef } from 'vue'
+
+  const dialog = shallowRef(false)
+
   const studio = [
     ['M12.435 14.3194L12 21L6.87046 12.2799L12.435 14.3194Z', 1],
     ['M22 4L12.435 14.3194L6.87046 12.2799L9.26479 7.61064L12.435 14.3194L12 21L22 4Z', 0.5],

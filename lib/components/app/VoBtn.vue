@@ -9,6 +9,10 @@
     size="small"
     variant="flat"
   >
+    <template v-if="$slots.prepend" #prepend>
+      <slot name="prepend" />
+    </template>
+
     <template v-if="$slots.default" #default>
       <slot />
     </template>
