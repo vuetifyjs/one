@@ -39,7 +39,6 @@ export default createVuetify({
     },
     VDataTable: {
       density: 'compact',
-      itemsPerPage: 50,
       hover: true,
     },
     VTextField: {
