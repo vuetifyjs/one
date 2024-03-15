@@ -9,6 +9,17 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { useHttpStore } from '@/stores/http'
 import { useUserStore } from '@/stores/user'
 
+export interface Sponsorship {
+  id: string
+  platform: string
+  interval: 'month' | 'year'
+  target: string
+  tierName: string
+  amount: number
+  isActive: boolean
+  createdAt: Date
+}
+
 export interface User {
   id: string
   isAdmin: boolean
@@ -24,16 +35,7 @@ export interface User {
     userHandle: string
     primary: boolean
   }[]
-  sponsorships: {
-    id: string
-    platform: string
-    recurring: boolean
-    target: string
-    tierName: string
-    amount: number
-    isActive: boolean
-    createdAt: Date
-  }[]
+  sponsorships: Sponsorship[]
 }
 
 export const useAuthStore = defineStore('auth', () => {
