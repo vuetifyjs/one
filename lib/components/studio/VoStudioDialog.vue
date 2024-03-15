@@ -16,8 +16,9 @@
           cover
         >
           <v-card
-            class="text-center pa-2"
-            color="surface-variant"
+            class="text-center pa-3"
+            color="surface"
+            rounded="xl"
             flat
           >
             <template #text>
@@ -56,7 +57,7 @@
                     {{ item.subtitle }}
                   </p>
 
-                  <p class="text-body-2 text-medium-emphasis">
+                  <p class="text-caption">
                     {{ item.text }}
                   </p>
                 </v-col>
