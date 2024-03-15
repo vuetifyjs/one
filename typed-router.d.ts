@@ -27,6 +27,9 @@ declare module 'vue-router/auto-routes' {
     '/notifications/': RouteRecordInfo<'/notifications/', '/notifications', Record<never, never>, Record<never, never>>,
     '/notifications/[id]': RouteRecordInfo<'/notifications/[id]', '/notifications/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/notifications/create': RouteRecordInfo<'/notifications/create', '/notifications/create', Record<never, never>, Record<never, never>>,
+    '/spots/': RouteRecordInfo<'/spots/', '/spots', Record<never, never>, Record<never, never>>,
+    '/spots/[id]': RouteRecordInfo<'/spots/[id]', '/spots/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/spots/create': RouteRecordInfo<'/spots/create', '/spots/create', Record<never, never>, Record<never, never>>,
     '/user/dashboard': RouteRecordInfo<'/user/dashboard', '/user/dashboard', Record<never, never>, Record<never, never>>,
     '/users/': RouteRecordInfo<'/users/', '/users', Record<never, never>, Record<never, never>>,
   }

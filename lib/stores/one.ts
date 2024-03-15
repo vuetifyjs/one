@@ -67,7 +67,6 @@ export const useOneStore = defineStore('one', () => {
     return auth.user?.sponsorships.find((s: any) => s.platform === 'github')
   })
   const discord = computed(() => {
-    console.log(auth.user?.sponsorships)
     return auth.user?.sponsorships.find((s: any) => s.platform === 'discord')
   })
 

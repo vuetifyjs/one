@@ -4,6 +4,7 @@ import VoAuthCard from '@/components/auth/VoAuthCard.vue'
 import VoAuthDialog from '@/components/auth/VoAuthDialog.vue'
 import VoNotificationsBanner from '@/components/notifications/VoNotificationsBanner.vue'
 import VoAuthListItem from '@/components/auth/VoAuthListItem.vue'
+import VoSpot from '@/components/spots/VoSpot.vue'
 import VoFooter from '@/components/app/VoFooter.vue'
 
 // Types
@@ -18,6 +19,7 @@ export { useHttpStore } from '@/stores/http'
 export { useOneStore } from '@/stores/one'
 export { useUserStore } from '@/stores/user'
 export { useSettingsStore } from '@/stores/settings'
+export { useSpotsStore } from '@/stores/spots'
 
 export function createOne () {
   function install (app: App) {
@@ -26,6 +28,7 @@ export function createOne () {
     app.component('VoAuthDialog', VoAuthDialog)
     app.component('VoAuthListItem', VoAuthListItem)
     app.component('VoNotificationsBanner', VoNotificationsBanner)
+    app.component('VoSpot', VoSpot)
     app.component('VoFooter', VoFooter)
   }
 

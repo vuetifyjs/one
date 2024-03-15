@@ -75,7 +75,6 @@
     {
       title: 'Spots',
       prependIcon: `svg:${mdiBullhorn}`,
-      disabled: true,
       children: [
         { title: 'List', to: '/spots/', exact: route.name === '/spots/create' },
         { title: 'Create', to: '/spots/create' },
