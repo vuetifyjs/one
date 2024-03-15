@@ -5,6 +5,7 @@
     <v-data-table
       :headers="headers"
       :items="users"
+      :loading="isLoading"
     >
       <template #item.id="{ item }">
         <div class="text-truncate">{{ item.id }}</div>
@@ -39,7 +40,7 @@
 
   // Utilities
   import { definePage } from 'vue-router/auto'
-  import { onBeforeMount, ref } from 'vue'
+  import { onBeforeMount, ref, shallowRef } from 'vue'
 
   // Stores
   import { useHttpStore } from '@/stores/http'
@@ -53,6 +54,7 @@
   })
 
   const users = ref<User[]>([])
+  const isLoading = shallowRef(false)
 
   const http = useHttpStore()
 
@@ -78,8 +80,16 @@
   ]
 
   onBeforeMount(async () => {
-    const res = await http.get<{ users: User[] }>('/one/admin/users')
+    try {
+      isLoading.value = true
 
-    users.value = res.users
+      const res = await http.get<{ users: User[] }>('/one/admin/users')
+
+      users.value = res.users
+    } catch (error) {
+      console.error(error)
+    } finally {
+      isLoading.value = false
+    }
   })
 </script>
