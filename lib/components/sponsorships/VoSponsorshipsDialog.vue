@@ -6,8 +6,8 @@
   >
     <v-layout>
       <v-main scrollable>
-        <div class="px-3 pb-5 d-flex flex-column">
-          <v-card-text>
+        <div class="px-3 pb-5 d-flex flex-column h-100">
+          <v-card-text class="flex-0-0 mb-16 mb-sm-4">
             <VoDialogSubheader
               text="Support Vuetify through GitHub Sponsors, Discord, or Patreon to unlock exclusive benefits and content."
               title="Support Vuetify"
@@ -17,30 +17,24 @@
           </v-card-text>
 
           <v-empty-state
-            :icon="`svg:${mdiChartLine}`"
-            class="mt-auto"
+            class="flex-1-0"
+            icon="$vuetify"
             min-height="auto"
-            size="64"
-            title="Your Monthly Contributions"
+            size="128"
           >
             <template #media>
-              <v-icon color="success" />
+              <v-icon :color="auth.isSubscriber ? 'success' : 'error'" />
             </template>
 
-            <template #headline>
-              <div class="py-4">
-                <template v-if="auth.isSubscriber">
-                  ${{ parseFloat(String(one.monthlyTotal)).toFixed(2) }}
-                </template>
+            <template #title>
+              One Status:
 
-                <template v-else>
-                  $0.00
-                </template></div>
+              <span class="font-weight-black">{{ auth.isSubscriber ? 'Active' : 'Inactive' }}</span>
             </template>
 
             <template #text>
               <div class="text-caption text-medium-emphasis">
-                A total of $2.99 or more unlocks <span class="font-weight-black">all</span> Vuetify One benefits
+                {{ auth.isSubscriber ? 'You are currently receiving benefits from Vuetify One.' : 'Login to activate Vuetify One benefits' }}
               </div>
             </template>
           </v-empty-state>
@@ -60,7 +54,7 @@
   import { useOneStore } from '@/stores/one'
 
   // Icons
-  import { mdiChartLine, mdiHandHeart } from '@mdi/js'
+  import { mdiHandHeart } from '@mdi/js'
 
   const dialog = defineModel('modelValue', { type: Boolean })
 

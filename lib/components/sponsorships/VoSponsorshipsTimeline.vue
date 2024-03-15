@@ -6,6 +6,8 @@
     style="grid-template-columns: auto auto 1fr;"
     truncate-line="both"
   >
+    <VoSponsorshipsTimelineItemOne />
+
     <VoSponsorshipsTimelineItemGithub />
 
     <VoSponsorshipsTimelineItemDiscord />

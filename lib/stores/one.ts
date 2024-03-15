@@ -8,7 +8,7 @@ import { useHttpStore } from '@/stores/http'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 
 // Types
 
@@ -42,7 +42,6 @@ interface Invoice {
 
 export const useOneStore = defineStore('one', () => {
   const query = useQuery()
-  const sessionId = query.value.session_id
   const router = useRouter()
 
   const auth = useAuthStore()
@@ -52,6 +51,7 @@ export const useOneStore = defineStore('one', () => {
   const isOpen = ref(false)
   const info = ref<Info>()
   const invoices = ref<Invoice[]>([])
+  const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
 
   const subscription = computed(() => {
@@ -60,12 +60,17 @@ export const useOneStore = defineStore('one', () => {
   const hasBilling = computed(() => !!subscription.value?.tierName)
   const isSubscriber = computed(() => subscription.value?.isActive)
 
+  const one = computed(() => {
+    return auth.user?.sponsorships.find((s: any) => s.tierName.startsWith('sub_'))
+  })
   const github = computed(() => {
     return auth.user?.sponsorships.find((s: any) => s.platform === 'github')
   })
   const discord = computed(() => {
+    console.log(auth.user?.sponsorships)
     return auth.user?.sponsorships.find((s: any) => s.platform === 'discord')
   })
+
   const patreon = computed(() => {
     return auth.user?.sponsorships.find((s: any) => s.platform === 'patreon')
   })
@@ -77,11 +82,16 @@ export const useOneStore = defineStore('one', () => {
     }, 0)
   })
 
-  onBeforeMount(async () => {
-    if (sessionId) await activate()
+  onMounted(async () => {
+    if (sessionId.value) await activate()
   })
 
   watch(isOpen, resetQuery)
+  watch(sessionId, val => {
+    if (!val) return
+
+    activate()
+  }, { immediate: true })
 
   watch(query, val => {
     if (val.one !== 'subscribe' || auth.user) return
@@ -107,7 +117,7 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await http.post('/one/activate', { sessionId })
+      const res = await http.post('/one/activate', { sessionId: sessionId.value })
 
       auth.user = res.user
 
@@ -206,7 +216,12 @@ export const useOneStore = defineStore('one', () => {
   }
 
   function resetQuery () {
-    router.push({ query: {} })
+    router.push({
+      query: {
+        ...query.value,
+        one: undefined,
+      },
+    })
   }
 
   return {
@@ -225,6 +240,7 @@ export const useOneStore = defineStore('one', () => {
     github,
     patreon,
     discord,
+    one,
 
     activate,
     cancel,

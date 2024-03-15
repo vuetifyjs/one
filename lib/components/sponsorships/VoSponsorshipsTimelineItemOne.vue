@@ -1,10 +1,10 @@
 <template>
   <VoSponsorshipsTimelineItem
-    :sponsorship="one.github"
-    href="https://github.com/sponsors/johnleider"
-    logo="github"
-    text="Support Vuetify through GitHub sponsors."
-    title="GitHub Sponsor"
+    :sponsorship="one.one"
+    logo="one"
+    text="Support Vuetify through Vuetify One."
+    title="Vuetify One Subscriber"
+    to="?one=subscribe"
   />
 </template>
 
