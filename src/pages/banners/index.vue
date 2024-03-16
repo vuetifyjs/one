@@ -42,7 +42,7 @@
       <template #item.actions="{ item }">
         <VoBtn
           :to="{
-            name: '/banners/[id].edit',
+            name: '/banners/[id]',
             params: { id: item.id },
           }"
           prepend-icon="$edit"

@@ -35,6 +35,6 @@
 
   onMounted(async () => {
     notifications.index()
-    banners.get()
+    banners.index()
   })
 </script>

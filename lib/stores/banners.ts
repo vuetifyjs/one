@@ -51,10 +51,11 @@ interface State {
   record: Ref<Banner | undefined>
 
   admin: () => Promise<Banner[]>
-  get: () => Promise<Banner[]>
-  edit: (slug: string) => Promise<Banner>
-  create: (data: FormData) => Promise<Banner>
-  save: (slug: string, data: FormData) => Promise<Banner>
+  destroy: (slug: string) => Promise<void>
+  index: () => Promise<Banner[]>
+  show: (slug: string) => Promise<Banner>
+  store: (data: FormData) => Promise<Banner>
+  update: (slug: string, data: FormData) => Promise<Banner>
 }
 
 export const DEFAULT_BANNER: Banner = {
@@ -136,7 +137,7 @@ export const useBannersStore = defineStore('banners', () => {
     })
   })
 
-  async function get () {
+  async function index () {
     try {
       isLoading.value = true
 
@@ -152,11 +153,11 @@ export const useBannersStore = defineStore('banners', () => {
     return all.value
   }
 
-  async function edit (id: string) {
+  async function show (id: string) {
     try {
       isLoading.value = true
 
-      const res = await http.get<{ banner: Banner }>(`/one/admin/banners/${id}/edit`)
+      const res = await http.get<{ banner: Banner }>(`/one/admin/banners/${id}`)
 
       record.value = res.banner
 
@@ -168,26 +169,7 @@ export const useBannersStore = defineStore('banners', () => {
     }
   }
 
-  async function save (id: string, data: FormData) {
-    try {
-      isLoading.value = true
-
-      const res = await http.form<{ banner: Banner }>(
-        `/one/admin/banners/${id}/edit`,
-        data,
-      )
-
-      record.value = res.banner
-
-      return res.banner
-    } catch (e) {
-      //
-    } finally {
-      isLoading.value = false
-    }
-  }
-
-  async function create (data: FormData) {
+  async function store (data: FormData) {
     try {
       isLoading.value = true
 
@@ -205,6 +187,27 @@ export const useBannersStore = defineStore('banners', () => {
       isLoading.value = false
     }
   }
+
+  async function update (id: string, data: FormData) {
+    try {
+      isLoading.value = true
+
+      const res = await http.form<{ banner: Banner }>(
+        `/one/admin/banners/${id}`,
+        data,
+      )
+
+      record.value = res.banner
+
+      return res.banner
+    } catch (e) {
+      //
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function destroy () {}
 
   async function admin () {
     try {
@@ -231,9 +234,10 @@ export const useBannersStore = defineStore('banners', () => {
     record,
 
     admin,
-    get,
-    create,
-    edit,
-    save,
+    destroy,
+    index,
+    show,
+    store,
+    update,
   } as State
 })

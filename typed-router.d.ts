@@ -22,7 +22,7 @@ declare module 'vue-router/auto-routes' {
     '/[...404]': RouteRecordInfo<'/[...404]', '/:404(.*)', { 404: ParamValue<true> }, { 404: ParamValue<false> }>,
     '/401': RouteRecordInfo<'/401', '/401', Record<never, never>, Record<never, never>>,
     '/banners/': RouteRecordInfo<'/banners/', '/banners', Record<never, never>, Record<never, never>>,
-    '/banners/[id].edit': RouteRecordInfo<'/banners/[id].edit', '/banners/:id/edit', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/banners/[id]': RouteRecordInfo<'/banners/[id]', '/banners/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/banners/create': RouteRecordInfo<'/banners/create', '/banners/create', Record<never, never>, Record<never, never>>,
     '/notifications/': RouteRecordInfo<'/notifications/', '/notifications', Record<never, never>, Record<never, never>>,
     '/notifications/[id]': RouteRecordInfo<'/notifications/[id]', '/notifications/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,

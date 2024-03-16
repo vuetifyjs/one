@@ -57,10 +57,10 @@
   async function onClickSave (form: SubmitEvent) {
     const data = new FormData(form.target as HTMLFormElement)
 
-    const res = await banners.create(data)
+    const res = await banners.store(data)
 
     router.push({
-      name: '/banners/[id].edit',
+      name: '/banners/[id]',
       params: { id: res.id },
     })
   }

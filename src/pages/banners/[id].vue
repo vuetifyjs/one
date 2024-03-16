@@ -42,7 +42,7 @@
   })
 
   onMounted(async () => {
-    const res = await banners.edit(params.value.id)
+    const res = await banners.show(params.value.id)
 
     original.value = structuredClone(res)
   })
@@ -58,7 +58,7 @@
   async function onClickSave (form: SubmitEvent) {
     const data = new FormData(form.target as HTMLFormElement)
 
-    const res = await banners.save(original.value!.id, data)
+    const res = await banners.update(original.value!.id, data)
 
     original.value = structuredClone(res)
   }
