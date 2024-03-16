@@ -1,36 +1,53 @@
 <template>
-  <v-container>
-    <h1>Users</h1>
-
-    <v-data-table
-      :headers="headers"
-      :items="users"
-      :loading="isLoading"
-    >
-      <template #item.id="{ item }">
-        <div class="text-truncate">{{ item.id }}</div>
-      </template>
-
-      <template #item.isAdmin="{ item }">
-        <AppChip v-if="item.isAdmin" color="success" text="Administrator" />
-      </template>
-
-      <template #item.name="{ item }">
-        <div class="d-flex align-center">
-          <v-avatar
-            :image="item.picture"
-            class="me-1"
-            size="16"
+  <v-container class="h-100">
+    <v-card>
+      <v-toolbar color="surface-variant" title="All Users">
+        <template #append>
+          <v-text-field
+            v-model="search"
+            :prepend-inner-icon="`svg:${mdiMagnify}`"
+            label="Search"
+            style="width: 300px"
           />
+        </template>
+      </v-toolbar>
 
-          {{ item.name }}
-        </div>
-      </template>
+      <v-data-table
+        v-model:search="search"
+        :headers="headers"
+        :items="users"
+        :loading="isLoading"
+        fixed-footer
+      >
+        <template #item.id="{ item }">
+          <div class="text-truncate">{{ item.id }}</div>
+        </template>
 
-      <template #item.createdAt="{ item }">
-        {{ adapter.format(item.createdAt, 'fullDateWithWeekday') }}
-      </template>
-    </v-data-table>
+        <template #item.isAdmin="{ item }">
+          <AppChip
+            v-if="item.isAdmin"
+            color="success"
+            text="Administrator"
+          />
+        </template>
+
+        <template #item.name="{ item }">
+          <div class="d-flex align-center">
+            <v-avatar
+              :image="item.picture"
+              class="me-1"
+              size="16"
+            />
+
+            {{ item.name }}
+          </div>
+        </template>
+
+        <template #item.createdAt="{ item }">
+          {{ adapter.format(item.createdAt, 'fullDateWithWeekday') }}
+        </template>
+      </v-data-table>
+    </v-card>
   </v-container>
 </template>
 
@@ -46,6 +63,9 @@
   import { useHttpStore } from '@/stores/http'
   import { User } from '@/stores/auth'
 
+  // Icons
+  import { mdiMagnify } from '@mdi/js'
+
   definePage({
     meta: {
       requiresAdmin: true,
@@ -53,6 +73,7 @@
     },
   })
 
+  const search = shallowRef('')
   const users = ref<User[]>([])
   const isLoading = shallowRef(false)
 
@@ -64,10 +85,12 @@
     {
       title: 'Name',
       value: 'name',
+      sortable: true,
     },
     {
       title: 'Admin',
       value: 'isAdmin',
+      sortable: true,
     },
     {
       title: 'ID',
@@ -76,6 +99,7 @@
     {
       title: 'Created At',
       value: 'createdAt',
+      sortable: true,
     },
   ]
 
