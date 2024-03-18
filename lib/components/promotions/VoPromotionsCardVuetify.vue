@@ -1,0 +1,72 @@
+<template>
+  <VoPromotionsCard
+    :href="promotion?.metadata.url"
+    class="pa-3"
+    width="360"
+    border
+  >
+    <div class="d-flex ga-4">
+      <template v-if="promotion">
+        <v-img
+          :src="promotion.metadata.images.default?.url"
+          height="100"
+          rounded="s"
+          width="130"
+        />
+
+        <div class="d-flex align-start ga-4">
+          <div class="text-caption on-surface-light">
+            {{ promotion.metadata.text }}
+          </div>
+        </div>
+
+      </template>
+
+      <template v-else>
+        <v-skeleton-loader
+          class="flex-1-0 overflow-hidden"
+          color="transparent"
+          max-height="100"
+          min-width="130"
+          type="image"
+          loading
+        />
+
+        <v-skeleton-loader
+          class="flex-1-0 ms-n3 mt-n3"
+          color="transparent"
+          max-height="100"
+          type="text@3"
+          loading
+        />
+      </template>
+    </div>
+  </VoPromotionsCard>
+</template>
+
+<script lang="ts" setup>
+  // Utilities
+  import { computed } from 'vue'
+
+  // Stores
+  import { usePromotionsStore } from '@/stores/promotions'
+
+  // Types
+  interface Props {
+    slug?: string
+  }
+
+  const props = defineProps<Props>()
+
+  const promotions = usePromotionsStore()
+
+  const promotion = computed(() => {
+    if (props.slug) {
+      const found = promotions.show(props.slug)
+
+      if (found) return found
+    }
+
+    return promotions.random(promotions.all)
+  })
+</script>

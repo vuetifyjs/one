@@ -39,15 +39,6 @@
     { type: 'subheader', class: 'mt-4', title: 'Admin' },
     { type: 'divider', class: 'mb-2' },
     {
-      title: 'Advertisements',
-      prependIcon: `svg:${mdiTagMultiple}`,
-      disabled: true,
-      children: [
-        { title: 'List', to: '/advertisements/', exact: route.name === '/advertisements/create' },
-        { title: 'Create', to: '/advertisements/create' },
-      ],
-    },
-    {
       title: 'Banners',
       prependIcon: `svg:${mdiBillboard}`,
       children: [
@@ -61,6 +52,15 @@
       children: [
         { title: 'List', to: '/notifications/', exact: route.name === '/notifications/create' },
         { title: 'Create', to: '/notifications/create' },
+      ],
+    },
+    {
+      title: 'Promotions',
+      prependIcon: `svg:${mdiTagMultiple}`,
+      disabled: true,
+      children: [
+        { title: 'List', to: '/promotions/', exact: route.name === '/promotions/create' },
+        { title: 'Create', to: '/promotions/create' },
       ],
     },
     {

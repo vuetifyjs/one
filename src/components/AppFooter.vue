@@ -1,5 +1,5 @@
 <template>
-  <VoFooter
+  <VoSocialFooter
     :image="settings.suit['footer']"
     app
   />
