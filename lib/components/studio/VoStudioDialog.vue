@@ -103,8 +103,6 @@
           </v-container>
         </v-sheet>
       </v-main>
-
-      <VoFooter app />
     </v-layout>
   </VoDialog>
 </template>
