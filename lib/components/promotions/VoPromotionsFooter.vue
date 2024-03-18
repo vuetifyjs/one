@@ -1,12 +1,11 @@
 <template>
   <VoFooter
     :image="image"
-    order="-1"
     style="transform: translateY(0); /* no idea why this is needed */"
   >
     <a
       :href="promotion?.metadata.url"
-      class="d-flex text-decoration-none py-2 px-4 ms-n4 flex-1-0 me-n4"
+      class="d-flex text-decoration-none py-2 px-4 ms-n4 flex-1-0 me-n4 text-high-emphasis position-relative"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -22,7 +21,7 @@
 
       <v-chip
         v-if="promotion?.metadata.advertisement"
-        class="ms-auto me-n4 mb-n5 py-1 ps-3"
+        class="ms-auto me-n4 align-self-end mb-n2 py-1 ps-3"
         rounded="0 ts-lg"
         size="x-small"
         text="SPONSORED"
