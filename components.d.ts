@@ -26,6 +26,7 @@ declare module 'vue' {
     VoAuthLogoutNavItem: typeof import('./lib/components/auth/VoAuthLogoutNavItem.vue')['default']
     VoBtn: typeof import('./lib/components/app/VoBtn.vue')['default']
     VoDashboardListItem: typeof import('./lib/components/VoDashboardListItem.vue')['default']
+    VoDashboardNavItem: typeof import('./lib/components/VoDashboardNavItem.vue')['default']
     VoDialog: typeof import('./lib/components/app/VoDialog.vue')['default']
     VoDialogSubheader: typeof import('./lib/components/app/VoDialogSubheader.vue')['default']
     VoFooter: typeof import('./lib/components/app/VoFooter.vue')['default']

@@ -4,7 +4,7 @@
     nav
     slim
   >
-    <VoDashboardListItem />
+    <VoDashboardNavItem />
 
     <VoNotificationsNavItem />
 
