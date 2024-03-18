@@ -3,7 +3,7 @@ import VoAuthBtn from '@/components/auth/VoAuthBtn.vue'
 import VoAuthCard from '@/components/auth/VoAuthCard.vue'
 import VoAuthDialog from '@/components/auth/VoAuthDialog.vue'
 import VoAuthListItem from '@/components/auth/VoAuthListItem.vue'
-import VoFooter from '@/components/app/VoFooter.vue'
+import VoSocialFooter from '@/components/app/VoSocialFooter.vue'
 import VoNotificationsBanner from '@/components/notifications/VoNotificationsBanner.vue'
 import VoPromotionsCardHighlight from '@/components/promotions/VoPromotionsCardHighlight.vue'
 import VoPromotionsCardVuetify from '@/components/promotions/VoPromotionsCardVuetify.vue'
@@ -32,7 +32,7 @@ export function createOne () {
     app.component('VoAuthCard', VoAuthCard)
     app.component('VoAuthDialog', VoAuthDialog)
     app.component('VoAuthListItem', VoAuthListItem)
-    app.component('VoFooter', VoFooter)
+    app.component('VoSocialFooter', VoSocialFooter)
     app.component('VoNotificationsBanner', VoNotificationsBanner)
     app.component('VoPromotionsCardHighlight', VoPromotionsCardHighlight)
     app.component('VoPromotionsCardVuetify', VoPromotionsCardVuetify)
