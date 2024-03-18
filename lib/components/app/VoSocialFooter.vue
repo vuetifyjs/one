@@ -1,6 +1,6 @@
 <template>
   <VoFooter
-    :image="image"
+    :image="settings.suit['footer']"
     class="vo-footer"
     height="40"
   >
@@ -33,6 +33,9 @@
 </template>
 
 <script setup lang="ts">
+  // Stores
+  import { useSettingsStore } from '@/stores/settings'
+
   // Icons
   import {
     mdiDiscord,
@@ -41,11 +44,7 @@
     mdiShieldStarOutline,
   } from '@mdi/js'
 
-  interface Props {
-    image?: string
-  }
-
-  defineProps<Props>()
+  const settings = useSettingsStore()
 
   const items = [
     {
