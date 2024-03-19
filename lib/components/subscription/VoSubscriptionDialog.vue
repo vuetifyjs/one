@@ -37,34 +37,34 @@
       <div class="flex-grow-1 px-4 pb-3 overflow-hidden">
         <VoBtn
           v-if="isUpdatingSubscription !== false"
+          block
+          color="success"
           :loading="one.isLoading"
           :prepend-icon="`svg:${isUpdatingSubscription !== null ? mdiReload : mdiCheckCircleOutline}`"
           :readonly="isUpdatingSubscription === null"
-          :text="isUpdatingSubscription !== null ? 'Modify Subscription' : 'Success'"
-          color="success"
           size="default"
-          block
+          :text="isUpdatingSubscription !== null ? 'Modify Subscription' : 'Success'"
           @click="onClickModify"
         />
 
         <VoBtn
           v-else-if="!one.isSubscriber"
+          block
           :color="!subscription ? 'disabled' : 'primary'"
           :disabled="!subscription"
           :loading="one.isLoading"
           prepend-icon="$vuetify"
           size="default"
           text="Activate Subscription"
-          block
           @click="one.subscribe(subscription!)"
         />
 
         <VoBtn
           v-else
+          block
           :prepend-icon="`svg:${mdiPlaylistCheck}`"
           size="default"
           text="Manage Subscription"
-          block
           @click="window = 'status'"
         />
       </div>

@@ -1,8 +1,8 @@
 <template>
   <VoSponsorshipsTimelineItem
-    :sponsorship="one.github"
     href="https://github.com/sponsors/johnleider"
     logo="github"
+    :sponsorship="one.github"
     text="Support Vuetify through GitHub sponsors."
     title="GitHub Sponsor"
   />

@@ -1,12 +1,12 @@
 <template>
   <VoListItem
     :active="dialog"
+    link
     :prepend-icon="studio"
     title="Vuetify Studio"
-    link
   >
     <template #append>
-      <v-chip size="x-small" label>COMING SOON</v-chip>
+      <v-chip label size="x-small">COMING SOON</v-chip>
     </template>
 
     <VoStudioDialog v-model="dialog" :prepend-icon="studio" />

@@ -2,10 +2,10 @@
   <v-card
     class="d-inline-flex flex-child-1 position-relative"
     color="surface-light"
-    rel="noopener"
-    target="_blank"
     flat
+    rel="noopener"
     rounded
+    target="_blank"
   >
     <template v-if="$slots.prepend" #prepend>
       <slot name="prepend" />

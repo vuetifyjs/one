@@ -1,7 +1,7 @@
 <template>
   <VoSponsorshipsTimelineItem
-    :sponsorship="one.one"
     logo="one"
+    :sponsorship="one.one"
     text="Support Vuetify through Vuetify One."
     title="Vuetify One Subscriber"
     to="?one=subscribe"

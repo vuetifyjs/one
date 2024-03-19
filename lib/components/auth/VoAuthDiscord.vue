@@ -1,10 +1,10 @@
 <template>
   <v-list-item
-    :prepend-icon="`svg:${mdiDiscord}`"
     base-color="#5865F2"
+    :prepend-icon="`svg:${mdiDiscord}`"
     rounded="pill"
-    variant="flat"
     slim
+    variant="flat"
     @click="auth.login('discord')"
   >
     <template #title>

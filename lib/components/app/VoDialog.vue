@@ -1,18 +1,18 @@
 <template>
   <v-dialog
     v-model="model"
+    activator="parent"
     :fullscreen="isFullscreen || display.xs.value"
+    height="100%"
     :max-height="isFullscreen || display.xs.value ? '100%' : 800"
     :max-width="isFullscreen || display.xs.value ? '100%' : 800"
-    activator="parent"
-    height="100%"
   >
     <template #default="{ isActive }">
       <v-card
-        :prepend-icon="prependIcon"
-        :title="title"
         class="overflow-hidden"
         height="inherit"
+        :prepend-icon="prependIcon"
+        :title="title"
       >
         <template v-if="$slots.prepend" #prepend>
           <slot name="prepend" />
@@ -27,9 +27,9 @@
 
           <v-btn
             v-if="!display.xs.value"
-            :icon="`svg:${isFullscreen ? mdiFullscreenExit : mdiFullscreen}`"
             class="me-2"
             density="comfortable"
+            :icon="`svg:${isFullscreen ? mdiFullscreenExit : mdiFullscreen}`"
             size="small"
             variant="text"
             @click="isFullscreen = !isFullscreen"

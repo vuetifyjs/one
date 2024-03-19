@@ -7,9 +7,9 @@
       />
 
       <v-card
+        border
         height="450"
         rounded="lg"
-        border
       >
         <v-data-table-virtual
           :items="one.invoices"
@@ -28,13 +28,13 @@
 
           <template #item.status="{ item }">
             <v-chip
-              :text="item.status"
               border="success sm"
               class="text-capitalize"
               color="success"
-              size="small"
-              variant="tonal"
               label
+              size="small"
+              :text="item.status"
+              variant="tonal"
             />
           </template>
 

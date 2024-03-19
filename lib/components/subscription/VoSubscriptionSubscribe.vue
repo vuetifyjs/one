@@ -8,10 +8,10 @@
               :border="isSelected ? 'sm primary opacity-100' : 'sm'"
               :color="isSelected ? 'primary' : undefined"
               :prepend-icon="isSelected ? `svg:${mdiCheckCircleOutline}` : '$radioOff'"
-              :variant="isSelected ? 'tonal' : 'text'"
               rounded="lg"
               subtitle="$2.99/month"
               title="Monthly"
+              :variant="isSelected ? 'tonal' : 'text'"
               @click="toggle"
             >
               <template #prepend>
@@ -29,10 +29,10 @@
               :border="isSelected ? 'sm primary opacity-100' : 'sm'"
               :color="isSelected ? 'primary' : undefined"
               :prepend-icon="isSelected ? `svg:${mdiCheckCircleOutline}` : '$radioOff'"
-              :variant="isSelected ? 'tonal' : 'text'"
               rounded="lg"
               subtitle="$29.99/year"
               title="Yearly"
+              :variant="isSelected ? 'tonal' : 'text'"
               @click="toggle"
             >
               <template #prepend>

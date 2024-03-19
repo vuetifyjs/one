@@ -1,9 +1,9 @@
 <template>
   <VoListItem
     :active="dialog"
+    link
     :prepend-icon="`svg:${mdiHandHeartOutline}`"
     title="Sponsorships"
-    link
   >
     <VoSponsorshipsDialog v-model="dialog" />
   </VoListItem>

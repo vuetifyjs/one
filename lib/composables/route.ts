@@ -1,6 +1,5 @@
 // Utilities
-import { RouteParams } from 'vue-router'
-import { useRoute } from 'vue-router'
+import { RouteParams, useRoute } from 'vue-router'
 import { computed } from 'vue'
 
 // https://github.com/vuejs/router/issues/1160#issuecomment-1055276586

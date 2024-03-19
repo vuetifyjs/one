@@ -2,9 +2,9 @@
   <VoListItem
     v-if="user.notifications.show"
     :active="dialog"
+    link
     :prepend-icon="`svg:${mdiBellOutline}`"
     title="Notifications"
-    link
   >
     <template v-if="notifications.unread.length" #prepend>
       <VoNotificationsBadge>

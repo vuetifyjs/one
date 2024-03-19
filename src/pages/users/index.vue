@@ -5,8 +5,8 @@
         <template #append>
           <v-text-field
             v-model="search"
-            :prepend-inner-icon="`svg:${mdiMagnify}`"
             label="Search"
+            :prepend-inner-icon="`svg:${mdiMagnify}`"
             style="width: 300px"
           />
         </template>
@@ -14,10 +14,10 @@
 
       <v-data-table
         v-model:search="search"
+        fixed-footer
         :headers="headers"
         :items="users"
         :loading="isLoading"
-        fixed-footer
       >
         <template #item.id="{ item }">
           <div class="text-truncate">{{ item.id }}</div>
@@ -34,8 +34,8 @@
         <template #item.name="{ item }">
           <div class="d-flex align-center">
             <v-avatar
-              :image="item.picture"
               class="me-1"
+              :image="item.picture"
               size="16"
             />
 

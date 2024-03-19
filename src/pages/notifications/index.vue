@@ -16,8 +16,8 @@
 
       <template #item.title="{ item }">
         <v-avatar
-          :text="item.metadata.emoji"
           size="16"
+          :text="item.metadata.emoji"
         />
 
         {{ item.title }}
@@ -29,12 +29,12 @@
 
       <template #item.actions="{ item }">
         <VoBtn
+          prepend-icon="$edit"
+          text="Edit"
           :to="{
             name: '/notifications/[id]',
             params: { id: item.id },
           }"
-          prepend-icon="$edit"
-          text="Edit"
         />
       </template>
     </v-data-table>

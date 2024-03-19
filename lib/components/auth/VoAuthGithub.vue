@@ -1,10 +1,10 @@
 <template>
   <v-list-item
-    :prepend-icon="`svg:${mdiGithub}`"
     base-color="#2a2a2a"
+    :prepend-icon="`svg:${mdiGithub}`"
     rounded="pill"
-    variant="flat"
     slim
+    variant="flat"
     @click="auth.login('github')"
   >
     <template #title>

@@ -1,5 +1,5 @@
 <template>
-  <div ref="rootEl" :id="id" />
+  <div :id="id" ref="rootEl" />
 </template>
 
 <script setup lang="ts">

@@ -27,12 +27,12 @@
                         <v-card
                           :color="isSelected ? 'primary' : 'surface-variant'"
                           :disabled="item.disabled"
+                          height="76"
                           :image="item.image"
                           :prepend-icon="item.prependIcon"
                           :ripple="!item.disabled"
                           :subtitle="!item.disabled ? item.subtitle : 'In Development'"
                           :title="item.title"
-                          height="76"
                           variant="tonal"
                           v-bind="activatorProps"
                           @click="toggle"

@@ -1,9 +1,9 @@
 <template>
   <VoListItem
     :active="dialog"
+    link
     :prepend-icon="`svg:${mdiCreditCardOutline}`"
     title="Subscriptions"
-    link
   >
     <VoSubscriptionDialog v-model="dialog" />
   </VoListItem>

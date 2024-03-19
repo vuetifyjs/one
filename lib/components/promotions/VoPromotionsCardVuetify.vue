@@ -1,16 +1,16 @@
 <template>
   <VoPromotionsCard
-    :href="promotion?.metadata.url"
-    class="pa-3"
-    width="360"
     border
+    class="pa-3"
+    :href="promotion?.metadata.url"
+    width="360"
   >
     <div class="d-flex ga-4">
       <template v-if="promotion">
         <v-img
-          :src="promotion.metadata.images.default?.url"
           height="100"
           rounded="s"
+          :src="promotion.metadata.images.default?.url"
           width="130"
         />
 
@@ -26,18 +26,18 @@
         <v-skeleton-loader
           class="flex-1-0 overflow-hidden"
           color="transparent"
+          loading
           max-height="100"
           min-width="130"
           type="image"
-          loading
         />
 
         <v-skeleton-loader
           class="flex-1-0 ms-n3 mt-n3"
           color="transparent"
+          loading
           max-height="100"
           type="text@3"
-          loading
         />
       </template>
     </div>

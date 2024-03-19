@@ -2,16 +2,16 @@
   <v-menu
     ref="menu"
     v-model="one.isOpen"
+    activator="parent"
     :close-on-click="false"
     :close-on-content-click="false"
-    activator="parent"
-    location="bottom end"
     eager
+    location="bottom end"
   >
     <v-card
+      border
       rounded="lg"
       width="280"
-      border
     >
       <VoUserColors />
 

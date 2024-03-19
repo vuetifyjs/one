@@ -6,11 +6,11 @@
     width="100%"
   >
     <v-card
-      :prepend-avatar="`${settings.CDN_URL}logos/${logo}.png`"
-      :title="title"
-      rounded="lg"
-      variant="text"
       border
+      :prepend-avatar="`${settings.CDN_URL}logos/${logo}.png`"
+      rounded="lg"
+      :title="title"
+      variant="text"
     >
       <template #subtitle>
         <template v-if="sponsorship?.isActive">
@@ -43,8 +43,8 @@
         <VoBtn
           v-else
           color="surface-variant"
-          text="Coming Soon"
           readonly
+          text="Coming Soon"
         />
       </template>
     </v-card>

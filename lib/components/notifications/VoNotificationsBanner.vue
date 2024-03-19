@@ -2,11 +2,11 @@
   <v-app-bar
     v-if="banner"
     :color="banner.metadata.color"
+    flat
     :height="height"
     :image="banner.metadata.images.bg?.url"
     :model-value="hasPromotion"
     order="-1"
-    flat
   >
     <v-list-item
       v-bind="link"
@@ -18,8 +18,8 @@
       <template #prepend>
         <v-avatar
           v-if="banner.metadata.images.logo"
-          :image="banner.metadata.images.logo.url"
           icon="$vuetify"
+          :image="banner.metadata.images.logo.url"
           size="x-large"
           tile
         />
@@ -45,10 +45,10 @@
                 ...link
               }"
               :append-icon="`svg:${mdiOpenInNew}`"
+              class="text-none me-2"
               :color="banner.metadata.link_color"
               :elevation="isHovering ? 8 : 0"
               :title="banner.metadata.link_text"
-              class="text-none me-2"
               variant="elevated"
               @click="onClick"
             >
@@ -60,9 +60,9 @@
 
         <v-btn
           v-if="banner.metadata.closable"
-          :disabled="demo"
           class="ms-6 me-2"
           density="comfortable"
+          :disabled="demo"
           icon="$clear"
           size="small"
           variant="plain"

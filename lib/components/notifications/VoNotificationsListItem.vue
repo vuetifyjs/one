@@ -12,19 +12,19 @@
         <template #append>
           <v-responsive class="mt-n3" width="56">
             <v-tooltip
-              :text="isRead(notification.slug) ? 'Mark as unread' : 'Mark as read'"
               location="bottom"
+              :text="isRead(notification.slug) ? 'Mark as unread' : 'Mark as read'"
             >
               <template #activator="{ props: tooltipActivatorProps }">
                 <v-fade-transition hide-on-leave>
                   <v-btn
                     v-show="isHovering || display.mobile.value"
                     v-bind="tooltipActivatorProps"
-                    :icon="`svg:${!isRead(notification.slug) ? mdiEmailOpenOutline : mdiEmailVariant}`"
                     class="ms-auto"
+                    :icon="`svg:${!isRead(notification.slug) ? mdiEmailOpenOutline : mdiEmailVariant}`"
+                    mdi-email-variant
                     size="small"
                     variant="text"
-                    mdi-email-variant
                     @click="onClick(notification)"
                   />
                 </v-fade-transition>
@@ -47,12 +47,12 @@
 
         <v-chip
           :append-icon="`svg:${mdiOpenInNew}`"
-          :text="notification.metadata.action_text"
           v-bind="link"
-          size="small"
-          variant="text"
           border
           label
+          size="small"
+          :text="notification.metadata.action_text"
+          variant="text"
         >
           <template #append>
             <v-icon size="12" />

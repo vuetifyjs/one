@@ -6,15 +6,15 @@
   >
     <input
       v-if="spots.record.id"
-      :value="spots.record.id"
       name="id"
       type="hidden"
+      :value="spots.record.id"
     >
 
     <input
-      :value="spots.record.metadata.active"
       name="metadata[active]"
       type="hidden"
+      :value="spots.record.metadata.active"
     >
 
     <v-card
@@ -53,31 +53,31 @@
           <v-col cols="12" md="4">
             <v-autocomplete
               v-model="spots.record.metadata.site"
+              clearable
               :items="sites"
               label="Site(s)"
-              clearable
               multiple
             />
 
             <input
               v-for="site in spots.record.metadata.site"
               :key="site"
-              :value="site"
               name="metadata[site][]"
               type="hidden"
+              :value="site"
             >
           </v-col>
 
           <v-col cols="6" md="4">
             <v-text-field
-              :items="sites"
-              :model-value="spots.record.metadata.start_date"
               append-inner-icon="$calendar"
               autocomplete="off"
+              :items="sites"
               label="Start Date"
+              :model-value="spots.record.metadata.start_date"
               name="metadata[start_date]"
             >
-              <v-menu :close-on-content-click="false" activator="parent">
+              <v-menu activator="parent" :close-on-content-click="false">
                 <v-date-picker v-model="start" />
               </v-menu>
             </v-text-field>
@@ -85,14 +85,14 @@
 
           <v-col cols="6" md="4">
             <v-text-field
-              :items="sites"
-              :model-value="spots.record.metadata.end_date"
               append-inner-icon="$calendar"
               autocomplete="off"
+              :items="sites"
               label="End Date"
+              :model-value="spots.record.metadata.end_date"
               name="metadata[end_date]"
             >
-              <v-menu :close-on-content-click="false" activator="parent">
+              <v-menu activator="parent" :close-on-content-click="false">
                 <v-date-picker v-model="stop" />
               </v-menu>
             </v-text-field>

@@ -2,11 +2,11 @@
   <v-row>
     <v-col cols="12">
       <v-card
+        border
+        flat
         prepend-icon="$vuetify"
         rounded="lg"
         title="Subscription Status"
-        border
-        flat
       >
         <template v-if="one.info" #subtitle>
           <div class="d-flex align-center">
@@ -42,9 +42,9 @@
         <template #append>
           <VoBtn
             v-if="one.hasBilling && one.info?.status === 'canceled'"
-            :loading="one.isLoading"
             class="me-2"
             color="success"
+            :loading="one.isLoading"
             prepend-icon="$success"
             text="Activate"
             variant="outlined"

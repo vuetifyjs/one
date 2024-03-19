@@ -4,14 +4,14 @@
       v-bind="{
         [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
       }"
+      active
+      class="vo-auth-btn"
       :color="color"
       :icon="auth.user || auth.isLoading"
       :loading="auth.isLoading"
-      :variant="auth.user ? 'outlined' : 'flat'"
-      class="vo-auth-btn"
       size="default"
       style="transition: .2s ease;"
-      active
+      :variant="auth.user ? 'outlined' : 'flat'"
     >
       <span v-if="!auth.user">Login</span>
 

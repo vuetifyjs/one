@@ -1,18 +1,18 @@
 <template>
   <v-card
-    :variant="social ? 'tonal' : 'text'"
     class="ma-2"
     rounded="lg"
+    :variant="social ? 'tonal' : 'text'"
   >
     <v-list class="py-0">
       <v-list-item
-        :link="!!auth.user"
-        :prepend-icon="`svg:${auth.user && user.syncSettings ? mdiSync : mdiSyncOff}`"
-        :title="auth.user && user.syncSettings ? 'Sync is on' : 'Sync is paused'"
         class="mb-0"
-        rounded="b-0"
+        :link="!!auth.user"
         nav
+        :prepend-icon="`svg:${auth.user && user.syncSettings ? mdiSync : mdiSyncOff}`"
+        rounded="b-0"
         slim
+        :title="auth.user && user.syncSettings ? 'Sync is on' : 'Sync is paused'"
         @click="onClickSync"
       >
         <template #append>

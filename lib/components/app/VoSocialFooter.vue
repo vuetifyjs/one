@@ -1,8 +1,8 @@
 <template>
   <VoFooter
-    :image="settings.suit['footer']"
     class="vo-footer"
     height="40"
+    :image="settings.suit['footer']"
   >
     <template v-if="$slots.image" #image>
       <slot name="image" />
@@ -11,11 +11,11 @@
     <a
       v-for="item in items"
       :key="item.title"
-      :href="item.href"
-      :title="item.title"
       class="d-inline-block mx-2 social-link"
+      :href="item.href"
       rel="noopener noreferrer"
       target="_blank"
+      :title="item.title"
     >
       <v-icon
         :icon="item.icon"

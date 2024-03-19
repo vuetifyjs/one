@@ -7,8 +7,8 @@
     <v-layout>
       <v-navigation-drawer
         :location="display.mobile.value ? 'top' : 'start'"
-        :width="display.mobile.value ? 128 : 168"
         permanent
+        :width="display.mobile.value ? 128 : 168"
       >
         <v-list
           v-model:selected="list"
@@ -48,7 +48,7 @@
             value="banners"
           >
             <template #append>
-              <v-badge offset-y="-3" dot />
+              <v-badge dot offset-y="-3" />
             </template>
           </VoListItem>
         </v-list>

@@ -10,14 +10,14 @@
     <div v-if="user.suits.show">
       <v-select
         v-model="user.suits.suit"
-        :items="suits"
+        clearable
         density="compact"
+        item-props
+        :items="suits"
         placeholder="Choose a page suit"
+        single-line
         style="max-width: 300px;"
         variant="outlined"
-        clearable
-        item-props
-        single-line
       >
         <template #selection="{ item }">
           <v-icon :icon="item.props.prependIcon" size="x-small" start />

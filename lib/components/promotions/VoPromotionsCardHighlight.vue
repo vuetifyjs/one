@@ -1,11 +1,11 @@
 <template>
   <VoPromotionsCard
+    height="60"
     :href="promotion?.metadata.url"
     :image="image"
+    max-width="720"
     :prepend-avatar="logo"
     :title="promotion?.metadata.short_text"
-    height="60"
-    max-width="720"
     width="100%"
   >
     <template v-if="promotion" #prepend>
@@ -21,8 +21,8 @@
       class="flex-1-0 overflow-hidden"
       color="transparent"
       height="60"
-      type="image"
       loading
+      type="image"
     />
   </VoPromotionsCard>
 </template>

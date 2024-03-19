@@ -1,10 +1,10 @@
 <template>
   <v-badge
+    color="error"
     :content="items"
     :dot="!!auth.user"
-    :model-value="items > 0"
-    color="error"
     location="start top"
+    :model-value="items > 0"
   >
     <slot />
   </v-badge>

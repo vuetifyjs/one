@@ -3,8 +3,8 @@
     <div v-if="user.quickbar">
       <div class="d-flex align-center justify-center pa-1 ga-2">
         <v-btn
-          :color="user.colors.one"
           class="text-caption"
+          :color="user.colors.one"
           density="comfortable"
           href="https://play.vuetifyjs.com"
           icon="$vuetify-play"
@@ -20,11 +20,11 @@
         </v-btn>
 
         <v-btn
-          :color="user.colors.one"
-          :icon="vbin"
           class="text-caption"
+          :color="user.colors.one"
           density="comfortable"
           href="https://bin.vuetifyjs.com"
+          :icon="vbin"
           target="_blank"
         >
           <v-icon />
@@ -37,11 +37,11 @@
         </v-btn>
 
         <v-btn
-          :color="user.colors.one"
-          :icon="vissues"
           class="text-caption"
+          :color="user.colors.one"
           density="comfortable"
           href="https://issues.vuetifyjs.com"
+          :icon="vissues"
           target="_blank"
         >
           <v-icon />

@@ -30,10 +30,10 @@
         <div class="mb-4">
           <v-card
             :color="banner.metadata.color"
-            :image="banner.metadata.images.bg?.url"
-            :title="banner.title"
-            rounded="b-0"
             flat
+            :image="banner.metadata.images.bg?.url"
+            rounded="b-0"
+            :title="banner.title"
           >
             <template #prepend>
               <v-avatar :image="banner.metadata.images.logo?.url" />
@@ -48,24 +48,24 @@
             <template #default="{ props:activatorProps, isHovering }">
               <v-sheet
                 v-bind="activatorProps"
+                border
                 class="px-8 pt-2 pb-4 position-relative"
                 rounded="b"
-                border
               >
                 <v-tooltip
-                  :text="isRead(banner.slug) ? 'Mark as unread' : 'Mark as read'"
                   location="bottom"
+                  :text="isRead(banner.slug) ? 'Mark as unread' : 'Mark as read'"
                 >
                   <template #activator="{ props: tooltipActivatorProps }">
                     <v-fade-transition hide-on-leave>
                       <v-btn
                         v-show="isHovering || display.mobile.value"
                         v-bind="tooltipActivatorProps"
-                        :icon="`svg:${!isRead(banner.slug) ? mdiEmailOpenOutline : mdiEmailVariant}`"
                         class="ms-auto float-right"
+                        :icon="`svg:${!isRead(banner.slug) ? mdiEmailOpenOutline : mdiEmailVariant}`"
+                        mdi-email-variant
                         size="small"
                         variant="text"
-                        mdi-email-variant
                         @click="onClick(banner)"
                       />
                     </v-fade-transition>
@@ -93,11 +93,11 @@
                     }
                   }"
                   :append-icon="`svg:${mdiOpenInNew}`"
-                  :text="banner.metadata.link_text"
-                  size="small"
-                  variant="text"
                   border
                   label
+                  size="small"
+                  :text="banner.metadata.link_text"
+                  variant="text"
                 >
                   <template #append>
                     <v-icon size="12" />

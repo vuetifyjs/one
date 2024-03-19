@@ -5,12 +5,12 @@
     The Vuetify One subscription comes with the following perks:
   </div>
 
-  <v-list :lines="false" class="py-0" density="compact" nav>
+  <v-list class="py-0" density="compact" :lines="false" nav>
     <VoListItem
       v-for="(perk, i) in perks"
       :key="i"
-      :prepend-icon="`svg:${mdiCheck}`"
       class="mb-0"
+      :prepend-icon="`svg:${mdiCheck}`"
     >
       <template #prepend>
         <v-icon class="mx-n2" color="success" size="small" />
@@ -30,12 +30,12 @@
     The following features are in development and coming soon:
   </div>
 
-  <v-list :lines="false" class="py-0" density="compact" nav>
+  <v-list class="py-0" density="compact" :lines="false" nav>
     <VoListItem
       v-for="(perk, i) in upnext"
       :key="i"
-      :prepend-icon="`svg:${mdiRocketOutline}`"
       class="mb-0"
+      :prepend-icon="`svg:${mdiRocketOutline}`"
     >
       <template #prepend>
         <v-icon class="mx-n2" size="small" />

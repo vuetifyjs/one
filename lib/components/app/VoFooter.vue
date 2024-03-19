@@ -6,7 +6,7 @@
     <div v-if="image || $slots.image" class="v-footer__image">
       <slot v-if="$slots.image" name="image" />
 
-      <v-img v-else :src="image" position="left" cover />
+      <v-img v-else cover position="left" :src="image" />
     </div>
 
     <slot />

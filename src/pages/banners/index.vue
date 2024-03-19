@@ -41,12 +41,12 @@
 
       <template #item.actions="{ item }">
         <VoBtn
+          prepend-icon="$edit"
+          text="Edit"
           :to="{
             name: '/banners/[id]',
             params: { id: item.id },
           }"
-          prepend-icon="$edit"
-          text="Edit"
         />
       </template>
     </v-data-table>

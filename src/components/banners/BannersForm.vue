@@ -5,29 +5,29 @@
     @submit.prevent="onClickSave"
   >
     <input
-      :value="banners.record.id"
       name="id"
       type="hidden"
+      :value="banners.record.id"
     >
 
     <input
-      :value="banners.record.metadata.active"
       name="metadata[active]"
       type="hidden"
+      :value="banners.record.metadata.active"
     >
 
     <input
       v-if="!banners.record.metadata.images.logo"
-      :value="null"
       name="metadata[images][logo]"
       type="hidden"
+      :value="null"
     >
 
     <input
       v-if="!banners.record.metadata.images.bg"
-      :value="null"
       name="metadata[images][bg]"
       type="hidden"
+      :value="null"
     >
 
     <v-card
@@ -76,30 +76,30 @@
           <v-col cols="4">
             <v-autocomplete
               v-model="banners.record.metadata.site"
+              clearable
               :items="sites"
               label="Site(s)"
-              clearable
               multiple
             />
 
             <input
               v-for="site in banners.record.metadata.site"
               :key="site"
-              :value="site"
               name="metadata[site][]"
               type="hidden"
+              :value="site"
             >
           </v-col>
 
           <v-col cols="4">
             <v-text-field
-              :items="sites"
-              :model-value="banners.record.metadata.start_date"
               append-inner-icon="$calendar"
+              :items="sites"
               label="Start Date"
+              :model-value="banners.record.metadata.start_date"
               name="metadata[start_date]"
             >
-              <v-menu :close-on-content-click="false" activator="parent">
+              <v-menu activator="parent" :close-on-content-click="false">
                 <v-date-picker v-model="start" />
               </v-menu>
             </v-text-field>
@@ -107,13 +107,13 @@
 
           <v-col cols="4">
             <v-text-field
-              :items="sites"
-              :model-value="banners.record.metadata.end_date"
               append-inner-icon="$calendar"
+              :items="sites"
               label="End Date"
+              :model-value="banners.record.metadata.end_date"
               name="metadata[end_date]"
             >
-              <v-menu :close-on-content-click="false" activator="parent">
+              <v-menu activator="parent" :close-on-content-click="false">
                 <v-date-picker v-model="stop" />
               </v-menu>
             </v-text-field>
@@ -121,13 +121,13 @@
 
           <v-col cols="4">
             <v-text-field
-              :items="sites"
-              :model-value="banners.record.metadata.color"
               append-inner-icon="$eyeDropper"
+              :items="sites"
               label="Color"
+              :model-value="banners.record.metadata.color"
               name="metadata[color]"
             >
-              <v-menu :close-on-content-click="false" activator="parent">
+              <v-menu activator="parent" :close-on-content-click="false">
                 <v-color-picker v-model="banners.record.metadata.color" />
               </v-menu>
             </v-text-field>
@@ -135,13 +135,13 @@
 
           <v-col cols="4">
             <v-text-field
-              :items="sites"
-              :model-value="banners.record.metadata.link_color"
               append-inner-icon="$eyeDropper"
+              :items="sites"
               label="Link color"
+              :model-value="banners.record.metadata.link_color"
               name="metadata[link_color]"
             >
-              <v-menu :close-on-content-click="false" activator="parent">
+              <v-menu activator="parent" :close-on-content-click="false">
                 <v-color-picker v-model="banners.record.metadata.link_color" />
               </v-menu>
             </v-text-field>
@@ -150,10 +150,10 @@
           <v-col cols="4">
             <v-text-field
               v-model.number="banners.record.metadata.height"
+              clearable
               label="Height"
               name="metadata[height]"
               type="number"
-              clearable
             />
           </v-col>
 

@@ -1,7 +1,7 @@
 <template>
   <VoSocialFooter
-    :image="settings.suit['footer']"
     app
+    :image="settings.suit['footer']"
   />
 </template>
 

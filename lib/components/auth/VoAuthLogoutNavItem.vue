@@ -1,11 +1,11 @@
 <template>
   <VoListItem
+    class="mb-0"
     :disabled="isLoggingout"
+    link
     :loading="isLoggingout"
     :prepend-icon="`svg:${mdiLogoutVariant}`"
-    class="mb-0"
     title="Logout"
-    link
     @click="onClick"
   />
 </template>

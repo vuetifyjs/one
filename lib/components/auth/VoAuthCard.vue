@@ -5,8 +5,8 @@
   >
     <div class="text-center">
       <v-avatar
-        :image="'https://vuetifyjs.b-cdn.net/docs/images/avatars/one.png'"
         class="mx-auto"
+        :image="'https://vuetifyjs.b-cdn.net/docs/images/avatars/one.png'"
         size="64"
       />
     </div>

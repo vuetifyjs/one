@@ -4,14 +4,14 @@
     style="transform: translateY(0); /* no idea why this is needed */"
   >
     <a
-      :href="promotion?.metadata.url"
       class="d-flex text-decoration-none py-2 px-4 ms-n4 flex-1-0 me-n4 text-high-emphasis position-relative"
+      :href="promotion?.metadata.url"
       rel="noopener noreferrer"
       target="_blank"
     >
       <v-avatar
-        :image="logo"
         class="me-4"
+        :image="logo"
         size="24"
       />
 

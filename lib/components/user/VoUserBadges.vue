@@ -28,8 +28,8 @@
     >
       <template #activator="{ props: activatorProps }">
         <v-icon
-          :icon="`svg:${mdiCrown}`"
           color="amber-darken-2"
+          :icon="`svg:${mdiCrown}`"
           v-bind="activatorProps"
           size="16"
         />
@@ -43,8 +43,8 @@
     >
       <template #activator="{ props: activatorProps }">
         <v-icon
-          :icon="`svg:${mdiGithub}`"
           color="white"
+          :icon="`svg:${mdiGithub}`"
           v-bind="activatorProps"
           size="16"
         />
@@ -58,8 +58,8 @@
     >
       <template #activator="{ props: activatorProps }">
         <v-icon
-          :icon="`svg:${mdiDiscord}`"
           color="white"
+          :icon="`svg:${mdiDiscord}`"
           v-bind="activatorProps"
           size="16"
         />

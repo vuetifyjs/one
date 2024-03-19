@@ -6,15 +6,15 @@
   >
     <input
       v-if="notifications.record.id"
-      :value="notifications.record.id"
       name="id"
       type="hidden"
+      :value="notifications.record.id"
     >
 
     <input
-      :value="notifications.record.metadata.active"
       name="metadata[active]"
       type="hidden"
+      :value="notifications.record.metadata.active"
     >
 
     <v-card
@@ -79,9 +79,9 @@
 
               <v-col v-if="notifications.record.created_at" cols="7">
                 <v-text-field
-                  :model-value="adapter.format(notifications.record.created_at, 'fullDateWithWeekday')"
-                  label="Created at"
                   disabled
+                  label="Created at"
+                  :model-value="adapter.format(notifications.record.created_at, 'fullDateWithWeekday')"
                 />
               </v-col>
             </v-row>
@@ -98,8 +98,8 @@
               <v-divider class="mt-1" />
 
               <VoNotificationsListItem
-                :notification="notifications.record"
                 demo
+                :notification="notifications.record"
               />
             </v-list>
           </v-col>

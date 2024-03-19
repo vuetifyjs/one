@@ -6,11 +6,11 @@
     target="_blank"
   >
     <v-img
-      :color="spots.spot.metadata.image ? undefined : 'surface'"
-      :src="spots.spot.metadata.image?.url"
       class="mx-auto"
-      width="225"
+      :color="spots.spot.metadata.image ? undefined : 'surface'"
       rounded
+      :src="spots.spot.metadata.image?.url"
+      width="225"
     />
   </a>
 </template>

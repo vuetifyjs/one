@@ -4,9 +4,9 @@
     :image="settings.suit['drawer']"
   >
     <v-list
-      :items="items"
       density="compact"
       item-props
+      :items="items"
       nav
       slim
     />

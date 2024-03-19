@@ -1,10 +1,10 @@
 <template>
   <v-switch
-    :disabled="disabled"
-    :true-icon="`svg:${mdiCheck}`"
     color="primary"
     density="compact"
+    :disabled="disabled"
     inset
+    :true-icon="`svg:${mdiCheck}`"
   >
     <template v-if="$slots.label" #label>
       <slot name="label" />

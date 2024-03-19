@@ -8,21 +8,21 @@
       <v-main scrollable>
         <v-img
           content-class="d-flex align-center justify-center flex-column"
+          cover
           gradient="to top right, rgba(var(--v-theme-primary),.8), rgba(0,0,0,.9)"
           height="350"
           max-height="350"
           position="top"
           src="https://cdn.vuetifyjs.com/docs/images/one/studio/hero.png"
-          cover
         >
           <v-card
             class="text-center pa-3"
             color="surface"
-            rounded="xl"
             flat
+            rounded="xl"
           >
             <template #text>
-              <v-icon :icon="prependIcon" color="accent" size="80" />
+              <v-icon color="accent" :icon="prependIcon" size="80" />
 
               <h2 class="text-h4">
                 Configuration Tooling
@@ -37,16 +37,16 @@
 
         <template v-for="(item, i) in items" :key="i">
           <v-sheet
-            :color="i % 2 === 0 ? 'surface-light' : 'surface-variant'"
             class="py-8"
+            :color="i % 2 === 0 ? 'surface-light' : 'surface-variant'"
           >
             <v-container>
               <v-row align="center">
                 <v-col
-                  :order="i % 2"
                   cols="12"
                   offset="0"
                   offset-sm="1"
+                  :order="i % 2"
                   sm="6"
                 >
                   <strong class="text-uppercase text-info">
@@ -63,16 +63,16 @@
                 </v-col>
 
                 <v-col
-                  :offset-sm="i % 2"
                   cols="12"
                   offset="0"
+                  :offset-sm="i % 2"
                   sm="4"
                 >
                   <v-img
-                    :height="smAndUp ? 180 : undefined"
-                    :src="item.image"
-                    rounded="lg"
                     cover
+                    :height="smAndUp ? 180 : undefined"
+                    rounded="lg"
+                    :src="item.image"
                   />
                 </v-col>
               </v-row>

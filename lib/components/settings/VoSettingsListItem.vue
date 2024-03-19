@@ -1,9 +1,9 @@
 <template>
   <VoListItem
     :active="dialog"
+    link
     :prepend-icon="`svg:${mdiCogOutline}`"
     title="Settings"
-    link
   >
     <VoSettingsDialog v-model="dialog" />
   </VoListItem>

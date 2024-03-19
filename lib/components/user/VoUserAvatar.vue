@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-avatar
+      v-ripple="auth.isSubscriber"
       :class="[
         'border-md border-opacity-100 border-surface-variant',
         {
@@ -10,13 +11,12 @@
       color="surface"
       size="72"
       text="Foobar"
-      v-ripple="auth.isSubscriber"
       @click.prevent.stop="onClickAvatar"
     >
       <v-img
         v-if="auth.user && user.avatar"
-        :src="user.avatar"
         alt="User avatar"
+        :src="user.avatar"
       />
 
       <v-icon
@@ -32,8 +32,8 @@
         <div v-if="expanded">
           <v-card
             class="pt-6 pb-1"
-            rounded="0"
             flat
+            rounded="0"
           >
             <div class="d-flex ga-4 flex-wrap justify-center mb-4">
               <template
@@ -42,13 +42,13 @@
               >
                 <v-btn
                   :active="user.avatar === avatar"
-                  variant="flat"
                   icon
+                  variant="flat"
                   @click="onClickSelectAvatar(avatar)"
                 >
                   <v-avatar
-                    :image="avatar"
                     eager
+                    :image="avatar"
                   />
                 </v-btn>
               </template>

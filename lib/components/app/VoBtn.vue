@@ -1,12 +1,12 @@
 <template>
   <v-btn
+    class="text-none font-weight-regular"
+    color="primary"
+    size="small"
     :style="{
       pointerEvents: props.readonly ? 'none' : undefined,
     }"
     :tabindex="props.readonly ? -1 : undefined"
-    class="text-none font-weight-regular"
-    color="primary"
-    size="small"
     variant="flat"
   >
     <template v-if="$slots.prepend" #prepend>
