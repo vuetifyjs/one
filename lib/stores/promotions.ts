@@ -64,6 +64,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
   const aall = ref<Promotion[]>([])
   const record = ref<Promotion | null>()
   const isLoading = shallowRef(false)
+  const hasLoaded = shallowRef(false)
 
   const discoverable = computed(() => {
     return all.value.filter(promotion => promotion.metadata.discoverable)
@@ -86,6 +87,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
       //
     } finally {
       isLoading.value = false
+      hasLoaded.value = true
     }
 
     return all.value
@@ -167,6 +169,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
     all,
     aall,
     isLoading,
+    hasLoaded,
     discoverable,
     record,
 

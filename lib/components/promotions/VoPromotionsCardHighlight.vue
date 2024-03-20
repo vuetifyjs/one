@@ -1,5 +1,7 @@
 <template>
   <VoPromotionsCard
+    v-if="promotion || !promotions.hasLoaded"
+    class="mb-4"
     height="60"
     :href="promotion?.metadata.url"
     :image="image"
@@ -8,6 +10,15 @@
     :title="promotion?.metadata.short_text"
     width="100%"
   >
+    <v-skeleton-loader
+      v-if="!promotions.hasLoaded"
+      class="flex-1-0 overflow-hidden"
+      color="transparent"
+      height="60"
+      loading
+      type="image"
+    />
+
     <template v-if="promotion" #prepend>
       <v-avatar class="my-n4 me-4" size="36" />
     </template>
@@ -15,15 +26,6 @@
     <template v-if="promotion" #image>
       <v-img position="right" />
     </template>
-
-    <v-skeleton-loader
-      v-if="!promotion"
-      class="flex-1-0 overflow-hidden"
-      color="transparent"
-      height="60"
-      loading
-      type="image"
-    />
   </VoPromotionsCard>
 </template>
 
@@ -37,9 +39,14 @@
 
   const promotions = usePromotionsStore()
   const theme = useTheme()
+  const user = useUserStore()
 
   const promotion = computed(() => {
+    if (user.disableAds) return undefined
+
     if (promotions.record) return promotions.record
+
+    if (props.slug) return promotions.all.find(p => p.slug === props.slug)
 
     return promotions.random(promotions.all)
   })
@@ -54,11 +61,5 @@
     const target = theme.current.value.dark ? 'bgdark' : 'bglight'
 
     return promotion.value?.metadata.images[target]?.url
-  })
-
-  onBeforeMount(async () => {
-    if (!props.slug) return
-
-    await promotions.show(props.slug)
   })
 </script>

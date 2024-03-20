@@ -1,29 +1,13 @@
 <template>
   <VoPromotionsCard
+    v-if="promotion || !promotions.hasLoaded"
     border
-    class="pa-2"
+    class="pa-2 mb-4"
     :href="promotion?.metadata?.url"
     width="360"
   >
     <div class="d-flex ga-4">
-      <template v-if="promotion">
-        <v-img
-          height="100"
-          max-width="130"
-          rounded="s"
-          :src="promotion.metadata?.images.default?.url"
-          width="100%"
-        />
-
-        <div class="d-flex align-start ga-4">
-          <div class="text-caption on-surface-light">
-            {{ promotion.metadata?.text }}
-          </div>
-        </div>
-
-      </template>
-
-      <template v-else>
+      <template v-if="!promotions.hasLoaded">
         <v-skeleton-loader
           class="flex-1-0 overflow-hidden"
           color="transparent"
@@ -41,6 +25,22 @@
           type="text@3"
         />
       </template>
+
+      <template v-else-if="promotion">
+        <v-img
+          height="100"
+          max-width="130"
+          rounded="s"
+          :src="promotion.metadata?.images.default?.url"
+          width="100%"
+        />
+
+        <div class="d-flex align-start ga-4">
+          <div class="text-caption on-surface-light">
+            {{ promotion.metadata?.text }}
+          </div>
+        </div>
+      </template>
     </div>
   </VoPromotionsCard>
 </template>
@@ -54,16 +54,15 @@
   const props = defineProps<Props>()
 
   const promotions = usePromotionsStore()
+  const user = useUserStore()
 
   const promotion = computed(() => {
+    if (user.disableAds) return undefined
+
     if (promotions.record) return promotions.record
 
+    if (props.slug) return promotions.all.find(p => p.slug === props.slug)
+
     return promotions.random(promotions.all)
-  })
-
-  onBeforeMount(async () => {
-    if (!props.slug) return
-
-    await promotions.show(props.slug)
   })
 </script>
