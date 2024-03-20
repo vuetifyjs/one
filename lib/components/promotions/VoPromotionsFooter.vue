@@ -33,15 +33,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useTheme } from 'vuetify'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-
-  // Stores
-  import { usePromotionsStore } from '@/stores/promotions'
-
   // Types
   interface Props {
     slug?: string

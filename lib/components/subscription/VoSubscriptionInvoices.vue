@@ -54,12 +54,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useDate } from 'vuetify'
-
-  // Stores
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import { mdiFileDocument } from '@mdi/js'
 

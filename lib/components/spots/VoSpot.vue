@@ -16,7 +16,5 @@
 </template>
 
 <script lang="ts" setup>
-  import { useSpotsStore } from '@/stores/spots'
-
   const spots = useSpotsStore()
 </script>

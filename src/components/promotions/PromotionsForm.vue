@@ -357,6 +357,9 @@
 </template>
 
 <script lang="ts" setup>
+  // Types
+  import type { Promotion } from '@/stores/promotions'
+
   interface Props {
     isPristine?: boolean
     title: string

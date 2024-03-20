@@ -40,6 +40,8 @@
 
     const res = await promotions.store(data)
 
+    if (!res) return
+
     router.push({
       name: '/promotions/[id]',
       params: { id: res.id },

@@ -14,9 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { shallowRef } from 'vue'
-
   const dialog = shallowRef(false)
 
   const studio = [

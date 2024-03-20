@@ -55,10 +55,6 @@
 <script lang="ts" setup>
   // Composables
   import { mdiFullscreen, mdiFullscreenExit } from '@mdi/js'
-  import { useDisplay } from 'vuetify'
-
-  // Utilities
-  import { shallowRef } from 'vue'
 
   interface Props {
     prependIcon?: any

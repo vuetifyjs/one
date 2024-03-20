@@ -74,19 +74,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useDisplay } from 'vuetify'
-
-  // Utilities
-  import { nextTick, shallowRef, watch } from 'vue'
-  import { useQuery } from '@/composables/route'
-
-  // Stores
-  import { useBannersStore } from '@/stores/banners'
-  import { useOneStore } from '@/stores/one'
-  import { useNotificationsStore } from '@/stores/notifications'
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import { mdiBell, mdiBillboard, mdiInboxFullOutline, mdiInboxOutline } from '@mdi/js'
 

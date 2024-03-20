@@ -64,15 +64,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useDate, useDisplay } from 'vuetify'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 

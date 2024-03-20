@@ -10,9 +10,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { shallowRef } from 'vue'
-
   // Icons
   import { mdiCreditCardOutline } from '@mdi/js'
 

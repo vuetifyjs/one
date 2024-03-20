@@ -45,14 +45,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { useQuery } from '@/composables/route'
-  import { nextTick, watch } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import { mdiHandHeart } from '@mdi/js'
 

@@ -262,6 +262,9 @@
 </template>
 
 <script lang="ts" setup>
+  // Types
+  import type { Banner } from '@/stores/banners'
+
   interface Props {
     isPristine?: boolean
     title: string

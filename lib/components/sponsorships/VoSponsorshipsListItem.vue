@@ -10,9 +10,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { shallowRef } from 'vue'
-
   // Icons
   import { mdiHandHeartOutline } from '@mdi/js'
 

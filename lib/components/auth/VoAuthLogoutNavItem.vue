@@ -11,12 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { shallowRef } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-
   // Icons
   import { mdiLogoutVariant } from '@mdi/js'
 

@@ -57,12 +57,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { PropType, shallowRef, watch } from 'vue'
-
-  // Stores
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import { mdiCheckCircleOutline } from '@mdi/js'
 

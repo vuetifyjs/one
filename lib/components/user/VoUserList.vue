@@ -21,8 +21,5 @@
 </template>
 
 <script lang="ts" setup>
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-
   const auth = useAuthStore()
 </script>

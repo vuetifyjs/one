@@ -79,15 +79,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useDate } from 'vuetify'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import {
     mdiCreditCardSettingsOutline,

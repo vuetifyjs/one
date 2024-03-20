@@ -108,18 +108,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { useQuery } from '@/composables/route'
-  import { nextTick, watch } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useOneStore } from '@/stores/one'
-
   // Types
   interface Props {
     prependIcon?: any

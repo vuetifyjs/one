@@ -3,6 +3,7 @@ import Components from 'unplugin-vue-components/vite'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { resolve } from 'path'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -19,6 +20,32 @@ export default defineConfig({
       dts: false,
     }),
     Vuetify(),
+    AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+        'pinia',
+        {
+          'vue-router/auto': [
+            'definePage',
+          ],
+          vuetify: [
+            'useDisplay',
+            'useDate',
+            'useTheme',
+          ],
+        },
+      ],
+      dirs: [
+        './lib/stores',
+        './lib/composables',
+      ],
+      dts: true,
+      eslintrc: {
+        enabled: true,
+      },
+      vueTemplate: true,
+    }),
   ],
   resolve: {
     alias: {

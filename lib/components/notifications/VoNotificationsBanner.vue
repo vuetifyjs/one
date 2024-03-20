@@ -74,17 +74,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useDisplay } from 'vuetify'
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed, nextTick } from 'vue'
-
-  // Stores
-  import { useBannersStore } from '@/stores/banners'
-  import { useUserStore } from '@/stores/user'
-
   // Icons
   import { mdiOpenInNew } from '@mdi/js'
 

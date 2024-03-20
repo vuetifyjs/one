@@ -11,14 +11,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useNotificationsStore } from '@/stores/notifications'
-  import { useUserStore } from '@/stores/user'
-
   const auth = useAuthStore()
   const notifications = useNotificationsStore()
   const user = useUserStore()

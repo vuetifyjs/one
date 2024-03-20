@@ -52,12 +52,8 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useSettingsStore } from '@/stores/settings'
-  import { Sponsorship } from '@/stores/auth'
+  // Types
+  import type { Sponsorship } from '@/stores/auth'
 
   // Icons
   import { mdiCheck, mdiCheckCircleOutline, mdiMedal, mdiOpenInNew } from '@mdi/js'

@@ -21,12 +21,8 @@
 </template>
 
 <script setup lang="ts">
-    // Stores
-  import { useAuthStore } from '@/stores/auth'
-
   // Icons
   import { mdiDiscord } from '@mdi/js'
-  import { computed } from 'vue'
 
   const auth = useAuthStore()
 

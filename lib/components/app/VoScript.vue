@@ -3,8 +3,6 @@
 </template>
 
 <script setup lang="ts">
-  import { onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
-
   const props = defineProps({
     id: {
       type: String,

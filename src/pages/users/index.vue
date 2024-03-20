@@ -52,6 +52,9 @@
 </template>
 
 <script lang="ts" setup>
+  // Types
+  import type { User } from '@/stores/auth'
+
   definePage({
     meta: {
       requiresAdmin: true,

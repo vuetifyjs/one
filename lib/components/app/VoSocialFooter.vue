@@ -33,9 +33,6 @@
 </template>
 
 <script setup lang="ts">
-  // Stores
-  import { useSettingsStore } from '@/stores/settings'
-
   // Icons
   import {
     mdiDiscord,

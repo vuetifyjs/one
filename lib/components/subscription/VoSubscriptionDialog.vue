@@ -73,13 +73,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { nextTick, shallowRef, watch } from 'vue'
-  import { useQuery } from '@/composables/route'
-
-  // Stores
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import { mdiCheckCircleOutline, mdiCreditCard, mdiPlaylistCheck, mdiReload } from '@mdi/js'
 

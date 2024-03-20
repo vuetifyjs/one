@@ -8,9 +8,6 @@
 </template>
 
 <script setup lang="ts">
-  // Stores
-  import { useOneStore } from '@/stores/one'
-
   // Icons
   import { mdiViewDashboardOutline } from '@mdi/js'
 
