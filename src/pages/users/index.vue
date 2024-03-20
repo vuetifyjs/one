@@ -6,7 +6,7 @@
           <v-text-field
             v-model="search"
             label="Search"
-            :prepend-inner-icon="`svg:${mdiMagnify}`"
+            prepend-inner-icon="mdi-magnify"
             style="width: 300px"
           />
         </template>
@@ -52,20 +52,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Components
-  import { useDate } from 'vuetify'
-
-  // Utilities
-  import { definePage } from 'vue-router/auto'
-  import { onBeforeMount, ref, shallowRef } from 'vue'
-
-  // Stores
-  import { useHttpStore } from '@/stores/http'
-  import { User } from '@/stores/auth'
-
-  // Icons
-  import { mdiMagnify } from '@mdi/js'
-
   definePage({
     meta: {
       requiresAdmin: true,

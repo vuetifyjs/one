@@ -11,12 +11,8 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { computed, onMounted, ref, toRaw } from 'vue'
-  import { definePage, onBeforeRouteLeave } from 'vue-router/auto'
-  import { useParams } from '@/composables/route'
-
-  import { Notification, useNotificationsStore } from '@/stores/notifications'
+  // Stores
+  import { Notification } from '@/stores/notifications'
 
   definePage({
     meta: {

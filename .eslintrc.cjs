@@ -1,3 +1,6 @@
 module.exports = {
-  extends: ['vuetify'],
+  extends: [
+    'vuetify',
+    './.eslintrc-auto-import.json',
+  ],
 }

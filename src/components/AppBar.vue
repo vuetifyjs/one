@@ -13,15 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-// Components
-  import { useTheme } from 'vuetify'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useSettingsStore } from '@/stores/settings'
-
   const theme = useTheme()
 
   const settings = useSettingsStore()

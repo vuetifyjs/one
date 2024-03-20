@@ -26,9 +26,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { definePage, useRouter } from 'vue-router/auto'
-
   definePage({
     meta: {
       guest: true,

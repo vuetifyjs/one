@@ -13,12 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { computed, onMounted, ref, toRaw } from 'vue'
-  import { definePage, onBeforeRouteLeave } from 'vue-router/auto'
-  import { useParams } from '@/composables/route'
-
-  import { Spot, useSpotsStore } from '@/stores/spots'
+  // Stores
+  import { Spot } from '@/stores/spots'
 
   definePage({
     meta: {

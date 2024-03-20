@@ -16,10 +16,10 @@
 
       <template #item.title="{ item }">
         <v-avatar
+          class="me-2"
           :image="item.metadata.images?.default?.url"
           size="24"
           tile
-          class="me-2"
         />
 
         {{ item.title }}
@@ -48,14 +48,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { usePromotionsStore } from '@/stores/promotions'
-  import { useDate } from 'vuetify'
-
-  // Utilities
-  import { definePage } from 'vue-router/auto'
-  import { onMounted } from 'vue'
-
   definePage({
     meta: {
       requiresAdmin: true,

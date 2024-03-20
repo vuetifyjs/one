@@ -3,7 +3,7 @@
     <v-main class="mt-4">
       <PromotionsForm
         :is-pristine="isPristine"
-        :prepend-icon="`svg:${mdiPencilOutline}`"
+        prepend-icon="mdi-pencil-outline"
         title="Create Promotions"
         @click:cancel="onClickCancel"
         @click:save="onClickSave"
@@ -13,19 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-  import { definePage } from 'vue-router/auto'
-
-  // Stores
-  import { DEFAULT_PROMOTION, usePromotionsStore } from '@/stores/promotions'
-
-  // Icons
-  import { mdiPencilOutline } from '@mdi/js'
-
   definePage({
     meta: {
       requiresAdmin: true,

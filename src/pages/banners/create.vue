@@ -9,7 +9,7 @@
     <v-main class="mt-4">
       <BannersForm
         :is-pristine="isPristine"
-        :prepend-icon="`svg:${mdiPencilOutline}`"
+        prepend-icon="mdi-pencil-outline"
         title="Create Banner"
         @click:cancel="onClickCancel"
         @click:save="onClickSave"
@@ -19,19 +19,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed, onBeforeMount } from 'vue'
-  import { definePage } from 'vue-router/auto'
-
-  // Stores
-  import { DEFAULT_BANNER, useBannersStore } from '@/stores/banners'
-
-  // Icons
-  import { mdiPencilOutline } from '@mdi/js'
-
   definePage({
     meta: {
       requiresAdmin: true,

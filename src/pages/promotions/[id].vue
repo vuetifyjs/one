@@ -13,12 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { computed, onMounted, ref, toRaw } from 'vue'
-  import { definePage, onBeforeRouteLeave } from 'vue-router/auto'
-  import { useParams } from '@/composables/route'
-
-  import { Promotion, usePromotionsStore } from '@/stores/promotions'
+  // Stores
+  import { Promotion } from '@/stores/promotions'
 
   definePage({
     meta: {

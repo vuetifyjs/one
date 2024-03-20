@@ -55,16 +55,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useDate } from 'vuetify'
-
-  // Utilities
-  import { definePage } from 'vue-router/auto'
-  import { onMounted } from 'vue'
-
-  // Stores
-  import { useSpotsStore } from '@/stores/spots'
-
   definePage({
     meta: {
       requiresAdmin: true,

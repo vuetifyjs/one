@@ -23,7 +23,7 @@
     >
       <template #append>
         <VoBtn
-          :prepend-icon="`svg:${mdiArrowLeft}`"
+          prepend-icon="mdi-arrow-left"
           text="Go Back"
           @click="router.go(-1)"
         />
@@ -135,19 +135,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useDate } from 'vuetify'
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { definePage } from 'vue-router/auto'
-
-  // Stores
-  import { useNotificationsStore } from '@/stores/notifications'
-
-  // Icons
-  import { mdiArrowLeft } from '@mdi/js'
-
   interface Props {
     isPristine?: boolean
     title: string

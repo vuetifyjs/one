@@ -54,14 +54,6 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useBannersStore } from '@/stores/banners'
-  import { useDate } from 'vuetify'
-
-  // Utilities
-  import { definePage } from 'vue-router/auto'
-  import { onMounted } from 'vue'
-
   definePage({
     meta: {
       requiresAdmin: true,

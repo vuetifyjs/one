@@ -5,8 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { definePage } from 'vue-router/auto'
-
   definePage({
     meta: {
       layout: 'guest',

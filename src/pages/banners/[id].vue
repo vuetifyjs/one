@@ -19,12 +19,8 @@
 </template>
 
 <script lang="ts" setup>
-  // Utilities
-  import { computed, onMounted, ref, toRaw } from 'vue'
-  import { definePage, onBeforeRouteLeave } from 'vue-router/auto'
-  import { useParams } from '@/composables/route'
-
-  import { Banner, useBannersStore } from '@/stores/banners'
+  // Stores
+  import { Banner } from '@/stores/banners'
 
   definePage({
     meta: {

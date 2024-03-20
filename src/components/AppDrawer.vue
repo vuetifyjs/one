@@ -14,25 +14,16 @@
 </template>
 
 <script lang="ts" setup>
-  // Composables
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-
-  // Stores
-  import { useAuthStore } from '@/stores/auth'
-  import { useSettingsStore } from '@/stores/settings'
-
-  // Icons
-  import { mdiAccountGroup, mdiBank, mdiBell, mdiBillboard, mdiBullhorn, mdiStorefront, mdiTagMultiple, mdiViewDashboardOutline } from '@mdi/js'
-
   const auth = useAuthStore()
   const route = useRoute()
   const settings = useSettingsStore()
 
   const links = [
-    { title: 'Dashboard', to: '/user/dashboard/', prependIcon: `svg:${mdiViewDashboardOutline}` },
+    {
+      title: 'Dashboard',
+      to: '/user/dashboard/',
+      prependIcon: 'mdi-view-dashboard-outline',
+    },
   ]
 
   const admin = computed(() => [
@@ -40,7 +31,7 @@
     { type: 'divider', class: 'mb-2' },
     {
       title: 'Banners',
-      prependIcon: `svg:${mdiBillboard}`,
+      prependIcon: 'mdi-billboard',
       children: [
         { title: 'List', to: '/banners/', exact: route.name === '/banners/create' },
         { title: 'Create', to: '/banners/create' },
@@ -48,7 +39,7 @@
     },
     {
       title: 'Notifications',
-      prependIcon: `svg:${mdiBell}`,
+      prependIcon: 'mdi-bell',
       children: [
         { title: 'List', to: '/notifications/', exact: route.name === '/notifications/create' },
         { title: 'Create', to: '/notifications/create' },
@@ -56,7 +47,7 @@
     },
     {
       title: 'Promotions',
-      prependIcon: `svg:${mdiTagMultiple}`,
+      prependIcon: 'mdi-tag-multiple',
       children: [
         { title: 'List', to: '/promotions/', exact: route.name === '/promotions/create' },
         { title: 'Create', to: '/promotions/create' },
@@ -64,7 +55,7 @@
     },
     {
       title: 'Sponsors',
-      prependIcon: `svg:${mdiBank}`,
+      prependIcon: 'mdi-bank',
       disabled: true,
       children: [
         { title: 'List', to: '/sponsors/', exact: route.name === '/sponsors/create' },
@@ -73,7 +64,7 @@
     },
     {
       title: 'Spots',
-      prependIcon: `svg:${mdiBullhorn}`,
+      prependIcon: 'mdi-bullhorn',
       children: [
         { title: 'List', to: '/spots/', exact: route.name === '/spots/create' },
         { title: 'Create', to: '/spots/create' },
@@ -81,12 +72,12 @@
     },
     {
       title: 'Users',
-      prependIcon: `svg:${mdiAccountGroup}`,
+      prependIcon: 'mdi-account-group',
       to: '/users/',
     },
     {
       title: 'Vendors',
-      prependIcon: `svg:${mdiStorefront}`,
+      prependIcon: 'mdi-storefront',
       disabled: true,
       children: [
         { title: 'List', to: '/vendors/', exact: route.name === '/vendors/create' },

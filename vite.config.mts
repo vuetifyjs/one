@@ -5,6 +5,7 @@ import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
 import VueRouter from 'unplugin-vue-router/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -13,11 +14,11 @@ import { fileURLToPath, URL } from 'node:url'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    Vue({
-      template: { transformAssetUrls },
-    }),
     VueRouter({
       dts: true,
+    }),
+    Vue({
+      template: { transformAssetUrls },
     }),
     Layouts({
       layoutsDirs: 'src/layouts',
@@ -35,6 +36,32 @@ export default defineConfig({
           styles: 'wght@100;300;400;500;700;900',
         }],
       },
+    }),
+    AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+        'pinia',
+        {
+          'vue-router/auto': [
+            'definePage',
+          ],
+          vuetify: [
+            'useDisplay',
+            'useDate',
+            'useTheme',
+          ],
+        },
+      ],
+      dirs: [
+        './lib/stores',
+        './lib/composables',
+      ],
+      dts: true,
+      eslintrc: {
+        enabled: true,
+      },
+      vueTemplate: true,
     }),
   ],
   define: { 'process.env': {} },

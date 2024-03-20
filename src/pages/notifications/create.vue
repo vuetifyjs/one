@@ -2,7 +2,7 @@
   <v-container>
     <NotificationsForm
       :is-pristine="isPristine"
-      :prepend-icon="`svg:${mdiPencilOutline}`"
+      prepend-icon="mdi-pencil-outline"
       title="Create Notification"
       @click:cancel="onClickCancel"
       @click:save="onClickSave"
@@ -11,16 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-// Composables
-  import { useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed, onBeforeMount, toRaw } from 'vue'
-  import { definePage } from 'vue-router/auto'
-
-  import { DEFAULT_NOTIFICATION, useNotificationsStore } from '@/stores/notifications'
-  import { mdiPencilOutline } from '@mdi/js'
-
   definePage({
     meta: {
       requiresAdmin: true,
