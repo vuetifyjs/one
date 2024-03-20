@@ -8,10 +8,12 @@
 import 'vuetify/styles'
 
 // Composables
-import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import { createVuetify, IconProps } from 'vuetify'
 import * as components from 'vuetify/components'
-import { VConfirmEdit, VEmptyState } from 'vuetify/labs/components'
+import { VConfirmEdit, VEmptyState, VNumberInput } from 'vuetify/labs/components'
+import { camelize, h } from 'vue'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import * as mdiSvg from './icons'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
@@ -21,6 +23,7 @@ export default createVuetify({
   components: {
     VConfirmEdit,
     VEmptyState,
+    VNumberInput,
   },
   defaults: {
     global: {
@@ -40,6 +43,10 @@ export default createVuetify({
     VDataTable: {
       density: 'compact',
       hover: true,
+    },
+    VNumberInput: {
+      density: 'compact',
+      variant: 'outlined',
     },
     VTextField: {
       density: 'compact',
@@ -77,6 +84,7 @@ export default createVuetify({
     },
   },
   icons: {
+    defaultSet: 'mdi',
     aliases: {
       ...aliases,
       'vuetify-play': [
@@ -84,6 +92,15 @@ export default createVuetify({
         ['M9.093 11.552c.046-.079.144-.15.32-.148a.53.53 0 0 1 .43.207c.285.414.636.847 1.046 1.2.405.35.914.662 1.516.754 1.334.205 2.502-.698 3.48-2.495l.014-.028.013-.03c.687-1.574.774-2.852-.005-3.675-.37-.391-.861-.586-1.333-.676a5.243 5.243 0 0 0-1.447-.044c-.173.016-.393-.073-.54-.257-.145-.18-.127-.316-.082-.392l.393-.672L14.287 3h5.71c1.536 0 2.499 1.659 1.737 2.992l-7.997 13.996c-.768 1.344-2.706 1.344-3.473 0l-3.037-5.314 1.377-2.278.004-.006.004-.007.481-.831Z', 0.6],
       ],
     },
-    sets: { mdi },
+    sets: {
+      mdiSvg: mdi,
+      mdi: {
+        component: (props: IconProps) => {
+          const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
+
+          return h(components.VSvgIcon, { ...props, icon })
+        },
+      },
+    },
   },
 })
