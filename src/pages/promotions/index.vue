@@ -68,6 +68,10 @@
       key: 'title',
     },
     {
+      title: 'Slug',
+      key: 'slug',
+    },
+    {
       title: 'Starts on',
       key: 'metadata.start_date',
     },
