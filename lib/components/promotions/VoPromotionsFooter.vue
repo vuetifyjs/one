@@ -1,10 +1,11 @@
 <template>
   <VoFooter
+    color="surface-light"
     :image="image"
     style="transform: translateY(0); /* no idea why this is needed */"
   >
     <a
-      class="d-flex text-decoration-none py-2 px-4 ms-n4 flex-1-0 me-n4 text-high-emphasis position-relative"
+      class="d-flex align-center text-decoration-none py-2 px-4 ms-n4 flex-1-0 me-n4 text-high-emphasis position-relative"
       :href="promotion?.metadata.url"
       rel="noopener noreferrer"
       target="_blank"
@@ -36,7 +37,7 @@
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed } from 'vue'
+  import { computed, onBeforeMount } from 'vue'
 
   // Stores
   import { usePromotionsStore } from '@/stores/promotions'
@@ -52,11 +53,7 @@
   const theme = useTheme()
 
   const promotion = computed(() => {
-    if (props.slug) {
-      const found = promotions.show(props.slug)
-
-      if (found) return found
-    }
+    if (promotions.record) return promotions.record
 
     return promotions.random(promotions.all)
   })
@@ -71,5 +68,11 @@
     const target = theme.current.value.dark ? 'bgdark' : 'bglight'
 
     return promotion.value?.metadata.images[target]?.url
+  })
+
+  onBeforeMount(async () => {
+    if (!props.slug) return
+
+    await promotions.show(props.slug)
   })
 </script>

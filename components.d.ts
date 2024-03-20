@@ -12,6 +12,7 @@ declare module 'vue' {
     AppFooter: typeof import('./src/components/AppFooter.vue')['default']
     BannersForm: typeof import('./src/components/banners/BannersForm.vue')['default']
     NotificationsForm: typeof import('./src/components/notifications/NotificationsForm.vue')['default']
+    PromotionsForm: typeof import('./src/components/promotions/PromotionsForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SpotsForm: typeof import('./src/components/spots/SpotsForm.vue')['default']

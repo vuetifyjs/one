@@ -57,7 +57,6 @@
     {
       title: 'Promotions',
       prependIcon: `svg:${mdiTagMultiple}`,
-      disabled: true,
       children: [
         { title: 'List', to: '/promotions/', exact: route.name === '/promotions/create' },
         { title: 'Create', to: '/promotions/create' },

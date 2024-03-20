@@ -36,6 +36,7 @@
 
   // Stores
   import { usePromotionsStore } from '@/stores/promotions'
+  import { onBeforeMount } from 'vue'
 
   // Types
   interface Props {
@@ -48,11 +49,7 @@
   const theme = useTheme()
 
   const promotion = computed(() => {
-    if (props.slug) {
-      const found = promotions.show(props.slug)
-
-      if (found) return found
-    }
+    if (promotions.record) return promotions.record
 
     return promotions.random(promotions.all)
   })
@@ -67,5 +64,11 @@
     const target = theme.current.value.dark ? 'bgdark' : 'bglight'
 
     return promotion.value?.metadata.images[target]?.url
+  })
+
+  onBeforeMount(async () => {
+    if (!props.slug) return
+
+    await promotions.show(props.slug)
   })
 </script>

@@ -1,22 +1,23 @@
 <template>
   <VoPromotionsCard
     border
-    class="pa-3"
-    :href="promotion?.metadata.url"
+    class="pa-2"
+    :href="promotion?.metadata?.url"
     width="360"
   >
     <div class="d-flex ga-4">
       <template v-if="promotion">
         <v-img
           height="100"
+          max-width="130"
           rounded="s"
-          :src="promotion.metadata.images.default?.url"
-          width="130"
+          :src="promotion.metadata?.images.default?.url"
+          width="100%"
         />
 
         <div class="d-flex align-start ga-4">
           <div class="text-caption on-surface-light">
-            {{ promotion.metadata.text }}
+            {{ promotion.metadata?.text }}
           </div>
         </div>
 
@@ -46,7 +47,7 @@
 
 <script lang="ts" setup>
   // Utilities
-  import { computed } from 'vue'
+  import { computed, onBeforeMount } from 'vue'
 
   // Stores
   import { usePromotionsStore } from '@/stores/promotions'
@@ -61,12 +62,14 @@
   const promotions = usePromotionsStore()
 
   const promotion = computed(() => {
-    if (props.slug) {
-      const found = promotions.show(props.slug)
-
-      if (found) return found
-    }
+    if (promotions.record) return promotions.record
 
     return promotions.random(promotions.all)
+  })
+
+  onBeforeMount(async () => {
+    if (!props.slug) return
+
+    await promotions.show(props.slug)
   })
 </script>
