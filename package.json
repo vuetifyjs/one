@@ -16,7 +16,8 @@
     },
     "./styles": {
       "import": "./dist/style.css"
-    }
+    },
+    "./subpath/*": "./dist/subpath/*.js"
   },
   "scripts": {
     "dev": "vite",

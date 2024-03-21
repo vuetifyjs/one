@@ -12,6 +12,7 @@
     "jsx": "preserve",
     "sourceMap": false,
     "declaration": true,
+    "declarationMap": true,
     "emitDeclarationOnly": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
