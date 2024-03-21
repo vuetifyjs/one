@@ -66,27 +66,32 @@
 
 <script setup lang="ts">
   const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 
   const expanded = shallowRef(false)
 
   const avatars = computed(() => {
     const array = [
-      'https://cdn.vuetifyjs.com/docs/images/avatars/one.png',
+      'https://cdn.vuetifyjs.com/docs/images/avatars/dark.png',
+      'https://cdn.vuetifyjs.com/docs/images/avatars/blackguard.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/grass.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/wood.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/gold.png',
-      'https://cdn.vuetifyjs.com/docs/images/avatars/planet.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/planetary.png',
-      'https://cdn.vuetifyjs.com/docs/images/avatars/light.png',
-      'https://cdn.vuetifyjs.com/docs/images/avatars/dark.png',
-      'https://cdn.vuetifyjs.com/docs/images/avatars/blackguard.png',
+      'https://cdn.vuetifyjs.com/docs/images/avatars/grass-subscriber.png',
+      'https://cdn.vuetifyjs.com/docs/images/avatars/wood-subscriber.png',
+      'https://cdn.vuetifyjs.com/docs/images/avatars/gold-subscriber.png',
+      'https://cdn.vuetifyjs.com/docs/images/avatars/planetary-subscriber.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/battlecruiser.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/cosmic-blue.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/blackhole.png',
       'https://cdn.vuetifyjs.com/docs/images/avatars/meteor.png',
-      'https://cdn.vuetifyjs.com/docs/images/avatars/tada.png',
     ]
+
+    if (one.isSubscriber) {
+      array.unshift('https://cdn.vuetifyjs.com/docs/images/avatars/one.png')
+    }
 
     if (auth.user) {
       array.unshift(auth.user.picture)
