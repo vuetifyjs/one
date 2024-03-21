@@ -10,22 +10,6 @@
     <div class="d-flex flex-grow-1 justify-end fill-height align-start">
       <VoUserBadges />
 
-      <VoBtn
-        v-if="auth.isSubscriber"
-        :active="colors"
-        class="align-self-end"
-        color="inherit"
-        density="comfortable"
-        :icon="colors ? `svg:${mdiCheck}` : '$edit'"
-        title="Edit One Header Color"
-        :variant="colors ? 'text' : 'plain'"
-        @click="colors = !colors"
-      >
-        <v-fade-transition leave-absolute>
-          <v-icon :key="String(colors)" />
-        </v-fade-transition>
-      </VoBtn>
-
       <v-expand-x-transition>
         <div
           v-show="colors"
@@ -44,6 +28,22 @@
           />
         </div>
       </v-expand-x-transition>
+
+      <VoBtn
+        v-if="auth.isSubscriber"
+        :active="colors"
+        class="align-self-end"
+        color="inherit"
+        density="comfortable"
+        :icon="colors ? `svg:${mdiCheck}` : '$edit'"
+        title="Edit One Header Color"
+        :variant="colors ? 'text' : 'plain'"
+        @click="colors = !colors"
+      >
+        <v-fade-transition leave-absolute>
+          <v-icon :key="String(colors)" />
+        </v-fade-transition>
+      </VoBtn>
     </div>
   </v-img>
 
