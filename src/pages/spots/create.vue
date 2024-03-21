@@ -1,6 +1,6 @@
 <template>
   <v-layout class="ma-4" full-height>
-    <v-main class="mt-4">
+    <v-main>
       <SpotsForm
         :is-pristine="isPristine"
         prepend-icon="mdi-pencil-outline"

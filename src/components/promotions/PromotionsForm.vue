@@ -51,17 +51,16 @@
       :value="null"
     >
 
-    <v-card
-      :prepend-icon="prependIcon"
-      :title="title"
-    >
-      <template #append>
-        <VoBtn
-          prepend-icon="mdi-arrow-left"
-          text="Go Back"
-          @click="router.go(-1)"
-        />
-      </template>
+    <v-card>
+      <v-toolbar :title="title">
+        <template #append>
+          <VoBtn
+            prepend-icon="mdi-arrow-left"
+            text="Go Back"
+            @click="router.go(-1)"
+          />
+        </template>
+      </v-toolbar>
 
       <v-divider />
 

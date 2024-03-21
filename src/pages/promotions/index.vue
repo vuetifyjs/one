@@ -1,49 +1,51 @@
 <template>
   <v-container>
-    <h1>Promotions</h1>
+    <v-card>
+      <v-toolbar title="All Promotions" />
 
-    <v-data-table
-      :headers="headers"
-      :items="promotions.aall"
-      :loading="promotions.isLoading"
-      :sort-by="[{ key: 'metadata.end_date', order: 'desc' }]"
-    >
-      <template #item.metadata.active="{ item }">
-        <AppChip :color="item.metadata.active ? 'success' : 'error'">
-          {{ item.metadata.active ? 'Active' : 'Inactive' }}
-        </AppChip>
-      </template>
+      <v-data-table
+        :headers="headers"
+        :items="promotions.aall"
+        :loading="promotions.isLoading"
+        :sort-by="[{ key: 'metadata.end_date', order: 'desc' }]"
+      >
+        <template #item.metadata.active="{ item }">
+          <AppChip :color="item.metadata.active ? 'success' : 'error'">
+            {{ item.metadata.active ? 'Active' : 'Inactive' }}
+          </AppChip>
+        </template>
 
-      <template #item.title="{ item }">
-        <v-avatar
-          class="me-2"
-          :image="item.metadata.images?.default?.url"
-          size="24"
-          tile
-        />
+        <template #item.title="{ item }">
+          <v-avatar
+            class="me-2"
+            :image="item.metadata.images?.default?.url"
+            size="24"
+            tile
+          />
 
-        {{ item.title }}
-      </template>
+          {{ item.title }}
+        </template>
 
-      <template #item.metadata.start_date="{ item }">
-        {{ adapter.format(item.metadata.startdate, 'normalDateWithWeekday') }}
-      </template>
+        <template #item.metadata.start_date="{ item }">
+          {{ adapter.format(item.metadata.startdate, 'normalDateWithWeekday') }}
+        </template>
 
-      <template #item.metadata.end_date="{ item }">
-        {{ adapter.format(item.metadata.enddate, 'normalDateWithWeekday') }}
-      </template>
+        <template #item.metadata.end_date="{ item }">
+          {{ adapter.format(item.metadata.enddate, 'normalDateWithWeekday') }}
+        </template>
 
-      <template #item.actions="{ item }">
-        <VoBtn
-          prepend-icon="$edit"
-          text="Edit"
-          :to="{
-            name: '/promotions/[id]',
-            params: { id: item.id },
-          }"
-        />
-      </template>
-    </v-data-table>
+        <template #item.actions="{ item }">
+          <VoBtn
+            prepend-icon="$edit"
+            text="Edit"
+            :to="{
+              name: '/promotions/[id]',
+              params: { id: item.id },
+            }"
+          />
+        </template>
+      </v-data-table>
+    </v-card>
   </v-container>
 </template>
 

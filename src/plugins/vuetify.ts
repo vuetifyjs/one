@@ -82,6 +82,12 @@ export default createVuetify({
         color: undefined,
       },
     },
+    VToolbar: {
+      color: 'surface-variant',
+    },
+    VAppBar: {
+      color: 'surface',
+    },
   },
   icons: {
     defaultSet: 'mdi',

@@ -1,10 +1,10 @@
 <template>
   <v-layout class="ma-4" full-height>
-    <v-main class="mt-4">
+    <v-main>
       <PromotionsForm
         :is-pristine="isPristine"
         prepend-icon="mdi-pencil-outline"
-        title="Create Promotions"
+        title="Create Promotion"
         @click:cancel="onClickCancel"
         @click:save="onClickSave"
       />
