@@ -3,7 +3,7 @@
     :prepend-icon="`svg:${mdiViewDashboardOutline}`"
     title="Dashboard"
     to="/user/dashboard"
-    @click="one.isOpen = false"
+    @click="onClick"
   />
 </template>
 
@@ -12,4 +12,11 @@
   import { mdiViewDashboardOutline } from '@mdi/js'
 
   const one = useOneStore()
+
+  function onClick () {
+    // TODO: Figure out why this is needed for Playground dashboard link to work
+    setTimeout(() => {
+      one.isOpen = false
+    }, 100)
+  }
 </script>
