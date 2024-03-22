@@ -101,6 +101,7 @@
     "watchSyncEffect": true,
     "useParams": true,
     "useQuery": true,
-    "definePage": true
+    "definePage": true,
+    "useProductsStore": true
   }
 }
