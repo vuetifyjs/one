@@ -77,8 +77,18 @@
 
           <v-col cols="6">
             <v-text-field
+              v-if="promotions.record.id"
+              v-model="promotions.record.slug"
+              label="Slug"
+              name="slug"
+              required
+            />
+          </v-col>
+
+          <v-col cols="12">
+            <v-text-field
               v-model="promotions.record.metadata.short_text"
-              label="Text"
+              label="Short Text"
               name="metadata[short_text]"
               required
             />
