@@ -1,21 +1,13 @@
 <template>
-  <v-layout class="ma-4" full-height>
-    <VoNotificationsBanner
-      class="overflow-hidden"
-      demo
-      rounded
+  <v-container>
+    <BannersForm
+      :is-pristine="isPristine"
+      prepend-icon="mdi-pencil-outline"
+      title="Edit Banner"
+      @click:cancel="onClickCancel"
+      @click:save="onClickSave"
     />
-
-    <v-main class="mt-4">
-      <BannersForm
-        :is-pristine="isPristine"
-        prepend-icon="$edit"
-        title="Edit Banner"
-        @click:cancel="onClickCancel"
-        @click:save="onClickSave"
-      />
-    </v-main>
-  </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts" setup>

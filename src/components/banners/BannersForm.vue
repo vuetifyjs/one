@@ -30,16 +30,14 @@
       :value="null"
     >
 
-    <v-card>
-      <v-toolbar :title="title">
-        <template #append>
-          <VoBtn
-            prepend-icon="mdi-arrow-left"
-            text="Go Back"
-            @click="router.go(-1)"
-          />
-        </template>
-      </v-toolbar>
+    <VoCard :prepend-icon="prependIcon" :title="title">
+      <template #append>
+        <VoBtn
+          prepend-icon="mdi-arrow-left"
+          text="Go Back"
+          @click="router.go(-1)"
+        />
+      </template>
 
       <v-divider />
 
@@ -232,6 +230,18 @@
         </v-row>
       </v-card-text>
 
+      <v-layout class="pa-4 ma-4 border border-opacity-50 rounded">
+        <v-responsive :height="(banners.record.metadata.height ?? 88) + 32">
+          <v-label>Banner preview:</v-label>
+
+          <VoNotificationsBanner
+            class="overflow-hidden"
+            demo
+            rounded
+          />
+        </v-responsive>
+      </v-layout>
+
       <v-divider />
 
       <template #actions>
@@ -256,7 +266,7 @@
           type="submit"
         />
       </template>
-    </v-card>
+    </VoCard>
   </v-form>
 </template>
 

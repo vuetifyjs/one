@@ -5,6 +5,7 @@
     flat
     :height="height"
     :image="banner.metadata.images.bg?.url"
+    :location="demo ? 'bottom' : undefined"
     :model-value="hasPromotion"
     order="-1"
   >

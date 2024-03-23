@@ -1,7 +1,16 @@
 <template>
   <v-container>
-    <v-card>
-      <v-toolbar title="All Banners" />
+    <VoCard
+      prepend-icon="mdi-list-status"
+      title="All Banners"
+    >
+      <template #append>
+        <VoBtn
+          prepend-icon="mdi-plus-circle"
+          text="Create"
+          to="/banners/create"
+        />
+      </template>
 
       <v-data-table
         :headers="headers"
@@ -43,15 +52,17 @@
         <template #item.actions="{ item }">
           <VoBtn
             prepend-icon="$edit"
+            slim
             text="Edit"
             :to="{
               name: '/banners/[id]',
               params: { id: item.id },
             }"
+            variant="outlined"
           />
         </template>
       </v-data-table>
-    </v-card>
+    </VoCard>
   </v-container>
 </template>
 
@@ -86,12 +97,14 @@
     {
       title: 'Sites',
       key: 'metadata.site',
+      align: 'end',
     },
     {
       title: 'Actions',
       key: 'actions',
+      align: 'end',
     },
-  ]
+  ] as const
 
   onMounted(() => {
     banners.admin()

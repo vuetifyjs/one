@@ -83,7 +83,8 @@ export default createVuetify({
       },
     },
     VToolbar: {
-      color: 'surface-variant',
+      color: 'surface-light',
+      class: 'px-2',
     },
     VAppBar: {
       color: 'surface',
