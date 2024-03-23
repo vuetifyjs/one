@@ -52,7 +52,6 @@
         <template #item.actions="{ item }">
           <VoBtn
             prepend-icon="$edit"
-            slim
             text="Edit"
             :to="{
               name: '/banners/[id]',
