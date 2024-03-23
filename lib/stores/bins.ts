@@ -8,7 +8,7 @@ import { computed, ref, shallowRef, watch } from 'vue'
 import { useAuthStore } from './auth'
 import { useHttpStore } from './http'
 
-type Bin = {
+export type Bin = {
   id: string
   content: string
   favorite: boolean
