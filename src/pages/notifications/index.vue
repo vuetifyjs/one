@@ -1,7 +1,16 @@
 <template>
   <v-container>
-    <v-card>
-      <v-toolbar title="All Notifications" />
+    <VoCard
+      prepend-icon="mdi-list-status"
+      title="All Notifications"
+    >
+      <template #append>
+        <VoBtn
+          prepend-icon="mdi-plus-circle"
+          text="Create"
+          to="/notifications/create"
+        />
+      </template>
 
       <v-data-table
         :headers="headers"
@@ -36,10 +45,11 @@
               name: '/notifications/[id]',
               params: { id: item.id },
             }"
+            variant="outlined"
           />
         </template>
       </v-data-table>
-    </v-card>
+    </VoCard>
   </v-container>
 </template>
 
@@ -70,8 +80,9 @@
     {
       title: 'Actions',
       key: 'actions',
+      align: 'end',
     },
-  ]
+  ] as const
 
   onMounted(() => {
     notifications.admin()

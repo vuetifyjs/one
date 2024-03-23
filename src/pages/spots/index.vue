@@ -1,7 +1,16 @@
 <template>
   <v-container>
-    <v-card>
-      <v-toolbar title="All Spots" />
+    <VoCard
+      prepend-icon="mdi-list-status"
+      title="All Spots"
+    >
+      <template #append>
+        <VoBtn
+          prepend-icon="mdi-plus-circle"
+          text="Create"
+          to="/spots/create"
+        />
+      </template>
 
       <v-data-table
         :headers="headers"
@@ -10,8 +19,8 @@
         :sort-by="[{ key: 'metadata.end_date', order: 'desc' }]"
       >
         <template #item.metadata.active="{ item }">
-          <AppChip :color="item.metadata.active ? 'success' : 'error'">
-            {{ item.metadata.active ? 'Active' : 'Inactive' }}
+          <AppChip :color="isWithinRange(item) ? 'warning' : item.metadata.active ? 'success' : 'error'">
+            {{ isWithinRange(item) ? 'Running' : item.metadata.active ? 'Active' : 'Inactive' }}
           </AppChip>
         </template>
 
@@ -49,10 +58,11 @@
               name: '/spots/[id]',
               params: { id: item.id },
             }"
+            variant="outlined"
           />
         </template>
       </v-data-table>
-    </v-card>
+    </VoCard>
   </v-container>
 </template>
 
@@ -87,12 +97,14 @@
     {
       title: 'Sites',
       key: 'metadata.site',
+      align: 'end',
     },
     {
       title: 'Actions',
       key: 'actions',
+      align: 'end',
     },
-  ]
+  ] as const
 
   onMounted(() => {
     spots.admin()

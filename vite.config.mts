@@ -56,6 +56,7 @@ export default defineConfig({
       dirs: [
         './lib/stores',
         './lib/composables',
+        './src/util',
       ],
       dts: true,
       eslintrc: {

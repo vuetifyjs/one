@@ -32,43 +32,28 @@
     {
       title: 'Banners',
       prependIcon: 'mdi-billboard',
-      children: [
-        { title: 'List', to: '/banners/', exact: route.name === '/banners/create' },
-        { title: 'Create', to: '/banners/create' },
-      ],
+      to: '/banners/',
     },
     {
       title: 'Notifications',
       prependIcon: 'mdi-bell',
-      children: [
-        { title: 'List', to: '/notifications/', exact: route.name === '/notifications/create' },
-        { title: 'Create', to: '/notifications/create' },
-      ],
+      to: '/notifications/',
     },
     {
       title: 'Promotions',
       prependIcon: 'mdi-tag-multiple',
-      children: [
-        { title: 'List', to: '/promotions/', exact: route.name === '/promotions/create' },
-        { title: 'Create', to: '/promotions/create' },
-      ],
+      to: '/promotions/',
     },
     {
       title: 'Sponsors',
       prependIcon: 'mdi-bank',
       disabled: true,
-      children: [
-        { title: 'List', to: '/sponsors/', exact: route.name === '/sponsors/create' },
-        { title: 'Create', to: '/sponsors/create' },
-      ],
+      to: '/sponsors/',
     },
     {
       title: 'Spots',
       prependIcon: 'mdi-bullhorn',
-      children: [
-        { title: 'List', to: '/spots/', exact: route.name === '/spots/create' },
-        { title: 'Create', to: '/spots/create' },
-      ],
+      to: '/spots/',
     },
     {
       title: 'Users',
@@ -79,10 +64,7 @@
       title: 'Vendors',
       prependIcon: 'mdi-storefront',
       disabled: true,
-      children: [
-        { title: 'List', to: '/vendors/', exact: route.name === '/vendors/create' },
-        { title: 'Create', to: '/vendors/create' },
-      ],
+      to: '/vendors/',
     },
   ])
 

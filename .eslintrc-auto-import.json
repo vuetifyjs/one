@@ -102,6 +102,7 @@
     "useParams": true,
     "useQuery": true,
     "definePage": true,
-    "useProductsStore": true
+    "useProductsStore": true,
+    "isWithinRange": true
   }
 }

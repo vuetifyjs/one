@@ -1,16 +1,17 @@
 <template>
   <v-container class="h-100">
-    <v-card>
-      <v-toolbar color="surface-variant" title="All Users">
-        <template #append>
-          <v-text-field
-            v-model="search"
-            label="Search"
-            prepend-inner-icon="mdi-magnify"
-            style="width: 300px"
-          />
-        </template>
-      </v-toolbar>
+    <VoCard
+      prepend-icon="mdi-list-status"
+      title="All Users"
+    >
+      <template #append>
+        <v-text-field
+          v-model="search"
+          label="Search"
+          prepend-inner-icon="mdi-magnify"
+          style="width: 300px"
+        />
+      </template>
 
       <v-data-table
         v-model:search="search"
@@ -47,7 +48,7 @@
           {{ adapter.format(item.createdAt, 'fullDateWithWeekday') }}
         </template>
       </v-data-table>
-    </v-card>
+    </VoCard>
   </v-container>
 </template>
 

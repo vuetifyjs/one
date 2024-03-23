@@ -1,7 +1,16 @@
 <template>
   <v-container>
-    <v-card>
-      <v-toolbar title="All Promotions" />
+    <VoCard
+      prepend-icon="mdi-list-status"
+      title="All Promotions"
+    >
+      <template #append>
+        <VoBtn
+          prepend-icon="mdi-plus-circle"
+          text="Create"
+          to="/promotions/create"
+        />
+      </template>
 
       <v-data-table
         :headers="headers"
@@ -42,10 +51,11 @@
               name: '/promotions/[id]',
               params: { id: item.id },
             }"
+            variant="outlined"
           />
         </template>
       </v-data-table>
-    </v-card>
+    </VoCard>
   </v-container>
 </template>
 
@@ -84,8 +94,9 @@
     {
       title: 'Actions',
       key: 'actions',
+      align: 'end',
     },
-  ]
+  ] as const
 
   onMounted(() => {
     promotions.admin()
