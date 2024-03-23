@@ -19,8 +19,8 @@
         :sort-by="[{ key: 'metadata.end_date', order: 'desc' }]"
       >
         <template #item.metadata.active="{ item }">
-          <AppChip :color="item.metadata.active ? 'success' : 'error'">
-            {{ item.metadata.active ? 'Active' : 'Inactive' }}
+          <AppChip :color="isWithinRange(item) ? 'warning' : item.metadata.active ? 'success' : 'error'">
+            {{ isWithinRange(item) ? 'Running' : item.metadata.active ? 'Active' : 'Inactive' }}
           </AppChip>
         </template>
 
@@ -67,6 +67,9 @@
 </template>
 
 <script lang="ts" setup>
+  // Types
+  import type { Banner } from '@/stores/banners'
+
   definePage({
     meta: {
       requiresAdmin: true,
@@ -76,6 +79,9 @@
 
   const adapter = useDate()
   const banners = useBannersStore()
+
+  const today = adapter.startOfDay(adapter.date())
+
   const headers = [
     {
       title: 'Status',
@@ -109,4 +115,11 @@
   onMounted(() => {
     banners.admin()
   })
+
+  function isWithinRange (item: Banner) {
+    const start = adapter.startOfDay(adapter.date(item.metadata.start_date))
+    const end = adapter.endOfDay(adapter.date(item.metadata.end_date))
+
+    return adapter.isWithinRange(today, [start, end])
+  }
 </script>
