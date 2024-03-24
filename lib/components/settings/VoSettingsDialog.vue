@@ -119,14 +119,11 @@
             messages="Notifications are short form messages that provide information about new releases, updates, and other important information."
           />
 
-          <v-expand-transition>
-            <VoSwitch
-              v-if="user.notifications.show"
-              v-model="user.notifications.banners"
-              label="Enable Banners"
-              messages="Banners are located at the top of the screen and provide a callout for important information."
-            />
-          </v-expand-transition>
+          <VoSwitch
+            v-model="user.notifications.banners"
+            label="Enable Banners"
+            messages="Banners are located at the top of the screen and provide a callout for important information."
+          />
         </v-card-text>
       </v-main>
     </v-layout>
