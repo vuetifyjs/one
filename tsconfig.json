@@ -25,6 +25,7 @@
     ],
     "paths": {
       "@/*": ["lib/*"],
+      "@/util/*": ["src/util/*"],
     },
     "skipLibCheck": true
   },

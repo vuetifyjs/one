@@ -1,13 +1,9 @@
 /// <reference types="vitest" />
 
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vitest/config'
 import { fileURLToPath } from 'url'
 
 export default defineConfig({
-  plugins: [
-    Vue(),
-  ],
   resolve: {
     alias: {
       '@/stores': fileURLToPath(new URL('./lib/stores', import.meta.url)),

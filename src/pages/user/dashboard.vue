@@ -1,6 +1,8 @@
 <template>
   <v-container>
     Dashboard
+
+    <VoPromotionsCardVuetify />
   </v-container>
 </template>
 
