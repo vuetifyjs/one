@@ -76,26 +76,18 @@
             messages="Disable traditional advertisements on all documentation pages."
           />
 
-          <!-- <v-expand-transition>
-              <div
-                v-show="user.disableAds"
-                class="ms-5"
-              >
-                <VoSwitch
-
-                  v-model="user.disableHouseAds"
-                  class="mb-2"
-                  label="Disable House Ads"
-                  messages="These advertisements are for Vuetify products and services only."
-                />
-
-                <VoSwitch
-                  v-model="user.disableSponsorAds"
-                  label="Disable Sponsor Ads"
-                  messages="These advertisements are for Vuetify sponsors and partners."
-                />
-              </div>
-            </v-expand-transition> -->
+          <v-expand-transition>
+            <div
+              v-show="user.disableAds"
+              class="ms-5 mb-2"
+            >
+              <VoSwitch
+                v-model="user.showHouseAds"
+                label="Show House Ads"
+                messages="These advertisements are for Vuetify products and services only."
+              />
+            </div>
+          </v-expand-transition>
 
           <VoSwitch
             v-model="user.quickbar"

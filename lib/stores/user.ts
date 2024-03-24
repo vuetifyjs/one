@@ -21,6 +21,7 @@ export type RootState = {
   pwaRefresh: boolean
   slashSearch: boolean
   syncSettings: boolean
+  showHouseAds: boolean
   theme: string
   mixedTheme: boolean
   direction: 'rtl' | 'ltr'
@@ -120,6 +121,7 @@ export const DEFAULT_USER: RootState = {
   pinned: [],
   slashSearch: false,
   syncSettings: true,
+  showHouseAds: false,
   quickbar: false,
   railDrawer: false,
   suits: {

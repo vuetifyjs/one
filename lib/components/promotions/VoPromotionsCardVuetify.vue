@@ -59,7 +59,7 @@
   const promotion = computed(() => {
     if (promotions.record) return promotions.record
 
-    if (user.disableAds) return undefined
+    if (user.disableAds && !user.showHouseAds) return undefined
 
     if (props.slug) return promotions.all.find(p => p.slug === props.slug)
 
