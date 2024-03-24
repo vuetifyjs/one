@@ -34,7 +34,7 @@
 
             <template #text>
               <div class="text-caption text-medium-emphasis">
-                {{ auth.isSubscriber ? 'You are currently receiving benefits from Vuetify One.' : 'Login to activate Vuetify One benefits' }}
+                {{ auth.isSubscriber ? 'You are currently receiving benefits of Vuetify One.' : 'Login to activate Vuetify One benefits' }}
               </div>
             </template>
           </v-empty-state>
