@@ -28,8 +28,10 @@
 
       <template v-else-if="promotion">
         <v-img
+          cover
           height="100"
           max-width="130"
+          position="right"
           rounded="s"
           :src="promotion.metadata?.images.default?.url"
           width="100%"
