@@ -98,7 +98,6 @@
             <v-textarea
               v-model="promotions.record.metadata.text"
               label="Text"
-              maxlength="100"
               name="metadata[text]"
               required
             />
