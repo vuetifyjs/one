@@ -21,7 +21,7 @@
     />
 
     <template v-if="promotion" #prepend>
-      <v-avatar class="my-n4 me-4" size="36" />
+      <v-avatar class="my-n4 me-4" icon="$vuetify" size="36" />
     </template>
 
     <template v-if="promotion" #image>

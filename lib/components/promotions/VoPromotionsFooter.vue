@@ -13,6 +13,7 @@
     >
       <v-avatar
         class="me-4"
+        icon="$vuetify"
         :image="logo"
         size="24"
       />
