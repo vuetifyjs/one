@@ -13,6 +13,7 @@ export interface Promotion {
   title: string
   metadata: {
     active: boolean
+    color: string
     text: string
     short_text: string
     images: {
@@ -38,6 +39,7 @@ export const DEFAULT_PROMOTION: Promotion = {
   title: '',
   metadata: {
     active: false,
+    color: '',
     text: 'Enter an advertisement message here',
     short_text: 'Short text is for Highlighted Promotions.',
     images: {

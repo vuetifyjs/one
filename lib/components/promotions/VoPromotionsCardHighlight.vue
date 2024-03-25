@@ -2,6 +2,7 @@
   <VoPromotionsCard
     v-if="promotion || !promotions.hasLoaded"
     class="mb-4"
+    :color="promotion?.metadata.color ?? 'surface'"
     height="60"
     :href="promotion?.metadata.url"
     :image="image"

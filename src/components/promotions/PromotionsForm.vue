@@ -106,6 +106,7 @@
           <v-col cols="4">
             <v-text-field
               append-inner-icon="$calendar"
+              autocomplete="off"
               label="Start Date"
               :model-value="promotions.record.metadata.startdate"
               name="metadata[startdate]"
@@ -119,6 +120,7 @@
           <v-col cols="4">
             <v-text-field
               append-inner-icon="$calendar"
+              autocomplete="off"
               label="End Date"
               :model-value="promotions.record.metadata.enddate"
               name="metadata[enddate]"
@@ -194,6 +196,20 @@
               name="metadata[images][default]"
               @update:model-value="onUpdateDefaultImage"
             />
+          </v-col>
+
+          <v-col class="align-self-end" cols="6">
+            <v-text-field
+              append-inner-icon="$eyeDropper"
+              autocomplete="off"
+              label="Color"
+              :model-value="promotions.record.metadata.color"
+              name="metadata[color]"
+            >
+              <v-menu activator="parent" :close-on-content-click="false">
+                <v-color-picker v-model="promotions.record.metadata.color" />
+              </v-menu>
+            </v-text-field>
           </v-col>
 
           <v-col cols="12">
