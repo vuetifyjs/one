@@ -75,7 +75,9 @@ export const usePromotionsStore = defineStore('promotions', () => {
   onBeforeMount(index)
 
   function random (array: Promotion[]) {
-    return array[Math.floor(Math.random() * array.length)]
+    const _array = array.filter(promotion => promotion.metadata.active)
+
+    return _array[Math.floor(Math.random() * _array.length)]
   }
 
   async function index () {
