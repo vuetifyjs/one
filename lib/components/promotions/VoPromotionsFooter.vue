@@ -8,6 +8,7 @@
       class="d-flex align-center text-decoration-none py-2 px-4 ms-n4 flex-1-0 me-n4 position-relative"
       :href="promotion?.metadata.url"
       rel="noopener noreferrer"
+      style="color: inherit"
       target="_blank"
     >
       <v-avatar
