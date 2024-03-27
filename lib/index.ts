@@ -1,4 +1,5 @@
 // Components
+import VoAppBar from '@/components/app/VoAppBar.vue'
 import VoAuthBtn from '@/components/auth/VoAuthBtn.vue'
 import VoAuthCard from '@/components/auth/VoAuthCard.vue'
 import VoAuthDialog from '@/components/auth/VoAuthDialog.vue'
@@ -29,6 +30,7 @@ export { useUserStore } from '@/stores/user'
 
 export function createOne () {
   function install (app: App) {
+    app.component('VoAppBar', VoAppBar)
     app.component('VoAuthBtn', VoAuthBtn)
     app.component('VoAuthCard', VoAuthCard)
     app.component('VoAuthDialog', VoAuthDialog)

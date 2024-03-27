@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppBar />
+    <VoAppBar logo="vone" />
 
     <router-view />
   </v-app>
