@@ -1,15 +1,13 @@
 <template>
-  <v-layout full-height>
-    <v-main>
-      <!-- <SpotsForm
-        :is-pristine="isPristine"
-        prepend-icon="mdi-pencil-outline"
-        title="Create Spot"
-        @click:cancel="onClickCancel"
-        @click:save="onClickSave"
-      /> -->
-    </v-main>
-  </v-layout>
+  <v-container>
+    <SponsorsForm
+      :is-pristine="isPristine"
+      prepend-icon="mdi-pencil-outline"
+      title="Create Sponsor"
+      @click:cancel="onClickCancel"
+      @click:save="onClickSave"
+    />
+  </v-container>
 </template>
 
 <script lang="ts" setup>

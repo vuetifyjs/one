@@ -79,16 +79,16 @@
       key: 'title',
     },
     {
-      title: 'Starts on',
+      title: 'Started sponsoring',
       key: 'metadata.start_date',
     },
     {
-      title: 'Ends on',
-      key: 'metadata.end_date',
+      title: 'Source',
+      key: 'metadata.source',
     },
     {
-      title: 'Sites',
-      key: 'metadata.site',
+      title: 'Level',
+      key: 'metadata.level.value',
       align: 'end',
     },
     {

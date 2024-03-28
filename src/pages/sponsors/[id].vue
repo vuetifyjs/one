@@ -1,18 +1,19 @@
 <template>
-  <v-layout full-height>
-    <v-main>
-      <!-- <SpotsForm
-        :is-pristine="isPristine"
-        prepend-icon="$edit"
-        title="Edit Spot"
-        @click:cancel="onClickCancel"
-        @click:save="onClickSave"
-      /> -->
-    </v-main>
-  </v-layout>
+  <v-container>
+    <SponsorsForm
+      :is-pristine="isPristine"
+      prepend-icon="$edit"
+      title="Edit Sponsor"
+      @click:cancel="onClickCancel"
+      @click:save="onClickSave"
+    />
+  </v-container>
 </template>
 
 <script lang="ts" setup>
+  // Types
+  import type { Sponsor } from '@/stores/sponsors'
+
   definePage({
     meta: {
       requiresAdmin: true,
@@ -20,7 +21,7 @@
     },
   })
 
-  const original = ref<Spot>()
+  const original = ref<Sponsor>()
   const sponsors = useSponsorsStore()
   const params = useParams<{ id: string }>()
 

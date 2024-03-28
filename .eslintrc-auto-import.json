@@ -104,6 +104,7 @@
     "definePage": true,
     "useProductsStore": true,
     "isWithinRange": true,
-    "useSponsorsStore": true
+    "useSponsorsStore": true,
+    "DEFAULT_SPONSOR": true
   }
 }
