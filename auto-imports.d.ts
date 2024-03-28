@@ -8,6 +8,7 @@ declare global {
   const DEFAULT_BANNER: typeof import('./lib/stores/banners')['DEFAULT_BANNER']
   const DEFAULT_NOTIFICATION: typeof import('./lib/stores/notifications')['DEFAULT_NOTIFICATION']
   const DEFAULT_PROMOTION: typeof import('./lib/stores/promotions')['DEFAULT_PROMOTION']
+  const DEFAULT_SPONSOR: typeof import('./lib/stores/sponsors')['DEFAULT_SPONSOR']
   const DEFAULT_SPOT: typeof import('./lib/stores/spots')['DEFAULT_SPOT']
   const DEFAULT_USER: typeof import('./lib/stores/user')['DEFAULT_USER']
   const EffectScope: typeof import('vue')['EffectScope']
@@ -91,6 +92,7 @@ declare global {
   const useSettingsStore: typeof import('./lib/stores/settings')['useSettingsStore']
   const useSiteStore: typeof import('./lib/stores/site')['useSiteStore']
   const useSlots: typeof import('vue')['useSlots']
+  const useSponsorsStore: typeof import('./lib/stores/sponsors')['useSponsorsStore']
   const useSpotsStore: typeof import('./lib/stores/spots')['useSpotsStore']
   const useTheme: typeof import('vuetify')['useTheme']
   const useUserStore: typeof import('./lib/stores/user')['useUserStore']
@@ -113,6 +115,7 @@ declare module 'vue' {
     readonly DEFAULT_BANNER: UnwrapRef<typeof import('./lib/stores/banners')['DEFAULT_BANNER']>
     readonly DEFAULT_NOTIFICATION: UnwrapRef<typeof import('./lib/stores/notifications')['DEFAULT_NOTIFICATION']>
     readonly DEFAULT_PROMOTION: UnwrapRef<typeof import('./lib/stores/promotions')['DEFAULT_PROMOTION']>
+    readonly DEFAULT_SPONSOR: UnwrapRef<typeof import('./lib/stores/sponsors')['DEFAULT_SPONSOR']>
     readonly DEFAULT_SPOT: UnwrapRef<typeof import('./lib/stores/spots')['DEFAULT_SPOT']>
     readonly DEFAULT_USER: UnwrapRef<typeof import('./lib/stores/user')['DEFAULT_USER']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
@@ -196,6 +199,7 @@ declare module 'vue' {
     readonly useSettingsStore: UnwrapRef<typeof import('./lib/stores/settings')['useSettingsStore']>
     readonly useSiteStore: UnwrapRef<typeof import('./lib/stores/site')['useSiteStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useSponsorsStore: UnwrapRef<typeof import('./lib/stores/sponsors')['useSponsorsStore']>
     readonly useSpotsStore: UnwrapRef<typeof import('./lib/stores/spots')['useSpotsStore']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('./lib/stores/user')['useUserStore']>
@@ -211,6 +215,7 @@ declare module '@vue/runtime-core' {
     readonly DEFAULT_BANNER: UnwrapRef<typeof import('./lib/stores/banners')['DEFAULT_BANNER']>
     readonly DEFAULT_NOTIFICATION: UnwrapRef<typeof import('./lib/stores/notifications')['DEFAULT_NOTIFICATION']>
     readonly DEFAULT_PROMOTION: UnwrapRef<typeof import('./lib/stores/promotions')['DEFAULT_PROMOTION']>
+    readonly DEFAULT_SPONSOR: UnwrapRef<typeof import('./lib/stores/sponsors')['DEFAULT_SPONSOR']>
     readonly DEFAULT_SPOT: UnwrapRef<typeof import('./lib/stores/spots')['DEFAULT_SPOT']>
     readonly DEFAULT_USER: UnwrapRef<typeof import('./lib/stores/user')['DEFAULT_USER']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
@@ -294,6 +299,7 @@ declare module '@vue/runtime-core' {
     readonly useSettingsStore: UnwrapRef<typeof import('./lib/stores/settings')['useSettingsStore']>
     readonly useSiteStore: UnwrapRef<typeof import('./lib/stores/site')['useSiteStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useSponsorsStore: UnwrapRef<typeof import('./lib/stores/sponsors')['useSponsorsStore']>
     readonly useSpotsStore: UnwrapRef<typeof import('./lib/stores/spots')['useSpotsStore']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('./lib/stores/user')['useUserStore']>

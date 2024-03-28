@@ -47,7 +47,6 @@
     {
       title: 'Sponsors',
       prependIcon: 'mdi-bank',
-      disabled: true,
       to: '/sponsors/',
     },
     {
