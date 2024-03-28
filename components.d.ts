@@ -17,6 +17,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SponsorsForm: typeof import('./src/components/sponsors/SponsorsForm.vue')['default']
     SpotsForm: typeof import('./src/components/spots/SpotsForm.vue')['default']
+    UsersStatusChip: typeof import('./src/components/users/UsersStatusChip.vue')['default']
     VoAppBar: typeof import('./lib/components/app/VoAppBar.vue')['default']
     VoAuthBtn: typeof import('./lib/components/auth/VoAuthBtn.vue')['default']
     VoAuthCard: typeof import('./lib/components/auth/VoAuthCard.vue')['default']

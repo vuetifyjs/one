@@ -25,10 +25,10 @@
         </template>
 
         <template #item.isAdmin="{ item }">
-          <AppChip
-            v-if="item.isAdmin"
-            color="success"
-            text="Administrator"
+          <UsersStatusChip
+            :loading="isLoading"
+            :user="item"
+            @update:model-value="val => onUpdateUser(val, item)"
           />
         </template>
 
@@ -106,4 +106,23 @@
       isLoading.value = false
     }
   })
+
+  async function onUpdateUser (val: boolean | null, item: User) {
+    try {
+      isLoading.value = true
+
+      const res = await http.post<{ user: User }>(`/one/admin/users/${item.id}`, {
+        ...item,
+        isAdmin: val,
+      })
+
+      const index = users.value.findIndex(user => user.id === res.user.id)
+
+      users.value[index] = res.user
+    } catch (error) {
+      console.error(error)
+    } finally {
+      isLoading.value = false
+    }
+  }
 </script>
