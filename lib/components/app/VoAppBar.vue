@@ -8,6 +8,10 @@
       <slot name="prepend" />
     </template>
 
+    <template v-if="$slots.title" #title>
+      <slot name="title" />
+    </template>
+
     <slot />
 
     <template v-if="$slots.extension" #extension>
