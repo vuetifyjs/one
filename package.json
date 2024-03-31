@@ -38,7 +38,7 @@
     "@mdi/js": "6.2.95",
     "lodash-es": "^4.17.21",
     "vue": "^3.4.0",
-    "vuetify": "^3.5.0"
+    "vuetify": "^3.5.13"
   },
   "devDependencies": {
     "@babel/types": "^7.24.0",
@@ -84,6 +84,6 @@
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "vue-tsc": "^2.0.6",
-    "vuetify": "^3.5.10"
+    "vuetify": "^3.5.13"
   }
 }
