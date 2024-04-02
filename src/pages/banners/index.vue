@@ -19,8 +19,8 @@
         :sort-by="[{ key: 'metadata.end_date', order: 'desc' }]"
       >
         <template #item.metadata.active="{ item }">
-          <AppChip :color="isWithinRange(item) ? 'warning' : item.metadata.active ? 'success' : 'error'">
-            {{ isWithinRange(item) ? 'Running' : item.metadata.active ? 'Active' : 'Inactive' }}
+          <AppChip :color="!item.metadata.active ? 'error' : isWithinRange(item) ? 'warning' : 'success'">
+            {{ !item.metadata.active ? 'Inactive' : isWithinRange(item) ? 'Running' : 'Active' }}
           </AppChip>
         </template>
 
