@@ -44,6 +44,8 @@
             <VoAuthGithub @click="social = false" />
 
             <VoAuthDiscord @click="social = false" />
+
+            <VoAuthShopify @click="social = false" />
           </div>
         </v-sheet>
       </v-expand-transition>
