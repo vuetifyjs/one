@@ -32,6 +32,8 @@ declare module 'vue' {
     VoDialog: typeof import('./lib/components/app/VoDialog.vue')['default']
     VoDialogSubheader: typeof import('./lib/components/app/VoDialogSubheader.vue')['default']
     VoFooter: typeof import('./lib/components/app/VoFooter.vue')['default']
+    VoIconBin: typeof import('./lib/components/icon/VoIconBin.vue')['default']
+    VoIconIssues: typeof import('./lib/components/icon/VoIconIssues.vue')['default']
     VoListItem: typeof import('./lib/components/app/VoListItem.vue')['default']
     VoNotificationsBadge: typeof import('./lib/components/notifications/VoNotificationsBadge.vue')['default']
     VoNotificationsBanner: typeof import('./lib/components/notifications/VoNotificationsBanner.vue')['default']
