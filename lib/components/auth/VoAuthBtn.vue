@@ -5,13 +5,14 @@
         [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
       }"
       active
+      :border="!!auth.user"
       class="vo-auth-btn"
       :color="color"
       :icon="auth.user || auth.isLoading"
       :loading="auth.isLoading"
       size="default"
       style="transition: .2s ease;"
-      :variant="auth.user ? 'outlined' : 'flat'"
+      :variant="!auth.user ? 'flat' : one.isOpen ? 'outlined' : 'text'"
     >
       <span v-if="!auth.user">Login</span>
 

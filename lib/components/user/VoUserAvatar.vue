@@ -3,7 +3,7 @@
     <v-avatar
       v-ripple="auth.isSubscriber"
       :class="[
-        'border-md border-opacity-100 border-surface-variant',
+        'border-md border-opacity-100 border-surface-light',
         {
           'cursor-pointer': auth.isSubscriber,
         }
