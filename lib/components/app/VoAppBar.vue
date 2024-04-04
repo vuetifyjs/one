@@ -1,5 +1,8 @@
 <template>
-  <v-app-bar :image="settings.suit['app-bar']">
+  <v-app-bar
+    :image="settings.suit['app-bar']"
+    name="vo-app-bar"
+  >
     <template #prepend>
       <router-link class="ps-2" to="/">
         <v-img :src="image" width="128" />
