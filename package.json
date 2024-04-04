@@ -32,7 +32,8 @@
     "lint": "eslint . --ext .ts,.vue --fix --ignore-path .gitignore",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "prepublishOnly": "yarn build:one"
+    "prepublishOnly": "yarn build:one",
+    "postversion": "git push --follow-tags"
   },
   "peerDependencies": {
     "@mdi/js": "6.2.95",
