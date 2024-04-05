@@ -31,7 +31,9 @@
     >
       <VoAuthGithub class="mb-3" />
 
-      <VoAuthDiscord />
+      <VoAuthDiscord class="mb-3" />
+
+      <VoAuthShopify />
     </v-list>
   </v-card>
 </template>

@@ -109,10 +109,16 @@ export const useAuthStore = defineStore('auth', () => {
   }
   verify.promise = null as Promise<void> | null
 
-  async function login (provider: 'github' | 'discord' = 'github') {
+  async function login (provider: 'github' | 'discord' | 'shopify' = 'github') {
     isLoading.value = true
 
     const redirectUrl = `${http.url}/auth/${provider}/redirect`
+
+    if (provider === 'shopify') {
+      window.location = redirectUrl + '?next=' + encodeURIComponent(window.location.href)
+      return
+    }
+
     const width = 400
     const height = 600
     const left = window.screenX + (window.innerWidth - width) / 2
