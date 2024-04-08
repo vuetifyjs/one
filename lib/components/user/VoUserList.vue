@@ -10,6 +10,8 @@
 
     <VoStudioNavItem />
 
+    <VoDownloadsNavItem />
+
     <VoSponsorshipsListItem />
 
     <VoSubscriptionListItem v-if="auth.user" />
