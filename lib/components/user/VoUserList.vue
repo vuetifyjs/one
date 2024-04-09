@@ -10,7 +10,7 @@
 
     <VoStudioNavItem />
 
-    <VoDownloadsNavItem />
+    <VoDownloadsNavItem v-if="one.shopify" />
 
     <VoSponsorshipsListItem />
 
@@ -24,4 +24,5 @@
 
 <script lang="ts" setup>
   const auth = useAuthStore()
+  const one = useOneStore()
 </script>

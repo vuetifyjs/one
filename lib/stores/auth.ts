@@ -115,7 +115,7 @@ export const useAuthStore = defineStore('auth', () => {
     const redirectUrl = `${http.url}/auth/${provider}/redirect`
 
     if (provider === 'shopify') {
-      window.location = redirectUrl + '?next=' + encodeURIComponent(window.location.href)
+      window.location.assign(redirectUrl + '?next=' + encodeURIComponent(window.location.href))
       return
     }
 

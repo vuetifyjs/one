@@ -27,5 +27,5 @@
   // Icons
   import { mdiTrayArrowDown } from '@mdi/js'
 
-  const dialog = shallowRef(true)
+  const dialog = shallowRef(false)
 </script>

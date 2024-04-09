@@ -12,24 +12,14 @@ export interface SendowlDownload {
   id: number
   download_items: SendowlDownloadItem[]
   order_name: string
+  created_at: string
+  download_url: string
 }
 
 export const useDownloadsStore = defineStore('downloads', () => {
   const http = useHttpStore()
   const all = ref<SendowlDownload[]>([])
   const isLoading = shallowRef(false)
-
-  const downloads = computed(() => {
-    return all.value.reduce((acc, download) => {
-      for (const item of download.download_items) {
-        if (!item.accessible || !item.downloadable) continue
-
-        acc.push(item)
-      }
-
-      return acc
-    }, [] as SendowlDownloadItem[])
-  })
 
   async function index () {
     if (all.value.length) return all.value
@@ -52,7 +42,6 @@ export const useDownloadsStore = defineStore('downloads', () => {
   return {
     all,
     isLoading,
-    downloads,
 
     index,
   }
