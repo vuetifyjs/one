@@ -2,38 +2,43 @@
   <v-row>
     <v-col cols="12">
       <VoDialogSubheader
-        text="View and download your store purchase."
+        text="View and download your store purchases."
         title="Download history"
       />
 
       <v-card
         border
         flat
-        min-height="640"
         rounded="lg"
       >
         <v-data-table-virtual
+          fixed-header
           :headers="headers"
+          height="640"
           :items="downloads.all"
           :loading="downloads.isLoading"
-          sticky
         >
           <template #item.order_name="{ item }">
             #{{ item.order_name }}
           </template>
 
           <template #item.created_at="{ item }">
-            {{ adapter.format(item.created_at, 'fullDateWithWeekday') }}
+            {{ adapter.format(item.created_at, 'shortDate') }}
           </template>
 
           <template #item.download_items="{ item }">
-            <div v-for="(download, i) in item.download_items" :key="i">
+            <div
+              v-for="(download, i) in item.download_items"
+              :key="i"
+              class="text-truncate"
+            >
               {{ download.name }}
             </div>
           </template>
 
           <template #item.download_url="{ item }">
             <v-btn
+              color="medium-emphasis"
               :href="item.download_url"
               :icon="`svg:${mdiCloudDownload}`"
               size="small"
@@ -60,12 +65,13 @@
       value: 'order_name',
     },
     {
-      title: 'Order date',
-      value: 'created_at',
-    },
-    {
       title: 'Items',
       value: 'download_items',
+    },
+    {
+      title: 'Order date',
+      value: 'created_at',
+      align: 'end',
     },
     {
       title: 'Download',
