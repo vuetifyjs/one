@@ -79,6 +79,7 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useDate: typeof import('vuetify')['useDate']
   const useDisplay: typeof import('vuetify')['useDisplay']
+  const useDownloadsStore: typeof import('./lib/stores/downloads')['useDownloadsStore']
   const useHttpStore: typeof import('./lib/stores/http')['useHttpStore']
   const useLink: typeof import('vue-router')['useLink']
   const useNotificationsStore: typeof import('./lib/stores/notifications')['useNotificationsStore']
@@ -186,6 +187,7 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
+    readonly useDownloadsStore: UnwrapRef<typeof import('./lib/stores/downloads')['useDownloadsStore']>
     readonly useHttpStore: UnwrapRef<typeof import('./lib/stores/http')['useHttpStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useNotificationsStore: UnwrapRef<typeof import('./lib/stores/notifications')['useNotificationsStore']>
@@ -286,6 +288,7 @@ declare module '@vue/runtime-core' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
+    readonly useDownloadsStore: UnwrapRef<typeof import('./lib/stores/downloads')['useDownloadsStore']>
     readonly useHttpStore: UnwrapRef<typeof import('./lib/stores/http')['useHttpStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useNotificationsStore: UnwrapRef<typeof import('./lib/stores/notifications')['useNotificationsStore']>

@@ -69,7 +69,9 @@ export const useOneStore = defineStore('one', () => {
   const discord = computed(() => {
     return auth.user?.sponsorships.find((s: any) => s.platform === 'discord')
   })
-
+  const shopify = computed(() => {
+    return auth.user?.identities.find((i: any) => i.provider === 'shopify')
+  })
   const patreon = computed(() => {
     return auth.user?.sponsorships.find((s: any) => s.platform === 'patreon')
   })
@@ -239,6 +241,7 @@ export const useOneStore = defineStore('one', () => {
     github,
     patreon,
     discord,
+    shopify,
     one,
 
     activate,
