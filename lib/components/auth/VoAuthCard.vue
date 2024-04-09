@@ -20,7 +20,7 @@
       </v-card-title>
 
       <v-card-subtitle class="text-wrap">
-        Login with GitHub or Discord to save your settings and unlock exclusive subscriber perks.
+        Login to save your settings and gain access to exclusive subscriber perks.
       </v-card-subtitle>
     </div>
 
