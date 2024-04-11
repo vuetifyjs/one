@@ -61,19 +61,19 @@ export const useOneStore = defineStore('one', () => {
   const isSubscriber = computed(() => subscription.value?.isActive)
 
   const one = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.tierName.startsWith('sub_'))
+    return auth.user?.sponsorships.find((s: any) => s.tierName.startsWith('sub_') && s.isActive)
   })
   const github = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.platform === 'github')
+    return auth.user?.sponsorships.find((s: any) => s.platform === 'github' && s.isActive)
   })
   const discord = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.platform === 'discord')
+    return auth.user?.sponsorships.find((s: any) => s.platform === 'discord' && s.isActive)
   })
   const shopify = computed(() => {
     return auth.user?.identities.find((i: any) => i.provider === 'shopify')
   })
   const patreon = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.platform === 'patreon')
+    return auth.user?.sponsorships.find((s: any) => s.platform === 'patreon' && s.isActive)
   })
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s: any) => {
