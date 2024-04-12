@@ -59,10 +59,10 @@
     'Pinned Navigation Items and Rail drawer in <a href="https://vuetifyjs.com/" target="_blank">Documentation</a>',
     'Customize Navigation components with Page Suits',
     'Custom Vuetify One menu avatar',
+    'Special role in the <a href="https://discord.vuetifyjs.com/" target="_blank">Vuetify Discord</a>',
   ]
   const upnext = [
     'Early access to Vuetify Studio, a visual editor for Vuetify',
-    'Special role in the <a href="https://discord.vuetifyjs.com/" target="_blank">Vuetify Discord</a>',
     'Receive a special label on GitHub created issues and pull requests',
   ]
 
