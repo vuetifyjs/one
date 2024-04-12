@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 
-import { useAuthStore } from './auth'
 import { useUserStore } from './user'
 
 import { computed, watch } from 'vue'
@@ -177,7 +176,7 @@ function genThemes () {
 export const useSettingsStore = defineStore('settings', () => {
   const CDN_URL = 'https://cdn.vuetifyjs.com/docs/images/one/'
 
-  const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
   const theme = useTheme()
 
@@ -202,7 +201,7 @@ export const useSettingsStore = defineStore('settings', () => {
   } as Record<string, Suit>
 
   const suit = computed(() => {
-    if (!user.suits.suit || !user.suits.show || !auth.isSubscriber) return {}
+    if (!user.suits.suit || !user.suits.show || !one.isSubscriber) return {}
 
     const _suit = suits[user.suits.suit.toLowerCase()]
     const suit = {} as Partial<Suit>

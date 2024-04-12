@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { computed, ref, shallowRef, watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 
 // Stores
 import { useHttpStore } from '@/stores/http'
@@ -12,12 +12,21 @@ import { useUserStore } from '@/stores/user'
 export interface Sponsorship {
   id: string
   platform: string
-  interval: 'month' | 'year'
+  interval: 'month' | 'year' | 'once'
   target: string
   tierName: string
   amount: number
   isActive: boolean
   createdAt: Date
+}
+
+export interface Identity {
+  id: string
+  emails: string[]
+  provider: string
+  userId: string
+  userHandle: string
+  primary: boolean
 }
 
 export interface User {
@@ -27,14 +36,7 @@ export interface User {
   picture: string
   settings: Record<string, any> | null
   createdAt: string
-  identities: {
-    id: string
-    emails: string[]
-    provider: string
-    userId: string
-    userHandle: string
-    primary: boolean
-  }[]
+  identities: Identity[]
   sponsorships: Sponsorship[]
 }
 
@@ -45,12 +47,6 @@ export const useAuthStore = defineStore('auth', () => {
   const userStore = useUserStore()
   const router = useRouter()
   const isLoading = shallowRef(false)
-
-  const isSubscriber = computed(() => (
-    !http.url ||
-    user.value?.isAdmin ||
-    !!user.value?.sponsorships.some(s => s.isActive)
-  ))
 
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
@@ -222,7 +218,6 @@ export const useAuthStore = defineStore('auth', () => {
     verify,
     login,
     logout,
-    isSubscriber,
     lastLoginProvider,
     sync,
   }

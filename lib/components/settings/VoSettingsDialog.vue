@@ -53,7 +53,7 @@
             </v-row>
           </v-item-group>
 
-          <template v-if="auth.isSubscriber">
+          <template v-if="one.isSubscriber">
             <v-divider class="mt-6 mb-4 " />
 
             <VoSettingsPageSuitOption />
@@ -69,7 +69,7 @@
           />
 
           <VoSwitch
-            v-if="auth.isSubscriber"
+            v-if="one.isSubscriber"
             v-model="user.disableAds"
             class="mb-2"
             label="Disable Ads"
@@ -98,7 +98,7 @@
 
         <v-divider />
 
-        <v-card-text v-if="auth.isSubscriber" class="px-7">
+        <v-card-text v-if="one.isSubscriber" class="px-7">
           <VoDialogSubheader
             text="Vuetify will communicate with you through banners and notifications. You can disable these features here or reset your local notification cache."
             title="Communication"
@@ -136,7 +136,6 @@
   } from '@mdi/js'
 
   const dialog = defineModel('modelValue', { type: Boolean })
-  const auth = useAuthStore()
   const one = useOneStore()
   const settings = useSettingsStore()
   const user = useUserStore()

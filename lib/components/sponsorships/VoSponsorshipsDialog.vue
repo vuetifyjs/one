@@ -23,18 +23,18 @@
             size="128"
           >
             <template #media>
-              <v-icon :color="auth.isSubscriber ? 'success' : 'error'" />
+              <v-icon :color="one.isSubscriber ? 'success' : 'error'" />
             </template>
 
             <template #title>
               One Status:
 
-              <span class="font-weight-black">{{ auth.isSubscriber ? 'Active' : 'Inactive' }}</span>
+              <span class="font-weight-black">{{ one.isSubscriber ? 'Active' : 'Inactive' }}</span>
             </template>
 
             <template #text>
               <div class="text-caption text-medium-emphasis">
-                {{ auth.isSubscriber ? 'You are currently receiving benefits of Vuetify One.' : 'Login to activate Vuetify One benefits' }}
+                {{ one.isSubscriber ? 'You are currently receiving benefits of Vuetify One.' : 'Login to activate Vuetify One benefits' }}
               </div>
             </template>
           </v-empty-state>
@@ -51,7 +51,6 @@
   const dialog = defineModel('modelValue', { type: Boolean })
 
   const query = useQuery()
-  const auth = useAuthStore()
   const one = useOneStore()
 
   watch(query, async () => {

@@ -80,7 +80,7 @@
           </v-sheet>
         </template>
 
-        <v-sheet v-if="!auth.isSubscriber" class="text-center py-6">
+        <v-sheet v-if="!one.isSubscriber" class="text-center py-6">
           <v-container>
             <v-row justify="center">
               <v-col cols="6">
@@ -119,7 +119,6 @@
 
   const query = useQuery()
   const router = useRouter()
-  const auth = useAuthStore()
   const one = useOneStore()
   const { smAndUp } = useDisplay()
 

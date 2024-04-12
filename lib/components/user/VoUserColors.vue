@@ -30,7 +30,7 @@
       </v-expand-x-transition>
 
       <VoBtn
-        v-if="auth.isSubscriber"
+        v-if="one.isSubscriber"
         :active="colors"
         class="align-self-end"
         color="inherit"
@@ -70,6 +70,7 @@
   import { mdiArrowULeftBottom, mdiCheck } from '@mdi/js'
 
   const auth = useAuthStore()
+  const one = useOneStore()
   const user = useUserStore()
 
   const colors = shallowRef(false)

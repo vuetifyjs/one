@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-avatar
-      v-ripple="auth.isSubscriber"
+      v-ripple="one.isSubscriber"
       :class="[
         'border-md border-opacity-100 border-surface-light',
         {
-          'cursor-pointer': auth.isSubscriber,
+          'cursor-pointer': one.isSubscriber,
         }
       ]"
       color="surface"
@@ -105,7 +105,7 @@
   }
 
   function onClickAvatar () {
-    if (!auth.isSubscriber) return
+    if (!one.isSubscriber) return
 
     expanded.value = !expanded.value
   }

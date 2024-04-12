@@ -11,7 +11,6 @@ import { defineStore } from 'pinia'
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 
 // Types
-
 interface SubscriptionItemPlan {
   id: string
   amount: number
@@ -48,39 +47,46 @@ export const useOneStore = defineStore('one', () => {
   const http = useHttpStore()
 
   const isLoading = shallowRef(false)
-  const isOpen = ref(false)
+  const isOpen = shallowRef(false)
   const info = ref<Info>()
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
 
   const subscription = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.platform === 'stripe' && s.tierName.startsWith('sub_'))
+    return auth.user?.sponsorships.find(s => s.platform === 'stripe' && s.tierName.startsWith('sub_'))
   })
   const hasBilling = computed(() => !!subscription.value?.tierName)
-  const isSubscriber = computed(() => subscription.value?.isActive)
 
-  const one = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.tierName.startsWith('sub_') && s.isActive)
-  })
-  const github = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.platform === 'github' && s.isActive)
-  })
-  const discord = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.platform === 'discord' && s.isActive)
-  })
-  const shopify = computed(() => {
-    return auth.user?.identities.find((i: any) => i.provider === 'shopify')
-  })
-  const patreon = computed(() => {
-    return auth.user?.sponsorships.find((s: any) => s.platform === 'patreon' && s.isActive)
-  })
   const monthlyTotal = computed(() => {
-    return auth.user?.sponsorships.reduce((acc: number, s: any) => {
+    return auth.user?.sponsorships.reduce((acc: number, s) => {
       if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') return acc
       const amount = s.interval === 'month' ? s.amount : s.amount / 12
       return acc + amount / 100
-    }, 0)
+    }, 0) ?? 0
+  })
+
+  const isSubscriber = computed(() => (
+    !http.url ||
+    auth.user?.isAdmin ||
+    subscription.value?.isActive ||
+    monthlyTotal.value >= 299
+  ))
+
+  const one = computed(() => {
+    return auth.user?.sponsorships.find(s => s.tierName.startsWith('sub_') && s.isActive)
+  })
+  const github = computed(() => {
+    return auth.user?.sponsorships.find(s => s.platform === 'github' && s.isActive)
+  })
+  const discord = computed(() => {
+    return auth.user?.sponsorships.find(s => s.platform === 'discord' && s.isActive)
+  })
+  const shopify = computed(() => {
+    return auth.user?.identities.find(i => i.provider === 'shopify')
+  })
+  const patreon = computed(() => {
+    return auth.user?.sponsorships.find(s => s.platform === 'patreon' && s.isActive)
   })
 
   onMounted(async () => {
