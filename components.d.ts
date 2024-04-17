@@ -32,7 +32,6 @@ declare module 'vue' {
     VoDashboardNavItem: typeof import('./lib/components/VoDashboardNavItem.vue')['default']
     VoDialog: typeof import('./lib/components/app/VoDialog.vue')['default']
     VoDialogSubheader: typeof import('./lib/components/app/VoDialogSubheader.vue')['default']
-    VoDownloadsListItem: typeof import('./lib/components/downloads/VoDownloadsListItem.vue')['default']
     VoDownloadsNavItem: typeof import('./lib/components/downloads/VoDownloadsNavItem.vue')['default']
     VoDownloadsTable: typeof import('./lib/components/downloads/VoDownloadsTable.vue')['default']
     VoFooter: typeof import('./lib/components/app/VoFooter.vue')['default']
