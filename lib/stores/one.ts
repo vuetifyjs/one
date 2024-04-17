@@ -66,13 +66,6 @@ export const useOneStore = defineStore('one', () => {
     }, 0) ?? 0
   })
 
-  const isSubscriber = computed(() => (
-    !http.url ||
-    auth.user?.isAdmin ||
-    subscription.value?.isActive ||
-    monthlyTotal.value >= 299
-  ))
-
   const one = computed(() => {
     return auth.user?.sponsorships.find(s => s.tierName.startsWith('sub_') && s.isActive)
   })
@@ -88,6 +81,16 @@ export const useOneStore = defineStore('one', () => {
   const patreon = computed(() => {
     return auth.user?.sponsorships.find(s => s.platform === 'patreon' && s.isActive)
   })
+
+  const isSubscriber = computed(() => (
+    !http.url ||
+    auth.user?.isAdmin ||
+    subscription.value?.isActive ||
+    github.value?.isActive ||
+    discord.value?.isActive ||
+    patreon.value?.isActive ||
+    monthlyTotal.value >= 2.99
+  ))
 
   onMounted(async () => {
     if (sessionId.value) await activate()
