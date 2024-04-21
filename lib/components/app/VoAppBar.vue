@@ -1,5 +1,6 @@
 <template>
   <v-app-bar
+    class="border-b"
     :image="settings.suit['app-bar']"
     name="vo-app-bar"
   >
