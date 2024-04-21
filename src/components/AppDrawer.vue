@@ -4,6 +4,7 @@
     :image="settings.suit['drawer']"
   >
     <v-list
+      color="primary"
       density="compact"
       item-props
       :items="items"
