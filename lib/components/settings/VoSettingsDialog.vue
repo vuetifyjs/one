@@ -17,25 +17,28 @@
               <v-col
                 v-for="(item, i) in items"
                 :key="i"
+                class="d-flex flex-column ga-3"
                 cols="12"
                 md="6"
               >
-                <v-item :value="item.value">
+                <v-list-subheader class="mb-n4">{{ item.title }}</v-list-subheader>
+
+                <v-item v-for="theme in item.items" :key="theme.value" :value="theme.value">
                   <template #default="{ toggle, isSelected }">
                     <v-hover>
                       <template #default="{ props: activatorProps, isHovering }">
                         <v-card
                           :color="isSelected ? 'primary' : 'surface-variant'"
-                          :disabled="item.disabled"
                           height="76"
-                          :image="item.image"
-                          :prepend-icon="item.prependIcon"
-                          :ripple="!item.disabled"
-                          :subtitle="!item.disabled ? item.subtitle : 'In Development'"
-                          :title="item.title"
+                          :image="theme.image"
+                          :prepend-icon="theme.prependIcon"
+                          :readonly="theme.disabled"
+                          :ripple="!theme.disabled"
+                          :subtitle="!theme.disabled ? theme.subtitle : '🔓 Unlock with Vuetify One'"
+                          :title="theme.title"
                           variant="tonal"
                           v-bind="activatorProps"
-                          @click="toggle"
+                          @click="onClick(toggle, theme)"
                         >
                           <template #image>
                             <v-img
@@ -123,6 +126,8 @@
 </template>
 
 <script setup lang="ts">
+  // Utilities
+  import { computed } from 'vue'
   // Icons
   import {
     mdiCog,
@@ -131,6 +136,7 @@
     mdiImageFilterHdr,
     mdiRocketLaunchOutline,
     mdiSpaceInvaders,
+    mdiTransmissionTower,
     mdiWeatherNight,
     mdiWhiteBalanceSunny,
   } from '@mdi/js'
@@ -140,7 +146,7 @@
   const settings = useSettingsStore()
   const user = useUserStore()
 
-  const items = [
+  const standard = computed(() => ([
     {
       title: 'Light',
       subtitle: 'A standard light theme.',
@@ -163,11 +169,23 @@
       value: 'system',
     },
     {
+      title: 'High Contrast',
+      subtitle: 'A theme for high contrast.',
+      image: settings.CDN_URL + 'themes/high-contrast.png',
+      prependIcon: `svg:${mdiContrastCircle}`,
+      value: 'highContrast',
+      disabled: !one.isSubscriber,
+    },
+  ]))
+
+  const releases = computed(() => ([
+    {
       title: 'Blackguard',
       subtitle: 'A theme for v3.4 Blackguard.',
       image: settings.CDN_URL + 'themes/blackguard.png',
       prependIcon: `svg:${mdiSpaceInvaders}`,
       value: 'blackguard',
+      disabled: !one.isSubscriber,
     },
     {
       title: 'Polaris',
@@ -175,23 +193,31 @@
       image: settings.CDN_URL + 'themes/polaris.png',
       prependIcon: `svg:${mdiImageFilterHdr}`,
       value: 'polaris',
+      disabled: !one.isSubscriber,
     },
     {
       title: 'Nebula',
       subtitle: 'A theme for v3.6 Nebula.',
       image: settings.CDN_URL + 'themes/nebula.png',
-      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      prependIcon: `svg:${mdiTransmissionTower}`,
       value: 'nebula',
+      disabled: !one.isSubscriber,
     },
     {
-      title: 'High Contrast',
-      subtitle: 'A theme for high contrast.',
-      image: settings.CDN_URL + 'themes/high-contrast.png',
-      prependIcon: `svg:${mdiContrastCircle}`,
-      value: 'highContrast',
-      disabled: true,
+      title: 'Odyssey',
+      subtitle: 'A theme for v3.7 Odyssey.',
+      image: settings.CDN_URL + 'themes/odyssey.png',
+      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      value: 'odyssey',
+      disabled: !one.isSubscriber,
     },
-  ]
+  ]))
+
+  const items = computed(() => ([
+    { title: 'Standard', items: standard.value },
+    { title: 'Releases', items: releases.value },
+  ]))
+
   const query = useQuery<{ one: string }>()
 
   watch(query, async () => {
@@ -203,4 +229,12 @@
 
     dialog.value = true
   }, { immediate: true })
+
+  function onClick (toggle: () => void, theme: typeof standard[0]) {
+    if (theme.disabled) return
+
+    user.theme = theme.value
+
+    toggle()
+  }
 </script>

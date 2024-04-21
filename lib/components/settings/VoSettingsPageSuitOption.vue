@@ -88,6 +88,7 @@
     mdiSelect,
     mdiSpaceInvaders,
     mdiTextBox,
+    mdiTransmissionTower,
   } from '@mdi/js'
 
   const user = useUserStore()
@@ -110,8 +111,13 @@
     },
     {
       title: 'Nebula',
-      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      prependIcon: `svg:${mdiTransmissionTower}`,
       value: 'nebula',
+    },
+    {
+      title: 'Odyssey',
+      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      value: 'odyssey',
     },
   ]
 </script>
