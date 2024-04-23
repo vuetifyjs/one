@@ -82,13 +82,15 @@
           <v-expand-transition>
             <div
               v-show="user.disableAds"
-              class="ms-5 mb-2"
+              class="ms-5"
             >
-              <VoSwitch
-                v-model="user.showHouseAds"
-                label="Show House Ads"
-                messages="These advertisements are for Vuetify products and services only."
-              />
+              <div class="pb-2">
+                <VoSwitch
+                  v-model="user.showHouseAds"
+                  label="Show House Ads"
+                  messages="These advertisements are for Vuetify products and services only."
+                />
+              </div>
             </div>
           </v-expand-transition>
 
@@ -134,7 +136,7 @@
     mdiContrastCircle,
     mdiDesktopTowerMonitor,
     mdiImageFilterHdr,
-    mdiRocketLaunchOutline,
+    // mdiRocketLaunchOutline,
     mdiSpaceInvaders,
     mdiTransmissionTower,
     mdiWeatherNight,
@@ -203,14 +205,14 @@
       value: 'nebula',
       disabled: !one.isSubscriber,
     },
-    {
-      title: 'Odyssey',
-      subtitle: 'A theme for v3.7 Odyssey.',
-      image: settings.CDN_URL + 'themes/odyssey.png',
-      prependIcon: `svg:${mdiRocketLaunchOutline}`,
-      value: 'odyssey',
-      disabled: !one.isSubscriber,
-    },
+    // {
+    //   title: 'Odyssey',
+    //   subtitle: 'A theme for v3.7 Odyssey.',
+    //   image: settings.CDN_URL + 'themes/odyssey.png',
+    //   prependIcon: `svg:${mdiRocketLaunchOutline}`,
+    //   value: 'odyssey',
+    //   disabled: !one.isSubscriber,
+    // },
   ]))
 
   const items = computed(() => ([
