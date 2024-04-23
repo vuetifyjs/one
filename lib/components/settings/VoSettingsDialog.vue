@@ -232,11 +232,11 @@
     dialog.value = true
   }, { immediate: true })
 
-  function onClick (toggle: () => void, theme: typeof standard[0]) {
+  function onClick (toggle?: () => void, theme?: any) {
     if (theme.disabled) return
 
     user.theme = theme.value
 
-    toggle()
+    toggle?.()
   }
 </script>
