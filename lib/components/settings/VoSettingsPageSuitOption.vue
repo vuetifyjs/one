@@ -84,7 +84,7 @@
   import {
     mdiHome,
     mdiImageFilterHdr,
-    mdiRocketLaunchOutline,
+    // mdiRocketLaunchOutline,
     mdiSelect,
     mdiSpaceInvaders,
     mdiTextBox,
@@ -114,10 +114,10 @@
       prependIcon: `svg:${mdiTransmissionTower}`,
       value: 'nebula',
     },
-    {
-      title: 'Odyssey',
-      prependIcon: `svg:${mdiRocketLaunchOutline}`,
-      value: 'odyssey',
-    },
+    // {
+    //   title: 'Odyssey',
+    //   prependIcon: `svg:${mdiRocketLaunchOutline}`,
+    //   value: 'odyssey',
+    // },
   ]
 </script>
