@@ -18,7 +18,7 @@
           <slot name="prepend" />
         </template>
 
-        <v-divider class="mt-4" />
+        <v-divider />
 
         <slot />
 
