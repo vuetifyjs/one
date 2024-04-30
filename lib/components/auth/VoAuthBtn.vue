@@ -26,6 +26,8 @@
   </VoNotificationsTotalBadge>
 
   <VoAuthDialog />
+
+  <VoSnackbarQueue />
 </template>
 
 <script lang="ts" setup>

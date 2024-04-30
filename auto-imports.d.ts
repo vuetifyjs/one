@@ -88,6 +88,7 @@ declare global {
   const useProductsStore: typeof import('./lib/stores/products')['useProductsStore']
   const usePromotionsStore: typeof import('./lib/stores/promotions')['usePromotionsStore']
   const useQuery: typeof import('./lib/composables/route')['useQuery']
+  const useQueueStore: typeof import('./lib/stores/queue')['useQueueStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSettingsStore: typeof import('./lib/stores/settings')['useSettingsStore']
@@ -196,6 +197,7 @@ declare module 'vue' {
     readonly useProductsStore: UnwrapRef<typeof import('./lib/stores/products')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./lib/stores/promotions')['usePromotionsStore']>
     readonly useQuery: UnwrapRef<typeof import('./lib/composables/route')['useQuery']>
+    readonly useQueueStore: UnwrapRef<typeof import('./lib/stores/queue')['useQueueStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSettingsStore: UnwrapRef<typeof import('./lib/stores/settings')['useSettingsStore']>
@@ -297,6 +299,7 @@ declare module '@vue/runtime-core' {
     readonly useProductsStore: UnwrapRef<typeof import('./lib/stores/products')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./lib/stores/promotions')['usePromotionsStore']>
     readonly useQuery: UnwrapRef<typeof import('./lib/composables/route')['useQuery']>
+    readonly useQueueStore: UnwrapRef<typeof import('./lib/stores/queue')['useQueueStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSettingsStore: UnwrapRef<typeof import('./lib/stores/settings')['useSettingsStore']>

@@ -106,6 +106,7 @@
     "isWithinRange": true,
     "useSponsorsStore": true,
     "DEFAULT_SPONSOR": true,
-    "useDownloadsStore": true
+    "useDownloadsStore": true,
+    "useQueueStore": true
   }
 }

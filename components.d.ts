@@ -54,6 +54,7 @@ declare module 'vue' {
     VoSettingsDialog: typeof import('./lib/components/settings/VoSettingsDialog.vue')['default']
     VoSettingsListItem: typeof import('./lib/components/settings/VoSettingsListItem.vue')['default']
     VoSettingsPageSuitOption: typeof import('./lib/components/settings/VoSettingsPageSuitOption.vue')['default']
+    VoSnackbarQueue: typeof import('./lib/components/app/VoSnackbarQueue.vue')['default']
     VoSocialFooter: typeof import('./lib/components/app/VoSocialFooter.vue')['default']
     VoSponsorshipsDialog: typeof import('./lib/components/sponsorships/VoSponsorshipsDialog.vue')['default']
     VoSponsorshipsListItem: typeof import('./lib/components/sponsorships/VoSponsorshipsListItem.vue')['default']
