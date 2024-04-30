@@ -10,7 +10,7 @@ import 'vuetify/styles'
 // Composables
 import { createVuetify, IconProps } from 'vuetify'
 import * as components from 'vuetify/components'
-import { VConfirmEdit, VEmptyState, VNumberInput } from 'vuetify/labs/components'
+import { VNumberInput } from 'vuetify/labs/components'
 import { camelize, h } from 'vue'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
@@ -21,8 +21,6 @@ export default createVuetify({
     AppChip: components.VChip,
   },
   components: {
-    VConfirmEdit,
-    VEmptyState,
     VNumberInput,
   },
   defaults: {
