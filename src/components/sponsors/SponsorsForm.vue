@@ -82,10 +82,11 @@
 
           <v-col cols="3">
             <v-number-input
-              v-model="sponsors.record.metadata.tier"
               label="Tier"
+              :model-value="Number(sponsors.record.metadata.tier)"
               name="metadata[tier]"
               required
+              @update:model-value="sponsors.record.metadata.tier = String($event)"
             />
           </v-col>
 
