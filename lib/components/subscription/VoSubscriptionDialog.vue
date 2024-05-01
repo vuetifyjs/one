@@ -48,7 +48,7 @@
         />
 
         <VoBtn
-          v-else-if="!one.isSubscriber"
+          v-else-if="!one.one"
           block
           :color="!subscription ? 'disabled' : 'primary'"
           :disabled="!subscription"
