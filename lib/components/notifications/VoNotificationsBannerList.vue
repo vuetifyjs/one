@@ -53,6 +53,7 @@
                 rounded="b"
               >
                 <v-tooltip
+                  v-if="banner.metadata.site.some(s => site.id.includes(s))"
                   location="bottom"
                   :text="isRead(banner.slug) ? 'Mark as unread' : 'Mark as read'"
                 >
@@ -127,6 +128,7 @@
   const display = useDisplay()
 
   const user = useUserStore()
+  const site = useSiteStore()
 
   defineProps<Props>()
 
