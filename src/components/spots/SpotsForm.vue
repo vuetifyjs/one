@@ -243,9 +243,9 @@
     emit('click:save', form)
   }
 
-  function onUpdateImage (file: File[]) {
+  function onUpdateImage (file: File) {
     spots.record!.metadata.image = {
-      url: file.length ? URL.createObjectURL(file[0]) : '',
+      url: file ? URL.createObjectURL(file) : '',
     }
   }
 </script>

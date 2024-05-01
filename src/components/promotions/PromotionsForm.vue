@@ -439,33 +439,33 @@
     emit('click:save', form)
   }
 
-  function onUpdateDefaultImage (file: File[]) {
-    promotions.record!.metadata.images.default = file.length
-      ? { url: URL.createObjectURL(file[0]) } as any
+  function onUpdateDefaultImage (file: File) {
+    promotions.record!.metadata.images.default = file
+      ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.default?.url } as any
   }
 
-  function onUpdateLogoLight (file: File[]) {
-    promotions.record!.metadata.images.logolight = file.length
-      ? { url: URL.createObjectURL(file[0]) } as any
+  function onUpdateLogoLight (file: File) {
+    promotions.record!.metadata.images.logolight = file
+      ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.logolight?.url } as any
   }
 
-  function onUpdateLogoDark (file: File[]) {
-    promotions.record!.metadata.images.logodark = file.length
-      ? { url: URL.createObjectURL(file[0]) } as any
+  function onUpdateLogoDark (file: File) {
+    promotions.record!.metadata.images.logodark = file
+      ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.logodark?.url } as any
   }
 
-  function onUpdateBgLight (file: File[]) {
-    promotions.record!.metadata.images.bglight = file.length
-      ? { url: URL.createObjectURL(file[0]) } as any
+  function onUpdateBgLight (file: File) {
+    promotions.record!.metadata.images.bglight = file
+      ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.bglight?.url } as any
   }
 
-  function onUpdateBgDark (file: File[]) {
-    promotions.record!.metadata.images.bgdark = file.length
-      ? { url: URL.createObjectURL(file[0]) } as any
+  function onUpdateBgDark (file: File) {
+    promotions.record!.metadata.images.bgdark = file
+      ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.bgdark?.url } as any
   }
 </script>

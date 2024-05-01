@@ -303,15 +303,15 @@
     emit('click:save', form)
   }
 
-  function onUpdateLogoDark (file: File[]) {
-    sponsors.record!.metadata.logodark = file.length
-      ? { url: URL.createObjectURL(file[0]) } as any
+  function onUpdateLogoDark (file: File) {
+    sponsors.record!.metadata.logodark = file
+      ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.logodark?.url } as any
   }
 
-  function onUpdateLogoLight (file: File[]) {
-    sponsors.record!.metadata.logolight = file.length
-      ? { url: URL.createObjectURL(file[0]) } as any
+  function onUpdateLogoLight (file: File) {
+    sponsors.record!.metadata.logolight = file
+      ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.logolight?.url } as any
   }
 </script>
