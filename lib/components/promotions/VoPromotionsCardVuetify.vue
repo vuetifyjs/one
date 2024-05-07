@@ -56,13 +56,14 @@
 
   const props = defineProps<Props>()
 
+  const auth = useAuthStore()
   const promotions = usePromotionsStore()
   const user = useUserStore()
 
   const promotion = computed(() => {
     if (promotions.record) return promotions.record
 
-    if (user.disableAds && !user.showHouseAds) return undefined
+    if (auth.user && user.disableAds && !user.showHouseAds) return undefined
 
     if (props.slug) return promotions.all.find(p => p.slug === props.slug)
 
