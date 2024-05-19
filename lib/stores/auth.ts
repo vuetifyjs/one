@@ -143,10 +143,6 @@ export const useAuthStore = defineStore('auth', () => {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
         }
         user.value = e.data.body.user
-        router.push({
-          path: '/user/dashboard/',
-          query: router.currentRoute.value.query,
-        })
         sync()
       } else {
         console.error(e.data.message)
