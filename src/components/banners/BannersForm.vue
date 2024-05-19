@@ -329,13 +329,15 @@
     emit('click:save', form)
   }
 
-  function onUpdateLogo (file: File) {
+  function onUpdateLogo (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     banners.record!.metadata.images.logo = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.logo?.url } as any
   }
 
-  function onUpdateBg (file: File) {
+  function onUpdateBg (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     banners.record!.metadata.images.bg = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.bg?.url } as any

@@ -243,7 +243,8 @@
     emit('click:save', form)
   }
 
-  function onUpdateImage (file: File) {
+  function onUpdateImage (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     spots.record!.metadata.image = {
       url: file ? URL.createObjectURL(file) : '',
     }

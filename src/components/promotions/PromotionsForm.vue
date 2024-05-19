@@ -439,31 +439,36 @@
     emit('click:save', form)
   }
 
-  function onUpdateDefaultImage (file: File) {
+  function onUpdateDefaultImage (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     promotions.record!.metadata.images.default = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.default?.url } as any
   }
 
-  function onUpdateLogoLight (file: File) {
+  function onUpdateLogoLight (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     promotions.record!.metadata.images.logolight = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.logolight?.url } as any
   }
 
-  function onUpdateLogoDark (file: File) {
+  function onUpdateLogoDark (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     promotions.record!.metadata.images.logodark = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.logodark?.url } as any
   }
 
-  function onUpdateBgLight (file: File) {
+  function onUpdateBgLight (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     promotions.record!.metadata.images.bglight = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.bglight?.url } as any
   }
 
-  function onUpdateBgDark (file: File) {
+  function onUpdateBgDark (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     promotions.record!.metadata.images.bgdark = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.images.bgdark?.url } as any

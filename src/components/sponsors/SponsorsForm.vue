@@ -303,13 +303,15 @@
     emit('click:save', form)
   }
 
-  function onUpdateLogoDark (file: File) {
+  function onUpdateLogoDark (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     sponsors.record!.metadata.logodark = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.logodark?.url } as any
   }
 
-  function onUpdateLogoLight (file: File) {
+  function onUpdateLogoLight (_file: File | File[]) {
+    const file = Array.isArray(_file) ? _file[0] : _file
     sponsors.record!.metadata.logolight = file
       ? { url: URL.createObjectURL(file) } as any
       : { url: original.value!.metadata.logolight?.url } as any
