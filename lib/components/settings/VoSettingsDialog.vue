@@ -136,7 +136,7 @@
     mdiContrastCircle,
     mdiDesktopTowerMonitor,
     mdiImageFilterHdr,
-    // mdiRocketLaunchOutline,
+    mdiRocketLaunchOutline,
     mdiSpaceInvaders,
     mdiTransmissionTower,
     mdiWeatherNight,
@@ -205,14 +205,14 @@
       value: 'nebula',
       disabled: !one.isSubscriber,
     },
-    // {
-    //   title: 'Odyssey',
-    //   subtitle: 'A theme for v3.7 Odyssey.',
-    //   image: settings.CDN_URL + 'themes/odyssey.png',
-    //   prependIcon: `svg:${mdiRocketLaunchOutline}`,
-    //   value: 'odyssey',
-    //   disabled: !one.isSubscriber,
-    // },
+    {
+      title: 'Odyssey',
+      subtitle: 'A theme for v3.7 Odyssey.',
+      image: settings.CDN_URL + 'themes/odyssey.png',
+      prependIcon: `svg:${mdiRocketLaunchOutline}`,
+      value: 'odyssey',
+      disabled: !one.isSubscriber,
+    },
   ]))
 
   const items = computed(() => ([
