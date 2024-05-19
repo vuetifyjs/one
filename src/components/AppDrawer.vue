@@ -16,7 +16,6 @@
 
 <script lang="ts" setup>
   const auth = useAuthStore()
-  const route = useRoute()
   const settings = useSettingsStore()
 
   const links = [
