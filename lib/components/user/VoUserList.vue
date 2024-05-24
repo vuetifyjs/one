@@ -4,7 +4,7 @@
     nav
     slim
   >
-    <VoDashboardNavItem />
+    <VoDashboardNavItem v-if="auth.user" />
 
     <VoNotificationsNavItem />
 
