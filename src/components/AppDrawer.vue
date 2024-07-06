@@ -1,7 +1,10 @@
 <template>
   <v-navigation-drawer
+    expand-on-hover
     :floating="!!settings.suit['drawer']"
     :image="settings.suit['drawer']"
+    :permanent="!$vuetify.display.xs"
+    :rail="$vuetify.display.mobile && !$vuetify.display.xs"
   >
     <v-list
       color="primary"

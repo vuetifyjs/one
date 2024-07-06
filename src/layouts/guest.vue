@@ -1,6 +1,8 @@
 <template>
   <VoNotificationsBanner />
 
+  <VoAppBar logo="vone" />
+
   <v-main>
     <router-view />
 
