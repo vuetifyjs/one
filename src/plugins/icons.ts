@@ -47,4 +47,11 @@ export {
   mdiTextBox,
   mdiViewDashboardOutline,
   mdiWhiteBalanceSunny,
+  mdiMessageTextClock,
+  mdiInformation,
+  mdiAlertCircle,
+  mdiAlert,
+  mdiAlertOctagon,
+  mdiTruckDelivery,
+  mdiPauseCircle,
 } from '@mdi/js'

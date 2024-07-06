@@ -32,7 +32,7 @@
   // Types
   interface Props {
     prependIcon?: string
-    title: string
+    title?: string
   }
 
   defineProps<Props>()

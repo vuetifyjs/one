@@ -68,6 +68,11 @@
       disabled: true,
       to: '/vendors/',
     },
+    {
+      title: 'Logs',
+      prependIcon: 'mdi-message-text-clock',
+      to: '/logs/',
+    },
   ])
 
   const items = computed(() => {

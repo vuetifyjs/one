@@ -53,6 +53,7 @@
     "conventional-changelog-vuetify": "^1.2.1",
     "conventional-github-releaser": "^3.1.5",
     "core-js": "^3.36.0",
+    "date-fns": "^3.6.0",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-config-vuetify": "^1.0.0",
