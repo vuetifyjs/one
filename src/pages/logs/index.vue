@@ -156,7 +156,7 @@
       level: level.value,
       page: page.value,
       cursor: firstItem,
-    }).filter(([k, v]) => v != null) as any)
+    }).filter(([, v]) => v != null) as any)
 
     const { logs: _logs, ...rest } = await http.get('/admin/logs?' + params.toString())
 

@@ -1,12 +1,13 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
+import { routes } from 'vue-router/auto-routes'
 import { setupLayouts } from 'virtual:generated-layouts'
 
 import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  extendRoutes: (routes: any) => setupLayouts(routes),
+  routes: setupLayouts(routes),
 })
 
 router.beforeEach(async (to, from, next) => {
