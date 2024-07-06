@@ -15,5 +15,5 @@
 </template>
 
 <script lang="ts" setup>
-  const drawer = shallowRef(null)
+  const drawer = shallowRef<boolean | null>(null)
 </script>

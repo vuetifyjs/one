@@ -78,7 +78,7 @@
   import { mdiBell, mdiBillboard, mdiInboxFullOutline, mdiInboxOutline } from '@mdi/js'
 
   const display = useDisplay()
-  const query = useQuery()
+  const query = useQuery<{ one: string }>()
 
   const banners = useBannersStore()
   const notifications = useNotificationsStore()

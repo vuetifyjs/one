@@ -117,7 +117,7 @@
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
-  const query = useQuery()
+  const query = useQuery<{ one: string }>()
   const router = useRouter()
   const one = useOneStore()
   const { smAndUp } = useDisplay()

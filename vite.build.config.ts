@@ -73,7 +73,6 @@ export default defineConfig({
       external: [
         'vue',
         /^vuetify($|\/)/,
-        '@mdi/js',
         'pinia',
         'vue-router',
         'vue-router/auto',

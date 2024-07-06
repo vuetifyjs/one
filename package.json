@@ -70,7 +70,7 @@
     "rollup-plugin-dts": "^6.1.1",
     "sass": "^1.77.6",
     "taze": "^0.14.2",
-    "typescript": "^5.4.5",
+    "typescript": "5.3.3",
     "unplugin-auto-import": "^0.17.6",
     "unplugin-fonts": "^1.1.1",
     "unplugin-vue-components": "^0.27.2",

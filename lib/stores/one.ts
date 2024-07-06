@@ -40,7 +40,7 @@ interface Invoice {
 }
 
 export const useOneStore = defineStore('one', () => {
-  const query = useQuery()
+  const query = useQuery<{ one: string, session_id: string }>()
   const router = useRouter()
 
   const auth = useAuthStore()

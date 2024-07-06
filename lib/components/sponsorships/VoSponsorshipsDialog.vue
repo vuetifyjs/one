@@ -50,7 +50,7 @@
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
-  const query = useQuery()
+  const query = useQuery<{ one: string }>()
   const one = useOneStore()
 
   watch(query, async () => {
