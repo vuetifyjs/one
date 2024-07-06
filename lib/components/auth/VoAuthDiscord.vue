@@ -1,7 +1,7 @@
 <template>
   <v-list-item
     base-color="#5865F2"
-    :prepend-icon="`svg:${mdiDiscord}`"
+    prepend-icon="$discord"
     rounded="pill"
     slim
     variant="flat"
@@ -21,9 +21,6 @@
 </template>
 
 <script setup lang="ts">
-  // Icons
-  import { mdiDiscord } from '@mdi/js'
-
   const auth = useAuthStore()
 
   const hasIdentity = computed(() => {

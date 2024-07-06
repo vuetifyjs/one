@@ -107,6 +107,7 @@
     "useSponsorsStore": true,
     "DEFAULT_SPONSOR": true,
     "useDownloadsStore": true,
-    "useQueueStore": true
+    "useQueueStore": true,
+    "aliases": true
   }
 }

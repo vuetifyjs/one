@@ -44,7 +44,7 @@
       <template #activator="{ props: activatorProps }">
         <v-icon
           color="white"
-          :icon="`svg:${mdiGithub}`"
+          icon="$github"
           v-bind="activatorProps"
           size="16"
         />
@@ -59,7 +59,7 @@
       <template #activator="{ props: activatorProps }">
         <v-icon
           color="white"
-          :icon="`svg:${mdiDiscord}`"
+          icon="$discord"
           v-bind="activatorProps"
           size="16"
         />
@@ -70,7 +70,7 @@
 
 <script lang="ts" setup>
   // Icons
-  import { mdiCrown, mdiDiscord, mdiGithub } from '@mdi/js'
+  import { mdiCrown } from '@mdi/js'
 
   const auth = useAuthStore()
   const one = useOneStore()

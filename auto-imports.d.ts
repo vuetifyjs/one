@@ -13,6 +13,7 @@ declare global {
   const DEFAULT_USER: typeof import('./lib/stores/user')['DEFAULT_USER']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
+  const aliases: typeof import('./lib/icons/index')['aliases']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const createPinia: typeof import('pinia')['createPinia']

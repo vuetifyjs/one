@@ -1,7 +1,7 @@
 <template>
   <v-list-item
     base-color="#2a2a2a"
-    :prepend-icon="`svg:${mdiGithub}`"
+    prepend-icon="$github"
     rounded="pill"
     slim
     variant="flat"
@@ -21,9 +21,6 @@
 </template>
 
 <script setup lang="ts">
-  // Icons
-  import { mdiGithub } from '@mdi/js'
-
   const auth = useAuthStore()
 
   const hasIdentity = computed(() => {

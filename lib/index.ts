@@ -18,6 +18,9 @@ import VoSpot from '@/components/spots/VoSpot.vue'
 import type { App } from 'vue'
 import type { PiniaPluginContext } from 'pinia'
 
+// Icons
+export { aliases } from '@/icons'
+
 // Stores
 export { useAuthStore } from '@/stores/auth'
 export { useBannersStore } from '@/stores/banners'
