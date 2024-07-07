@@ -11,6 +11,8 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  if (from.matched.length && to.path === from.path) return next()
+
   const auth = useAuthStore()
 
   await auth.verify()

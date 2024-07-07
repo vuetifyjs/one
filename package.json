@@ -48,6 +48,7 @@
     "@types/node": "^20.14.10",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-typescript": "^13.0.0",
+    "@vueuse/router": "^10.11.0",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog-vuetify": "^1.2.1",
     "conventional-github-releaser": "^3.1.5",

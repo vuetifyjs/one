@@ -38,42 +38,63 @@
               </div>
             </template>
             <template #subtitle>
-              <span v-if="log.data.req">{{ log.data.req.url }}</span>
+              <span v-if="log.route">{{ log.route }}&emsp;{{ log.query }}</span>
               <span v-else>&nbsp;</span>
             </template>
 
-            <v-dialog activator="parent">
+            <v-dialog v-slot="{ isActive }" activator="parent" width="auto">
               <v-card>
                 <v-toolbar :color="levelColor(log.level)">
-                  <v-card-item class="w-100">
+                  <v-card-item class="flex-1-1">
                     <template #title>
                       <span class="text-uppercase">{{ levelLabel(log.level) }}:&nbsp;</span>
                       {{ log.msg.split('\n').at(0) }}
                     </template>
                     <template #subtitle>
-                      {{ log.data.req?.url }}
+                      {{ log.route }}&emsp;{{ log.query }}
                     </template>
                     <template #append>
                       {{ log.time }}
                     </template>
                   </v-card-item>
+                  <v-btn icon="$close" variant="text" @click="isActive.value = false" />
                 </v-toolbar>
-                <v-card-text class="d-flex flex-column ga-4">
-                  <p v-if="!log.data.err" class="text-pre-wrap">{{ log.msg }}</p>
+                <div class="d-flex flex-column ga-4 mt-4">
+                  <p v-if="!log.data.err" class="text-pre-wrap px-6">{{ log.msg }}</p>
                   <div v-if="log.data.req">
-                    <p class="text-h6 mb-1">URL:</p>
-                    <v-code class="mx-n6 px-6">{{ log.data.req.url }}</v-code>
-                    <p class="text-h6">Request ID:</p>
-                    <v-code class="mx-n6 px-6">{{ log.data.req.id }}</v-code>
+                    <p class="text-h6 mb-1 px-6">URL:</p>
+                    <v-code class="px-6">{{ log.data.url }}</v-code>
+                    <template v-if="log.query">
+                      <p class="text-h6 mb-1 px-6">Query:</p>
+                      <v-code class="px-6">
+                        <pre>{{ log.data.query }}</pre>
+                      </v-code>
+                    </template>
+                    <p class="text-h6 px-6">Request ID:</p>
+                    <v-code class="px-6">{{ log.data.req.id }}</v-code>
+                  </div>
+                  <div v-if="log.user">
+                    <p class="text-h6 px-6">User:</p>
+                    <v-code class="px-6">
+                      <router-link :to="`/users/${log.user.id}`">{{ log.user.id }}</router-link>
+                    </v-code>
                   </div>
                   <div v-if="log.data.err">
-                    <p class="text-h6 mb-1">Stack:</p>
-                    <v-code class="mx-n6 px-6 overflow-x-auto">
+                    <p class="text-h6 mb-1 px-6">Stack:</p>
+                    <v-code class="px-6 overflow-x-auto">
                       <pre>{{ log.data.err.stack }}</pre>
                     </v-code>
                   </div>
-                  <pre>{{ log }}</pre>
-                </v-card-text>
+                  <v-expansion-panels class="w-auto" flat>
+                    <v-expansion-panel title="Raw data">
+                      <v-expansion-panel-text>
+                        <v-code class="mt-n2 mx-n6 mb-n4 px-6 overflow-x-auto">
+                          <pre>{{ log }}</pre>
+                        </v-code>
+                      </v-expansion-panel-text>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                </div>
               </v-card>
             </v-dialog>
           </v-list-item>
@@ -91,6 +112,7 @@
 </template>
 
 <script setup lang="ts">
+  import { useRouteQuery } from '@vueuse/router'
   import { formatRelative } from 'date-fns'
   import { enUS } from 'date-fns/locale/en-US'
 
@@ -112,10 +134,10 @@
 
   const now = ref(new Date())
   // const live = ref(false)
-  const query = ref('')
-  const level = ref(40)
+  const query = useRouteQuery('search', '', { mode: 'replace' })
+  const level = useRouteQuery('level', 40, { transform: Number, mode: 'replace' })
+  const page = useRouteQuery('page', 1, { transform: Number, mode: 'replace' })
   const logs = ref<any[]>([])
-  const page = ref(1)
   const pagination = ref({
     pageSize: 12,
     pageCount: 0,
@@ -126,14 +148,14 @@
 
   let nowTimer = -1
   onBeforeMount(async () => {
-    nowTimer = window.setTimeout(() => {
+    nowTimer = window.setInterval(() => {
       now.value = new Date()
-    }, 5000)
+    }, 60000)
 
     await fetchLogs()
   })
   onUnmounted(() => {
-    clearTimeout(nowTimer)
+    clearInterval(nowTimer)
   })
 
   let firstItem: string | undefined
@@ -148,7 +170,7 @@
     }
   }, { flush: 'sync' })
 
-  watchEffect(fetchLogs)
+  watch([level, query, page], fetchLogs)
 
   async function fetchLogs () {
     const params = new URLSearchParams(Object.entries({
@@ -159,6 +181,12 @@
     }).filter(([, v]) => v != null) as any)
 
     const { logs: _logs, ...rest } = await http.get('/admin/logs?' + params.toString())
+
+    _logs.forEach((log: any) => {
+      if (log.data.query) {
+        log.query = new URLSearchParams(log.data.query).toString()
+      }
+    })
 
     logs.value = _logs
     pagination.value = rest
@@ -194,7 +222,7 @@
           lastWeek: 'yyyy-MM-dd HH:mm',
           yesterday: "HH:mm 'yesterday'",
           today: 'HH:mm',
-          tomorrow: "'Tomorrow at' HH:mm",
+          tomorrow: 'HH:mm',
           nextWeek: "'Next' eeee",
           other: 'yyyy-MM-dd HH:mm',
         })[token],
