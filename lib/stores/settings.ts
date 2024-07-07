@@ -151,7 +151,7 @@ function genThemes () {
         warning: '#ecb85b',
       },
       variables: {
-        'border-color': '#ffffff',
+        'border-color': '#000000',
         'border-opacity': 0.24,
         'high-emphasis-opacity': 1.0,
         'medium-emphasis-opacity': 0.87,
