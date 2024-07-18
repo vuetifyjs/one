@@ -63,12 +63,6 @@
       to: '/users/',
     },
     {
-      title: 'Vendors',
-      prependIcon: 'mdi-storefront',
-      disabled: true,
-      to: '/vendors/',
-    },
-    {
       title: 'Logs',
       prependIcon: 'mdi-message-text-clock',
       to: '/logs/',
