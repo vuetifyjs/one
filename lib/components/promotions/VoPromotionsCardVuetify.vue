@@ -67,6 +67,6 @@
 
     if (props.slug) return promotions.all.find(p => p.slug === props.slug)
 
-    return promotions.random(promotions.all)
+    return promotions.random(user.disableAds && user.showHouseAds ? promotions.discoverable : promotions.all)
   })
 </script>
