@@ -17,6 +17,12 @@
     >
 
     <input
+      name="metadata[closable]"
+      type="hidden"
+      :value="banners.record.metadata.closable"
+    >
+
+    <input
       v-if="!banners.record.metadata.images.logo"
       name="metadata[images][logo]"
       type="hidden"
@@ -174,7 +180,6 @@
             <v-switch
               v-model="banners.record.metadata.closable"
               label="Closable"
-              name="metadata[closable]"
             />
           </v-col>
 
