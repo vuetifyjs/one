@@ -19,7 +19,9 @@ export default defineConfig({
       dirs: ['lib/components'],
       dts: false,
     }),
-    Vuetify(),
+    Vuetify({
+      autoImport: { labs: true },
+    }),
     AutoImport({
       imports: [
         'vue',
