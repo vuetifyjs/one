@@ -78,6 +78,7 @@ export default defineConfig({
         'vue-router/auto',
         'unplugin-vue-router',
         'lodash-es',
+        '@mdi/js',
       ],
     },
   },

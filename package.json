@@ -36,6 +36,7 @@
     "postversion": "git push --follow-tags"
   },
   "peerDependencies": {
+    "@mdi/js": "7.4.47",
     "lodash-es": "^4.17.21",
     "vue": "^3.4.0",
     "vuetify": "^3.6.1"
