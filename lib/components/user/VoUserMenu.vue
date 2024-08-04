@@ -34,18 +34,19 @@
 
 <script setup lang="ts">
   // Components
-  import { VMenu } from 'vuetify/components'
+  import type { VMenu } from 'vuetify/components'
 
   const banners = useBannersStore()
   const one = useOneStore()
 
-  const menu = ref<typeof VMenu>()
+  const menu = ref<VMenu>()
 
   watch(() => banners.banner, async () => {
     await new Promise(resolve => setTimeout(resolve, 300))
 
     if (!one.isOpen) return
 
+    // @ts-expect-error argument should be optional
     menu.value?.updateLocation?.()
   }, { flush: 'pre' })
 </script>
