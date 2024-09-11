@@ -152,7 +152,7 @@
 </script>
 
 <style scoped>
-:deep(.v-app-bar) .v-toolbar__content {
+.v-app-bar :deep(.v-toolbar__content) {
   backdrop-filter: blur(3px);
 }
 </style>
