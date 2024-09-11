@@ -73,6 +73,7 @@
               v-model="sponsors.record.metadata.level"
               clearable
               item-title="value"
+              item-value="key"
               :items="levels"
               label="Level"
               name="metadata[level]"

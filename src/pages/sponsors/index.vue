@@ -35,11 +35,11 @@
         </template>
 
         <template #item.metadata.start_date="{ item }">
-          {{ adapter.format(item.metadata.start_date, 'normalDateWithWeekday') }}
+          {{ adapter.format(item.metadata.start_date, 'fullDate') }}
         </template>
 
         <template #item.metadata.end_date="{ item }">
-          {{ adapter.format(item.metadata.end_date, 'normalDateWithWeekday') }}
+          {{ adapter.format(item.metadata.end_date, 'fullDate') }}
         </template>
 
         <template #item.actions="{ item }">
@@ -81,6 +81,10 @@
     {
       title: 'Started sponsoring',
       key: 'metadata.start_date',
+    },
+    {
+      title: 'End date',
+      key: 'metadata.end_date',
     },
     {
       title: 'Source',
