@@ -4,7 +4,7 @@
     :color="banner.metadata.color"
     flat
     :height="height"
-    :image="banner.metadata.images.bg?.url"
+    :image="image"
     :location="demo ? 'bottom' : undefined"
     :model-value="hasPromotion"
     order="-1"
@@ -134,4 +134,25 @@
       onClick,
     }
   })
-</script>@/stores/banners@/stores/user
+
+  const image = computed(() => {
+    const bg = banner.value?.metadata.images.bg?.url
+    if (!bg?.startsWith('https://cdn.cosmicjs.com/')) return bg
+    const url = new URL(bg)
+    url.host = 'imgix.cosmicjs.com'
+    url.search = new URLSearchParams({
+      auto: 'format,compress',
+      q: '10',
+      fit: 'crop',
+      w: '4096',
+      h: '256',
+    }).toString()
+    return url.toString()
+  })
+</script>
+
+<style scoped>
+:deep(.v-app-bar) .v-toolbar__content {
+  backdrop-filter: blur(3px);
+}
+</style>
