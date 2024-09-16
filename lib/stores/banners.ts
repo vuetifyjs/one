@@ -30,6 +30,7 @@ export interface Banner {
     attributes: Record<string, any>
     start_date: string
     end_date: string
+    bg_blur: number | null
     images: {
       bg: {
         url: string
@@ -79,6 +80,7 @@ export const DEFAULT_BANNER: Banner = {
     attributes: {},
     start_date: '',
     end_date: '',
+    bg_blur: null,
     images: {
       bg: {
         url: '',

@@ -63,7 +63,6 @@
           v-if="banner.metadata.closable"
           class="ms-6 me-2"
           density="comfortable"
-          :disabled="demo"
           icon="$clear"
           size="small"
           variant="plain"
@@ -99,6 +98,7 @@
   })
 
   function onClose () {
+    if (props.demo) return
     if (!banner.value) return
 
     user.notifications.last.banner.push(banner.value.slug)
@@ -152,7 +152,36 @@
 </script>
 
 <style scoped>
-.v-app-bar :deep(.v-toolbar__content) {
-  backdrop-filter: blur(3px);
+.v-app-bar :deep(.v-toolbar__image)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(calc(v-bind('banner?.metadata.bg_blur') * 1px));
+  /* https://non-boring-gradients.netlify.app/
+     15deg, easeOutQuad, rgba(0,0,0,0.65) to rgba(0,0,0,0) */
+  background: linear-gradient(
+    15deg,
+    rgb(0% 0% 0% / 0.65) 0%,
+    rgb(0% 0% 0% / 0.5712890625) 6.25%,
+    rgb(0% 0% 0% / 0.49765625) 12.5%,
+    rgb(0% 0% 0% / 0.4291015625) 18.75%,
+    rgb(0% 0% 0% / 0.36562500000000003) 25%,
+    rgb(0% 0% 0% / 0.3072265625) 31.25%,
+    rgb(0% 0% 0% / 0.25390625) 37.5%,
+    rgb(0% 0% 0% / 0.20566406250000002) 43.75%,
+    rgb(0% 0% 0% / 0.16249999999999998) 50%,
+    rgb(0% 0% 0% / 0.12441406249999998) 56.25%,
+    rgb(0% 0% 0% / 0.09140625000000002) 62.5%,
+    rgb(0% 0% 0% / 0.0634765625) 68.75%,
+    rgb(0% 0% 0% / 0.04062500000000002) 75%,
+    rgb(0% 0% 0% / 0.022851562499999978) 81.25%,
+    rgb(0% 0% 0% / 0.010156249999999978) 87.5%,
+    rgb(0% 0% 0% / 0.002539062500000022) 93.75%,
+    rgb(0% 0% 0% / 0) 100%
+  );
+}
+.v-list-item-subtitle {
+  color: currentColor;
+  opacity: var(--v-high-emphasis-opacity);
 }
 </style>

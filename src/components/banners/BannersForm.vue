@@ -151,11 +151,14 @@
           </v-col>
 
           <v-col cols="4">
-            <v-text-field
-              v-model.number="banners.record.metadata.height"
+            <v-number-input
+              v-model="banners.record.metadata.height"
               clearable
+              control-variant="stacked"
               label="Height"
+              :min="0"
               name="metadata[height]"
+              suffix="px"
               type="number"
             />
           </v-col>
@@ -225,12 +228,27 @@
               />
             </div>
 
-            <v-file-input
-              accept="image/*"
-              label="Upload background"
-              name="metadata[images][bg]"
-              @update:model-value="onUpdateBg"
-            />
+            <v-row dense>
+              <v-col>
+                <v-file-input
+                  accept="image/*"
+                  label="Upload background"
+                  name="metadata[images][bg]"
+                  @update:model-value="onUpdateBg"
+                />
+              </v-col>
+              <v-col cols="auto">
+                <v-number-input
+                  v-model="banners.record.metadata.bg_blur"
+                  control-variant="stacked"
+                  label="Blur"
+                  :max="24"
+                  :min="0"
+                  :step="1"
+                  suffix="px"
+                />
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-card-text>
