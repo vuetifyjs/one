@@ -23,16 +23,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:one": "vite build --config vite.build.config.ts && yarn build:types",
+    "build:one": "vite build --config vite.build.config.ts && pnpm build:types",
     "build:dev": "vite build --mode development --config vite.build.config.ts ",
     "build:types": "rimraf types-temp && vue-tsc --pretty -p tsconfig.json && rollup --config rollup.types.config.js && rimraf types-temp",
-    "release": "yarn build:dev && yarn version && git push --follow-tags",
-    "watch": "yarn build:dev --watch",
+    "release": "pnpm build:dev && pnpm version && git push --follow-tags",
+    "watch": "pnpm build:dev --watch",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.vue --fix --ignore-path .gitignore",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "prepublishOnly": "yarn build:one",
+    "prepublishOnly": "pnpm build:one",
     "postversion": "git push --follow-tags"
   },
   "peerDependencies": {
@@ -86,5 +86,6 @@
     "vue-router": "^4.4.0",
     "vue-tsc": "^2.0.26",
     "vuetify": "^3.6.11"
-  }
+  },
+  "packageManager": "pnpm@9.10.0"
 }

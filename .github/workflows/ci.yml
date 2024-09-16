@@ -13,8 +13,12 @@ jobs:
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
       - uses: actions/checkout@v2
-      - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn build:one
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v4
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm build:one
         env:
           VITE_API_SERVER_URL: https://api.vuetifyjs.com
       - run: npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
@@ -22,6 +26,6 @@ jobs:
           NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
       - run: npm publish
       - name: GitHub release
-        run: yarn conventional-github-releaser -p vuetify
+        run: pnpm conventional-github-releaser -p vuetify
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
