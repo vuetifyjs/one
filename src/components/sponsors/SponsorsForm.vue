@@ -22,20 +22,6 @@
       :value="sponsors.record.metadata.active"
     >
 
-    <input
-      v-if="!sponsors.record.metadata.logodark"
-      name="metadata[logodark]"
-      type="hidden"
-      :value="null"
-    >
-
-    <input
-      v-if="!sponsors.record.metadata.logolight"
-      name="metadata[logolight]"
-      type="hidden"
-      :value="null"
-    >
-
     <VoCard :prepend-icon="prependIcon" :title="title">
       <template #append>
         <VoBtn

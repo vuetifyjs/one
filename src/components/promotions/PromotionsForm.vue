@@ -16,41 +16,6 @@
       :value="promotions.record.metadata.active"
     >
 
-    <input
-      v-if="!promotions.record.metadata.images.default"
-      name="metadata[images][default]"
-      type="hidden"
-      :value="null"
-    >
-
-    <input
-      v-if="!promotions.record.metadata.images.logolight"
-      name="metadata[images][logolight]"
-      type="hidden"
-      :value="null"
-    >
-
-    <input
-      v-if="!promotions.record.metadata.images.logodark"
-      name="metadata[images][logodark]"
-      type="hidden"
-      :value="null"
-    >
-
-    <input
-      v-if="!promotions.record.metadata.images.bglight"
-      name="metadata[images][bglight]"
-      type="hidden"
-      :value="null"
-    >
-
-    <input
-      v-if="!promotions.record.metadata.images.bgdark"
-      name="metadata[images][bgdark]"
-      type="hidden"
-      :value="null"
-    >
-
     <v-card>
       <v-toolbar :title="title">
         <template #append>

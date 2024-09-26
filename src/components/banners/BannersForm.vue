@@ -22,20 +22,6 @@
       :value="banners.record.metadata.closable"
     >
 
-    <input
-      v-if="!banners.record.metadata.images.logo"
-      name="metadata[images][logo]"
-      type="hidden"
-      :value="null"
-    >
-
-    <input
-      v-if="!banners.record.metadata.images.bg"
-      name="metadata[images][bg]"
-      type="hidden"
-      :value="null"
-    >
-
     <VoCard :prepend-icon="prependIcon" :title="title">
       <template #append>
         <VoBtn
