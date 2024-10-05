@@ -64,6 +64,22 @@ export default defineConfig({
       },
       vueTemplate: true,
     }),
+    {
+      name: 'inject-umami',
+      transformIndexHtml (html, ctx) {
+        if (!ctx.bundle) return
+
+        return [{
+          tag: 'script',
+          attrs: {
+            defer: true,
+            src: 'https://umami.vuetifyjs.com/script.js',
+            'data-website-id': '18b6c33e-6952-40ef-8150-bb2309e06534',
+          },
+          injectTo: 'head',
+        }]
+      },
+    },
   ],
   optimizeDeps: {
     exclude: ['vuetify'],
