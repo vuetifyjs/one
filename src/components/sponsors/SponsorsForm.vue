@@ -151,7 +151,7 @@
 
             <div class="d-flex align-center mb-2">
               <v-img
-                color="surface-variant"
+                color="surface-bright"
                 max-height="56"
                 rounded
                 :src="sponsors.record.metadata.logolight?.url"
@@ -169,7 +169,7 @@
 
             <v-file-input
               accept="image/*"
-              label="Upload background"
+              label="Upload logo"
               name="metadata[logolight]"
               @update:model-value="onUpdateLogoLight"
             />
