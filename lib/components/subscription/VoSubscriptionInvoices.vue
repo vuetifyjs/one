@@ -6,12 +6,10 @@
         title="Invoice History"
       />
 
-      <v-card
-        border
-        height="450"
-        rounded="lg"
-      >
+      <v-card border rounded="lg">
         <v-data-table-virtual
+          fixed-header
+          height="450"
           :items="one.invoices"
           :loading="one.isLoading"
           sticky
