@@ -5,6 +5,7 @@
  */
 
 // Plugins
+import './analytics'
 import vuetify from './vuetify'
 import pinia from './pinia'
 import router from '../router'

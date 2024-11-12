@@ -62,7 +62,7 @@
               item-value="key"
               :items="levels"
               label="Level"
-              name="metadata[level]"
+              name="metadata[level][key]"
               return-object
             />
           </v-col>
