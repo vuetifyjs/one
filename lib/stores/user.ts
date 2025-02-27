@@ -112,7 +112,7 @@ export const DEFAULT_USER: RootState = {
   avatar: '',
   dev: false,
   disableAds: false,
-  composition: 'options',
+  composition: 'composition',
   pwaRefresh: true,
   theme: 'system',
   mixedTheme: true,
