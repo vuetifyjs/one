@@ -1,7 +1,7 @@
 <template>
   <VoPromotionsCard
     v-if="promotion || !promotions.hasLoaded"
-    class="mb-4"
+    class="vo-promotions-card-highlight"
     :color="promotion?.metadata.color ?? 'surface'"
     height="60"
     :href="promotion?.metadata.url"

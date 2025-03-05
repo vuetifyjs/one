@@ -3,7 +3,7 @@
     v-if="promotion || !promotions.hasLoaded"
     border
     caption="ads via vuetify"
-    class="pa-2 mb-4"
+    class="vo-promotions-card-vuetify pa-2"
     :href="promotion?.metadata?.url"
     width="360"
   >
