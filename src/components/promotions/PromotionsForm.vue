@@ -10,10 +10,26 @@
       :value="promotions.record.id"
     >
 
+    <!-- Hidden inputs to show false value on initial unchecked checkbox -->
     <input
+      v-if="!promotions.record.metadata.active"
       name="metadata[active]"
       type="hidden"
       :value="promotions.record.metadata.active"
+    >
+
+    <input
+      v-if="!promotions.record.metadata.advertisement"
+      name="metadata[advertisement]"
+      type="hidden"
+      :value="promotions.record.metadata.advertisement"
+    >
+
+    <input
+      v-if="!promotions.record.metadata.discoverable"
+      name="metadata[discoverable]"
+      type="hidden"
+      :value="promotions.record.metadata.discoverable"
     >
 
     <v-card>
