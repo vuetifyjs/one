@@ -16,6 +16,7 @@ interface SubscriptionItemPlan {
   amount: number
   currency: string
   interval: 'month' | 'year'
+  oneTeam: boolean
 }
 
 interface SubscriptionItem {
@@ -52,6 +53,7 @@ export const useOneStore = defineStore('one', () => {
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
+  const oneTeam = computed(() => info.value?.items[0].plan.oneTeam ?? false)
 
   const subscription = computed(() => {
     return auth.user?.sponsorships.find(s => s.platform === 'stripe' && s.tierName.startsWith('sub_'))
@@ -147,10 +149,10 @@ export const useOneStore = defineStore('one', () => {
     window.open(`${http.url}/one/manage`, '_blank')
   }
 
-  async function subscribe (interval: string) {
+  async function subscribe (interval: string, team: boolean) {
     isLoading.value = true
 
-    window.location.href = `${http.url}/one/subscribe?interval=${interval}`
+    window.location.href = `${http.url}/one/subscribe?interval=${interval}&team=${team}`
   }
 
   async function cancel () {
@@ -237,6 +239,7 @@ export const useOneStore = defineStore('one', () => {
   return {
     info,
     interval,
+    oneTeam,
     invoices,
     sessionId,
     subscription,

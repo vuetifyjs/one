@@ -29,6 +29,12 @@ export interface Identity {
   primary: boolean
 }
 
+export interface Team {
+  id: string
+  name: string
+  inviteCode: string
+}
+
 export interface User {
   id: string
   isAdmin: boolean
@@ -38,6 +44,7 @@ export interface User {
   createdAt: string
   identities: Identity[]
   sponsorships: Sponsorship[]
+  team: Team
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -102,6 +109,7 @@ export const useAuthStore = defineStore('auth', () => {
       async res => {
         if (res.ok || res.status === 401) {
           user.value = (await res.json()).user
+          console.log(user.value)
         } else {
           console.error(res.statusText)
         }
