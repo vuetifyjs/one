@@ -10,6 +10,8 @@
 
     <VoStudioNavItem />
 
+    <VoTeamListItem v-if="auth.user" />
+
     <VoDownloadsNavItem v-if="one.shopify" />
 
     <VoSponsorshipsListItem />
