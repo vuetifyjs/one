@@ -20,7 +20,7 @@ export default defineConfig({
       dts: false,
     }),
     Vuetify({
-      autoImport: { labs: true },
+      autoImport: true,
     }),
     AutoImport({
       imports: [
