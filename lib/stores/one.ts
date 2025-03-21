@@ -16,7 +16,7 @@ interface SubscriptionItemPlan {
   amount: number
   currency: string
   interval: 'month' | 'year'
-  oneTeam: boolean
+  hasTeamAccess: boolean
 }
 
 interface SubscriptionItem {
@@ -53,12 +53,16 @@ export const useOneStore = defineStore('one', () => {
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
-  const oneTeam = computed(() => info.value?.items[0].plan.oneTeam ?? false)
 
+  const access = ref<[]>([])
   const subscription = computed(() => {
     return auth.user?.sponsorships.find(s => s.platform === 'stripe' && s.tierName.startsWith('sub_'))
   })
   const hasBilling = computed(() => !!subscription.value?.tierName)
+
+  const hasTeamAccess = computed(() =>
+    access.value.some(access => ['one-team', 'team'].includes(access))
+  )
 
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s) => {
@@ -203,6 +207,7 @@ export const useOneStore = defineStore('one', () => {
       )
 
       auth.user = res.user
+      access.value = res.access
     } catch (e) {
       //
     } finally {
@@ -218,7 +223,6 @@ export const useOneStore = defineStore('one', () => {
 
       info.value = res.subscription
       invoices.value = res.invoices
-
       return res
     } catch (e) {
       //
@@ -239,7 +243,8 @@ export const useOneStore = defineStore('one', () => {
   return {
     info,
     interval,
-    oneTeam,
+    access,
+    hasTeamAccess,
     invoices,
     sessionId,
     subscription,
