@@ -18,6 +18,7 @@ export interface Sponsorship {
   amount: number
   isActive: boolean
   createdAt: Date
+  hasTeamAccess: boolean;
 }
 
 export interface Identity {
@@ -29,6 +30,12 @@ export interface Identity {
   primary: boolean
 }
 
+export interface Team {
+  id: string
+  name: string
+  inviteCode: string
+}
+
 export interface User {
   id: string
   isAdmin: boolean
@@ -38,6 +45,7 @@ export interface User {
   createdAt: string
   identities: Identity[]
   sponsorships: Sponsorship[]
+  team: Team
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -47,6 +55,7 @@ export const useAuthStore = defineStore('auth', () => {
   const userStore = useUserStore()
   const router = useRouter()
   const isLoading = shallowRef(false)
+  const one = useOneStore()
 
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
@@ -101,7 +110,9 @@ export const useAuthStore = defineStore('auth', () => {
     }).then(
       async res => {
         if (res.ok || res.status === 401) {
-          user.value = (await res.json()).user
+          const data = await res.json()
+          user.value = data.user
+          one.access = data.access
         } else {
           console.error(res.statusText)
         }
