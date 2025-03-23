@@ -40,6 +40,22 @@ interface Invoice {
   pdf: string
 }
 
+export type Team = {
+  id: string
+  name: string
+  inviteCode: string
+  members: {
+    id: string
+    name: string
+    picture: string
+  }[]
+  owner: {
+    id: string
+    name: string
+    picture: string
+  }
+}
+
 export const useOneStore = defineStore('one', () => {
   const query = useQuery<{ one: string, session_id: string }>()
   const router = useRouter()
@@ -53,6 +69,7 @@ export const useOneStore = defineStore('one', () => {
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
+  const team = ref<Team | null>(null)
 
   const access = ref<[]>([])
   const subscription = computed(() => {
@@ -61,8 +78,12 @@ export const useOneStore = defineStore('one', () => {
   const hasBilling = computed(() => !!subscription.value?.tierName)
 
   const hasTeamAccess = computed(() =>
-    access.value.some(access => ['one-team', 'team'].includes(access))
+    access.value.some(access => ['one/team', 'snips/team'].includes(access))
   )
+
+  const isTeamOwner = computed(() => {
+    return auth.user?.id === auth.user?.team?.owner.id
+  })
 
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s) => {
@@ -208,6 +229,7 @@ export const useOneStore = defineStore('one', () => {
 
       auth.user = res.user
       access.value = res.access
+      team.value = auth.user?.team ?? null
     } catch (e) {
       //
     } finally {
@@ -245,6 +267,8 @@ export const useOneStore = defineStore('one', () => {
     interval,
     access,
     hasTeamAccess,
+    isTeamOwner,
+    team,
     invoices,
     sessionId,
     subscription,

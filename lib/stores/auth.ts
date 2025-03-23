@@ -9,6 +9,8 @@ import { ref, shallowRef, watch } from 'vue'
 import { useHttpStore } from '@/stores/http'
 import { useUserStore } from '@/stores/user'
 
+import { type Team } from './one'
+
 export interface Sponsorship {
   id: string
   platform: string
@@ -28,12 +30,6 @@ export interface Identity {
   userId: string
   userHandle: string
   primary: boolean
-}
-
-export interface Team {
-  id: string
-  name: string
-  inviteCode: string
 }
 
 export interface User {
@@ -113,6 +109,8 @@ export const useAuthStore = defineStore('auth', () => {
           const data = await res.json()
           user.value = data.user
           one.access = data.access
+          one.team = data.user.team
+          console.log(user.value)
         } else {
           console.error(res.statusText)
         }

@@ -4,21 +4,218 @@
     :prepend-icon="`svg:${mdiBell}`"
     title="Team"
   >
-    <span class="text-center">Team id: {{ team?.id }}</span>
-    <span class="text-center">Team name: {{ team?.name }}</span>
-    <span class="text-center">Invite Code: {{ team?.inviteCode }}</span>  </VoDialog>
-</template>
+    <v-container class="pa-md-10" fluid>
+      <v-card
+        v-if="one.isTeamOwner"
+        border
+        class="mb-4"
+        color="surface-light"
+        flat
+        max-width="1280"
+        rounded="lg"
+      >
+        <v-card-item
+          class="bg-surface"
+          prepend-icon="mdi-account-group-outline"
+          :subtitle="`Team - ${one.team?.members?.length} members`"
+          title="Members"
+        >
+          <template #append>
+            <v-btn
+              border
+              class="text-none"
+              color="primary"
+              prepend-icon="mdi-account-plus-outline"
+              rounded="lg"
+              variant="flat"
+            >
+              Add member
+
+              <v-menu
+                activator="parent"
+                :close-on-content-click="false"
+                max-width="450"
+                offset="8"
+                width="100%"
+              >
+                <v-card color="surface-light">
+                  <v-card-item
+                    class="bg-surface"
+                    prepend-icon="mdi-link-variant"
+                    subtitle="Provide this link to invite your team members"
+                    title="Member invite link"
+                  >
+                    <template #append>
+                      <v-btn
+                        class="text-none"
+                        :color="reset ? undefined : 'error'"
+                        :disabled="reset"
+                        flat
+                        slim
+                        text="Reset"
+                        @click="onClickReset"
+                      />
+                    </template>
+                  </v-card-item>
+
+                  <v-card-text class="pt-4">
+                    <v-text-field
+                      flat
+                      hide-details
+                      label="Invite link"
+                      :model-value="invite"
+                      readonly
+                      variant="solo"
+                    >
+                      <template #append-inner>
+                        <v-icon
+                          v-tooltip="'Copy Team link'"
+                          :icon="copied ? 'mdi-check' : 'mdi-content-copy'"
+                          size="small"
+                          @click="onClickCopy"
+                        />
+                      </template>
+                    </v-text-field>
+                  </v-card-text>
+                </v-card>
+              </v-menu>
+            </v-btn>
+          </template>
+        </v-card-item>
+
+        <v-divider />
+
+        <v-card-text>
+          <v-sheet border rounded="lg">
+            <v-data-table
+              :headers="headers"
+              :hide-default-footer="team?.members?.length! < 10"
+              :items="team?.members"
+            >
+              <template #item.name="{ item }">
+                <div class="d-flex align-center">
+                  <v-avatar :image="item.picture" size="x-small" start />
+
+                  <span>{{ item.name }}</span>
+                </div>
+              </template>
+
+              <template #item.actions="{ item }">
+                <v-btn
+                  v-if="team?.owner?.id === item.id "
+                  class="text-none"
+                  color="primary"
+                  prepend-icon="mdi-shield-lock"
+                  readonly
+                  slim
+                  text="Team owner"
+                  variant="tonal"
+                />
+
+                <v-btn
+                  v-else
+                  text="Revoke"
+                  @click="onClickRemove()"
+                />
+              </template>
+            </v-data-table>
+          </v-sheet>
+        </v-card-text>
+      </v-card>
+
+      <v-card
+        v-else
+        border
+        color="surface-light"
+        flat
+        max-width="1280"
+        rounded="lg"
+      >
+        <v-card-item
+          prepend-icon="mdi-shield-lock"
+          subtitle="You are currently a member of a team with an All-access Pass."
+          title="My Team access"
+        >
+          <template #title>
+            <div class="d-flex align-center">
+              My Team Access
+
+              <v-chip
+                border="thin opacity-25 success"
+                class="ms-2"
+                color="success"
+                label
+                size="x-small"
+                text="Active"
+              />
+            </div>
+          </template>
+
+          <template #append>
+            <V-btn
+              prepend-icon="mdi-exit-to-app"
+              rounded="lg"
+              text="Leave team"
+              width="145"
+              @click="onClickLeaveTeam"
+            />
+          </template>
+        </v-card-item>
+      </v-card>
+    </v-container>
+  </vodialog></template>
 
   <script setup lang="ts">
     // Icons
   import { mdiBell } from '@mdi/js'
 
-  const auth = useAuthStore()
-  const team = computed(() => {
-    return auth?.user?.team
-  })
+  const one = useOneStore()
+  const http = useHttpStore()
+  const team = computed(() => { return one.team })
 
-  console.log(auth.user)
+  const copied = shallowRef(false)
+  const reset = shallowRef(false)
+
+  const headers = [
+    {
+      title: 'Name',
+      key: 'name',
+    },
+    {
+      title: 'Actions',
+      key: 'actions',
+      align: 'end',
+      sortable: false,
+    },
+  ] as const
+
+  const invite = computed(() => `https://one.vuetifyjs.com/?invite=${team.value?.inviteCode}`)
 
   const dialog = defineModel('modelValue', { type: Boolean })
+
+  function onClickCopy () {
+    copied.value = true
+
+    navigator.clipboard.writeText(invite.value)
+
+    setTimeout(() => {
+      copied.value = false
+    }, 2000)
+  }
+
+  const onClickLeaveTeam = () => {
+    console.log('leaving team')
+  }
+
+  const onClickRemove = () => {
+    console.log('removed from team')
+  }
+
+  async function onClickReset () {
+    reset.value = true
+
+    const res = await http.post('/one/team/regen')
+
+    one.team = res.team
+  }
   </script>
