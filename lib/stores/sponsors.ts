@@ -33,7 +33,7 @@ export interface Sponsor {
   }
 }
 
-export type State = {
+export type SponsorState = {
   isLoading: Ref<boolean>
   all: Ref<Sponsor[]>
   aall: Ref<Sponsor[]>
@@ -208,5 +208,5 @@ export const useSponsorsStore = defineStore('sponsors', () => {
     store,
     update,
     destroy,
-  } as State
+  } as SponsorState
 })

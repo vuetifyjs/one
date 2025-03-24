@@ -64,7 +64,9 @@
   defineProps<Props>()
 
   const model = defineModel('modelValue', { type: Boolean })
-  const display = useDisplay()
+  // TODO: why does this have to be typed as any? other components that
+  // use useDisplay don't need to be typed
+  const display: any = useDisplay()
 
   const isFullscreen = shallowRef(false)
 </script>

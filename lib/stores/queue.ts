@@ -3,7 +3,7 @@ import { Ref } from 'vue'
 
 export type Snackbar = Record<string, any>
 
-export interface State {
+export interface SnackbarQueueState {
   queue: Ref<Snackbar[]>
   show: (text: Record<string, any> | string) => void
 }
@@ -20,5 +20,5 @@ export const useQueueStore = defineStore('Queue', () => {
   return {
     queue,
     show,
-  } as State
+  } as SnackbarQueueState
 })
