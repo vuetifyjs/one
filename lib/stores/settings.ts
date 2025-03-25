@@ -193,7 +193,7 @@ function genThemes () {
         'border-opacity': 0.87,
         'high-emphasis-opacity': 1.0,
         'medium-emphasis-opacity': 0.87,
-        'disabled-opacity': 0.5,
+        'disabled-opacity': 0.8,
         'idle-opacity': 0.1,
         'hover-opacity': 0.2,
         'focus-opacity': 0.3,
