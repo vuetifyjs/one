@@ -63,7 +63,7 @@ export const useOneStore = defineStore('one', () => {
   const auth = useAuthStore()
   const http = useHttpStore()
 
-  const isLoading = shallowRef(false)
+  const isLoading = shallowRef(true)
   const isOpen = shallowRef(false)
   const info = ref<Info>()
   const invoices = ref<Invoice[]>([])
@@ -262,6 +262,24 @@ export const useOneStore = defineStore('one', () => {
     })
   }
 
+  async function removeFromTeam () {
+    try {
+      const res = await http.post('/one/team/remove', { userId: auth.user?.id })
+      team.value = res.team
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+
+  async function leaveTeam () {
+    try {
+      await http.post('/one/team/leave', { teamId: team.value?.id })
+      team.value = null
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+
   return {
     info,
     interval,
@@ -293,5 +311,8 @@ export const useOneStore = defineStore('one', () => {
     subscribe,
     subscriptionInfo,
     verify,
+
+    removeFromTeam,
+    leaveTeam,
   }
 })

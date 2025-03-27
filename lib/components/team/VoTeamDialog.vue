@@ -20,7 +20,7 @@
           :subtitle="`Team - ${one.team?.members?.length} members`"
           title="Members"
         >
-          <template #append>
+          <template v-if="one.isTeamOwner" #append>
             <v-btn
               border
               class="text-none"
@@ -115,7 +115,7 @@
                 <v-btn
                   v-else
                   text="Revoke"
-                  @click="onClickRemove()"
+                  @click="one.removeFromTeam()"
                 />
               </template>
             </v-data-table>
@@ -157,7 +157,7 @@
               rounded="lg"
               text="Leave team"
               width="145"
-              @click="onClickLeaveTeam"
+              @click="one.leaveTeam()"
             />
           </template>
         </v-card-item>
@@ -201,14 +201,6 @@
     setTimeout(() => {
       copied.value = false
     }, 2000)
-  }
-
-  const onClickLeaveTeam = () => {
-    console.log('leaving team')
-  }
-
-  const onClickRemove = () => {
-    console.log('removed from team')
   }
 
   async function onClickReset () {

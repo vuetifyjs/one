@@ -10,7 +10,7 @@
 
     <VoStudioNavItem />
 
-    <VoTeamListItem v-if="one.team && one.hasTeamAccess" />
+    <VoTeamListItem v-if="one.team" />
 
     <VoDownloadsNavItem v-if="one.shopify" />
 

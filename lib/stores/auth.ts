@@ -109,8 +109,7 @@ export const useAuthStore = defineStore('auth', () => {
           const data = await res.json()
           user.value = data.user
           one.access = data.access
-          one.team = data.user.team
-          console.log(user.value)
+          one.team = data.user?.team
         } else {
           console.error(res.statusText)
         }
@@ -161,6 +160,8 @@ export const useAuthStore = defineStore('auth', () => {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
         }
         user.value = e.data.body.user
+        one.access = e.data.body.access
+        one.team = e.data.body.user.team
         sync()
       } else {
         console.error(e.data.message)
