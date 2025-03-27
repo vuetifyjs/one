@@ -10,7 +10,7 @@
 
     <VoStudioNavItem />
 
-    <VoTeamListItem v-if="one.team" />
+    <VoTeamListItem v-if="one.team && auth.user?.isAdmin" />
 
     <VoDownloadsNavItem v-if="one.shopify" />
 
