@@ -15,15 +15,19 @@
 
             <v-window :model-value="window">
               <v-window-item value="subscribe">
-                <VoSwitch v-model="teamAccess" class="d-flex justify-end" title="One Team">
+                <VoSubscriptionSubscribe v-model="subscription" />
+                <VoSwitch v-model="teamAccess" class="d-flex justify-end" disabled title="One Team">
                   <template #label>
-                    <v-label>Team Access</v-label>
+                    <v-label>Teams</v-label>
+                    <v-chip
+                      class="ml-4"
+                      color="amber-darken-1"
+                      label
+                      size="small"
+                      variant="outlined"
+                    >Coming Soon</v-chip>
                   </template>
                 </VoSwitch>
-                <VoSubscriptionSubscribe v-model="subscription" />
-
-                <br>
-
                 <VoSubscriptionPerks />
               </v-window-item>
 
