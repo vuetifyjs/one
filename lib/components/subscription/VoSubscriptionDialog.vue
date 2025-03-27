@@ -15,11 +15,11 @@
 
             <v-window :model-value="window">
               <v-window-item value="subscribe">
-                <vo-switch v-model="oneTeam" class="d-flex justify-end" title="One Team">
+                <VoSwitch v-model="teamAccess" class="d-flex justify-end" title="One Team">
                   <template #label>
                     <v-label>Team Access</v-label>
                   </template>
-                </vo-switch>
+                </VoSwitch>
                 <VoSubscriptionSubscribe v-model="subscription" />
 
                 <br>
@@ -61,7 +61,7 @@
           prepend-icon="$vuetify"
           size="default"
           text="Activate Subscription"
-          @click="one.subscribe(subscription!, oneTeam!)"
+          @click="one.subscribe(subscription!, teamAccess)"
         />
 
         <VoBtn
@@ -90,7 +90,7 @@
   const one = useOneStore()
   const query = useQuery<{ one: string }>()
   const subscription = shallowRef(one.interval)
-  const oneTeam = shallowRef(one.oneTeam)
+  const teamAccess = shallowRef(false)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
   const isUpdatingSubscription = shallowRef<boolean | null>(false)
 
