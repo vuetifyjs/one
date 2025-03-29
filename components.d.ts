@@ -75,6 +75,7 @@ declare module 'vue' {
     VoSubscriptionSubscribe: typeof import('./lib/components/subscription/VoSubscriptionSubscribe.vue')['default']
     VoSwitch: typeof import('./lib/components/app/VoSwitch.vue')['default']
     VoTeamDialog: typeof import('./lib/components/team/VoTeamDialog.vue')['default']
+    VoTeamInvite: typeof import('./lib/components/team/VoTeamInvite.vue')['default']
     VoTeamListItem: typeof import('./lib/components/team/VoTeamListItem.vue')['default']
     VoUserAvatar: typeof import('./lib/components/user/VoUserAvatar.vue')['default']
     VoUserBadges: typeof import('./lib/components/user/VoUserBadges.vue')['default']

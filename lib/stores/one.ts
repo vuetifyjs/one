@@ -69,8 +69,10 @@ export const useOneStore = defineStore('one', () => {
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
+
   const team = ref<Team | null>(null)
-  const teamInviteCode = computed(() => query.value.invite)
+  const teamInviteDialog = ref<boolean>(true)
+  const teamInviteCode = computed<string>(() => query.value.invite)
 
   const access = ref<[]>([])
   const subscription = computed(() => {
@@ -134,8 +136,7 @@ export const useOneStore = defineStore('one', () => {
   watch(teamInviteCode, async () => {
     if (!teamInviteCode.value) return
     if (!auth.user) { auth.dialog = true }
-    await joinTeam()
-    router.replace({ query: undefined })
+    teamInviteDialog.value = true
   })
 
   watch(query, val => {
@@ -294,18 +295,20 @@ export const useOneStore = defineStore('one', () => {
       console.log(res)
       team.value = res.team
       access.value = res.access
+      clearTeamQuery()
     } catch (e) {
       console.warn(e)
     }
+  }
+
+  function clearTeamQuery () {
+    router.replace({ query: undefined })
   }
 
   return {
     info,
     interval,
     access,
-    hasTeamAccess,
-    isTeamOwner,
-    team,
     invoices,
     sessionId,
     subscription,
@@ -331,7 +334,13 @@ export const useOneStore = defineStore('one', () => {
     subscriptionInfo,
     verify,
 
+    hasTeamAccess,
+    isTeamOwner,
+    team,
     removeFromTeam,
     leaveTeam,
+    joinTeam,
+    teamInviteDialog,
+    clearTeamQuery,
   }
 })
