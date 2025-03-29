@@ -31,7 +31,8 @@ router.beforeEach(async (to, from, next) => {
     !to.meta.guest &&
     to.path !== '/user/dashboard/'
   ) {
-    next({ path: '/user/dashboard/' })
+    // Passing query to not reset it on reroute for team invites
+    next({ path: '/user/dashboard/', query: to.query })
   } else {
     next()
   }

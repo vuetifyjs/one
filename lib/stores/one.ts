@@ -57,7 +57,7 @@ export type Team = {
 }
 
 export const useOneStore = defineStore('one', () => {
-  const query = useQuery<{ one: string, session_id: string }>()
+  const query = useQuery<{ one: string, session_id: string, invite: string }>()
   const router = useRouter()
 
   const auth = useAuthStore()
@@ -70,6 +70,7 @@ export const useOneStore = defineStore('one', () => {
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
   const team = ref<Team | null>(null)
+  const teamInviteCode = computed(() => query.value.invite)
 
   const access = ref<[]>([])
   const subscription = computed(() => {
@@ -129,6 +130,13 @@ export const useOneStore = defineStore('one', () => {
 
     activate()
   }, { immediate: true })
+
+  watch(teamInviteCode, async () => {
+    if (!teamInviteCode.value) return
+    if (!auth.user) { auth.dialog = true }
+    await joinTeam()
+    router.replace({ query: undefined })
+  })
 
   watch(query, val => {
     if (val.one !== 'subscribe' || auth.user) return
@@ -275,6 +283,17 @@ export const useOneStore = defineStore('one', () => {
     try {
       await http.post('/one/team/leave', { teamId: team.value?.id })
       team.value = null
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+
+  async function joinTeam () {
+    try {
+      const res = await http.post('/one/team/join', { inviteCode: teamInviteCode.value })
+      console.log(res)
+      team.value = res.team
+      access.value = res.access
     } catch (e) {
       console.warn(e)
     }
