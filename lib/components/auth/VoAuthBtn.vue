@@ -26,6 +26,7 @@
   </VoNotificationsTotalBadge>
 
   <VoAuthDialog />
+  <VoTeamInvite />
 
   <VoSnackbarQueue />
 </template>
@@ -33,6 +34,7 @@
 <script lang="ts" setup>
   // Icons
   import { mdiLogin } from '@mdi/js'
+  import VoTeamInvite from '../team/VoTeamInvite.vue'
 
   defineProps({
     external: Boolean,

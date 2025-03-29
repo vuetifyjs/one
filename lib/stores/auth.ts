@@ -9,6 +9,8 @@ import { ref, shallowRef, watch } from 'vue'
 import { useHttpStore } from '@/stores/http'
 import { useUserStore } from '@/stores/user'
 
+import { type Team } from './one'
+
 export interface Sponsorship {
   id: string
   platform: string
@@ -18,6 +20,7 @@ export interface Sponsorship {
   amount: number
   isActive: boolean
   createdAt: Date
+  hasTeamAccess: boolean;
 }
 
 export interface Identity {
@@ -38,6 +41,7 @@ export interface User {
   createdAt: string
   identities: Identity[]
   sponsorships: Sponsorship[]
+  team: Team
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -47,6 +51,7 @@ export const useAuthStore = defineStore('auth', () => {
   const userStore = useUserStore()
   const router = useRouter()
   const isLoading = shallowRef(false)
+  const one = useOneStore()
 
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
@@ -101,7 +106,10 @@ export const useAuthStore = defineStore('auth', () => {
     }).then(
       async res => {
         if (res.ok || res.status === 401) {
-          user.value = (await res.json()).user
+          const data = await res.json()
+          user.value = data.user
+          one.access = data.access
+          one.team = data.user?.team
         } else {
           console.error(res.statusText)
         }
@@ -152,6 +160,8 @@ export const useAuthStore = defineStore('auth', () => {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
         }
         user.value = e.data.body.user
+        one.access = e.data.body.access
+        one.team = e.data.body.user.team
         sync()
       } else {
         console.error(e.data.message)
