@@ -109,6 +109,7 @@
     "useDownloadsStore": true,
     "useQueueStore": true,
     "aliases": true,
-    "trackEvent": true
+    "trackEvent": true,
+    "useTeamStore": true
   }
 }

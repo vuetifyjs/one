@@ -98,6 +98,7 @@ declare global {
   const useSlots: typeof import('vue')['useSlots']
   const useSponsorsStore: typeof import('./lib/stores/sponsors')['useSponsorsStore']
   const useSpotsStore: typeof import('./lib/stores/spots')['useSpotsStore']
+  const useTeamStore: typeof import('./lib/stores/team')['useTeamStore']
   const useTheme: typeof import('vuetify')['useTheme']
   const useUserStore: typeof import('./lib/stores/user')['useUserStore']
   const watch: typeof import('vue')['watch']
@@ -208,6 +209,7 @@ declare module 'vue' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./lib/stores/sponsors')['useSponsorsStore']>
     readonly useSpotsStore: UnwrapRef<typeof import('./lib/stores/spots')['useSpotsStore']>
+    readonly useTeamStore: UnwrapRef<typeof import('./lib/stores/team')['useTeamStore']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('./lib/stores/user')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
@@ -311,6 +313,7 @@ declare module '@vue/runtime-core' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./lib/stores/sponsors')['useSponsorsStore']>
     readonly useSpotsStore: UnwrapRef<typeof import('./lib/stores/spots')['useSpotsStore']>
+    readonly useTeamStore: UnwrapRef<typeof import('./lib/stores/team')['useTeamStore']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('./lib/stores/user')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

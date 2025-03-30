@@ -40,28 +40,13 @@ interface Invoice {
   pdf: string
 }
 
-export type Team = {
-  id: string
-  name: string
-  inviteCode: string
-  members: {
-    id: string
-    name: string
-    picture: string
-  }[]
-  owner: {
-    id: string
-    name: string
-    picture: string
-  }
-}
-
 export const useOneStore = defineStore('one', () => {
   const query = useQuery<{ one: string, session_id: string, invite: string }>()
   const router = useRouter()
 
   const auth = useAuthStore()
   const http = useHttpStore()
+  const team = useTeamStore()
 
   const isLoading = shallowRef(true)
   const isOpen = shallowRef(false)
@@ -70,23 +55,12 @@ export const useOneStore = defineStore('one', () => {
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
 
-  const team = ref<Team | null>(null)
-  const teamInviteDialog = ref<boolean>(true)
-  const teamInviteCode = computed<string>(() => query.value.invite)
+  const access = ref<string[]>([])
 
-  const access = ref<[]>([])
   const subscription = computed(() => {
     return auth.user?.sponsorships.find(s => s.platform === 'stripe' && s.tierName.startsWith('sub_'))
   })
   const hasBilling = computed(() => !!subscription.value?.tierName)
-
-  const hasTeamAccess = computed(() =>
-    access.value.some(access => ['one/team', 'snips/team'].includes(access))
-  )
-
-  const isTeamOwner = computed(() => {
-    return auth.user?.id === auth.user?.team?.owner.id
-  })
 
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s) => {
@@ -132,12 +106,6 @@ export const useOneStore = defineStore('one', () => {
 
     activate()
   }, { immediate: true })
-
-  watch(teamInviteCode, async () => {
-    if (!teamInviteCode.value) return
-    if (!auth.user) { auth.dialog = true }
-    teamInviteDialog.value = true
-  })
 
   watch(query, val => {
     if (val.one !== 'subscribe' || auth.user) return
@@ -235,10 +203,9 @@ export const useOneStore = defineStore('one', () => {
       const res = await http.post(
         `/one/verify?subscriptionId=${subscription.value?.tierName}`
       )
-
       auth.user = res.user
       access.value = res.access
-      team.value = auth.user?.team ?? null
+      team.team = auth.user?.team ?? null
     } catch (e) {
       //
     } finally {
@@ -271,44 +238,11 @@ export const useOneStore = defineStore('one', () => {
     })
   }
 
-  async function removeFromTeam () {
-    try {
-      const res = await http.post('/one/team/remove', { userId: auth.user?.id })
-      team.value = res.team
-    } catch (e) {
-      console.warn(e)
-    }
-  }
-
-  async function leaveTeam () {
-    try {
-      await http.post('/one/team/leave', { teamId: team.value?.id })
-      team.value = null
-    } catch (e) {
-      console.warn(e)
-    }
-  }
-
-  async function joinTeam () {
-    try {
-      const res = await http.post('/one/team/join', { inviteCode: teamInviteCode.value })
-      console.log(res)
-      team.value = res.team
-      access.value = res.access
-      clearTeamQuery()
-    } catch (e) {
-      console.warn(e)
-    }
-  }
-
-  function clearTeamQuery () {
-    router.replace({ query: undefined })
-  }
-
   return {
     info,
     interval,
     access,
+
     invoices,
     sessionId,
     subscription,
@@ -334,13 +268,5 @@ export const useOneStore = defineStore('one', () => {
     subscriptionInfo,
     verify,
 
-    hasTeamAccess,
-    isTeamOwner,
-    team,
-    removeFromTeam,
-    leaveTeam,
-    joinTeam,
-    teamInviteDialog,
-    clearTeamQuery,
   }
 })

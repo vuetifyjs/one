@@ -1,12 +1,13 @@
 <template>
   <VoDialog
+    v-if="team"
     v-model="dialog"
     :prepend-icon="`svg:${mdiBell}`"
     title="Team"
   >
     <v-container class="pa-md-10" fluid>
       <v-card
-        v-if="one.isTeamOwner"
+        v-if="teamStore.isTeamOwner"
         border
         class="mb-4"
         color="surface-light"
@@ -17,10 +18,10 @@
         <v-card-item
           class="bg-surface"
           prepend-icon="mdi-account-group-outline"
-          :subtitle="`Team - ${one.team?.members?.length} members`"
+          :subtitle="`Team - ${team?.members?.length} members`"
           title="Members"
         >
-          <template v-if="one.isTeamOwner" #append>
+          <template v-if="teamStore.isTeamOwner" #append>
             <v-btn
               border
               class="text-none"
@@ -90,7 +91,7 @@
             <v-data-table
               :headers="headers"
               :hide-default-footer="team?.members?.length! < 10"
-              :items="team?.members"
+              :items="team.members"
             >
               <template #item.name="{ item }">
                 <div class="d-flex align-center">
@@ -115,7 +116,7 @@
                 <v-btn
                   v-else
                   text="Revoke"
-                  @click="one.removeFromTeam()"
+                  @click="teamStore.removeFromTeam()"
                 />
               </template>
             </v-data-table>
@@ -157,7 +158,7 @@
               rounded="lg"
               text="Leave team"
               width="145"
-              @click="one.leaveTeam()"
+              @click="teamStore.leaveTeam()"
             />
           </template>
         </v-card-item>
@@ -169,9 +170,9 @@
     // Icons
   import { mdiBell } from '@mdi/js'
 
-  const one = useOneStore()
+  const teamStore = useTeamStore()
   const http = useHttpStore()
-  const team = computed(() => { return one.team })
+  const team = computed(() => teamStore.team)
 
   const copied = shallowRef(false)
   const reset = shallowRef(false)
@@ -189,7 +190,7 @@
     },
   ] as const
 
-  const invite = computed(() => `https://one.vuetifyjs.com/?invite=${team.value?.inviteCode}`)
+  const invite = computed(() => `https://one.vuetifyjs.com/?invite=${teamStore.team?.inviteCode}`)
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
@@ -208,6 +209,6 @@
 
     const res = await http.post('/one/team/regen')
 
-    one.team = res.team
+    teamStore.team = res.team
   }
   </script>

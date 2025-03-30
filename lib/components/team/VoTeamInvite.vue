@@ -1,19 +1,19 @@
 <template>
   <v-dialog
-    v-model="one.teamInviteDialog"
+    v-model="team.teamInviteDialog"
     max-width="500"
   >
     <template #default="{ isActive }">
       <v-card title="Join a Team">
         <v-card-text>
-          You have been invited to join a team!
+          You have been invited to join {{ teamName }}!
         </v-card-text>
 
         <v-card-actions>
           <v-spacer />
           <v-btn
             text="Join"
-            @click="one.joinTeam()"
+            @click="team.joinTeam()"
           />
           <v-btn
             text="Cancel"
@@ -26,10 +26,12 @@
 </template>
 
 <script setup lang="ts">
-  const one = useOneStore()
+  const team = useTeamStore()
+
+  const teamName = computed(() => team.team?.name ? team.team.name : `${team.team?.owner.name}'s team`)
 
   function clearQuery (isActive: Ref<boolean>) {
-    one.clearTeamQuery()
+    team.clearTeamQuery()
     isActive.value = false
   }
 
