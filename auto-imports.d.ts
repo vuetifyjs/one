@@ -102,7 +102,6 @@ declare global {
   const useSlots: typeof import('vue')['useSlots']
   const useSponsorsStore: typeof import('./lib/stores/sponsors')['useSponsorsStore']
   const useSpotsStore: typeof import('./lib/stores/spots')['useSpotsStore']
-  const useTeamStore: typeof import('./lib/stores/team')['useTeamStore']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTheme: typeof import('vuetify')['useTheme']
   const useUserStore: typeof import('./lib/stores/user')['useUserStore']
@@ -257,109 +256,7 @@ declare module 'vue' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./lib/stores/sponsors')['useSponsorsStore']>
     readonly useSpotsStore: UnwrapRef<typeof import('./lib/stores/spots')['useSpotsStore']>
-    readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
-    readonly useUserStore: UnwrapRef<typeof import('./lib/stores/user')['useUserStore']>
-    readonly watch: UnwrapRef<typeof import('vue')['watch']>
-    readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
-    readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
-    readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
-  }
-}
-declare module '@vue/runtime-core' {
-  interface GlobalComponents {}
-  interface ComponentCustomProperties {
-    readonly DEFAULT_BANNER: UnwrapRef<typeof import('./lib/stores/banners')['DEFAULT_BANNER']>
-    readonly DEFAULT_NOTIFICATION: UnwrapRef<typeof import('./lib/stores/notifications')['DEFAULT_NOTIFICATION']>
-    readonly DEFAULT_PROMOTION: UnwrapRef<typeof import('./lib/stores/promotions')['DEFAULT_PROMOTION']>
-    readonly DEFAULT_SPONSOR: UnwrapRef<typeof import('./lib/stores/sponsors')['DEFAULT_SPONSOR']>
-    readonly DEFAULT_SPOT: UnwrapRef<typeof import('./lib/stores/spots')['DEFAULT_SPOT']>
-    readonly DEFAULT_USER: UnwrapRef<typeof import('./lib/stores/user')['DEFAULT_USER']>
-    readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
-    readonly computed: UnwrapRef<typeof import('vue')['computed']>
-    readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
-    readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
-    readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
-    readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
-    readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
-    readonly definePage: UnwrapRef<typeof import('vue-router/auto')['definePage']>
-    readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
-    readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
-    readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
-    readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
-    readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
-    readonly h: UnwrapRef<typeof import('vue')['h']>
-    readonly inject: UnwrapRef<typeof import('vue')['inject']>
-    readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
-    readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
-    readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
-    readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
-    readonly isWithinRange: UnwrapRef<typeof import('./src/util/dates')['isWithinRange']>
-    readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
-    readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>
-    readonly mapState: UnwrapRef<typeof import('pinia')['mapState']>
-    readonly mapStores: UnwrapRef<typeof import('pinia')['mapStores']>
-    readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
-    readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
-    readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
-    readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
-    readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
-    readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
-    readonly onBeforeRouteUpdate: UnwrapRef<typeof import('vue-router')['onBeforeRouteUpdate']>
-    readonly onBeforeUnmount: UnwrapRef<typeof import('vue')['onBeforeUnmount']>
-    readonly onBeforeUpdate: UnwrapRef<typeof import('vue')['onBeforeUpdate']>
-    readonly onDeactivated: UnwrapRef<typeof import('vue')['onDeactivated']>
-    readonly onErrorCaptured: UnwrapRef<typeof import('vue')['onErrorCaptured']>
-    readonly onMounted: UnwrapRef<typeof import('vue')['onMounted']>
-    readonly onRenderTracked: UnwrapRef<typeof import('vue')['onRenderTracked']>
-    readonly onRenderTriggered: UnwrapRef<typeof import('vue')['onRenderTriggered']>
-    readonly onScopeDispose: UnwrapRef<typeof import('vue')['onScopeDispose']>
-    readonly onServerPrefetch: UnwrapRef<typeof import('vue')['onServerPrefetch']>
-    readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
-    readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
-    readonly provide: UnwrapRef<typeof import('vue')['provide']>
-    readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
-    readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
-    readonly ref: UnwrapRef<typeof import('vue')['ref']>
-    readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
-    readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
-    readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
-    readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
-    readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
-    readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
-    readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
-    readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
-    readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
-    readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
-    readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
-    readonly trackEvent: UnwrapRef<typeof import('./src/util/helpers')['trackEvent']>
-    readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
-    readonly unref: UnwrapRef<typeof import('vue')['unref']>
-    readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
-    readonly useAuthStore: UnwrapRef<typeof import('./lib/stores/auth')['useAuthStore']>
-    readonly useBannersStore: UnwrapRef<typeof import('./lib/stores/banners')['useBannersStore']>
-    readonly useBinsStore: UnwrapRef<typeof import('./lib/stores/bins')['useBinsStore']>
-    readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
-    readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
-    readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
-    readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
-    readonly useDownloadsStore: UnwrapRef<typeof import('./lib/stores/downloads')['useDownloadsStore']>
-    readonly useHttpStore: UnwrapRef<typeof import('./lib/stores/http')['useHttpStore']>
-    readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
-    readonly useNotificationsStore: UnwrapRef<typeof import('./lib/stores/notifications')['useNotificationsStore']>
-    readonly useOneStore: UnwrapRef<typeof import('./lib/stores/one')['useOneStore']>
-    readonly useParams: UnwrapRef<typeof import('./lib/composables/route')['useParams']>
-    readonly useProductsStore: UnwrapRef<typeof import('./lib/stores/products')['useProductsStore']>
-    readonly usePromotionsStore: UnwrapRef<typeof import('./lib/stores/promotions')['usePromotionsStore']>
-    readonly useQuery: UnwrapRef<typeof import('./lib/composables/route')['useQuery']>
-    readonly useQueueStore: UnwrapRef<typeof import('./lib/stores/queue')['useQueueStore']>
-    readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
-    readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
-    readonly useSettingsStore: UnwrapRef<typeof import('./lib/stores/settings')['useSettingsStore']>
-    readonly useSiteStore: UnwrapRef<typeof import('./lib/stores/site')['useSiteStore']>
-    readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useSponsorsStore: UnwrapRef<typeof import('./lib/stores/sponsors')['useSponsorsStore']>
-    readonly useSpotsStore: UnwrapRef<typeof import('./lib/stores/spots')['useSpotsStore']>
+    readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('./lib/stores/user')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
