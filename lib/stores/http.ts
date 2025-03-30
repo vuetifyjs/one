@@ -11,7 +11,11 @@ export const useHttpStore = defineStore('http', {
         ...options,
       })
 
-      return res.status === 204 ? res : res.json()
+      if (res.status === 204) {
+        return {} as T; // Return an empty object casted to T
+      }
+
+      return res.json() as Promise<T>;
     },
     async post<T = any> (url: string, body?: any, options: RequestInit = {}): Promise<T> {
       return this.fetch<T>(url, {
@@ -34,7 +38,7 @@ export const useHttpStore = defineStore('http', {
       return this.fetch<T>(url, options)
     },
     async delete (url: string, options: RequestInit = {}): Promise<Response> {
-      return this.fetch(url, {
+      return this.fetch<Response>(url, {
         method: 'DELETE',
         ...options,
       })

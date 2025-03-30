@@ -29,6 +29,6 @@
     },
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "types-temp", "dist"],
+  "exclude": ["node_modules", "types-temp", "dist", "vite.config.mts"],
   "references": [{ "path": "./tsconfig.node.json" }],
 }

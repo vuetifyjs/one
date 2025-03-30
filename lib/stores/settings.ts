@@ -11,7 +11,7 @@ export interface Suit {
   footer: string
 }
 
-export interface State {
+export interface SettingsState {
   CDN_URL: string
   suit: Suit | {}
 }
@@ -274,5 +274,5 @@ export const useSettingsStore = defineStore('settings', () => {
   return {
     suit,
     CDN_URL,
-  } satisfies State
+  } satisfies SettingsState
 })

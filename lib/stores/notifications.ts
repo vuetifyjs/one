@@ -27,7 +27,7 @@ export interface Notification {
   }
 }
 
-export interface State {
+export interface NotificationsState {
   all: Ref<Notification[]>
   aall: Ref<Notification[]>
   record: Ref<Notification | undefined>
@@ -174,5 +174,5 @@ export const useNotificationsStore = defineStore('notifications', () => {
     destroy,
     read,
     unread,
-  } as State
+  } as NotificationsState
 })
