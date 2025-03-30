@@ -98,6 +98,7 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSettingsStore: typeof import('./lib/stores/settings')['useSettingsStore']
+  const useTeamStore: typeof import('./lib/stores/team')['useTeamStore']
   const useSiteStore: typeof import('./lib/stores/site')['useSiteStore']
   const useSlots: typeof import('vue')['useSlots']
   const useSponsorsStore: typeof import('./lib/stores/sponsors')['useSponsorsStore']
@@ -231,6 +232,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('./lib/stores/auth')['useAuthStore']>
+    readonly useTeamStore: UnwrapRef<typeof import('./lib/stores/team')['useTeamStore']>
     readonly useBannersStore: UnwrapRef<typeof import('./lib/stores/banners')['useBannersStore']>
     readonly useBinsStore: UnwrapRef<typeof import('./lib/stores/bins')['useBinsStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>

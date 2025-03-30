@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    v-if="team.teamInviteDialog"
     v-model="team.teamInviteDialog"
     max-width="500"
   >

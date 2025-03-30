@@ -69,9 +69,9 @@ export const useTeamStore = defineStore('team', () => {
   async function joinTeam () {
     try {
       const res = await http.post('/one/team/join', { inviteCode: teamInviteCode.value })
-      clearTeamQuery()
       team.value = res.team
       one.access = res.access
+      clearTeamQuery()
     } catch (e) {
       console.warn(e)
     }
