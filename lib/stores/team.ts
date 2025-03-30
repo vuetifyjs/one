@@ -70,8 +70,10 @@ export const useTeamStore = defineStore('team', () => {
       team.value = res.team
       one.access = res.access
       clearTeamQuery()
-    } catch (e) {
-      console.warn(e)
+    } catch (e: any) {
+      console.warn(e.statusText)
+    } finally {
+      clearTeamQuery()
     }
   }
 
