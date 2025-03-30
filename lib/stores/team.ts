@@ -1,5 +1,4 @@
 // Composables
-import { useRouter } from 'vue-router'
 import { useQuery } from '@/composables/route'
 
 // Stores
@@ -25,7 +24,6 @@ export type Team = {
 
 export const useTeamStore = defineStore('team', () => {
   const query = useQuery<{ invite: string }>()
-  const router = useRouter()
 
   const auth = useAuthStore()
   const one = useOneStore()
@@ -79,7 +77,9 @@ export const useTeamStore = defineStore('team', () => {
 
   function clearTeamQuery () {
     teamInviteDialog.value = false
-    router.replace({ query: {} })
+    const url = new URL(window.location.href)
+    url.searchParams.delete('invite') // Remove a specific param
+    window.history.replaceState({}, '', url.toString())
   }
 
   const isTeamOwner = computed(() => {
