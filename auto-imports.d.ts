@@ -98,11 +98,11 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSettingsStore: typeof import('./lib/stores/settings')['useSettingsStore']
-  const useTeamStore: typeof import('./lib/stores/team')['useTeamStore']
   const useSiteStore: typeof import('./lib/stores/site')['useSiteStore']
   const useSlots: typeof import('vue')['useSlots']
   const useSponsorsStore: typeof import('./lib/stores/sponsors')['useSponsorsStore']
   const useSpotsStore: typeof import('./lib/stores/spots')['useSpotsStore']
+  const useTeamStore: typeof import('./lib/stores/team')['useTeamStore']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTheme: typeof import('vuetify')['useTheme']
   const useUserStore: typeof import('./lib/stores/user')['useUserStore']
@@ -152,6 +152,9 @@ declare global {
   // @ts-ignore
   export type { Spot } from './lib/stores/spots'
   import('./lib/stores/spots')
+  // @ts-ignore
+  export type { Team } from './lib/stores/team'
+  import('./lib/stores/team')
   // @ts-ignore
   export type { RootState, SavedState } from './lib/stores/user'
   import('./lib/stores/user')
@@ -232,7 +235,6 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('./lib/stores/auth')['useAuthStore']>
-    readonly useTeamStore: UnwrapRef<typeof import('./lib/stores/team')['useTeamStore']>
     readonly useBannersStore: UnwrapRef<typeof import('./lib/stores/banners')['useBannersStore']>
     readonly useBinsStore: UnwrapRef<typeof import('./lib/stores/bins')['useBinsStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
@@ -258,6 +260,7 @@ declare module 'vue' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useSponsorsStore: UnwrapRef<typeof import('./lib/stores/sponsors')['useSponsorsStore']>
     readonly useSpotsStore: UnwrapRef<typeof import('./lib/stores/spots')['useSpotsStore']>
+    readonly useTeamStore: UnwrapRef<typeof import('./lib/stores/team')['useTeamStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
     readonly useUserStore: UnwrapRef<typeof import('./lib/stores/user')['useUserStore']>

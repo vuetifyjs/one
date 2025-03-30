@@ -71,7 +71,7 @@ export const useTeamStore = defineStore('team', () => {
       one.access = res.access
       clearTeamQuery()
     } catch (e: any) {
-      console.warn(e.statusText)
+      console.error(e)
     } finally {
       clearTeamQuery()
     }
