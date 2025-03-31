@@ -78,7 +78,7 @@ export const useTeamStore = defineStore('team', () => {
   function clearTeamQuery () {
     teamInviteDialog.value = false
     const url = new URL(window.location.href)
-    url.searchParams.delete('invite') // Remove a specific param
+    url.searchParams.delete('invite')
     window.history.replaceState({}, '', url.toString())
   }
 
