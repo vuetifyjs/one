@@ -16,16 +16,26 @@
             <v-window :model-value="window">
               <v-window-item value="subscribe">
                 <VoSubscriptionSubscribe v-model="subscription" />
-                <VoSwitch v-model="teamAccess" class="d-flex justify-end" disabled title="One Team">
+
+                <br>
+
+                <VoSwitch
+                  v-model="hasTeam"
+                  class="d-flex justify-end"
+                  :disabled="!auth.user?.isAdmin"
+                  title="One Team"
+                >
                   <template #label>
-                    <v-label>Teams</v-label>
+                    Teams
+
                     <v-chip
                       class="ml-4"
                       color="amber-darken-1"
                       label
                       size="small"
+                      text="Coming Soon"
                       variant="outlined"
-                    >Coming Soon</v-chip>
+                    />
                   </template>
                 </VoSwitch>
                 <VoSubscriptionPerks />
@@ -65,7 +75,7 @@
           prepend-icon="$vuetify"
           size="default"
           text="Activate Subscription"
-          @click="one.subscribe(subscription!, teamAccess)"
+          @click="one.subscribe(subscription!, hasTeam)"
         />
 
         <VoBtn
@@ -92,9 +102,10 @@
   const dialog = defineModel('modelValue', { type: Boolean })
 
   const one = useOneStore()
+  const auth = useAuthStore()
   const query = useQuery<{ one: string }>()
   const subscription = shallowRef(one.interval)
-  const teamAccess = shallowRef(false)
+  const hasTeam = shallowRef(false)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
   const isUpdatingSubscription = shallowRef<boolean | null>(false)
 
