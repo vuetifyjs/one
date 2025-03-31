@@ -57,8 +57,7 @@ export const useTeamStore = defineStore('team', () => {
   async function leaveTeam () {
     try {
       await http.post('/one/team/leave', { teamId: team.value?.id })
-      team.value = null
-      one.access = one.access.filter((a:string) => a !== 'one/team')
+      await auth.verify(true)
     } catch (e) {
       console.warn(e)
     }
@@ -66,9 +65,8 @@ export const useTeamStore = defineStore('team', () => {
 
   async function joinTeam () {
     try {
-      const res = await http.post('/one/team/join', { inviteCode: teamInviteCode.value })
-      team.value = res.team
-      one.access = res.access
+      await http.post('/one/team/join', { inviteCode: teamInviteCode.value })
+      await auth.verify(true)
       clearTeamQuery()
     } catch (e: any) {
       console.error(e)
