@@ -20,7 +20,6 @@ export interface Sponsorship {
   amount: number
   isActive: boolean
   createdAt: Date
-  hasTeamAccess: boolean;
 }
 
 export interface Identity {
