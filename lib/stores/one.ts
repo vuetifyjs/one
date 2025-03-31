@@ -131,9 +131,8 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await http.post('/one/activate', { sessionId: sessionId.value })
-
-      auth.user = res.user
+      await http.post('/one/activate', { sessionId: sessionId.value })
+      await auth.verify(true)
 
       const url = new URL(window.location.href)
       const params = url.searchParams
