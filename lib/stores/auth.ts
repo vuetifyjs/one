@@ -108,7 +108,6 @@ export const useAuthStore = defineStore('auth', () => {
       async res => {
         if (res.ok || res.status === 401) {
           const data = await res.json()
-          console.log(data)
           user.value = data.user
           one.access = data.access
           team.team = data.user?.team
