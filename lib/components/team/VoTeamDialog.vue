@@ -17,7 +17,7 @@
       >
         <v-card-item
           class="bg-surface"
-          prepend-icon="mdi-account-group-outline"
+          :prepend-icon="`svg:${mdiAccountGroupOutline}`"
           :subtitle="`Team - ${team?.members?.length} members`"
           title="Members"
         >
@@ -26,7 +26,7 @@
               border
               class="text-none"
               color="primary"
-              prepend-icon="mdi-account-plus-outline"
+              :prepend-icon="`svg:${mdiAccountGroupOutline}`"
               rounded="lg"
               variant="flat"
             >
@@ -42,7 +42,7 @@
                 <v-card color="surface-light">
                   <v-card-item
                     class="bg-surface"
-                    prepend-icon="mdi-link-variant"
+                    :prepend-icon="`svg:${mdiLinkVariant}`"
                     subtitle="Provide this link to invite your team members"
                     title="Member invite link"
                   >
@@ -71,7 +71,7 @@
                       <template #append-inner>
                         <v-icon
                           v-tooltip="'Copy Team link'"
-                          :icon="copied ? 'mdi-check' : 'mdi-content-copy'"
+                          :icon="`svg:${copied ? mdiCheck : mdiContentCopy}`"
                           size="small"
                           @click="onClickCopy"
                         />
@@ -106,7 +106,7 @@
                   v-if="team?.owner?.id === item.id "
                   class="text-none"
                   color="primary"
-                  prepend-icon="mdi-shield-lock"
+                  :prepend-icon="`svg:${mdiShieldLock}`"
                   readonly
                   slim
                   text="Team owner"
@@ -115,7 +115,9 @@
 
                 <v-btn
                   v-else
+                  :prepend-icon="`svg:${mdiAccountRemoveOutline}`"
                   text="Revoke"
+                  variant="text"
                   @click="teamStore.removeFromTeam()"
                 />
               </template>
@@ -133,7 +135,7 @@
         rounded="lg"
       >
         <v-card-item
-          prepend-icon="mdi-shield-lock"
+          :prepend-icon="`svg:${mdiShieldLock}`"
           subtitle="You are currently a member of a team with an All-access Pass."
           title="My Team access"
         >
@@ -168,7 +170,7 @@
 
   <script setup lang="ts">
     // Icons
-  import { mdiBell } from '@mdi/js'
+  import { mdiAccountGroupOutline, mdiAccountRemoveOutline, mdiBell, mdiCheck, mdiContentCopy, mdiLinkVariant, mdiShieldLock } from '@mdi/js'
 
   const teamStore = useTeamStore()
   const http = useHttpStore()
