@@ -28,6 +28,7 @@ export const useTeamStore = defineStore('team', () => {
   const auth = useAuthStore()
   const one = useOneStore()
   const http = useHttpStore()
+  const queue = useQueueStore()
 
   const team = ref<Team | null>(null)
   const teamInviteDialog = ref<boolean>(false)
@@ -40,17 +41,23 @@ export const useTeamStore = defineStore('team', () => {
   watch(teamInviteCode, async () => {
     if (!teamInviteCode.value) return
     if (!auth.user) { auth.dialog = true }
-    const res = await http.get(`/one/team/${teamInviteCode.value}`)
-    team.value = res.team
-    teamInviteDialog.value = true
+
+    try {
+      const res = await http.get(`/one/team/${teamInviteCode.value}`)
+      team.value = res.team
+      teamInviteDialog.value = true
+    } catch (e: any) {
+      queue.showError(e.message)
+      clearTeamQuery()
+    }
   })
 
   async function removeFromTeam () {
     try {
       const res = await http.post('/one/team/remove', { userId: auth.user?.id })
       team.value = res.team
-    } catch (e) {
-      console.warn(e)
+    } catch (e:any) {
+      queue.showError(e.message)
     }
   }
 
@@ -58,8 +65,8 @@ export const useTeamStore = defineStore('team', () => {
     try {
       await http.post('/one/team/leave', { teamId: team.value?.id })
       await auth.verify(true)
-    } catch (e) {
-      console.warn(e)
+    } catch (e:any) {
+      queue.showError(e.message)
     }
   }
 
@@ -69,7 +76,7 @@ export const useTeamStore = defineStore('team', () => {
       await auth.verify(true)
       clearTeamQuery()
     } catch (e: any) {
-      console.error(e)
+      queue.showError(e.message)
     } finally {
       clearTeamQuery()
     }
