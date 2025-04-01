@@ -118,7 +118,7 @@
                   :prepend-icon="`svg:${mdiAccountRemoveOutline}`"
                   text="Revoke"
                   variant="text"
-                  @click="teamStore.removeFromTeam()"
+                  @click="teamStore.removeFromTeam(item.id)"
                 />
               </template>
             </v-data-table>

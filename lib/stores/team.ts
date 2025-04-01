@@ -35,7 +35,7 @@ export const useTeamStore = defineStore('team', () => {
   const teamInviteCode = computed<string>(() => query.value.invite)
 
   const hasTeamAccess = computed(() =>
-    team.value && one.access.some((access: string) => ['one/team', 'snips/team'].includes(access))
+    team.value && one.access?.some((access: string) => ['one/team', 'snips/team'].includes(access))
   )
 
   watch(teamInviteCode, async () => {
@@ -52,9 +52,9 @@ export const useTeamStore = defineStore('team', () => {
     }
   })
 
-  async function removeFromTeam () {
+  async function removeFromTeam (id: string) {
     try {
-      const res = await http.post('/one/team/remove', { userId: auth.user?.id })
+      const res = await http.post('/one/team/remove', { userId: id })
       team.value = res.team
     } catch (e:any) {
       queue.showError(e.message)
