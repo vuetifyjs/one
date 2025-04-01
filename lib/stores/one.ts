@@ -15,8 +15,7 @@ interface SubscriptionItemPlan {
   id: string
   amount: number
   currency: string
-  interval: 'month' | 'year'
-  hasTeamAccess: boolean
+  interval: 'soloMonth' | 'soloYear' | 'teamMonth' | 'teamYear'
 }
 
 interface SubscriptionItem {
@@ -65,7 +64,7 @@ export const useOneStore = defineStore('one', () => {
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s) => {
       if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') return acc
-      const amount = s.interval === 'month' ? s.amount : s.amount / 12
+      const amount = ['teamMonth', 'soloMonth'].includes(s.interval) ? s.amount : s.amount / 12
       return acc + amount / 100
     }, 0) ?? 0
   })
@@ -101,10 +100,10 @@ export const useOneStore = defineStore('one', () => {
   })
 
   watch(isOpen, resetQuery)
-  watch(sessionId, val => {
+  watch(sessionId, async val => {
     if (!val) return
 
-    activate()
+    await activate()
   }, { immediate: true })
 
   watch(query, val => {
@@ -150,10 +149,9 @@ export const useOneStore = defineStore('one', () => {
     window.open(`${http.url}/one/manage`, '_blank')
   }
 
-  async function subscribe (interval: string, team: boolean) {
+  async function subscribe (interval: string) {
     isLoading.value = true
-
-    window.location.href = `${http.url}/one/subscribe?interval=${interval}&team=${team}`
+    window.location.href = `${http.url}/one/subscribe?interval=${interval}`
   }
 
   async function cancel () {
