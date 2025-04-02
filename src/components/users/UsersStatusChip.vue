@@ -1,9 +1,6 @@
 <template>
   <v-switch
-    color="primary"
-    density="compact"
-    inset
-    :model-value="user.isAdmin"
+    :model-value="user?.isAdmin"
     @update:model-value="onUpdate"
   />
 </template>
@@ -13,7 +10,7 @@
   import type { User } from '@/stores/auth'
 
   defineProps<{
-    user: User
+    user: User | null
   }>()
 
   const emit = defineEmits(['update:modelValue'])

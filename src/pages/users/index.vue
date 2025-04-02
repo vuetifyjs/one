@@ -28,7 +28,7 @@
           <UsersStatusChip
             :loading="isLoading.has(item.id)"
             :user="item"
-            @update:model-value="val => onUpdateUser(val, item)"
+            @update:model-value="onUpdateUser($event, item)"
           />
         </template>
 
@@ -47,9 +47,92 @@
         <template #item.createdAt="{ item }">
           {{ adapter.format(item.createdAt, 'fullDateWithWeekday') }}
         </template>
+
+        <template #item.actions="{ item }">
+          <v-icon-btn
+            icon="mdi-account-edit"
+            size="small"
+            @click="onClickUser(item)"
+            @mouseenter="onMouseenter($event)"
+          />
+        </template>
       </v-data-table>
     </VoCard>
   </v-container>
+
+  <VoDialog
+    v-model="dialog"
+    :activator="activator"
+    height="auto"
+    max-width="600"
+    prepend-icon="mdi-account-edit"
+    title="Edit User"
+    @after-leave="editing = null"
+  >
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="4">
+          <v-text-field
+            label="Name"
+            :model-value="editing?.name"
+            readonly
+          >
+            <template #prepend-inner>
+              <v-avatar color="surface-light" :image="editing?.picture" size="x-small" />
+            </template>
+          </v-text-field>
+        </v-col>
+
+        <v-col cols="12" md="8">
+          <v-text-field
+            append-inner-icon="mdi-content-copy"
+            label="ID"
+            :model-value="editing?.id"
+            readonly
+            @click:append-inner="onClickCopy(editing?.id)"
+          />
+        </v-col>
+
+        <v-col cols="12">
+          <v-select
+            chips
+            item-title="platform"
+            item-value="id"
+            label="Sponsorships"
+            menu-icon=""
+            :model-value="editing?.sponsorships"
+            readonly
+          >
+            <template #chip="{ props: chipProps, item }">
+              <v-chip
+                v-bind="chipProps"
+                :color="item.raw.isActive ? 'success' : 'error'"
+                :prepend-icon="item.raw.isActive ? '$success' : '$error'"
+              >
+                <span class="text-capitalize">{{ item.title }}</span>
+                &nbsp;
+                <span class="text-medium-emphasis">(${{ item.raw.amount / 100 }}/{{ item.raw.interval }})</span>
+              </v-chip>
+            </template>
+          </v-select>
+        </v-col>
+
+        <v-col cols="12">
+          <v-textarea label="Settings" :model-value="editing?.settings" readonly />
+        </v-col>
+
+        <v-col cols="12">
+          <v-switch label="Admin" :model-value="editing?.isAdmin" readonly />
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <template #actions>
+      <v-spacer />
+
+      <v-btn text="Close" @click="dialog = false" />
+    </template>
+  </VoDialog>
 </template>
 
 <script lang="ts" setup>
@@ -63,6 +146,9 @@
     },
   })
 
+  const activator = ref()
+  const dialog = shallowRef(false)
+  const editing = ref<User | null>(null)
   const search = shallowRef('')
   const users = ref<User[]>([])
   const isLoading = shallowRef(new Set())
@@ -91,7 +177,13 @@
       value: 'createdAt',
       sortable: true,
     },
-  ]
+    {
+      title: 'Actions',
+      value: 'actions',
+      sortable: false,
+      align: 'end',
+    },
+  ] as const
 
   onBeforeMount(async () => {
     try {
@@ -106,6 +198,18 @@
       isLoading.value.delete('index')
     }
   })
+
+  function onMouseenter (e: MouseEvent) {
+    activator.value = e.currentTarget
+  }
+
+  function onClickUser (item: User) {
+    editing.value = toRaw(item)
+  }
+
+  function onClickCopy (id: string | undefined) {
+    if (id) navigator.clipboard.writeText(id)
+  }
 
   async function onUpdateUser (val: boolean | null, item: User) {
     try {

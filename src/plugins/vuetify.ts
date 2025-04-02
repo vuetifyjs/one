@@ -10,6 +10,7 @@ import 'vuetify/styles'
 // Composables
 import { createVuetify, IconProps } from 'vuetify'
 import * as components from 'vuetify/components'
+import { VIconBtn } from 'vuetify/labs/VIconBtn'
 import { camelize, h } from 'vue'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
@@ -19,6 +20,9 @@ import { aliases as oneAliases } from '@/../lib/icons'
 export default createVuetify({
   aliases: {
     AppChip: components.VChip,
+  },
+  components: {
+    VIconBtn,
   },
   defaults: {
     global: {
@@ -32,12 +36,25 @@ export default createVuetify({
     VBtn: {
       class: 'text-none',
     },
+    VChip: {
+      variant: 'outlined',
+      VIcon: {
+        size: 'small',
+      },
+    },
     VContainer: {
       fluid: true,
     },
     VDataTable: {
       density: 'compact',
       hover: true,
+    },
+    VField: {
+      variant: 'outlined',
+
+      VIcon: {
+        size: 'x-small',
+      },
     },
     VNumberInput: {
       density: 'compact',
@@ -66,6 +83,7 @@ export default createVuetify({
       prependInnerIcon: '$file',
     },
     VSwitch: {
+      color: 'primary',
       density: 'compact',
       inset: true,
     },

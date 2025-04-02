@@ -52,4 +52,6 @@ export {
   mdiAlertOctagon,
   mdiTruckDelivery,
   mdiPauseCircle,
+  mdiAccountEdit,
+  mdiContentCopy,
 } from '@mdi/js'
