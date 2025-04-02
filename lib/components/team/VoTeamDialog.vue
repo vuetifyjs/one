@@ -91,7 +91,7 @@
             <v-data-table
               :headers="headers"
               :hide-default-footer="team?.members?.length! < 10"
-              :items="team.members"
+              :items="team?.members"
             >
               <template #item.name="{ item }">
                 <div class="d-flex align-center">
