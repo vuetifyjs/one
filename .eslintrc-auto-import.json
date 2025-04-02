@@ -110,6 +110,7 @@
     "useQueueStore": true,
     "aliases": true,
     "trackEvent": true,
+    "useTeamStore": true,
     "Banner": true,
     "Bin": true,
     "DirectiveBinding": true,
@@ -138,6 +139,7 @@
     "SettingsState": true,
     "SiteState": true,
     "SnackbarQueueState": true,
-    "SponsorState": true
+    "SponsorState": true,
+    "Team": true
   }
 }

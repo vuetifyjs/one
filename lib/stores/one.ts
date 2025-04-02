@@ -15,7 +15,7 @@ interface SubscriptionItemPlan {
   id: string
   amount: number
   currency: string
-  interval: 'month' | 'year'
+  interval: 'soloMonth' | 'soloYear' | 'teamMonth' | 'teamYear'
 }
 
 interface SubscriptionItem {
@@ -45,6 +45,7 @@ export const useOneStore = defineStore('one', () => {
 
   const auth = useAuthStore()
   const http = useHttpStore()
+  const team = useTeamStore()
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
@@ -52,6 +53,8 @@ export const useOneStore = defineStore('one', () => {
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
+
+  const access = ref<string[]>([])
 
   const subscription = computed(() => {
     return auth.user?.sponsorships.find(s => s.platform === 'stripe' && s.tierName.startsWith('sub_'))
@@ -61,7 +64,7 @@ export const useOneStore = defineStore('one', () => {
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s) => {
       if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') return acc
-      const amount = s.interval === 'month' ? s.amount : s.amount / 12
+      const amount = ['teamMonth', 'soloMonth'].includes(s.interval) ? s.amount : s.amount / 12
       return acc + amount / 100
     }, 0) ?? 0
   })
@@ -97,10 +100,10 @@ export const useOneStore = defineStore('one', () => {
   })
 
   watch(isOpen, resetQuery)
-  watch(sessionId, val => {
+  watch(sessionId, async val => {
     if (!val) return
 
-    activate()
+    await activate()
   }, { immediate: true })
 
   watch(query, val => {
@@ -127,15 +130,15 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await http.post('/one/activate', { sessionId: sessionId.value })
-
-      auth.user = res.user
+      await http.post('/one/activate', { sessionId: sessionId.value })
+      await auth.verify(true)
+      await subscriptionInfo()
 
       const url = new URL(window.location.href)
       const params = url.searchParams
       params.delete('session_id')
+      params.delete('team')
       history.pushState(null, '', url.toString())
-      subscriptionInfo()
     } catch (e) {
       //
     } finally {
@@ -149,7 +152,6 @@ export const useOneStore = defineStore('one', () => {
 
   async function subscribe (interval: string) {
     isLoading.value = true
-
     window.location.href = `${http.url}/one/subscribe?interval=${interval}`
   }
 
@@ -199,8 +201,9 @@ export const useOneStore = defineStore('one', () => {
       const res = await http.post(
         `/one/verify?subscriptionId=${subscription.value?.tierName}`
       )
-
       auth.user = res.user
+      access.value = res.access
+      team.team = auth.user?.team ?? null
     } catch (e) {
       //
     } finally {
@@ -216,7 +219,6 @@ export const useOneStore = defineStore('one', () => {
 
       info.value = res.subscription
       invoices.value = res.invoices
-
       return res
     } catch (e) {
       //
@@ -237,6 +239,8 @@ export const useOneStore = defineStore('one', () => {
   return {
     info,
     interval,
+    access,
+
     invoices,
     sessionId,
     subscription,
@@ -261,5 +265,6 @@ export const useOneStore = defineStore('one', () => {
     subscribe,
     subscriptionInfo,
     verify,
+
   }
 })
