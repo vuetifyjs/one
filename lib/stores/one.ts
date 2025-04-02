@@ -132,12 +132,13 @@ export const useOneStore = defineStore('one', () => {
 
       await http.post('/one/activate', { sessionId: sessionId.value })
       await auth.verify(true)
+      await subscriptionInfo()
 
       const url = new URL(window.location.href)
       const params = url.searchParams
       params.delete('session_id')
+      params.delete('team')
       history.pushState(null, '', url.toString())
-      subscriptionInfo()
     } catch (e) {
       //
     } finally {

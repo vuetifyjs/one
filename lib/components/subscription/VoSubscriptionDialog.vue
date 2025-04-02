@@ -81,7 +81,7 @@
   const dialog = defineModel('modelValue', { type: Boolean })
 
   const one = useOneStore()
-  const query = useQuery<{ one: string }>()
+  const query = useQuery<{ one: string, team: string}>()
   const subscription = shallowRef(one.interval)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
   const isUpdatingSubscription = shallowRef<boolean | null>(false)
@@ -104,7 +104,7 @@
 
   watch(query, async () => {
     if (!one.sessionId && !['subscribe', 'status'].includes(query.value.one)) return
-
+    if (query.value.team) return
     window.value = one.sessionId || query.value.one === 'status' ? 'status' : 'subscribe'
 
     one.isOpen = true

@@ -1,6 +1,5 @@
 <template>
   <VoDialog
-    v-if="team"
     v-model="dialog"
     :prepend-icon="`svg:${mdiBell}`"
     title="Team"
@@ -172,9 +171,11 @@
     // Icons
   import { mdiAccountGroupOutline, mdiAccountRemoveOutline, mdiBell, mdiCheck, mdiContentCopy, mdiLinkVariant, mdiShieldLock } from '@mdi/js'
 
+  const one = useOneStore()
   const teamStore = useTeamStore()
   const http = useHttpStore()
   const team = computed(() => teamStore.team)
+  const query = useQuery<{ one: string, team: string}>()
 
   const copied = shallowRef(false)
   const reset = shallowRef(false)
@@ -213,4 +214,16 @@
 
     teamStore.team = res.team
   }
+
+  watch(query, async () => {
+    if (!one.sessionId || query.value.one === 'subscribe') return
+    if (!query.value.team) return
+    window.value = one.sessionId || query.value.one === 'status' ? 'status' : 'subscribe'
+
+    one.isOpen = true
+
+    await nextTick()
+
+    dialog.value = true
+  }, { immediate: true })
   </script>
