@@ -39,7 +39,7 @@
     "@mdi/js": "7.4.47",
     "lodash-es": "^4.17.21",
     "vue": "^3.5.13",
-    "vuetify": "^3.7.18"
+    "vuetify": "^3.8.0"
   },
   "devDependencies": {
     "@babel/types": "^7.26.10",
@@ -59,7 +59,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-config-vuetify": "^1.0.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^17.9.0",
+    "eslint-plugin-n": "^16.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.4.0",
     "eslint-plugin-vue": "^9.27.0",
@@ -79,14 +79,14 @@
     "unplugin-vue-components": "^28.4.1",
     "unplugin-vue-router": "^0.12.0",
     "vite": "^6.2.3",
-    "vite-plugin-vue-layouts": "^0.11.0",
+    "vite-plugin-vue-layouts-next": "^0.0.9",
     "vite-plugin-vuetify": "^2.1.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.9",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vue-tsc": "^2.2.8",
-    "vuetify": "^3.7.18"
+    "vuetify": "^3.8.0"
   },
   "packageManager": "pnpm@9.10.0"
 }

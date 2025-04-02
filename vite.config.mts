@@ -1,6 +1,6 @@
 // Plugins
 import Components from 'unplugin-vue-components/vite'
-import Layouts from 'vite-plugin-vue-layouts'
+import Layouts from 'vite-plugin-vue-layouts-next'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
@@ -20,10 +20,7 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
-    Layouts({
-      layoutsDirs: 'src/layouts',
-      defaultLayout: 'default',
-    }),
+    Layouts(),
     Components({
       dirs: ['lib/components', 'src/components'],
       dts: true,

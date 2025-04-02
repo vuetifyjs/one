@@ -10,7 +10,6 @@ import 'vuetify/styles'
 // Composables
 import { createVuetify, IconProps } from 'vuetify'
 import * as components from 'vuetify/components'
-import { VNumberInput, VSnackbarQueue } from 'vuetify/labs/components'
 import { camelize, h } from 'vue'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
@@ -20,10 +19,6 @@ import { aliases as oneAliases } from '@/../lib/icons'
 export default createVuetify({
   aliases: {
     AppChip: components.VChip,
-  },
-  components: {
-    VNumberInput,
-    VSnackbarQueue,
   },
   defaults: {
     global: {
