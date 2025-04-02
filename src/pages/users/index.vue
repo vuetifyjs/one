@@ -9,7 +9,7 @@
           v-model="search"
           label="Search"
           prepend-inner-icon="mdi-magnify"
-          style="width: 300px"
+          width="300"
         />
       </template>
 
@@ -18,7 +18,7 @@
         fixed-footer
         :headers="headers"
         :items="users"
-        :loading="isLoading"
+        :loading="isLoading.has('index')"
       >
         <template #item.id="{ item }">
           <div class="text-truncate">{{ item.id }}</div>
@@ -26,7 +26,7 @@
 
         <template #item.isAdmin="{ item }">
           <UsersStatusChip
-            :loading="isLoading"
+            :loading="isLoading.has(item.id)"
             :user="item"
             @update:model-value="val => onUpdateUser(val, item)"
           />
@@ -65,7 +65,7 @@
 
   const search = shallowRef('')
   const users = ref<User[]>([])
-  const isLoading = shallowRef(false)
+  const isLoading = shallowRef(new Set())
 
   const http = useHttpStore()
 
@@ -95,7 +95,7 @@
 
   onBeforeMount(async () => {
     try {
-      isLoading.value = true
+      isLoading.value.add('index')
 
       const res = await http.get<{ users: User[] }>('/one/admin/users')
 
@@ -103,13 +103,13 @@
     } catch (error) {
       console.error(error)
     } finally {
-      isLoading.value = false
+      isLoading.value.delete('index')
     }
   })
 
   async function onUpdateUser (val: boolean | null, item: User) {
     try {
-      isLoading.value = true
+      isLoading.value.add(item.id)
 
       const res = await http.post<{ user: User }>(`/one/admin/users/${item.id}`, {
         ...item,
@@ -122,7 +122,7 @@
     } catch (error) {
       console.error(error)
     } finally {
-      isLoading.value = false
+      isLoading.value.delete(item.id)
     }
   }
 </script>
