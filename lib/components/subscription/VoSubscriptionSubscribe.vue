@@ -38,16 +38,6 @@
               <template #prepend>
                 <v-icon class="mt-n6" />
               </template>
-
-              <template #append>
-                <v-chip
-                  class="mt-n6"
-                  color="success"
-                  size="small"
-                  text="Save 20%"
-                  variant="flat"
-                />
-              </template>
             </v-card>
           </template>
         </v-item>
@@ -61,10 +51,18 @@
     >
       <template #label>
         Yearly Billing
-
+        <v-chip
+          class="ml-2"
+          color="success"
+          size="small"
+          text="Save 20%"
+          variant="flat"
+        />
       </template>
+
     </VoSwitch>
   </v-item-group>
+
 </template>
 
 <script lang="ts" setup>
