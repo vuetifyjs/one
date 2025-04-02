@@ -1,5 +1,5 @@
 <template>
-  <v-item-group v-model="subscription" mandatory>
+  <v-item-group v-model="subscription" class="mb-4" mandatory>
     <v-row>
       <v-col cols="12" md="6">
         <v-item :value="isYearly ? 'soloYear' : 'soloMonth'">
@@ -43,26 +43,25 @@
         </v-item>
       </v-col>
     </v-row>
-    <VoSwitch
-      v-model="isYearly"
-      class="d-flex justify-end"
-      :disabled="!auth.user?.isAdmin"
-      title="One Team"
-    >
-      <template #label>
-        Yearly Billing
-        <v-chip
-          class="ml-2"
-          color="success"
-          size="small"
-          text="Save 20%"
-          variant="flat"
-        />
-      </template>
-
-    </VoSwitch>
   </v-item-group>
 
+  <VoSwitch
+    v-model="isYearly"
+    class="d-flex justify-end"
+    title="One Team"
+  >
+    <template #label>
+      Yearly Billing
+
+      <v-chip
+        class="ml-2"
+        color="success"
+        size="small"
+        text="Save 20%"
+        variant="flat"
+      />
+    </template>
+  </VoSwitch>
 </template>
 
 <script lang="ts" setup>
@@ -74,7 +73,6 @@
     type: String as PropType<'soloMonth' | 'soloYear' | 'teamMonth' | 'teamYear' | undefined>,
   })
   const one = useOneStore()
-  const auth = useAuthStore()
 
   const isYearly = ref(false)
   const soloPrice = computed(() => isYearly.value ? `$${import.meta.env.VITE_YEARLY_SOLO_PRICE} / Year` : `$${import.meta.env.VITE_MONTHLY_SOLO_PRICE} / Month`)

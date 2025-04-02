@@ -1,7 +1,7 @@
 <template>
   <VoDialog
     v-model="dialog"
-    :prepend-icon="`svg:${mdiBell}`"
+    :prepend-icon="`svg:${mdiAccountGroupOutline}`"
     title="Team"
   >
     <v-container class="pa-md-10" fluid>
@@ -17,7 +17,7 @@
         <v-card-item
           class="bg-surface"
           :prepend-icon="`svg:${mdiAccountGroupOutline}`"
-          :subtitle="`Team - ${team?.members?.length} members`"
+          :subtitle="`Team - ${team?.members?.length} member(s)`"
           title="Members"
         >
           <template v-if="teamStore.isTeamOwner" #append>
@@ -25,7 +25,7 @@
               border
               class="text-none"
               color="primary"
-              :prepend-icon="`svg:${mdiAccountGroupOutline}`"
+              :prepend-icon="`svg:${mdiAccount}`"
               rounded="lg"
               variant="flat"
             >
@@ -34,6 +34,7 @@
               <v-menu
                 activator="parent"
                 :close-on-content-click="false"
+                location="bottom end"
                 max-width="450"
                 offset="8"
                 width="100%"
@@ -103,8 +104,9 @@
               <template #item.actions="{ item }">
                 <v-btn
                   v-if="team?.owner?.id === item.id "
-                  class="text-none"
+                  class="me-n3"
                   color="primary"
+                  density="comfortable"
                   :prepend-icon="`svg:${mdiShieldLock}`"
                   readonly
                   slim
@@ -114,6 +116,8 @@
 
                 <v-btn
                   v-else
+                  class="me-n3"
+                  density="comfortable"
                   :prepend-icon="`svg:${mdiAccountRemoveOutline}`"
                   text="Revoke"
                   variant="text"
@@ -169,7 +173,7 @@
 
   <script setup lang="ts">
     // Icons
-  import { mdiAccountGroupOutline, mdiAccountRemoveOutline, mdiBell, mdiCheck, mdiContentCopy, mdiLinkVariant, mdiShieldLock } from '@mdi/js'
+  import { mdiAccount, mdiAccountGroupOutline, mdiAccountRemoveOutline, mdiCheck, mdiContentCopy, mdiLinkVariant, mdiShieldLock } from '@mdi/js'
 
   const one = useOneStore()
   const teamStore = useTeamStore()
