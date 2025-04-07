@@ -1,7 +1,7 @@
 import { createPinia, setActivePinia } from 'pinia'
 import { useHttpStore } from '../http'
 
-describe('http store', () => {
+describe('http store', async () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
@@ -9,24 +9,24 @@ describe('http store', () => {
   it('can make a get request', () => {
     const http = useHttpStore()
 
-    expect(http.get('url')).resolves.toEqual({})
+    return expect(http.get('url')).resolves.toEqual({})
   })
 
   it('can make a post request', () => {
     const http = useHttpStore()
 
-    expect(http.post('url')).resolves.toEqual({})
+    return expect(http.post('url')).resolves.toEqual({})
   })
 
   it('can make a delete request', () => {
     const http = useHttpStore()
 
-    expect(http.delete('url')).resolves.toEqual({})
+    return expect(http.delete('url')).resolves.toEqual({})
   })
 
   it('can make a fetch request', () => {
     const http = useHttpStore()
 
-    expect(http.fetch('url')).resolves.toEqual({})
+    return expect(http.fetch('url')).resolves.toEqual({})
   })
 })

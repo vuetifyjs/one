@@ -80,7 +80,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
       const res = await http.get<{ notifications: Notification[] }>('/one/notifications')
 
       all.value = res.notifications
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -98,7 +98,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
       record.value = res.notification
 
       return res.notification
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -117,7 +117,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
       record.value = res.notification
 
       return res.notification
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -136,7 +136,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
       record.value = res.notification
 
       return res.notification
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -152,7 +152,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
       const res = await http.get<{ notifications: Notification[] }>('/one/admin/notifications')
 
       aall.value = res.notifications
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false

@@ -12,10 +12,10 @@ export const useHttpStore = defineStore('http', {
       })
 
       if (res.status === 204) {
-        return {} as T; // Return an empty object casted to T
+        return {} as T // Return an empty object casted to T
       }
 
-      return res.json() as Promise<T>;
+      return res.json() as Promise<T>
     },
     async post<T = any> (url: string, body?: any, options: RequestInit = {}): Promise<T> {
       return this.fetch<T>(url, {

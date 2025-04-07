@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import { useUserStore } from './user'
 
-import { computed, watch } from 'vue'
+import { computed, ComputedRef, watch } from 'vue'
 import { useTheme } from 'vuetify'
 
 export interface Suit {
@@ -13,7 +13,7 @@ export interface Suit {
 
 export interface SettingsState {
   CDN_URL: string
-  suit: Suit | {}
+  suit: ComputedRef<Partial<Suit>>
 }
 
 function genThemes () {

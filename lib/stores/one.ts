@@ -136,7 +136,7 @@ export const useOneStore = defineStore('one', () => {
       params.delete('session_id')
       history.pushState(null, '', url.toString())
       subscriptionInfo()
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -164,7 +164,7 @@ export const useOneStore = defineStore('one', () => {
       )
 
       auth.user = res.user
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -183,7 +183,7 @@ export const useOneStore = defineStore('one', () => {
       })
 
       auth.user = res.user
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -201,7 +201,7 @@ export const useOneStore = defineStore('one', () => {
       )
 
       auth.user = res.user
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -218,7 +218,7 @@ export const useOneStore = defineStore('one', () => {
       invoices.value = res.invoices
 
       return res
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false

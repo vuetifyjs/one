@@ -52,7 +52,7 @@ export const useBinsStore = defineStore('bins', () => {
       const res = await http.get<{ bins: Bin[] }>('/one/bins')
 
       all.value = res.bins
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -68,7 +68,7 @@ export const useBinsStore = defineStore('bins', () => {
       await http.delete(`/one/bins/${id}`)
 
       all.value = all.value.filter(b => b.id !== id)
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -87,7 +87,7 @@ export const useBinsStore = defineStore('bins', () => {
       current.value = res.bin
 
       return res
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -105,7 +105,7 @@ export const useBinsStore = defineStore('bins', () => {
       const index = all.value.findIndex(b => b.id === id)
 
       all.value.splice(index, 1, res.bin)
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -121,7 +121,7 @@ export const useBinsStore = defineStore('bins', () => {
       const res = id ? await update(bin, id) : await create(bin)
 
       current.value = res.bin
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -136,7 +136,7 @@ export const useBinsStore = defineStore('bins', () => {
       const res = await http.get<{ bin: Bin }>(`/one/bins/${id}`)
 
       current.value = res.bin
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false

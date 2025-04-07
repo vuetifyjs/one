@@ -105,7 +105,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
       const res = await http.get<{ sponsors: Sponsor[] }>('/one/sponsors')
 
       all.value = res.sponsors
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -123,7 +123,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
       record.value = res.sponsor
 
       return res.sponsor
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -142,7 +142,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
       record.value = res.sponsor
 
       return res.sponsor
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -161,7 +161,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
       record.value = res.sponsor
 
       return res.sponsor
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -177,7 +177,7 @@ export const useSponsorsStore = defineStore('sponsors', () => {
       const res = await http.get<{ sponsors: Sponsor[] }>('/one/admin/sponsors')
 
       aall.value = res.sponsors
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
