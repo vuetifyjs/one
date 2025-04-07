@@ -15,7 +15,8 @@ interface SubscriptionItemPlan {
   id: string
   amount: number
   currency: string
-  interval: 'soloMonth' | 'soloYear' | 'teamMonth' | 'teamYear'
+  interval: 'month' | 'year'
+  type: 'solo' | 'team'
 }
 
 interface SubscriptionItem {
@@ -53,6 +54,7 @@ export const useOneStore = defineStore('one', () => {
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
+  const subscriptionType = computed(() => info.value?.items[0].plan.type)
 
   const access = ref<string[]>([])
 
@@ -150,9 +152,12 @@ export const useOneStore = defineStore('one', () => {
     window.open(`${http.url}/one/manage`, '_blank')
   }
 
-  async function subscribe (interval: string) {
+  async function subscribe (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) {
     isLoading.value = true
-    window.location.href = `${http.url}/one/subscribe?interval=${interval}`
+    const url = new URL('/one/subscribe', http.url)
+    url.searchParams.set('interval', interval)
+    url.searchParams.set('type', type)
+    window.location.href = url.toString()
   }
 
   async function cancel () {
@@ -173,7 +178,7 @@ export const useOneStore = defineStore('one', () => {
     }
   }
 
-  async function modify (interval: SubscriptionItemPlan['interval']) {
+  async function modify (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) {
     if (!subscription.value) return
 
     try {
@@ -182,6 +187,7 @@ export const useOneStore = defineStore('one', () => {
       const res = await http.post('/one/modify', {
         subscriptionId: subscription.value.tierName,
         interval,
+        type,
       })
 
       auth.user = res.user
@@ -239,6 +245,7 @@ export const useOneStore = defineStore('one', () => {
   return {
     info,
     interval,
+    subscriptionType,
     access,
 
     invoices,
@@ -265,6 +272,5 @@ export const useOneStore = defineStore('one', () => {
     subscribe,
     subscriptionInfo,
     verify,
-
   }
 })

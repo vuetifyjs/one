@@ -1,15 +1,29 @@
 <template>
-  <v-item-group v-model="subscription" class="mb-4" mandatory>
+  <v-tabs v-model="interval" color="primary" mandatory>
+    <v-tab value="month">Monthly billing</v-tab>
+    <v-tab value="year">
+      Yearly billing
+      <v-chip
+        class="ml-2"
+        color="success"
+        size="small"
+        text="Save 2 months"
+        variant="flat"
+      />
+    </v-tab>
+  </v-tabs>
+
+  <v-item-group v-model="type" class="mb-4" mandatory>
     <v-row>
       <v-col cols="12" md="6">
-        <v-item :value="isYearly ? 'soloYear' : 'soloMonth'">
+        <v-item value="solo">
           <template #default="{ toggle, isSelected }">
             <v-card
               :border="isSelected ? 'sm primary opacity-100' : 'sm'"
               :color="isSelected ? 'primary' : undefined"
               :prepend-icon="isSelected ? `svg:${mdiCheckCircleOutline}` : '$radioOff'"
               rounded="lg"
-              :subtitle="soloPrice"
+              :subtitle="prices.solo[interval]"
               title="Solo Developer"
               :variant="isSelected ? 'tonal' : 'text'"
               @click="toggle"
@@ -23,14 +37,14 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-item :value="isYearly ? 'teamYear' : 'teamMonth'">
+        <v-item value="team">
           <template #default="{ toggle, isSelected }">
             <v-card
               :border="isSelected ? 'sm primary opacity-100' : 'sm'"
               :color="isSelected ? 'primary' : undefined"
               :prepend-icon="isSelected ? `svg:${mdiCheckCircleOutline}` : '$radioOff'"
               rounded="lg"
-              :subtitle="teamPrice"
+              :subtitle="prices.team[interval]"
               title="Team Access"
               :variant="isSelected ? 'tonal' : 'text'"
               @click="toggle"
@@ -44,24 +58,6 @@
       </v-col>
     </v-row>
   </v-item-group>
-
-  <VoSwitch
-    v-model="isYearly"
-    class="d-flex justify-end"
-    title="One Team"
-  >
-    <template #label>
-      Yearly Billing
-
-      <v-chip
-        class="ml-2"
-        color="success"
-        size="small"
-        text="Save 20%"
-        variant="flat"
-      />
-    </template>
-  </VoSwitch>
 </template>
 
 <script lang="ts" setup>
@@ -69,20 +65,28 @@
   import { mdiCheckCircleOutline } from '@mdi/js'
 
   const dialog = shallowRef(false)
-  const subscription = defineModel({
-    type: String as PropType<'soloMonth' | 'soloYear' | 'teamMonth' | 'teamYear' | undefined>,
+  const interval = defineModel('interval', {
+    type: String as PropType<'month' | 'year'>,
+    default: 'month',
+  })
+  const type = defineModel('type', {
+    type: String as PropType<'solo' | 'team'>,
+    default: 'solo',
   })
   const one = useOneStore()
 
-  const isYearly = ref(false)
-  const soloPrice = computed(() => isYearly.value ? `$${import.meta.env.VITE_YEARLY_SOLO_PRICE} / Year` : `$${import.meta.env.VITE_MONTHLY_SOLO_PRICE} / Month`)
-  const teamPrice = computed(() => isYearly.value ? `$${import.meta.env.VITE_YEARLY_TEAM_PRICE} / Year` : `$${import.meta.env.VITE_MONTHLY_TEAM_PRICE} / Month`)
+  const prices = {
+    solo: {
+      month: import.meta.env.VITE_MONTHLY_SOLO_PRICE + ' / Month',
+      year: import.meta.env.VITE_YEARLY_SOLO_PRICE + ' / Year',
+    },
+    team: {
+      month: import.meta.env.VITE_MONTHLY_TEAM_PRICE + ' / Month',
+      year: import.meta.env.VITE_YEARLY_TEAM_PRICE + ' / Year',
+    },
+  }
 
   watch(dialog, async val => {
     if (val) one.subscriptionInfo()
   })
-
-  watch(() => one.interval, val => {
-    subscription.value = val
-  }, { immediate: true })
 </script>
