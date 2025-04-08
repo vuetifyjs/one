@@ -42,6 +42,7 @@
             <v-card
               :border="isSelected ? 'sm primary opacity-100' : 'sm'"
               :color="isSelected ? 'primary' : undefined"
+              :disabled="disableTeam"
               :prepend-icon="isSelected ? `svg:${mdiCheckCircleOutline}` : '$radioOff'"
               rounded="lg"
               :subtitle="prices.team[interval]"
@@ -61,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-  // Icons
+// Icons
   import { mdiCheckCircleOutline } from '@mdi/js'
 
   const dialog = shallowRef(false)
@@ -74,6 +75,10 @@
     default: 'solo',
   })
   const one = useOneStore()
+  const team = useTeamStore()
+  const auth = useAuthStore()
+
+  const disableTeam = computed<boolean>(() => team.team?.id && (team.team?.owner.id !== auth.user?.id))
 
   const prices = {
     solo: {
