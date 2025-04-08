@@ -76,9 +76,8 @@
   })
   const one = useOneStore()
   const team = useTeamStore()
-  const auth = useAuthStore()
 
-  const disableTeam = computed<boolean>(() => team.team?.id && (team.team?.owner.id !== auth.user?.id))
+  const disableTeam = computed(() => team.hasTeamAccess && !team.isTeamOwner)
 
   const prices = {
     solo: {
