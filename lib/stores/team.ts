@@ -35,7 +35,9 @@ export const useTeamStore = defineStore('team', () => {
   const teamInviteCode = computed<string>(() => query.value.invite)
 
   const hasTeamAccess = computed(() =>
-    team.value && one.access?.some((access: string) => ['one/team', 'snips/team'].includes(access))
+    team.value
+      ? one.access?.some((access: string) => ['one/team', 'snips/team'].includes(access))
+      : false
   )
 
   watch(teamInviteCode, async () => {
