@@ -232,7 +232,6 @@
   watch(query, async () => {
     if (!one.sessionId || query.value.one === 'subscribe') return
     if (!query.value.team) return
-    window.value = one.sessionId || query.value.one === 'status' ? 'status' : 'subscribe'
 
     one.isOpen = true
 
