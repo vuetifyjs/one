@@ -46,7 +46,6 @@ export const useOneStore = defineStore('one', () => {
 
   const auth = useAuthStore()
   const http = useHttpStore()
-  const team = useTeamStore()
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
