@@ -32,6 +32,7 @@
         vertical
       />
 
+      <!-- Leads to one dropdown dialog -->
       <VoAuthBtn />
     </template>
   </v-app-bar>

@@ -11,11 +11,15 @@ export const useHttpStore = defineStore('http', {
         ...options,
       })
 
-      if (res.status === 204) {
-        return {} as T; // Return an empty object casted to T
+      if (!res.ok) {
+        throw new Error(await res.text())
       }
 
-      return res.json() as Promise<T>;
+      if (res.status === 204) {
+        return {} as T // Return an empty object casted to T
+      }
+
+      return res.json() as Promise<T>
     },
     async post<T = any> (url: string, body?: any, options: RequestInit = {}): Promise<T> {
       return this.fetch<T>(url, {

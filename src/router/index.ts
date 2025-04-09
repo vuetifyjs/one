@@ -12,7 +12,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   if (from.matched.length && to.path === from.path) return next()
-
   const auth = useAuthStore()
 
   await auth.verify()
@@ -31,7 +30,8 @@ router.beforeEach(async (to, from, next) => {
     !to.meta.guest &&
     to.path !== '/user/dashboard/'
   ) {
-    next({ path: '/user/dashboard/' })
+    // Passing query to not reset it on reroute for team invites
+    next({ path: '/user/dashboard/', query: to.query })
   } else {
     next()
   }
