@@ -158,8 +158,8 @@
           </template>
 
           <template #append>
-            <V-btn
-              prepend-icon="mdi-exit-to-app"
+            <v-btn
+              :prepend-icon="`svg:${mdiExitToApp}`"
               rounded="lg"
               text="Leave team"
               width="145"
@@ -169,11 +169,21 @@
         </v-card-item>
       </v-card>
     </v-container>
-  </vodialog></template>
+  </VoDialog>
+</template>
 
-  <script setup lang="ts">
-    // Icons
-  import { mdiAccount, mdiAccountGroupOutline, mdiAccountRemoveOutline, mdiCheck, mdiContentCopy, mdiLinkVariant, mdiShieldLock } from '@mdi/js'
+<script setup lang="ts">
+  // Icons
+  import {
+    mdiAccount,
+    mdiAccountGroupOutline,
+    mdiAccountRemoveOutline,
+    mdiCheck,
+    mdiContentCopy,
+    mdiExitToApp,
+    mdiLinkVariant,
+    mdiShieldLock,
+  } from '@mdi/js'
 
   const one = useOneStore()
   const teamStore = useTeamStore()
@@ -230,4 +240,4 @@
 
     dialog.value = true
   }, { immediate: true })
-  </script>
+</script>
