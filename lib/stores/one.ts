@@ -184,13 +184,13 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await http.post('/one/modify', {
+      await http.post('/one/modify', {
         subscriptionId: subscription.value.tierName,
         interval,
         type,
       })
 
-      auth.user = res.user
+      await verify()
     } catch (e) {
       //
     } finally {
