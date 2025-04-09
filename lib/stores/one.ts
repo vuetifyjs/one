@@ -184,13 +184,13 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await http.post('/one/modify', {
+      await http.post('/one/modify', {
         subscriptionId: subscription.value.tierName,
         interval,
         type,
       })
 
-      auth.user = res.user
+      await auth.verify(true)
     } catch (e) {
       //
     } finally {
@@ -204,12 +204,10 @@ export const useOneStore = defineStore('one', () => {
     try {
       isLoading.value = true
 
-      const res = await http.post(
-        `/one/verify?subscriptionId=${subscription.value?.tierName}`
-      )
-      auth.user = res.user
-      access.value = res.access
-      team.team = auth.user?.team ?? null
+      await http.post(
+        `/one/verify?subscriptionId=${subscription.value?.tierName}`)
+
+      await auth.verify(true)
     } catch (e) {
       //
     } finally {
