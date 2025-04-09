@@ -17,7 +17,7 @@
               <v-window-item value="subscribe">
                 <VoSubscriptionSubscribe v-model:interval="interval" v-model:type="type" />
                 <br>
-                <VoSubscriptionPerks />
+                <VoSubscriptionPerks :type="type" />
               </v-window-item>
 
               <v-window-item value="status">
@@ -48,7 +48,7 @@
         <VoBtn
           v-else-if="!one.one"
           block
-          :color="!(interval && type) ? 'disabled' : 'primary'"
+          :color="!(interval && type) ? 'disabled' : 'success'"
           :disabled="!(interval && type)"
           :loading="one.isLoading"
           prepend-icon="$vuetify"
