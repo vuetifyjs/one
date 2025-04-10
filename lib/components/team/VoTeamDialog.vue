@@ -124,8 +124,10 @@
                       <v-btn
                         v-else
                         class="me-n3"
+                        color="medium-emphasis"
                         density="comfortable"
                         :prepend-icon="`svg:${mdiAccountRemoveOutline}`"
+                        slim
                         text="Revoke"
                         variant="text"
                         @click="teamStore.removeFromTeam(item.id)"
