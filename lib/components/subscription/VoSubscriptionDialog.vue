@@ -92,10 +92,6 @@
 
     isUpdatingSubscription.value = interval !== one.interval || type !== one.subscriptionType
   })
-  watchEffect(() => {
-    interval.value = one.interval
-    type.value = one.subscriptionType
-  })
 
   watch(dialog, async val => {
     if (!val || !one.isSubscriber) {
@@ -118,6 +114,11 @@
 
     dialog.value = true
   }, { immediate: true })
+
+  watchEffect(() => {
+    interval.value = one.interval ?? 'year'
+    type.value = one.subscriptionType ?? 'solo'
+  })
 
   async function onClickModify () {
     await one.modify(interval.value!, type.value!)
