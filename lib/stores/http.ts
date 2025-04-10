@@ -11,6 +11,10 @@ export const useHttpStore = defineStore('http', {
         ...options,
       })
 
+      if (!res.ok) {
+        throw new Error(await res.text())
+      }
+
       if (res.status === 204) {
         return {} as T // Return an empty object casted to T
       }

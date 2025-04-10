@@ -15,11 +15,9 @@
 
             <v-window :model-value="window">
               <v-window-item value="subscribe">
-                <VoSubscriptionSubscribe v-model="subscription" />
-
+                <VoSubscriptionSubscribe v-model:interval="interval" v-model:type="type" />
                 <br>
-
-                <VoSubscriptionPerks />
+                <VoSubscriptionPerks :type="type" />
               </v-window-item>
 
               <v-window-item value="status">
@@ -50,13 +48,13 @@
         <VoBtn
           v-else-if="!one.one"
           block
-          :color="!subscription ? 'disabled' : 'primary'"
-          :disabled="!subscription"
+          :color="!(interval && type) ? 'disabled' : 'success'"
+          :disabled="!(interval && type)"
           :loading="one.isLoading"
           prepend-icon="$vuetify"
           size="default"
           text="Activate Subscription"
-          @click="one.subscribe(subscription!)"
+          @click="one.subscribe(interval!, type!)"
         />
 
         <VoBtn
@@ -83,15 +81,16 @@
   const dialog = defineModel('modelValue', { type: Boolean })
 
   const one = useOneStore()
-  const query = useQuery<{ one: string }>()
-  const subscription = shallowRef(one.interval)
+  const query = useQuery<{ one: string, team: string}>()
+  const interval = shallowRef(one.interval)
+  const type = shallowRef(one.subscriptionType)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
   const isUpdatingSubscription = shallowRef<boolean | null>(false)
 
-  watch(subscription, val => {
-    if (!one.isSubscriber || !one.interval) return
+  watch([interval, type], ([interval, type]) => {
+    if (!one.isSubscriber || !one.interval || !one.subscriptionType) return
 
-    isUpdatingSubscription.value = val !== one.interval
+    isUpdatingSubscription.value = interval !== one.interval || type !== one.subscriptionType
   })
 
   watch(dialog, async val => {
@@ -106,7 +105,7 @@
 
   watch(query, async () => {
     if (!one.sessionId && !['subscribe', 'status'].includes(query.value.one)) return
-
+    if (query.value.team) return
     window.value = one.sessionId || query.value.one === 'status' ? 'status' : 'subscribe'
 
     one.isOpen = true
@@ -116,8 +115,13 @@
     dialog.value = true
   }, { immediate: true })
 
+  watchEffect(() => {
+    interval.value = one.interval ?? 'year'
+    type.value = one.subscriptionType ?? 'solo'
+  })
+
   async function onClickModify () {
-    await one.modify(subscription.value!)
+    await one.modify(interval.value!, type.value!)
     await one.subscriptionInfo()
 
     isUpdatingSubscription.value = null

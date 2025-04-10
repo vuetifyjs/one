@@ -10,6 +10,8 @@
 
     <VoStudioNavItem />
 
+    <VoTeamListItem v-if="team.hasTeamAccess" />
+
     <VoDownloadsNavItem v-if="one.shopify" />
 
     <VoSponsorshipsListItem />
@@ -25,4 +27,6 @@
 <script lang="ts" setup>
   const auth = useAuthStore()
   const one = useOneStore()
+  const team = useTeamStore()
+
 </script>
