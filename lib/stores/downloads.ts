@@ -30,7 +30,7 @@ export const useDownloadsStore = defineStore('downloads', () => {
       const res = await http.get<{ downloads: SendowlDownload[] }>('/one/sendowl/downloads')
 
       all.value = res.downloads
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false

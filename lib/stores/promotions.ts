@@ -87,7 +87,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
       const res = await http.get<{ promotions: Promotion[] }>('/one/promotions')
 
       all.value = res.promotions
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -106,7 +106,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
       record.value = res.promotion
 
       return res.promotion
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -125,7 +125,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
       record.value = res.promotion
 
       return res.promotion
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -144,7 +144,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
       record.value = res.promotion
 
       return res.promotion
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -160,7 +160,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
       const res = await http.get<{ promotions: Promotion[] }>('/one/admin/promotions')
 
       aall.value = res.promotions
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
