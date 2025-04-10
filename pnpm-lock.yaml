@@ -11,6 +11,9 @@ importers:
       '@babel/types':
         specifier: ^7.26.10
         version: 7.26.10
+      '@fontsource/roboto':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@mdi/js':
         specifier: 7.4.47
         version: 7.4.47
@@ -83,9 +86,6 @@ importers:
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
-      roboto-fontface:
-        specifier: '*'
-        version: 0.10.0
       rollup:
         specifier: ^4.37.0
         version: 4.37.0
@@ -564,6 +564,9 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@fontsource/roboto@5.2.5':
+    resolution: {integrity: sha512-70r2UZ0raqLn5W+sPeKhqlf8wGvUXFWlofaDlcbt/S3d06+17gXKr3VNqDODB0I1ASme3dGT5OJj9NABt7OTZQ==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -3038,9 +3041,6 @@ packages:
     engines: {node: 20 || >=22}
     hasBin: true
 
-  roboto-fontface@0.10.0:
-    resolution: {integrity: sha512-OlwfYEgA2RdboZohpldlvJ1xngOins5d7ejqnIBWr9KaMxsnBqotpptRXTyfNRLnFpqzX6sTDt+X+a+6udnU8g==}
-
   rollup-plugin-dts@6.2.1:
     resolution: {integrity: sha512-sR3CxYUl7i2CHa0O7bA45mCrgADyAQ0tVtGSqi3yvH28M+eg1+g5d7kQ9hLvEz5dorK3XVsH5L2jwHLQf72DzA==}
     engines: {node: '>=16'}
@@ -4074,6 +4074,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@fontsource/roboto@5.2.5': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -6811,8 +6813,6 @@ snapshots:
     dependencies:
       glob: 11.0.1
       package-json-from-dist: 1.0.1
-
-  roboto-fontface@0.10.0: {}
 
   rollup-plugin-dts@6.2.1(rollup@4.37.0)(typescript@5.8.2):
     dependencies:
