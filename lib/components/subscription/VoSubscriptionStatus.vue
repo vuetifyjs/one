@@ -8,9 +8,13 @@
         rounded="lg"
         title="Subscription Status"
       >
+        <template #prepend>
+          <v-icon :color="one.isSubscriber ? 'success' : undefined" />
+        </template>
+
         <template v-if="one.info" #subtitle>
           <div class="d-flex align-center">
-            <span key="status" class="text-capitalize hidden-sm-and-down">{{ one.info.status }}</span>
+            <strong key="status" class="text-capitalize hidden-sm-and-down" v-text="one.info.status" />
 
             <template v-if="one.info.items.length">
               <span class="mx-1 hidden-sm-and-down">—</span>
@@ -80,9 +84,7 @@
 
 <script lang="ts" setup>
   // Icons
-  import {
-    mdiCreditCardSettingsOutline,
-  } from '@mdi/js'
+  import { mdiCreditCardSettingsOutline } from '@mdi/js'
 
   const adapter = useDate()
   const one = useOneStore()
@@ -97,10 +99,10 @@
   })
 
   async function onClickSubscribe () {
-    if (!one.interval) return
+    if (!one.interval || !one.subscriptionType) return
 
     one.isLoading = true
 
-    one.subscribe(one.interval)
+    one.subscribe(one.interval, one.subscriptionType)
   }
 </script>
