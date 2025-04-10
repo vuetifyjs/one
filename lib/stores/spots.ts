@@ -98,7 +98,7 @@ export const useSpotsStore = defineStore('spots', () => {
       const res = await http.get<{ spots: Spot[] }>('/one/spots')
 
       all.value = res.spots
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -116,7 +116,7 @@ export const useSpotsStore = defineStore('spots', () => {
       record.value = res.spot
 
       return res.spot
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -135,7 +135,7 @@ export const useSpotsStore = defineStore('spots', () => {
       record.value = res.spot
 
       return res.spot
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -154,7 +154,7 @@ export const useSpotsStore = defineStore('spots', () => {
       record.value = res.spot
 
       return res.spot
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -170,7 +170,7 @@ export const useSpotsStore = defineStore('spots', () => {
       const res = await http.get<{ spots: Spot[] }>('/one/admin/spots')
 
       aall.value = res.spots
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false

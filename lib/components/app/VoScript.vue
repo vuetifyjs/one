@@ -39,10 +39,14 @@
   })
 
   onMounted(() => {
-    scriptEl.value && rootEl.value?.appendChild(scriptEl.value)
+    if (scriptEl.value && rootEl.value) {
+      rootEl.value.appendChild(scriptEl.value)
+    }
   })
 
   onBeforeUnmount(() => {
-    scriptEl.value && rootEl.value?.removeChild(scriptEl.value)
+    if (scriptEl.value && rootEl.value) {
+      rootEl.value.removeChild(scriptEl.value)
+    }
   })
 </script>

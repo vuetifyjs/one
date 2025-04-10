@@ -35,7 +35,7 @@ export const useProductsStore = defineStore('products', () => {
       const res = await http.get<{ products: ShopifyProduct[] }>('/one/shopify/products')
 
       all.value = res.products
-    } catch (e) {
+    } catch {
       //
     }
 

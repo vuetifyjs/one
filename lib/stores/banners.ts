@@ -146,7 +146,7 @@ export const useBannersStore = defineStore('banners', () => {
       const res = await http.get<{ banners: Banner[] }>('/one/banners')
 
       all.value = res.banners
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -164,7 +164,7 @@ export const useBannersStore = defineStore('banners', () => {
       record.value = res.banner
 
       return res.banner
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -183,7 +183,7 @@ export const useBannersStore = defineStore('banners', () => {
       record.value = res.banner
 
       return res.banner
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -202,7 +202,7 @@ export const useBannersStore = defineStore('banners', () => {
       record.value = res.banner
 
       return res.banner
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -218,7 +218,7 @@ export const useBannersStore = defineStore('banners', () => {
       const res = await http.get<{ banners: Banner[] }>('/one/admin/banners')
 
       aall.value = res.banners
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false

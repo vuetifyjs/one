@@ -141,7 +141,7 @@ export const useOneStore = defineStore('one', () => {
       params.delete('session_id')
       params.delete('team')
       history.pushState(null, '', url.toString())
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -171,7 +171,7 @@ export const useOneStore = defineStore('one', () => {
       )
 
       auth.user = res.user
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -191,7 +191,7 @@ export const useOneStore = defineStore('one', () => {
       })
 
       await verify()
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -210,7 +210,7 @@ export const useOneStore = defineStore('one', () => {
       auth.user = res.user
       access.value = res.access
       team.team = auth.user?.team ?? null
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
@@ -226,7 +226,7 @@ export const useOneStore = defineStore('one', () => {
       info.value = res.subscription
       invoices.value = res.invoices
       return res
-    } catch (e) {
+    } catch {
       //
     } finally {
       isLoading.value = false
