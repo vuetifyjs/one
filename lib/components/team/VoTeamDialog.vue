@@ -1,174 +1,184 @@
 <template>
   <VoDialog
     v-model="dialog"
-    :prepend-icon="`svg:${mdiAccountGroupOutline}`"
+    :prepend-icon="`svg:${mdiAccountGroup}`"
     title="Team"
   >
-    <v-container class="pa-md-10" fluid>
-      <v-card
-        v-if="teamStore.isTeamOwner"
-        border
-        class="mb-4"
-        color="surface-light"
-        flat
-        max-width="1280"
-        rounded="lg"
-      >
-        <v-card-item
-          class="bg-surface"
-          :prepend-icon="`svg:${mdiAccountGroupOutline}`"
-          :subtitle="`Team - ${team?.members?.length} member(s)`"
-          title="Members"
-        >
-          <template v-if="teamStore.isTeamOwner" #append>
-            <v-btn
-              border
-              class="text-none"
-              color="primary"
-              :prepend-icon="`svg:${mdiAccount}`"
-              rounded="lg"
-              variant="flat"
-            >
-              Add member
+    <v-layout>
+      <v-main scrollable>
+        <div class="px-3">
+          <v-card-text>
+            <VoDialogSubheader
+              text="Share access to Vuetify One with up to 25 team members."
+              title="Manage your team"
+            />
 
-              <v-menu
-                activator="parent"
-                :close-on-content-click="false"
-                location="bottom end"
-                max-width="450"
-                offset="8"
-                width="100%"
+            <v-card
+              v-if="teamStore.isTeamOwner"
+              border
+              class="mb-4"
+              color="surface-light"
+              flat
+              max-width="1280"
+              rounded="lg"
+            >
+              <v-card-item
+                class="bg-surface"
+                :subtitle="`Team - ${team?.members?.length} member(s)`"
+                title="Members"
               >
-                <v-card color="surface-light">
-                  <v-card-item
-                    class="bg-surface"
-                    :prepend-icon="`svg:${mdiLinkVariant}`"
-                    subtitle="Provide this link to invite your team members"
-                    title="Member invite link"
+                <template v-if="teamStore.isTeamOwner" #append>
+                  <v-btn
+                    border
+                    class="text-none"
+                    color="primary"
+                    :prepend-icon="`svg:${mdiAccount}`"
+                    rounded="lg"
+                    variant="flat"
                   >
-                    <template #append>
+                    Add member
+
+                    <v-menu
+                      activator="parent"
+                      :close-on-content-click="false"
+                      location="bottom end"
+                      max-width="450"
+                      offset="8"
+                      width="100%"
+                    >
+                      <v-card color="surface-light">
+                        <v-card-item
+                          class="bg-surface"
+                          :prepend-icon="`svg:${mdiLinkVariant}`"
+                          subtitle="Provide this link to invite your team members"
+                          title="Member invite link"
+                        >
+                          <template #append>
+                            <v-btn
+                              class="text-none"
+                              :color="reset ? undefined : 'error'"
+                              :disabled="reset"
+                              flat
+                              slim
+                              text="Reset"
+                              @click="onClickReset"
+                            />
+                          </template>
+                        </v-card-item>
+
+                        <v-card-text class="pt-4">
+                          <v-text-field
+                            flat
+                            hide-details
+                            label="Invite link"
+                            :model-value="invite"
+                            readonly
+                            variant="solo"
+                          >
+                            <template #append-inner>
+                              <v-icon
+                                v-tooltip="'Copy Team link'"
+                                :icon="`svg:${copied ? mdiCheck : mdiContentCopy}`"
+                                size="small"
+                                @click="onClickCopy"
+                              />
+                            </template>
+                          </v-text-field>
+                        </v-card-text>
+                      </v-card>
+                    </v-menu>
+                  </v-btn>
+                </template>
+              </v-card-item>
+
+              <v-divider />
+
+              <v-card-text class="pa-2">
+                <v-sheet border rounded="lg">
+                  <v-data-table
+                    :headers="headers"
+                    :hide-default-footer="team?.members?.length! < 10"
+                    :items="team?.members"
+                  >
+                    <template #item.name="{ item }">
+                      <div class="d-flex align-center">
+                        <v-avatar :image="item.picture" size="x-small" start />
+
+                        <span>{{ item.name }}</span>
+                      </div>
+                    </template>
+
+                    <template #item.actions="{ item }">
                       <v-btn
-                        class="text-none"
-                        :color="reset ? undefined : 'error'"
-                        :disabled="reset"
-                        flat
+                        v-if="team?.owner?.id === item.id "
+                        class="me-n3"
+                        color="primary"
+                        density="comfortable"
+                        :prepend-icon="`svg:${mdiShieldLock}`"
+                        readonly
                         slim
-                        text="Reset"
-                        @click="onClickReset"
+                        text="Team owner"
+                        variant="tonal"
+                      />
+
+                      <v-btn
+                        v-else
+                        class="me-n3"
+                        density="comfortable"
+                        :prepend-icon="`svg:${mdiAccountRemoveOutline}`"
+                        text="Revoke"
+                        variant="text"
+                        @click="teamStore.removeFromTeam(item.id)"
                       />
                     </template>
-                  </v-card-item>
+                  </v-data-table>
+                </v-sheet>
+              </v-card-text>
+            </v-card>
 
-                  <v-card-text class="pt-4">
-                    <v-text-field
-                      flat
-                      hide-details
-                      label="Invite link"
-                      :model-value="invite"
-                      readonly
-                      variant="solo"
-                    >
-                      <template #append-inner>
-                        <v-icon
-                          v-tooltip="'Copy Team link'"
-                          :icon="`svg:${copied ? mdiCheck : mdiContentCopy}`"
-                          size="small"
-                          @click="onClickCopy"
-                        />
-                      </template>
-                    </v-text-field>
-                  </v-card-text>
-                </v-card>
-              </v-menu>
-            </v-btn>
-          </template>
-        </v-card-item>
-
-        <v-divider />
-
-        <v-card-text>
-          <v-sheet border rounded="lg">
-            <v-data-table
-              :headers="headers"
-              :hide-default-footer="team?.members?.length! < 10"
-              :items="team?.members"
-            >
-              <template #item.name="{ item }">
-                <div class="d-flex align-center">
-                  <v-avatar :image="item.picture" size="x-small" start />
-
-                  <span>{{ item.name }}</span>
-                </div>
-              </template>
-
-              <template #item.actions="{ item }">
-                <v-btn
-                  v-if="team?.owner?.id === item.id "
-                  class="me-n3"
-                  color="primary"
-                  density="comfortable"
-                  :prepend-icon="`svg:${mdiShieldLock}`"
-                  readonly
-                  slim
-                  text="Team owner"
-                  variant="tonal"
-                />
-
-                <v-btn
-                  v-else
-                  class="me-n3"
-                  density="comfortable"
-                  :prepend-icon="`svg:${mdiAccountRemoveOutline}`"
-                  text="Revoke"
-                  variant="text"
-                  @click="teamStore.removeFromTeam(item.id)"
-                />
-              </template>
-            </v-data-table>
-          </v-sheet>
-        </v-card-text>
-      </v-card>
-
-      <v-card
-        v-else
-        border
-        color="surface-light"
-        flat
-        max-width="1280"
-        rounded="lg"
-      >
-        <v-card-item
-          :prepend-icon="`svg:${mdiShieldLock}`"
-          subtitle="You are currently a member of a team with an All-access Pass."
-          title="My Team access"
-        >
-          <template #title>
-            <div class="d-flex align-center">
-              My Team Access
-
-              <v-chip
-                border="thin opacity-25 success"
-                class="ms-2"
-                color="success"
-                label
-                size="x-small"
-                text="Active"
-              />
-            </div>
-          </template>
-
-          <template #append>
-            <v-btn
-              :prepend-icon="`svg:${mdiExitToApp}`"
+            <v-card
+              v-else
+              border
+              color="surface-light"
+              flat
+              max-width="1280"
               rounded="lg"
-              text="Leave team"
-              width="145"
-              @click="teamStore.leaveTeam()"
-            />
-          </template>
-        </v-card-item>
-      </v-card>
-    </v-container>
+            >
+              <v-card-item
+                :prepend-icon="`svg:${mdiShieldLock}`"
+                subtitle="You are currently a member of a team with an All-access Pass."
+                title="My Team access"
+              >
+                <template #title>
+                  <div class="d-flex align-center">
+                    My Team Access
+
+                    <v-chip
+                      border="thin opacity-25 success"
+                      class="ms-2"
+                      color="success"
+                      label
+                      size="x-small"
+                      text="Active"
+                    />
+                  </div>
+                </template>
+
+                <template #append>
+                  <v-btn
+                    :prepend-icon="`svg:${mdiExitToApp}`"
+                    rounded="lg"
+                    text="Leave team"
+                    width="145"
+                    @click="teamStore.leaveTeam()"
+                  />
+                </template>
+              </v-card-item>
+            </v-card>
+          </v-card-text>
+        </div>
+      </v-main>
+    </v-layout>
   </VoDialog>
 </template>
 
@@ -176,7 +186,7 @@
   // Icons
   import {
     mdiAccount,
-    mdiAccountGroupOutline,
+    mdiAccountGroup,
     mdiAccountRemoveOutline,
     mdiCheck,
     mdiContentCopy,

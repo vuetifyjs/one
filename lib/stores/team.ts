@@ -30,9 +30,11 @@ export const useTeamStore = defineStore('team', () => {
   const http = useHttpStore()
   const queue = useQueueStore()
 
+  const isLoading = shallowRef(false)
+
   const team = ref<Team | null>(null)
-  const teamInviteDialog = ref<boolean>(false)
-  const teamInviteCode = computed<string>(() => query.value.invite)
+  const teamInviteDialog = ref(false)
+  const teamInviteCode = computed(() => query.value.invite)
 
   const hasTeamAccess = computed(() =>
     team.value
@@ -45,42 +47,58 @@ export const useTeamStore = defineStore('team', () => {
     if (!auth.user) { auth.dialog = true }
 
     try {
+      isLoading.value = true
+
       const res = await http.get(`/one/team/${teamInviteCode.value}`)
       team.value = res.team
       teamInviteDialog.value = true
+
+      clearTeamQuery()
     } catch (e: any) {
       queue.showError(e.message)
-      clearTeamQuery()
+    } finally {
+      isLoading.value = false
     }
   })
 
   async function removeFromTeam (id: string) {
     try {
+      isLoading.value = true
+
       const res = await http.post('/one/team/remove', { userId: id })
       team.value = res.team
     } catch (e:any) {
       queue.showError(e.message)
+    } finally {
+      isLoading.value = false
     }
   }
 
   async function leaveTeam () {
     try {
+      isLoading.value = true
+
       await http.post('/one/team/leave', { teamId: team.value?.id })
       await auth.verify(true)
     } catch (e:any) {
       queue.showError(e.message)
+    } finally {
+      isLoading.value = false
     }
   }
 
   async function joinTeam () {
     try {
+      isLoading.value = true
+
       await http.post('/one/team/join', { inviteCode: teamInviteCode.value })
       await auth.verify(true)
+
       clearTeamQuery()
     } catch (e: any) {
       queue.showError(e.message)
     } finally {
-      clearTeamQuery()
+      isLoading.value = false
     }
   }
 
@@ -101,6 +119,7 @@ export const useTeamStore = defineStore('team', () => {
     teamInviteCode,
     hasTeamAccess,
     isTeamOwner,
+    isLoading,
     removeFromTeam,
     leaveTeam,
     joinTeam,
