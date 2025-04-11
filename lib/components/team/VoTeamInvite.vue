@@ -12,7 +12,7 @@
               icon="$close"
               size="x-small"
               variant="text"
-              @click="isActive.value = false"
+              @click="clearQuery(isActive)"
             />
           </div>
         </template>
@@ -49,7 +49,7 @@
   </v-dialog>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { mdiAtomVariant } from '@mdi/js'
 
   const team = useTeamStore()

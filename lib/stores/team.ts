@@ -44,7 +44,9 @@ export const useTeamStore = defineStore('team', () => {
 
   watch(teamInviteCode, async () => {
     if (!teamInviteCode.value) return
-    if (!auth.user) { auth.dialog = true }
+    if (!auth.user) {
+      auth.dialog = true
+    }
 
     try {
       isLoading.value = true
@@ -52,9 +54,8 @@ export const useTeamStore = defineStore('team', () => {
       const res = await http.get(`/one/team/${teamInviteCode.value}`)
       team.value = res.team
       teamInviteDialog.value = true
-
-      clearTeamQuery()
     } catch (e: any) {
+      clearTeamQuery()
       queue.showError(e.message)
     } finally {
       isLoading.value = false
@@ -65,9 +66,11 @@ export const useTeamStore = defineStore('team', () => {
     try {
       isLoading.value = true
 
-      const res = await http.post('/one/team/remove', { userId: id })
-      team.value = res.team
-    } catch (e:any) {
+      if (!team.value) return
+
+      await http.post('/one/team/remove', { userId: id })
+      team.value.members = team.value.members.filter((member: Team['members'][number]) => member.id !== id)
+    } catch (e: any) {
       queue.showError(e.message)
     } finally {
       isLoading.value = false
@@ -80,7 +83,7 @@ export const useTeamStore = defineStore('team', () => {
 
       await http.post('/one/team/leave', { teamId: team.value?.id })
       await auth.verify(true)
-    } catch (e:any) {
+    } catch (e: any) {
       queue.showError(e.message)
     } finally {
       isLoading.value = false
