@@ -85,18 +85,17 @@ export const useAuthStore = defineStore('auth', () => {
   async function verify (force = false) {
     if (verify.promise) return verify.promise
 
-    // TODO
-    // if (
-    //   !force &&
-    //   !document.cookie.includes('sx=1') &&
-    //   // This check only works if the api and site are on the same domain
-    //   location.hostname.match(/\.([^.]+\.[^.]+)$/)?.[1] ===
-    //   new URL(http.url).hostname.match(/\.([^.]+\.[^.]+)$/)?.[1]
-    // ) {
-    //   // Session cookie isn't set, don't even bother fetching
-    //   user.value = null
-    //   return
-    // }
+    if (
+      !force &&
+      !document.cookie.includes('sx=1') &&
+      // This check only works if the api and site are on the same domain
+      location.hostname.match(/([^.]+\.[^.]+)$/)?.[1] ===
+      new URL(http.url).hostname.match(/([^.]+\.[^.]+)$/)?.[1]
+    ) {
+      // Session cookie isn't set, don't even bother fetching
+      user.value = null
+      return
+    }
 
     isLoading.value = true
 
