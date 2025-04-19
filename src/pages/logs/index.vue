@@ -15,7 +15,7 @@
           <!--<v-checkbox-btn v-model="live" false-icon="mdi-truck-delivery" true-icon="mdi-pause-circle" />-->
           <v-text-field v-model="query" clearable label="search" prepend-inner-icon="mdi-magnify" />
           <v-select v-model="level" :items="levels" label="Level" />
-          <v-btn icon="mdi-reload" @click="fetchLogs" />
+          <v-btn icon="mdi-reload" :loading="isLoading" @click="fetchLogs" />
         </div>
       </template>
 
@@ -132,6 +132,7 @@
     { title: 'fatal', value: 60 },
   ]
 
+  const isLoading = shallowRef(false)
   const now = ref(new Date())
   // const live = ref(false)
   const query = useRouteQuery('search', '', { mode: 'replace' })
@@ -180,7 +181,9 @@
       cursor: firstItem,
     }).filter(([, v]) => v != null) as any)
 
+    isLoading.value = true
     const { logs: _logs, ...rest } = await http.get('/admin/logs?' + params.toString())
+    isLoading.value = false
 
     _logs.forEach((log: any) => {
       if (log.data.query) {
