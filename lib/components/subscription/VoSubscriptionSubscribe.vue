@@ -70,12 +70,12 @@
 
   const prices = {
     solo: {
-      month: import.meta.env.VITE_MONTHLY_SOLO_PRICE + ' /month',
-      year: import.meta.env.VITE_YEARLY_SOLO_PRICE + ' /year',
+      month: '2.99 /month',
+      year: '29.99 /year',
     },
     team: {
-      month: import.meta.env.VITE_MONTHLY_TEAM_PRICE + ' /month',
-      year: import.meta.env.VITE_YEARLY_TEAM_PRICE + ' /year',
+      month: '29.99 /month',
+      year: '299.99 /year',
     },
   }
 
