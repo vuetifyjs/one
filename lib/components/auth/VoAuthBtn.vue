@@ -14,13 +14,16 @@
       style="transition: .2s ease;"
       :variant="!auth.user ? 'flat' : one.isOpen ? 'outlined' : 'text'"
     >
-      <span v-if="!auth.user && smAndUp">Login</span> 
-      <v-icon v-if="!auth.user && !smAndUp">svg:{{mdiLogin}}</v-icon>
-
       <v-avatar
         v-if="auth.user"
         :image="user.avatar || auth.user.picture || ''"
       />
+
+      <template v-else>
+        <span v-if="smAndUp">Login</span>
+        <v-icon v-else :icon="`svg:${mdiLogin}`" />
+      </template>
+
 
       <VoUserMenu />
     </VoBtn>
