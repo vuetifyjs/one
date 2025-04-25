@@ -9,7 +9,6 @@ export default vuetify(
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      'unicorn/prefer-global-this': 'off',
     },
     languageOptions: {
       globals: {
