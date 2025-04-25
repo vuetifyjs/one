@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 
 export type Snackbar = Record<string, any>
 
 export interface SnackbarQueueState {
   queue: Ref<Snackbar[]>
   show: (text: Record<string, any> | string) => void
-  showError: (text: Record<string, any> |string) => void
+  showError: (text: Record<string, any> | string) => void
 }
 
 export const useQueueStore = defineStore('Queue', () => {

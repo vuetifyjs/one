@@ -3,7 +3,8 @@ import { useSiteStore } from './site'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { computed, ComputedRef, ref, Ref, shallowRef, ShallowRef } from 'vue'
+import type { ComputedRef, Ref, ShallowRef } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { useHttpStore } from './http'
 
 // Types
@@ -73,7 +74,9 @@ export const useSpotsStore = defineStore('spots', () => {
   const isLoading = shallowRef(false)
 
   const spot = computed(() => {
-    if (record.value) return record.value
+    if (record.value) {
+      return record.value
+    }
 
     return all.value.find(({
       metadata: {
@@ -81,11 +84,15 @@ export const useSpotsStore = defineStore('spots', () => {
         active,
       },
     }) => {
-      if (!active) return false
+      if (!active) {
+        return false
+      }
       if (
-        (_site.includes('dev') && import.meta.env.MODE === 'development') ||
-        _site.includes('*')
-      ) return true
+        (_site.includes('dev') && import.meta.env.MODE === 'development')
+        || _site.includes('*')
+      ) {
+        return true
+      }
 
       return _site.some(s => site.id.includes(s))
     })

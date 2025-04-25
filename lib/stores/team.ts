@@ -39,11 +39,13 @@ export const useTeamStore = defineStore('team', () => {
   const hasTeamAccess = computed(() =>
     team.value
       ? one.access?.some((access: string) => ['one/team', 'snips/team'].includes(access))
-      : false
+      : false,
   )
 
   watch(teamInviteCode, async () => {
-    if (!teamInviteCode.value) return
+    if (!teamInviteCode.value) {
+      return
+    }
     if (!auth.user) {
       auth.dialog = true
     }
@@ -54,9 +56,9 @@ export const useTeamStore = defineStore('team', () => {
       const res = await http.get(`/one/team/${teamInviteCode.value}`)
       team.value = res.team
       teamInviteDialog.value = true
-    } catch (e: any) {
+    } catch (error: any) {
       clearTeamQuery()
-      queue.showError(e.message)
+      queue.showError(error.message)
     } finally {
       isLoading.value = false
     }
@@ -66,12 +68,14 @@ export const useTeamStore = defineStore('team', () => {
     try {
       isLoading.value = true
 
-      if (!team.value) return
+      if (!team.value) {
+        return
+      }
 
       await http.post('/one/team/remove', { userId: id })
       team.value.members = team.value.members.filter((member: Team['members'][number]) => member.id !== id)
-    } catch (e: any) {
-      queue.showError(e.message)
+    } catch (error: any) {
+      queue.showError(error.message)
     } finally {
       isLoading.value = false
     }
@@ -83,8 +87,8 @@ export const useTeamStore = defineStore('team', () => {
 
       await http.post('/one/team/leave', { teamId: team.value?.id })
       await auth.verify(true)
-    } catch (e: any) {
-      queue.showError(e.message)
+    } catch (error: any) {
+      queue.showError(error.message)
     } finally {
       isLoading.value = false
     }
@@ -98,8 +102,8 @@ export const useTeamStore = defineStore('team', () => {
       await auth.verify(true)
 
       clearTeamQuery()
-    } catch (e: any) {
-      queue.showError(e.message)
+    } catch (error: any) {
+      queue.showError(error.message)
     } finally {
       isLoading.value = false
     }

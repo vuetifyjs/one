@@ -48,9 +48,9 @@
 
   const color = computed(() => {
     return one.isOpen || !auth.user
-      ? user.colors.one === 'surface-light'
+      ? (user.colors.one === 'surface-light'
         ? 'primary'
-        : user.colors.one
+        : user.colors.one)
       : 'surface-light'
   })
 </script>

@@ -201,7 +201,7 @@
   const teamStore = useTeamStore()
   const http = useHttpStore()
   const team = computed(() => teamStore.team)
-  const query = useQuery<{ one: string, team: string}>()
+  const query = useQuery<{ one: string, team: string }>()
 
   const copied = shallowRef(false)
   const reset = shallowRef(false)

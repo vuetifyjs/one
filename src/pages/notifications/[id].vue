@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
   // Stores
-  import { Notification } from '@/stores/notifications'
+  import type { Notification } from '@/stores/notifications'
 
   definePage({
     meta: {

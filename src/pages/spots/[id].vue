@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
   // Stores
-  import { Spot } from '@/stores/spots'
+  import type { Spot } from '@/stores/spots'
 
   definePage({
     meta: {

@@ -54,7 +54,7 @@
 
   const team = useTeamStore()
 
-  const teamName = computed(() => team.team?.name ? team.team.name : `${team.team?.owner.name}'s team`)
+  const teamName = computed(() => team.team?.name || `${team.team?.owner.name}'s team`)
 
   function clearQuery (isActive: Ref<boolean>) {
     team.clearTeamQuery()

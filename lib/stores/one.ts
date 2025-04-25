@@ -65,7 +65,9 @@ export const useOneStore = defineStore('one', () => {
 
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s) => {
-      if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') return acc
+      if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') {
+        return acc
+      }
       const amount = ['teamMonth', 'soloMonth'].includes(s.interval) ? s.amount : s.amount / 12
       return acc + amount / 100
     }, 0) ?? 0
@@ -88,33 +90,41 @@ export const useOneStore = defineStore('one', () => {
   })
 
   const isSubscriber = computed(() => (
-    !http.url ||
-    auth.user?.isAdmin ||
-    subscription.value?.isActive ||
-    github.value?.isActive ||
-    discord.value?.isActive ||
-    patreon.value?.isActive ||
-    monthlyTotal.value >= 2.99
+    !http.url
+    || auth.user?.isAdmin
+    || subscription.value?.isActive
+    || github.value?.isActive
+    || discord.value?.isActive
+    || patreon.value?.isActive
+    || monthlyTotal.value >= 2.99
   ))
 
   onMounted(async () => {
-    if (sessionId.value) await activate()
+    if (sessionId.value) {
+      await activate()
+    }
   })
 
   watch(isOpen, resetQuery)
   watch(sessionId, async val => {
-    if (!val) return
+    if (!val) {
+      return
+    }
 
     await activate()
   }, { immediate: true })
 
   watch(query, val => {
-    if (val.one !== 'subscribe' || auth.user) return
+    if (val.one !== 'subscribe' || auth.user) {
+      return
+    }
 
     auth.dialog = true
 
     const unwatch = watch(() => auth.user, val => {
-      if (!val) return
+      if (!val) {
+        return
+      }
 
       auth.dialog = false
 
@@ -123,7 +133,9 @@ export const useOneStore = defineStore('one', () => {
   }, { immediate: true })
 
   watch(isSubscriber, (val, oldVal) => {
-    if (val === false && oldVal !== true) return
+    if (val === false && oldVal !== true) {
+      return
+    }
 
     verify()
   })
@@ -161,13 +173,15 @@ export const useOneStore = defineStore('one', () => {
   }
 
   async function cancel () {
-    if (!subscription.value) return
+    if (!subscription.value) {
+      return
+    }
 
     try {
       isLoading.value = true
 
       const res = await http.post(
-        `/one/cancel?subscriptionId=${subscription.value?.tierName}`
+        `/one/cancel?subscriptionId=${subscription.value?.tierName}`,
       )
 
       auth.user = res.user
@@ -179,7 +193,9 @@ export const useOneStore = defineStore('one', () => {
   }
 
   async function modify (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) {
-    if (!subscription.value) return
+    if (!subscription.value) {
+      return
+    }
 
     try {
       isLoading.value = true
@@ -199,13 +215,15 @@ export const useOneStore = defineStore('one', () => {
   }
 
   async function verify () {
-    if (!subscription.value) return
+    if (!subscription.value) {
+      return
+    }
 
     try {
       isLoading.value = true
 
       const res = await http.post(
-        `/one/verify?subscriptionId=${subscription.value?.tierName}`
+        `/one/verify?subscriptionId=${subscription.value?.tierName}`,
       )
       auth.user = res.user
       access.value = res.access

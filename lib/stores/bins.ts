@@ -27,7 +27,9 @@ export const useBinsStore = defineStore('bins', () => {
   const timeout = shallowRef(-1)
 
   const isOwner = computed(() => {
-    if (!auth.user || !current.value) return false
+    if (!auth.user || !current.value) {
+      return false
+    }
 
     return auth.user.id === current.value.owner.id
   })
@@ -39,7 +41,9 @@ export const useBinsStore = defineStore('bins', () => {
     window.clearTimeout(timeout.value)
 
     timeout.value = window.setTimeout(() => {
-      if (!current.value || !isOwner.value) return
+      if (!current.value || !isOwner.value) {
+        return
+      }
 
       update(current.value, current.value.id)
     }, 100)

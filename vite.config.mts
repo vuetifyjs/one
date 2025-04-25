@@ -43,7 +43,7 @@ export default defineConfig({
           'vue-router/auto': [
             'definePage',
           ],
-          vuetify: [
+          'vuetify': [
             'useDisplay',
             'useDate',
             'useTheme',
@@ -68,7 +68,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./lib', import.meta.url)),
+      '@': fileURLToPath(new URL('lib', import.meta.url)),
     },
     extensions: [
       '.js',

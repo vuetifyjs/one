@@ -204,9 +204,7 @@
   const start = computed({
     get: () => {
       const date = adapter.date(
-        spots.record?.metadata.start_date
-          ? spots.record.metadata.start_date
-          : undefined
+        spots.record?.metadata?.start_date ?? undefined,
       )
 
       return adapter.parseISO(adapter.toISO(date)) as string
@@ -219,9 +217,7 @@
   const stop = computed({
     get: () => {
       const date = adapter.date(
-        spots.record?.metadata.end_date
-          ? spots.record.metadata.end_date
-          : undefined
+        spots.record?.metadata?.end_date ?? undefined,
       )
 
       return adapter.parseISO(adapter.toISO(date)) as string

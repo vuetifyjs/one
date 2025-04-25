@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
   // Stores
-  import { Promotion } from '@/stores/promotions'
+  import type { Promotion } from '@/stores/promotions'
 
   definePage({
     meta: {

@@ -153,7 +153,9 @@ export const useUserStore = defineStore('user', () => {
   watch(state, save)
 
   function load () {
-    if (!IN_BROWSER) return
+    if (!IN_BROWSER) {
+      return
+    }
 
     const stored = localStorage.getItem('vuetify@user')
     const data = stored ? JSON.parse(stored) : {}
@@ -170,9 +172,11 @@ export const useUserStore = defineStore('user', () => {
       }
       if (typeof data.theme === 'object') {
         data.mixedTheme = data.theme.mixed
-        data.theme = data.theme.system ? 'system'
-          : data.theme.dark ? 'dark'
-            : 'light'
+        data.theme = data.theme.system
+          ? 'system'
+          : (data.theme.dark
+              ? 'dark'
+              : 'light')
       }
       if (Array.isArray(data.notifications)) {
         data.notifications = { read: data.notifications }
@@ -218,13 +222,17 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function save () {
-    if (!IN_BROWSER) return
+    if (!IN_BROWSER) {
+      return
+    }
 
     localStorage.setItem('vuetify@user', JSON.stringify(state, null, 2))
   }
 
   function reset () {
-    if (!IN_BROWSER) return
+    if (!IN_BROWSER) {
+      return
+    }
 
     Object.assign(state, merge({}, DEFAULT_USER))
 

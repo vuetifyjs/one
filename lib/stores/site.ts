@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 
 // Utilities
-import { Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 
 export interface SiteState {
   id: Ref<string[]>

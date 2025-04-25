@@ -2,7 +2,7 @@
 import Components from 'unplugin-vue-components/vite'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import AutoImport from 'unplugin-auto-import/vite'
 
 // Utilities
@@ -31,7 +31,7 @@ export default defineConfig({
           'vue-router/auto': [
             'definePage',
           ],
-          vuetify: [
+          'vuetify': [
             'useDisplay',
             'useDate',
             'useTheme',
@@ -52,7 +52,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./lib', import.meta.url)),
+      '@': fileURLToPath(new URL('lib', import.meta.url)),
     },
     extensions: [
       '.js',

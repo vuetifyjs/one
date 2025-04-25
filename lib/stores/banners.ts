@@ -5,7 +5,8 @@ import { useSiteStore } from './site'
 import { useUserStore } from './user'
 
 // Utilities
-import { computed, ComputedRef, ref, Ref, shallowRef, ShallowRef } from 'vue'
+import type { ComputedRef, Ref, ShallowRef } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { useHttpStore } from './http'
 
 // Types
@@ -104,9 +105,15 @@ export const useBannersStore = defineStore('banners', () => {
   const isLoading = shallowRef(false)
 
   const banner = computed(() => {
-    if (record.value) return record.value
-    if (server.value) return server.value
-    if (!user.notifications.banners) return undefined
+    if (record.value) {
+      return record.value
+    }
+    if (server.value) {
+      return server.value
+    }
+    if (!user.notifications.banners) {
+      return undefined
+    }
 
     return all.value.find(({
       slug,
@@ -115,12 +122,18 @@ export const useBannersStore = defineStore('banners', () => {
         active,
       },
     }) => {
-      if (!active) return false
-      if (user.notifications.last.banner.includes(slug)) return false
+      if (!active) {
+        return false
+      }
+      if (user.notifications.last.banner.includes(slug)) {
+        return false
+      }
       if (
-        (_site.includes('dev') && import.meta.env.MODE === 'development') ||
-        _site.includes('*')
-      ) return true
+        (_site.includes('dev') && import.meta.env.MODE === 'development')
+        || _site.includes('*')
+      ) {
+        return true
+      }
 
       return _site.some(s => site.id.includes(s))
     })
@@ -133,7 +146,9 @@ export const useBannersStore = defineStore('banners', () => {
         active,
       },
     }) => {
-      if (!active) return false
+      if (!active) {
+        return false
+      }
 
       return _site.includes('server')
     })

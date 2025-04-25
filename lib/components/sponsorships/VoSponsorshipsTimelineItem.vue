@@ -74,7 +74,7 @@
   const settings = useSettingsStore()
 
   const tier = computed(() => {
-    const amount = parseFloat(String((props.sponsorship?.amount ?? 0) / 100)).toFixed(2)
+    const amount = Number.parseFloat(String((props.sponsorship?.amount ?? 0) / 100)).toFixed(2)
 
     return `$${amount} /${props.sponsorship?.interval}`
   })

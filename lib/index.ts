@@ -61,7 +61,9 @@ export function one (id: string[], url: string) {
 
     store.url = url
 
-    if (store.$id !== 'site') return
+    if (store.$id !== 'site') {
+      return
+    }
 
     store.id = id
   }

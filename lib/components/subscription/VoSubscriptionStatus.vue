@@ -16,7 +16,7 @@
           <div class="d-flex align-center">
             <strong key="status" class="text-capitalize hidden-sm-and-down" v-text="one.info.status" />
 
-            <template v-if="one.info.items.length">
+            <template v-if="one.info.items.length > 0">
               <span class="mx-1 hidden-sm-and-down">—</span>
 
               <span class="me-1">

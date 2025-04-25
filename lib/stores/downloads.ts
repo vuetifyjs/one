@@ -22,7 +22,9 @@ export const useDownloadsStore = defineStore('downloads', () => {
   const isLoading = shallowRef(false)
 
   async function index () {
-    if (all.value.length) return all.value
+    if (all.value.length > 0) {
+      return all.value
+    }
 
     isLoading.value = true
 

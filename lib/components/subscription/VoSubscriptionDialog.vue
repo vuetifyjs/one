@@ -81,7 +81,7 @@
   const dialog = defineModel('modelValue', { type: Boolean })
 
   const one = useOneStore()
-  const query = useQuery<{ one: string, team: string}>()
+  const query = useQuery<{ one: string, team: string }>()
   const interval = shallowRef(one.interval)
   const type = shallowRef(one.subscriptionType)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')

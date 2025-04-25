@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
   // Stores
-  import { Banner } from '@/stores/banners'
+  import type { Banner } from '@/stores/banners'
 
   definePage({
     meta: {

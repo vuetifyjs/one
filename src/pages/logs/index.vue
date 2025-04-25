@@ -151,7 +151,7 @@
   onBeforeMount(async () => {
     nowTimer = window.setInterval(() => {
       now.value = new Date()
-    }, 60000)
+    }, 60_000)
 
     await fetchLogs()
   })
@@ -185,11 +185,11 @@
     const { logs: _logs, ...rest } = await http.get('/admin/logs?' + params.toString())
     isLoading.value = false
 
-    _logs.forEach((log: any) => {
+    for (const log of _logs) {
       if (log.data.query) {
         log.query = new URLSearchParams(log.data.query).toString()
       }
-    })
+    }
 
     logs.value = _logs
     pagination.value = rest
@@ -223,10 +223,10 @@
         ...enUS,
         formatRelative: token => ({
           lastWeek: 'yyyy-MM-dd HH:mm',
-          yesterday: "HH:mm 'yesterday'",
+          yesterday: 'HH:mm \'yesterday\'',
           today: 'HH:mm',
           tomorrow: 'HH:mm',
-          nextWeek: "'Next' eeee",
+          nextWeek: '\'Next\' eeee',
           other: 'yyyy-MM-dd HH:mm',
         })[token],
       },

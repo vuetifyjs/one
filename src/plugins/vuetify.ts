@@ -8,7 +8,8 @@
 import 'vuetify/styles'
 
 // Composables
-import { createVuetify, IconProps } from 'vuetify'
+import type { IconProps } from 'vuetify'
+import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import { VIconBtn } from 'vuetify/labs/VIconBtn'
 import { camelize, h } from 'vue'

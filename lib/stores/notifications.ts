@@ -2,7 +2,8 @@
 import { defineStore } from 'pinia'
 
 // Composables
-import { computed, ComputedRef, ref, Ref, ShallowRef, shallowRef } from 'vue'
+import type { ComputedRef, Ref, ShallowRef } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 
 // Stores
 import { useHttpStore } from './http'

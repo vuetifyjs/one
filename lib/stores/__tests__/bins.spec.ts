@@ -62,7 +62,7 @@ describe('http store', () => {
 
     const bins = useBinsStore()
 
-    bins.all.push(...[bin, { ...bin, content: 'Bin 2', id: '2' }])
+    bins.all.push(bin, { ...bin, content: 'Bin 2', id: '2' })
 
     const res = bins.update(bin, '2')
 

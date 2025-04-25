@@ -4,7 +4,7 @@
     height="100%"
     lines="three"
   >
-    <div v-if="!items.length" class="pt-16">
+    <div v-if="items.length === 0" class="pt-16">
       <v-empty-state
 
         icon="$vuetify"
