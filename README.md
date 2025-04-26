@@ -6,7 +6,7 @@
 </div>
 
 [![npm version](https://img.shields.io/npm/v/@vuetify/one.svg)](https://www.npmjs.com/package/@vuetify/one)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
 
