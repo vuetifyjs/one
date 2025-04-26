@@ -1,9 +1,7 @@
-# Vuetify One
-
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://vuetifyjs.b-cdn.net/docs/images/one/logos/vone-logo-dark.png">
-  <img alt="Vuetify One Logo" src="https://vuetifyjs.b-cdn.net/docs/images/one/logos/vone-logo-light.png">
+  <img alt="Vuetify One Logo" src="https://vuetifyjs.b-cdn.net/docs/images/one/logos/vone-logo-light.png" height="150">
 </picture>
 </div>
 
