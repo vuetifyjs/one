@@ -38,6 +38,7 @@ declare module 'vue-router/auto-routes' {
     '/spots/[id]': RouteRecordInfo<'/spots/[id]', '/spots/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/spots/create': RouteRecordInfo<'/spots/create', '/spots/create', Record<never, never>, Record<never, never>>,
     '/user/dashboard': RouteRecordInfo<'/user/dashboard', '/user/dashboard', Record<never, never>, Record<never, never>>,
+    '/user/mcp': RouteRecordInfo<'/user/mcp', '/user/mcp', Record<never, never>, Record<never, never>>,
     '/users/': RouteRecordInfo<'/users/', '/users', Record<never, never>, Record<never, never>>,
   }
 }

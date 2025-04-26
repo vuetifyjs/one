@@ -20,7 +20,7 @@
     <v-card>
       <v-toolbar :title="title">
         <template #append>
-          <VoBtn
+          <v-btn
             prepend-icon="mdi-arrow-left"
             text="Go Back"
             @click="router.go(-1)"
