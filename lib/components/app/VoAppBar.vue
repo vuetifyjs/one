@@ -27,7 +27,7 @@
 
       <v-divider
         v-if="$slots.append"
-        class="mx-4 align-self-center h-100"
+        class="align-self-center h-100 mx-2 mx-sm-4"
         length="20"
         vertical
       />

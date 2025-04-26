@@ -8,18 +8,22 @@
       :border="!!auth.user"
       class="vo-auth-btn"
       :color="color"
-      :icon="auth.user || auth.isLoading"
+      :icon="auth.user || auth.isLoading || !smAndUp"
       :loading="auth.isLoading"
-      size="default"
+      :size="smAndUp ? 'default' : 'small'"
       style="transition: .2s ease;"
       :variant="!auth.user ? 'flat' : one.isOpen ? 'outlined' : 'text'"
     >
-      <span v-if="!auth.user">Login</span>
-
       <v-avatar
         v-if="auth.user"
         :image="user.avatar || auth.user.picture || ''"
       />
+
+      <template v-else>
+        <span v-if="smAndUp">Login</span>
+        <v-icon v-else :icon="`svg:${mdiLogin}`" />
+      </template>
+
 
       <VoUserMenu />
     </VoBtn>
@@ -53,4 +57,6 @@
         : user.colors.one
       : 'surface-light'
   })
+
+  const { smAndUp } = useDisplay()
 </script>
