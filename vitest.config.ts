@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 export default defineConfig({
   resolve: {
     alias: {
-      '@/stores': fileURLToPath(new URL('./lib/stores', import.meta.url)),
+      '@/stores': fileURLToPath(new URL('./src/stores', import.meta.url)),
     },
   },
   test: {

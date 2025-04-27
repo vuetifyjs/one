@@ -140,6 +140,26 @@
     "SiteState": true,
     "SnackbarQueueState": true,
     "SponsorState": true,
-    "Team": true
+    "Team": true,
+    "AuthState": true,
+    "BinsState": true,
+    "DownloadsState": true,
+    "ProductsState": true,
+    "QueueState": true,
+    "SpotState": true,
+    "TeamState": true,
+    "VOneBanner": true,
+    "VOneBin": true,
+    "VOneNotification": true,
+    "VOnePromotion": true,
+    "VOneSendowlDownload": true,
+    "VOneSendowlDownloadItem": true,
+    "VOneSponsor": true,
+    "VOneSponsorship": true,
+    "VOneSpot": true,
+    "VOneSuit": true,
+    "VOneTeam": true,
+    "VOneUser": true,
+    "VOneIdentity": true
   }
 }
