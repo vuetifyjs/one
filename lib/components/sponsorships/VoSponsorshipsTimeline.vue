@@ -11,8 +11,6 @@
     <VoSponsorshipsTimelineItemGithub />
 
     <VoSponsorshipsTimelineItemDiscord />
-
-    <VoSponsorshipsTimelineItemPatreon />
   </v-timeline>
 </template>
 
