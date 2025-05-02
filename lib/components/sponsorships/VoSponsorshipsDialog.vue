@@ -9,7 +9,7 @@
         <div class="px-3 pb-5 d-flex flex-column h-100">
           <v-card-text class="flex-0-0 mb-16 mb-sm-4">
             <VoDialogSubheader
-              text="Support Vuetify through GitHub Sponsors, Discord, or Patreon to unlock exclusive benefits and content."
+              text="Support Vuetify through GitHub Sponsors or Discord to unlock exclusive benefits and content."
               title="Support Vuetify"
             />
 

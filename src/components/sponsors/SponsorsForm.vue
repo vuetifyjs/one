@@ -245,7 +245,6 @@
   const sources = [
     'None',
     'GitHub',
-    'Patreon',
     'Open Collective',
     'Affiliate',
     'Service Sponsor',

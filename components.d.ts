@@ -64,7 +64,6 @@ declare module 'vue' {
     VoSponsorshipsTimelineItemDiscord: typeof import('./lib/components/sponsorships/VoSponsorshipsTimelineItemDiscord.vue')['default']
     VoSponsorshipsTimelineItemGithub: typeof import('./lib/components/sponsorships/VoSponsorshipsTimelineItemGithub.vue')['default']
     VoSponsorshipsTimelineItemOne: typeof import('./lib/components/sponsorships/VoSponsorshipsTimelineItemOne.vue')['default']
-    VoSponsorshipsTimelineItemPatreon: typeof import('./lib/components/sponsorships/VoSponsorshipsTimelineItemPatreon.vue')['default']
     VoSpot: typeof import('./lib/components/spots/VoSpot.vue')['default']
     VoStudioDialog: typeof import('./lib/components/studio/VoStudioDialog.vue')['default']
     VoStudioNavItem: typeof import('./lib/components/studio/VoStudioNavItem.vue')['default']
