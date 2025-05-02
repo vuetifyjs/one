@@ -24,7 +24,6 @@
         <v-icon v-else :icon="`svg:${mdiLogin}`" />
       </template>
 
-
       <VoUserMenu />
     </VoBtn>
   </VoNotificationsTotalBadge>
