@@ -22,7 +22,7 @@ export default defineConfig({
     }),
     Layouts(),
     Components({
-      dirs: ['lib/components', 'src/components'],
+      dirs: ['src/components'],
       dts: true,
     }),
     Vuetify({ autoImport: true }),
