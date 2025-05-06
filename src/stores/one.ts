@@ -50,7 +50,6 @@ interface OneState {
   isSubscriber: ComputedRef<boolean>
 
   github: ComputedRef<VOneSponsorship | undefined>
-  patreon: ComputedRef<VOneSponsorship | undefined>
   discord: ComputedRef<VOneSponsorship | undefined>
   shopify: ComputedRef<VOneIdentity | undefined>
   one: ComputedRef<VOneSponsorship | undefined>
