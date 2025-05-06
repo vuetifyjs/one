@@ -1,13 +1,3 @@
 <template>
-  <v-container>
-    Dashboard
-  </v-container>
+  <vo-app-bar logo="vone" />
 </template>
-
-<script lang="ts" setup>
-  definePage({
-    meta: {
-      requiresAuth: true,
-    },
-  })
-</script>

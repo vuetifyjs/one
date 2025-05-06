@@ -14,7 +14,7 @@ import { VIconBtn } from 'vuetify/labs/VIconBtn'
 import { camelize, h } from 'vue'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
-import { aliases as oneAliases } from '@/../lib/icons'
+import { aliases as oneAliases } from '@/icons'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
@@ -115,7 +115,10 @@ export default createVuetify({
         component: (props: IconProps) => {
           const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
 
-          return h(components.VSvgIcon, { ...props, icon })
+          return h(components.VSvgIcon, {
+            ...props,
+            icon,
+          })
         },
       },
     },

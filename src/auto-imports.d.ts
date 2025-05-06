@@ -6,12 +6,7 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const DEFAULT_BANNER: typeof import('./lib/stores/banners')['DEFAULT_BANNER']
-  const DEFAULT_NOTIFICATION: typeof import('./lib/stores/notifications')['DEFAULT_NOTIFICATION']
-  const DEFAULT_PROMOTION: typeof import('./lib/stores/promotions')['DEFAULT_PROMOTION']
-  const DEFAULT_SPONSOR: typeof import('./lib/stores/sponsors')['DEFAULT_SPONSOR']
-  const DEFAULT_SPOT: typeof import('./lib/stores/spots')['DEFAULT_SPOT']
-  const DEFAULT_USER: typeof import('./src/stores/user')['DEFAULT_USER']
+  const DEFAULT_USER: typeof import('./stores/user')['DEFAULT_USER']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
@@ -32,7 +27,6 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
-  const isWithinRange: typeof import('./src/util/dates')['isWithinRange']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
   const mapState: typeof import('pinia')['mapState']
@@ -71,40 +65,39 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
-  const trackEvent: typeof import('./src/util/helpers')['trackEvent']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
-  const useAuthStore: typeof import('./src/stores/auth')['useAuthStore']
-  const useBannersStore: typeof import('./src/stores/banners')['useBannersStore']
-  const useBinsStore: typeof import('./src/stores/bins')['useBinsStore']
+  const useAuthStore: typeof import('./stores/auth')['useAuthStore']
+  const useBannersStore: typeof import('./stores/banners')['useBannersStore']
+  const useBinsStore: typeof import('./stores/bins')['useBinsStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDate: typeof import('vuetify')['useDate']
   const useDisplay: typeof import('vuetify')['useDisplay']
-  const useDownloadsStore: typeof import('./src/stores/downloads')['useDownloadsStore']
-  const useHttpStore: typeof import('./src/stores/http')['useHttpStore']
+  const useDownloadsStore: typeof import('./stores/downloads')['useDownloadsStore']
+  const useHttpStore: typeof import('./stores/http')['useHttpStore']
   const useId: typeof import('vue')['useId']
   const useLink: typeof import('vue-router')['useLink']
   const useModel: typeof import('vue')['useModel']
-  const useNotificationsStore: typeof import('./src/stores/notifications')['useNotificationsStore']
-  const useOneStore: typeof import('./src/stores/one')['useOneStore']
-  const useParams: typeof import('./src/composables/route')['useParams']
-  const useProductsStore: typeof import('./src/stores/products')['useProductsStore']
-  const usePromotionsStore: typeof import('./src/stores/promotions')['usePromotionsStore']
-  const useQuery: typeof import('./src/composables/route')['useQuery']
-  const useQueueStore: typeof import('./src/stores/queue')['useQueueStore']
+  const useNotificationsStore: typeof import('./stores/notifications')['useNotificationsStore']
+  const useOneStore: typeof import('./stores/one')['useOneStore']
+  const useParams: typeof import('./composables/route')['useParams']
+  const useProductsStore: typeof import('./stores/products')['useProductsStore']
+  const usePromotionsStore: typeof import('./stores/promotions')['usePromotionsStore']
+  const useQuery: typeof import('./composables/route')['useQuery']
+  const useQueueStore: typeof import('./stores/queue')['useQueueStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
-  const useSettingsStore: typeof import('./src/stores/settings')['useSettingsStore']
-  const useSiteStore: typeof import('./src/stores/site')['useSiteStore']
+  const useSettingsStore: typeof import('./stores/settings')['useSettingsStore']
+  const useSiteStore: typeof import('./stores/site')['useSiteStore']
   const useSlots: typeof import('vue')['useSlots']
-  const useSponsorsStore: typeof import('./src/stores/sponsors')['useSponsorsStore']
-  const useSpotsStore: typeof import('./src/stores/spots')['useSpotsStore']
-  const useTeamStore: typeof import('./src/stores/team')['useTeamStore']
+  const useSponsorsStore: typeof import('./stores/sponsors')['useSponsorsStore']
+  const useSpotsStore: typeof import('./stores/spots')['useSpotsStore']
+  const useTeamStore: typeof import('./stores/team')['useTeamStore']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTheme: typeof import('vuetify')['useTheme']
-  const useUserStore: typeof import('./src/stores/user')['useUserStore']
+  const useUserStore: typeof import('./stores/user')['useUserStore']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -116,47 +109,47 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { VOneSponsorship, VOneIdentity, VOneUser, AuthState } from './src/stores/auth'
-  import('./src/stores/auth')
+  export type { VOneSponsorship, VOneIdentity, VOneUser, AuthState } from './stores/auth'
+  import('./stores/auth')
   // @ts-ignore
-  export type { VOneBanner } from './src/stores/banners'
-  import('./src/stores/banners')
+  export type { VOneBanner } from './stores/banners'
+  import('./stores/banners')
   // @ts-ignore
-  export type { VOneBin, BinsState } from './src/stores/bins'
-  import('./src/stores/bins')
+  export type { VOneBin, BinsState } from './stores/bins'
+  import('./stores/bins')
   // @ts-ignore
-  export type { VOneSendowlDownloadItem, VOneSendowlDownload, DownloadsState } from './src/stores/downloads'
-  import('./src/stores/downloads')
+  export type { VOneSendowlDownloadItem, VOneSendowlDownload, DownloadsState } from './stores/downloads'
+  import('./stores/downloads')
   // @ts-ignore
-  export type { VOneNotification, NotificationsState } from './src/stores/notifications'
-  import('./src/stores/notifications')
+  export type { VOneNotification, NotificationsState } from './stores/notifications'
+  import('./stores/notifications')
   // @ts-ignore
-  export type { ShopifyProduct, ProductsState } from './src/stores/products'
-  import('./src/stores/products')
+  export type { ShopifyProduct, ProductsState } from './stores/products'
+  import('./stores/products')
   // @ts-ignore
-  export type { VOnePromotion } from './src/stores/promotions'
-  import('./src/stores/promotions')
+  export type { VOnePromotion } from './stores/promotions'
+  import('./stores/promotions')
   // @ts-ignore
-  export type { Snackbar, QueueState } from './src/stores/queue'
-  import('./src/stores/queue')
+  export type { Snackbar, QueueState } from './stores/queue'
+  import('./stores/queue')
   // @ts-ignore
-  export type { VOneSuit, SettingsState } from './src/stores/settings'
-  import('./src/stores/settings')
+  export type { VOneSuit, SettingsState } from './stores/settings'
+  import('./stores/settings')
   // @ts-ignore
-  export type { SiteState } from './src/stores/site'
-  import('./src/stores/site')
+  export type { SiteState } from './stores/site'
+  import('./stores/site')
   // @ts-ignore
-  export type { VOneSponsor, SponsorState } from './src/stores/sponsors'
-  import('./src/stores/sponsors')
+  export type { VOneSponsor, SponsorState } from './stores/sponsors'
+  import('./stores/sponsors')
   // @ts-ignore
-  export type { VOneSpot, SpotState } from './src/stores/spots'
-  import('./src/stores/spots')
+  export type { VOneSpot, SpotState } from './stores/spots'
+  import('./stores/spots')
   // @ts-ignore
-  export type { VOneTeam, TeamState } from './src/stores/team'
-  import('./src/stores/team')
+  export type { VOneTeam, TeamState } from './stores/team'
+  import('./stores/team')
   // @ts-ignore
-  export type { RootState, SavedState } from './src/stores/user'
-  import('./src/stores/user')
+  export type { RootState, SavedState } from './stores/user'
+  import('./stores/user')
 }
 
 // for vue template auto import
@@ -164,7 +157,7 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
-    readonly DEFAULT_USER: UnwrapRef<typeof import('./src/stores/user')['DEFAULT_USER']>
+    readonly DEFAULT_USER: UnwrapRef<typeof import('./stores/user')['DEFAULT_USER']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -226,36 +219,36 @@ declare module 'vue' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
-    readonly useAuthStore: UnwrapRef<typeof import('./src/stores/auth')['useAuthStore']>
-    readonly useBannersStore: UnwrapRef<typeof import('./src/stores/banners')['useBannersStore']>
-    readonly useBinsStore: UnwrapRef<typeof import('./src/stores/bins')['useBinsStore']>
+    readonly useAuthStore: UnwrapRef<typeof import('./stores/auth')['useAuthStore']>
+    readonly useBannersStore: UnwrapRef<typeof import('./stores/banners')['useBannersStore']>
+    readonly useBinsStore: UnwrapRef<typeof import('./stores/bins')['useBinsStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
-    readonly useDownloadsStore: UnwrapRef<typeof import('./src/stores/downloads')['useDownloadsStore']>
-    readonly useHttpStore: UnwrapRef<typeof import('./src/stores/http')['useHttpStore']>
+    readonly useDownloadsStore: UnwrapRef<typeof import('./stores/downloads')['useDownloadsStore']>
+    readonly useHttpStore: UnwrapRef<typeof import('./stores/http')['useHttpStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
-    readonly useNotificationsStore: UnwrapRef<typeof import('./src/stores/notifications')['useNotificationsStore']>
-    readonly useOneStore: UnwrapRef<typeof import('./src/stores/one')['useOneStore']>
-    readonly useParams: UnwrapRef<typeof import('./src/composables/route')['useParams']>
-    readonly useProductsStore: UnwrapRef<typeof import('./src/stores/products')['useProductsStore']>
-    readonly usePromotionsStore: UnwrapRef<typeof import('./src/stores/promotions')['usePromotionsStore']>
-    readonly useQuery: UnwrapRef<typeof import('./src/composables/route')['useQuery']>
-    readonly useQueueStore: UnwrapRef<typeof import('./src/stores/queue')['useQueueStore']>
+    readonly useNotificationsStore: UnwrapRef<typeof import('./stores/notifications')['useNotificationsStore']>
+    readonly useOneStore: UnwrapRef<typeof import('./stores/one')['useOneStore']>
+    readonly useParams: UnwrapRef<typeof import('./composables/route')['useParams']>
+    readonly useProductsStore: UnwrapRef<typeof import('./stores/products')['useProductsStore']>
+    readonly usePromotionsStore: UnwrapRef<typeof import('./stores/promotions')['usePromotionsStore']>
+    readonly useQuery: UnwrapRef<typeof import('./composables/route')['useQuery']>
+    readonly useQueueStore: UnwrapRef<typeof import('./stores/queue')['useQueueStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
-    readonly useSettingsStore: UnwrapRef<typeof import('./src/stores/settings')['useSettingsStore']>
-    readonly useSiteStore: UnwrapRef<typeof import('./src/stores/site')['useSiteStore']>
+    readonly useSettingsStore: UnwrapRef<typeof import('./stores/settings')['useSettingsStore']>
+    readonly useSiteStore: UnwrapRef<typeof import('./stores/site')['useSiteStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useSponsorsStore: UnwrapRef<typeof import('./src/stores/sponsors')['useSponsorsStore']>
-    readonly useSpotsStore: UnwrapRef<typeof import('./src/stores/spots')['useSpotsStore']>
-    readonly useTeamStore: UnwrapRef<typeof import('./src/stores/team')['useTeamStore']>
+    readonly useSponsorsStore: UnwrapRef<typeof import('./stores/sponsors')['useSponsorsStore']>
+    readonly useSpotsStore: UnwrapRef<typeof import('./stores/spots')['useSpotsStore']>
+    readonly useTeamStore: UnwrapRef<typeof import('./stores/team')['useTeamStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTheme: UnwrapRef<typeof import('vuetify')['useTheme']>
-    readonly useUserStore: UnwrapRef<typeof import('./src/stores/user')['useUserStore']>
+    readonly useUserStore: UnwrapRef<typeof import('./stores/user')['useUserStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
