@@ -9,7 +9,7 @@
         <div class="px-3 pb-5 d-flex flex-column h-100">
           <v-card-text class="flex-0-0 mb-16 mb-sm-4">
             <VoDialogSubheader
-              text="Support Vuetify through GitHub Sponsors, Discord, or Patreon to unlock exclusive benefits and content."
+              text="Support Vuetify through GitHub Sponsors or Discord to unlock exclusive benefits and content."
               title="Support Vuetify"
             />
 
@@ -34,7 +34,9 @@
 
             <template #text>
               <div class="text-caption text-medium-emphasis">
-                {{ one.isSubscriber ? 'You are currently receiving benefits of Vuetify One.' : 'Login to activate Vuetify One benefits' }}
+                {{
+                  one.isSubscriber ? 'You are currently receiving benefits of Vuetify One.' : 'Login to activate Vuetify One benefits'
+                }}
               </div>
             </template>
           </v-empty-state>
@@ -45,7 +47,7 @@
 </template>
 
 <script lang="ts" setup>
-  // Icons
+// Icons
   import { mdiHandHeart } from '@mdi/js'
 
   const dialog = defineModel('modelValue', { type: Boolean })
