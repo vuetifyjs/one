@@ -12,9 +12,10 @@
 
     <VoSponsorshipsTimelineItemDiscord />
 
+    <VoSponsorshipsTimelineItemPatreon />
   </v-timeline>
 </template>
 
 <script lang="ts" setup>
-//
+  //
 </script>
