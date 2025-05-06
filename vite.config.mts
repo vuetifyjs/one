@@ -1,8 +1,10 @@
 // Plugins
 import Components from 'unplugin-vue-components/vite'
+import Layouts from 'vite-plugin-vue-layouts-next'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import { resolve } from 'path'
+import ViteFonts from 'unplugin-fonts/vite'
+import VueRouter from 'unplugin-vue-router/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
 // Utilities
@@ -12,15 +14,28 @@ import { fileURLToPath, URL } from 'node:url'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    VueRouter({
+      dts: true,
+    }),
     Vue({
       template: { transformAssetUrls },
     }),
+    Layouts(),
     Components({
-      dirs: ['src/components'],
-      dts: 'src/components.d.ts',
+      dirs: ['lib/components', 'src/components'],
+      dts: true,
     }),
-    Vuetify({
-      autoImport: true,
+    Vuetify({ autoImport: true }),
+    ViteFonts({
+      fontsource: {
+        families: [
+          {
+            name: 'Roboto',
+            weights: [100, 300, 400, 500, 700, 900],
+            styles: ['normal', 'italic'],
+          },
+        ],
+      },
     }),
     AutoImport({
       imports: [
@@ -43,13 +58,17 @@ export default defineConfig({
         './src/composables',
         './src/util',
       ],
-      dts: 'src/auto-imports.d.ts',
+      dts: true,
       eslintrc: {
         enabled: true,
       },
       vueTemplate: true,
     }),
   ],
+  optimizeDeps: {
+    exclude: ['vuetify'],
+  },
+  define: { 'process.env': {} },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -64,24 +83,7 @@ export default defineConfig({
       '.vue',
     ],
   },
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'VuetifyOne',
-      fileName: 'index',
-      formats: ['es'],
-    },
-    rollupOptions: {
-      external: [
-        'vue',
-        /^vuetify($|\/)/,
-        'pinia',
-        'vue-router',
-        'vue-router/auto',
-        'unplugin-vue-router',
-        'lodash-es',
-        '@mdi/js',
-      ],
-    },
+  server: {
+    port: 3000,
   },
 })

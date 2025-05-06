@@ -16,19 +16,38 @@
     "emitDeclarationOnly": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
     "types": [
       "vite/client",
       "vitest/globals",
-      "unplugin-vue-router/client"
+      "unplugin-vue-router/client",
+      "vite-plugin-vue-layouts-next/client"
     ],
     "paths": {
-      "@/*": ["src/*"],
-      "@/util/*": ["src/util/*"],
+      "@/*": [
+        "src/*"
+      ],
+      "@/util/*": [
+        "src/util/*"
+      ]
     },
     "skipLibCheck": true
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
-  "exclude": ["src/**/__tests__/*"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "src/**/__tests__/*"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
