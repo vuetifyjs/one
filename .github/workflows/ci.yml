@@ -18,7 +18,7 @@ jobs:
           node-version-file: .nvmrc
       - uses: pnpm/action-setup@v4
       - run: pnpm i --frozen-lockfile
-      - run: pnpm build:one
+      - run: pnpm build
         env:
           VITE_API_SERVER_URL: https://api.vuetifyjs.com
       - run: npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
