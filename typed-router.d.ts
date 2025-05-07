@@ -19,26 +19,7 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
-    '/[...404]': RouteRecordInfo<'/[...404]', '/:404(.*)', { 404: ParamValue<true> }, { 404: ParamValue<false> }>,
-    '/401': RouteRecordInfo<'/401', '/401', Record<never, never>, Record<never, never>>,
-    '/banners/': RouteRecordInfo<'/banners/', '/banners', Record<never, never>, Record<never, never>>,
-    '/banners/[id]': RouteRecordInfo<'/banners/[id]', '/banners/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/banners/create': RouteRecordInfo<'/banners/create', '/banners/create', Record<never, never>, Record<never, never>>,
-    '/logs/': RouteRecordInfo<'/logs/', '/logs', Record<never, never>, Record<never, never>>,
-    '/notifications/': RouteRecordInfo<'/notifications/', '/notifications', Record<never, never>, Record<never, never>>,
-    '/notifications/[id]': RouteRecordInfo<'/notifications/[id]', '/notifications/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/notifications/create': RouteRecordInfo<'/notifications/create', '/notifications/create', Record<never, never>, Record<never, never>>,
-    '/promotions/': RouteRecordInfo<'/promotions/', '/promotions', Record<never, never>, Record<never, never>>,
-    '/promotions/[id]': RouteRecordInfo<'/promotions/[id]', '/promotions/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/promotions/create': RouteRecordInfo<'/promotions/create', '/promotions/create', Record<never, never>, Record<never, never>>,
-    '/sponsors/': RouteRecordInfo<'/sponsors/', '/sponsors', Record<never, never>, Record<never, never>>,
-    '/sponsors/[id]': RouteRecordInfo<'/sponsors/[id]', '/sponsors/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/sponsors/create': RouteRecordInfo<'/sponsors/create', '/sponsors/create', Record<never, never>, Record<never, never>>,
-    '/spots/': RouteRecordInfo<'/spots/', '/spots', Record<never, never>, Record<never, never>>,
-    '/spots/[id]': RouteRecordInfo<'/spots/[id]', '/spots/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/spots/create': RouteRecordInfo<'/spots/create', '/spots/create', Record<never, never>, Record<never, never>>,
+    '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
     '/user/dashboard': RouteRecordInfo<'/user/dashboard', '/user/dashboard', Record<never, never>, Record<never, never>>,
-    '/user/mcp': RouteRecordInfo<'/user/mcp', '/user/mcp', Record<never, never>, Record<never, never>>,
-    '/users/': RouteRecordInfo<'/users/', '/users', Record<never, never>, Record<never, never>>,
   }
 }
