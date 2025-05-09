@@ -47,6 +47,7 @@ interface OneState {
   hasBilling: ComputedRef<boolean>
   isLoading: ShallowRef<boolean>
   isOpen: ShallowRef<boolean>
+  mobileMenu: ShallowRef<boolean>
   isSubscriber: ComputedRef<boolean>
 
   github: ComputedRef<VOneSponsorship | undefined>
@@ -74,6 +75,7 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
+  const mobileMenu = shallowRef(false)
   const info = ref<Info>()
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
@@ -278,6 +280,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     hasBilling,
     isLoading,
     isOpen,
+    mobileMenu,
     isSubscriber,
 
     github,
