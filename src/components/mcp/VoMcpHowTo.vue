@@ -4,12 +4,7 @@
     View how to use this API Key to power your local MCP tools
     <a class="d-inline-block" href="#" @click.stop.prevent="">
       here
-
-      <v-dialog
-        v-slot="{ isActive }"
-        activator="parent"
-        max-width="700"
-      >
+      <v-dialog v-slot="{ isActive }" activator="parent" max-width="700">
         <v-card
           prepend-icon="mdi-file-document"
           title="Usage Instructions"
@@ -52,7 +47,9 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </a>.
+    </a>
   </p>
 
 </template>
+<script lang="ts" setup>
+</script>
