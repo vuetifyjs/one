@@ -1,5 +1,5 @@
 <template>
-  <v-menu :close-on-content-click="false">
+  <v-menu v-model="one.mobileMenu" :close-on-content-click="false">
     <template #activator="{ props }">
       <v-btn v-bind="props" :icon="`svg:${mdiDotsVertical}`" />
     </template>
@@ -46,4 +46,6 @@
     extension?(props: void): void;
     append?(props: void): void;
   }>();
+
+  const one = useOneStore();
 </script>
