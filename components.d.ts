@@ -30,6 +30,7 @@ declare module 'vue' {
     VoIconBin: typeof import('./src/components/icon/VoIconBin.vue')['default']
     VoIconIssues: typeof import('./src/components/icon/VoIconIssues.vue')['default']
     VoListItem: typeof import('./src/components/app/VoListItem.vue')['default']
+    VoMcpCopyDialog: typeof import('./src/components/mcp/VoMcpCopyDialog.vue')['default']
     VoMcpDialog: typeof import('./src/components/mcp/VoMcpDialog.vue')['default']
     VoMcpHowTo: typeof import('./src/components/mcp/VoMcpHowTo.vue')['default']
     VoMcpListItem: typeof import('./src/components/mcp/VoMcpListItem.vue')['default']

@@ -33,25 +33,40 @@
               </v-col>
             </v-row>
 
-            <VoMcpTokenTable v-if="apiKey?.id" :api-key="apiKey" />
+            <template v-if="apiKey?.id">
+              <VoMcpTokenTable :api-key="apiKey" />
+
+              <VoMcpCopyDialog v-model="copyDialog" :api-key="apiKey.accessToken" />
+            </template>
 
           </v-card-text>
         </div>
-      </v-main></v-layout>
+      </v-main>
+    </v-layout>
   </VoDialog>
 </template>
 
 <script lang="ts" setup>
+  interface AccessToken {
+    id: string
+    accessToken: string
+    createdAt: string
+    updatedAt: string
+  }
+
+  import VoMcpCopyDialog from '@/components/mcp/VoMcpCopyDialog.vue'
   import { mdiKeyVariant, mdiPlus } from '@mdi/js'
 
   const http = useHttpStore()
-  const apiKey = ref(null)
+  const apiKey = ref<AccessToken | null>(null)
+  const copyDialog = ref(false)
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
   async function onClickGenerateKey () {
     const token = await http.fetch('/one/mcp/generate')
     apiKey.value = token.accessToken
+    copyDialog.value = true
   }
 
 </script>
