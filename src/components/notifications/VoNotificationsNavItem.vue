@@ -6,7 +6,7 @@
     :prepend-icon="`svg:${mdiBellOutline}`"
     title="Notifications"
   >
-    <template v-if="notifications.unread.length" #prepend>
+    <template v-if="notifications.unread.length > 0" #prepend>
       <VoNotificationsBadge>
         <v-icon />
       </VoNotificationsBadge>
