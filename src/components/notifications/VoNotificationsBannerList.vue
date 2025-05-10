@@ -4,7 +4,7 @@
     height="100%"
     lines="three"
   >
-    <div v-if="!items.length" class="pt-16">
+    <div v-if="items.length === 0" class="pt-16">
       <v-empty-state
 
         icon="$vuetify"
@@ -137,10 +137,10 @@
   }
 
   function onClick (banner: VOneBanner) {
-    if (!isRead(banner.slug)) {
-      user.notifications.last.banner.push(banner.slug)
-    } else {
+    if (isRead(banner.slug)) {
       user.notifications.last.banner = user.notifications.last.banner.filter(slug => slug !== banner.slug)
+    } else {
+      user.notifications.last.banner.push(banner.slug)
     }
   }
 </script>

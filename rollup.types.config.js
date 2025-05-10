@@ -9,7 +9,7 @@ export default {
     dts(),
     alias({
       entries: [
-        { find: /^@\/(.*)/, replacement: fileURLToPath(new URL('./types-temp/src/$1', import.meta.url)) },
+        { find: /^@\/(.*)/, replacement: fileURLToPath(new URL('types-temp/src/$1', import.meta.url)) },
       ],
     }),
   ],

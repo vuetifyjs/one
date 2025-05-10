@@ -59,11 +59,15 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
-    if (!user?.settings) return
+    if (!user?.settings) {
+      return
+    }
 
     const local = localStorage.getItem('vuetify@user') || '{}'
 
-    if (JSON.stringify(user.settings, null, 2) === local) return
+    if (JSON.stringify(user.settings, null, 2) === local) {
+      return
+    }
 
     externalUpdate = true
 
@@ -71,30 +75,36 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
   })
 
   userStore.$subscribe(() => {
-    if (!externalUpdate) sync()
+    if (!externalUpdate) {
+      sync()
+    }
 
     externalUpdate = false
   })
 
   async function sync () {
-    if (!user.value || !userStore.syncSettings) return
+    if (!user.value || !userStore.syncSettings) {
+      return
+    }
 
     try {
       await http.post('/user/settings', { settings: userStore.$state })
-    } catch (err: any) {
-      console.error(err)
+    } catch (error: any) {
+      console.error(error)
     }
   }
 
   async function verify (force = false) {
-    if (verify.promise) return verify.promise
+    if (verify.promise) {
+      return verify.promise
+    }
 
     if (
-      !force &&
-      !document.cookie.includes('sx=1') &&
+      !force
+      && !document.cookie.includes('sx=1')
       // This check only works if the api and site are on the same domain
-      location.hostname.match(/([^.]+\.[^.]+)$/)?.[1] ===
-      new URL(http.url).hostname.match(/([^.]+\.[^.]+)$/)?.[1]
+      && location.hostname.match(/([^.]+\.[^.]+)$/)?.[1]
+      === new URL(http.url).hostname.match(/([^.]+\.[^.]+)$/)?.[1]
     ) {
       // Session cookie isn't set, don't even bother fetching
       user.value = null
@@ -143,7 +153,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
     const ctx = window.open(
       '',
       'vuetify:authorize:popup',
-      `popup,left=${left},top=${top},width=${width},height=${height},resizable`
+      `popup,left=${left},top=${top},width=${width},height=${height},resizable`,
     )
 
     if (!ctx) {
@@ -156,8 +166,12 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
     let interval = -1
     let timeout = -1
     function messageHandler (e: MessageEvent) {
-      if (e.origin !== http.url) return
-      if (e.data?.type !== 'auth-response') return
+      if (e.origin !== http.url) {
+        return
+      }
+      if (e.data?.type !== 'auth-response') {
+        return
+      }
       if (e.data.status === 'success') {
         if (!user.value) {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
@@ -206,8 +220,8 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
       await http.post(url)
       await verify(true)
       user.value = null
-    } catch (err: any) {
-      console.error(err)
+    } catch (error: any) {
+      console.error(error)
     } finally {
       router.push({
         path: '/',

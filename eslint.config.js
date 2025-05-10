@@ -1,35 +1,19 @@
-import vuetify from 'eslint-config-vuetify/index.ts.mjs'
-import ignoreConfig from 'eslint-config-flat-gitignore'
-import vitestPlugin from '@vitest/eslint-plugin'
+import vuetify from 'eslint-config-vuetify'
 
-export default [
-  ignoreConfig(),
-  ...vuetify,
+export default vuetify(
+  {
+    perfectionist: {
+      import: false,
+    },
+  },
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
     },
-  },
-  {
-    files: ['**/*.{ts,tsx,mts,cts,vue}'],
     languageOptions: {
       globals: {
-        'RequestInit': true,
+        RequestInit: true,
       },
     },
   },
-  {
-    files: ['**/*.spec.{ts,js}'],
-    plugins: {
-      vitest: vitestPlugin,
-    },
-    rules: {
-      ...vitestPlugin.configs.recommended.rules,
-    },
-    languageOptions: {
-      globals: {
-        ...vitestPlugin.environments.env.globals,
-      },
-    },
-  },
-]
+)

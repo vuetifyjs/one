@@ -26,7 +26,9 @@ export const useProductsStore = defineStore('products', (): ProductsState => {
   const themes = computed(() => all.value.filter(b => b.product_type === 'Themes'))
 
   async function index () {
-    if (all.value.length) return all.value
+    if (all.value.length > 0) {
+      return all.value
+    }
 
     try {
       const res = await http.get<{ products: ShopifyProduct[] }>('/one/shopify/products')
