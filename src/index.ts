@@ -1,6 +1,3 @@
-import type { PiniaPluginContext } from 'pinia'
-// Types
-import type { App } from 'vue'
 // Components
 import VoAppBar from '@/components/app/VoAppBar.vue'
 import VoScript from '@/components/app/VoScript.vue'
@@ -18,9 +15,14 @@ import VoPromotionsCardVuetify from '@/components/promotions/VoPromotionsCardVue
 import VoPromotionsFooter from '@/components/promotions/VoPromotionsFooter.vue'
 import VoSpot from '@/components/spots/VoSpot.vue'
 
+// Types
+import type { App } from 'vue'
+import type { PiniaPluginContext } from 'pinia'
+
 // Icons
 export { aliases } from '@/icons'
 export type { VOneIdentity, VOneSponsorship, VOneUser } from '@/stores/auth'
+
 // Stores
 export { useAuthStore } from '@/stores/auth'
 export type { VOneBanner } from '@/stores/banners'

@@ -33,7 +33,8 @@
     script.id = props.scriptId
     script.src = props.src
     script.addEventListener('load', () => emit('script:load'))
-    script.addEventListener('error', onError)
+    // eslint-disable-next-line unicorn/prefer-add-event-listener
+    script.onerror = onError
 
     scriptEl.value = script
   })
