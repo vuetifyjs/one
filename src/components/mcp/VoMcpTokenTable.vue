@@ -16,10 +16,6 @@
             size="1em"
           />
         </th>
-
-        <th class="text-center">Usage</th>
-
-        <th class="text-end">Actions</th>
       </tr>
     </thead>
 
@@ -33,36 +29,13 @@
 
         <td>{{ new Date(props.apiKey.updatedAt).toLocaleDateString('en-US').slice(0, 8) }}</td>
 
-        <td class="d-flex align-center justify-center ga-4">
-          <span>{{ `0/${props.apiKey.allowance}` }}</span>
 
-          <v-progress-linear
-            :max="props.apiKey.allowance"
-            :model-value="0"
-            rounded
-            rounded-bar
-            style="width: 100px"
-          />
-        </td>
-
-        <td class="text-end">
-          <v-icon-btn
-            color="error"
-            :icon="`svg:${mdiTrashCanOutline}`"
-            size="small"
-            variant="text"
-            @click="onClickDelete"
-          />
-        </td>
       </tr>
     </tbody>
   </v-table>
 </template>
 
 <script lang="ts" setup>
-
-  import { mdiTrashCanOutline } from '@mdi/js'
-
   const props = defineProps({
     apiKey: {
       type: Object,
@@ -70,7 +43,5 @@
     },
   })
 
-  function onClickDelete () {
-    console.log('delete')
-  }
+  console.log(props.apiKey)
 </script>
