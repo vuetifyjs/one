@@ -24,11 +24,20 @@
             <v-row class="my-4" justify="center">
               <v-col cols="auto">
                 <v-btn
+                  v-if="!apiKey?.accessToken"
                   color="success"
                   :prepend-icon="`svg:${mdiPlus}`"
                   text="Generate API Key"
                   variant="flat"
-                  @click="onClickGenerateKey"
+                  @click="onClickGenerateKey(false)"
+                />
+                <v-btn
+                  v-else
+                  color="success"
+                  :prepend-icon="`svg:${mdiPlus}`"
+                  text="Regenerate API Key"
+                  variant="flat"
+                  @click="onClickGenerateKey(true)"
                 />
               </v-col>
             </v-row>
@@ -63,10 +72,22 @@
 
   const dialog = defineModel('modelValue', { type: Boolean })
 
-  async function onClickGenerateKey () {
-    const token = await http.fetch('/one/mcp/generate')
-    apiKey.value = token.accessToken
+  async function onClickGenerateKey (regenerate: boolean = false) {
+    const slug = regenerate ? 'regenerate' : 'generate'
+    const token = await http[regenerate ? 'post' : 'fetch'](`/one/mcp/${slug}`)
+    console.log(token)
+    apiKey.value = token
     copyDialog.value = true
   }
+
+  watch(dialog, async val => {
+    console.log(val)
+    if (val) {
+      const res = await http.fetch('/one/mcp/getToken')
+      console.log(res)
+      if (res.accessToken) apiKey.value = res
+    }
+  })
+
 
 </script>
