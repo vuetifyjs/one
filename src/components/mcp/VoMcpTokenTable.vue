@@ -42,6 +42,4 @@
       required: true,
     },
   })
-
-  console.log(props.apiKey)
 </script>

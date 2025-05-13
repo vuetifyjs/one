@@ -81,10 +81,8 @@
   }
 
   watch(dialog, async val => {
-    console.log(val)
     if (val) {
       const res = await http.fetch('/one/mcp/getToken')
-      console.log(res)
       if (res.accessToken) apiKey.value = res
     }
   })
