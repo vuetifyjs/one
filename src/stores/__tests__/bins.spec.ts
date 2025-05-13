@@ -1,11 +1,11 @@
 // Pinia
 import { createPinia, setActivePinia } from 'pinia'
 
+import { bin } from '../__mocks__/bin'
 // Stores
 import { useBinsStore } from '../bins'
-import { useHttpStore } from '../http'
 
-import { bin } from '../__mocks__/bin'
+import { useHttpStore } from '../http'
 
 describe('http store', () => {
   beforeEach(() => {
@@ -62,7 +62,7 @@ describe('http store', () => {
 
     const bins = useBinsStore()
 
-    bins.all.push(...[bin, { ...bin, content: 'Bin 2', id: '2' }])
+    bins.all.push(bin, { ...bin, content: 'Bin 2', id: '2' })
 
     const res = bins.update(bin, '2')
 

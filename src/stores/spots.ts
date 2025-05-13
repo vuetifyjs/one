@@ -44,11 +44,15 @@ export const useSpotsStore = defineStore('spots', (): SpotState => {
         active,
       },
     }) => {
-      if (!active) return false
+      if (!active) {
+        return false
+      }
       if (
-        (_site.includes('dev') && import.meta.env.MODE === 'development') ||
-        _site.includes('*')
-      ) return true
+        (_site.includes('dev') && import.meta.env.MODE === 'development')
+        || _site.includes('*')
+      ) {
+        return true
+      }
 
       return _site.some(s => site.id.includes(s))
     })

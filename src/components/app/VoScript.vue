@@ -32,21 +32,21 @@
     script.type = 'text/javascript'
     script.id = props.scriptId
     script.src = props.src
-    script.onload = () => emit('script:load')
-    script.onerror = onError
+    script.addEventListener('load', () => emit('script:load'))
+    script.addEventListener('error', onError)
 
     scriptEl.value = script
   })
 
   onMounted(() => {
     if (scriptEl.value && rootEl.value) {
-      rootEl.value.appendChild(scriptEl.value)
+      rootEl.value.append(scriptEl.value)
     }
   })
 
   onBeforeUnmount(() => {
     if (scriptEl.value && rootEl.value) {
-      rootEl.value.removeChild(scriptEl.value)
+      scriptEl.value.remove()
     }
   })
 </script>

@@ -53,8 +53,12 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
   const isLoading = shallowRef(false)
 
   const banner = computed(() => {
-    if (server.value) return server.value
-    if (!user.notifications.banners) return undefined
+    if (server.value) {
+      return server.value
+    }
+    if (!user.notifications.banners) {
+      return undefined
+    }
 
     return all.value.find(({
       slug,
@@ -63,12 +67,18 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
         active,
       },
     }) => {
-      if (!active) return false
-      if (user.notifications.last.banner.includes(slug)) return false
+      if (!active) {
+        return false
+      }
+      if (user.notifications.last.banner.includes(slug)) {
+        return false
+      }
       if (
-        (_site.includes('dev') && import.meta.env.MODE === 'development') ||
-        _site.includes('*')
-      ) return true
+        (_site.includes('dev') && import.meta.env.MODE === 'development')
+        || _site.includes('*')
+      ) {
+        return true
+      }
 
       return _site.some(s => site.id.includes(s))
     })
@@ -81,7 +91,9 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
         active,
       },
     }) => {
-      if (!active) return false
+      if (!active) {
+        return false
+      }
 
       return _site.includes('server')
     })
