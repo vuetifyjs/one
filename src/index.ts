@@ -1,5 +1,7 @@
 // Components
 import VoAppBar from '@/components/app/VoAppBar.vue'
+import VoScript from '@/components/app/VoScript.vue'
+import VoSocialFooter from '@/components/app/VoSocialFooter.vue'
 import VoAuthBtn from '@/components/auth/VoAuthBtn.vue'
 import VoAuthCard from '@/components/auth/VoAuthCard.vue'
 import VoAuthDialog from '@/components/auth/VoAuthDialog.vue'
@@ -9,9 +11,8 @@ import VoIconIssues from '@/components/icon/VoIconIssues.vue'
 import VoNotificationsBanner from '@/components/notifications/VoNotificationsBanner.vue'
 import VoPromotionsCardHighlight from '@/components/promotions/VoPromotionsCardHighlight.vue'
 import VoPromotionsCardVuetify from '@/components/promotions/VoPromotionsCardVuetify.vue'
+
 import VoPromotionsFooter from '@/components/promotions/VoPromotionsFooter.vue'
-import VoScript from '@/components/app/VoScript.vue'
-import VoSocialFooter from '@/components/app/VoSocialFooter.vue'
 import VoSpot from '@/components/spots/VoSpot.vue'
 
 // Types
@@ -21,6 +22,7 @@ import type { PiniaPluginContext } from 'pinia'
 // Icons
 export { aliases } from '@/icons'
 export type { VOneIdentity, VOneSponsorship, VOneUser } from '@/stores/auth'
+
 // Stores
 export { useAuthStore } from '@/stores/auth'
 export type { VOneBanner } from '@/stores/banners'

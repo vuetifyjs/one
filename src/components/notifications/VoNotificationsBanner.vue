@@ -113,9 +113,7 @@
 
     const metadata = banner.value?.metadata ?? { link: '' }
 
-    if (!metadata.link.includes('?one=')) {
-      return
-    }
+    if (!metadata.link.includes('?one=')) return
 
     e.preventDefault()
     e.stopPropagation()

@@ -160,6 +160,8 @@
     "VOneSuit": true,
     "VOneTeam": true,
     "VOneUser": true,
-    "VOneIdentity": true
+    "VOneIdentity": true,
+    "Slot": true,
+    "Slots": true
   }
 }

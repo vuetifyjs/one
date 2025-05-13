@@ -1,7 +1,7 @@
 // Utilities
 import type { RouteParams } from 'vue-router'
-import { useRoute } from 'vue-router'
 import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 // https://github.com/vuejs/router/issues/1160#issuecomment-1055276586
 export function useQuery<P extends RouteParams> () {

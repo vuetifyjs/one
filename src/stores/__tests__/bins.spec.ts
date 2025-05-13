@@ -1,11 +1,11 @@
 // Pinia
 import { createPinia, setActivePinia } from 'pinia'
 
+import { bin } from '../__mocks__/bin'
 // Stores
 import { useBinsStore } from '../bins'
-import { useHttpStore } from '../http'
 
-import { bin } from '../__mocks__/bin'
+import { useHttpStore } from '../http'
 
 describe('http store', () => {
   beforeEach(() => {

@@ -1,8 +1,8 @@
-// Utilities
-import { merge } from 'lodash-es'
-
 // Types
 import type { VOneSuit } from './settings'
+
+// Utilities
+import { merge } from 'lodash-es'
 
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'

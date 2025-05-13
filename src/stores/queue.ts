@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
 import type { Ref } from 'vue'
+import { defineStore } from 'pinia'
 
 export type Snackbar = string | Record<string, any>
 

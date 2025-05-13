@@ -64,11 +64,11 @@
 </template>
 
 <script setup lang="ts">
-  // Icons
-  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
-
   // Types
   import type { VOneNotification } from '@/stores/notifications'
+
+  // Icons
+  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 
   interface Props {
     demo?: boolean

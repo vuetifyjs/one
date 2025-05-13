@@ -114,11 +114,11 @@
 </template>
 
 <script setup lang="ts">
-  // Icons
-  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
-
   // Types
   import type { VOneBanner } from '@/stores/banners'
+
+  // Icons
+  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 
   interface Props {
     items: VOneBanner[]
