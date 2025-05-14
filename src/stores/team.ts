@@ -70,7 +70,7 @@ export const useTeamStore = defineStore('team', () => {
     } finally {
       isLoading.value = false
     }
-  })
+  }, { immediate: true })
 
   async function removeFromTeam (id: string) {
     try {
