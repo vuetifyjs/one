@@ -19,22 +19,22 @@
               may disable any API key that has leaked publicly.
             </p>
 
-            <VoMcpHowTo />
+            <VoMcpHowTo/>
 
             <v-row class="my-4" justify="center">
               <v-col cols="auto">
                 <v-btn
                   v-if="!apiKey?.accessToken"
-                  color="success"
                   :prepend-icon="`svg:${mdiPlus}`"
+                  color="success"
                   text="Generate API Key"
                   variant="flat"
                   @click="onClickGenerateKey(false)"
                 />
                 <v-btn
                   v-else
-                  color="success"
                   :prepend-icon="`svg:${mdiPlus}`"
+                  color="success"
                   text="Regenerate API Key"
                   variant="flat"
                   @click="onClickGenerateKey(true)"
@@ -43,9 +43,9 @@
             </v-row>
 
             <template v-if="apiKey?.id">
-              <VoMcpTokenTable :api-key="apiKey" />
+              <VoMcpTokenTable :api-key="apiKey"/>
 
-              <VoMcpCopyDialog v-model="copyDialog" :api-key="apiKey.accessToken" />
+              <VoMcpCopyDialog v-model="copyDialog" :api-key="apiKey.accessToken"/>
             </template>
 
           </v-card-text>
@@ -56,36 +56,35 @@
 </template>
 
 <script lang="ts" setup>
-  interface AccessToken {
-    id: string
-    accessToken: string
-    createdAt: string
-    updatedAt: string
+interface AccessToken {
+  id: string
+  accessToken: string
+  createdAt: string
+  updatedAt: string
+}
+
+import VoMcpCopyDialog from '@/components/mcp/VoMcpCopyDialog.vue'
+import { mdiKeyVariant, mdiPlus } from '@mdi/js'
+
+const http = useHttpStore()
+const apiKey = ref<AccessToken | null>(null)
+const copyDialog = ref(false)
+
+const dialog = defineModel('modelValue', { type: Boolean })
+
+async function onClickGenerateKey (regenerate: boolean = false) {
+  const slug = regenerate ? 'regenerate' : 'generate'
+  const token = await http[regenerate ? 'post' : 'fetch'](`/one/mcp/${slug}`)
+  apiKey.value = token
+  copyDialog.value = true
+}
+
+watch(dialog, async val => {
+  if (val) {
+    const res = await http.fetch('/one/mcp/getToken')
+    if (res.accessToken) apiKey.value = res
   }
-
-  import VoMcpCopyDialog from '@/components/mcp/VoMcpCopyDialog.vue'
-  import { mdiKeyVariant, mdiPlus } from '@mdi/js'
-
-  const http = useHttpStore()
-  const apiKey = ref<AccessToken | null>(null)
-  const copyDialog = ref(false)
-
-  const dialog = defineModel('modelValue', { type: Boolean })
-
-  async function onClickGenerateKey (regenerate: boolean = false) {
-    const slug = regenerate ? 'regenerate' : 'generate'
-    const token = await http[regenerate ? 'post' : 'fetch'](`/one/mcp/${slug}`)
-    console.log(token)
-    apiKey.value = token
-    copyDialog.value = true
-  }
-
-  watch(dialog, async val => {
-    if (val) {
-      const res = await http.fetch('/one/mcp/getToken')
-      if (res.accessToken) apiKey.value = res
-    }
-  })
+})
 
 
 </script>
