@@ -33,6 +33,7 @@ export interface SpotState {
 export const useSpotsStore = defineStore('spots', (): SpotState => {
   const http = useHttpStore()
   const site = useSiteStore()
+  const queue = useQueueStore()
 
   const all = ref<VOneSpot[]>([])
   const isLoading = shallowRef(false)
@@ -65,8 +66,8 @@ export const useSpotsStore = defineStore('spots', (): SpotState => {
       const res = await http.get<{ spots: VOneSpot[] }>('/one/spots')
 
       all.value = res.spots
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error.message)
     } finally {
       isLoading.value = false
     }

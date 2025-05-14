@@ -20,6 +20,7 @@ export interface BinsState {
 
 export const useBinsStore = defineStore('bins', (): BinsState => {
   const http = useHttpStore()
+  const queue = useQueueStore()
 
   const all = ref<VOneBin[]>([])
   const isLoading = shallowRef(false)
@@ -34,8 +35,8 @@ export const useBinsStore = defineStore('bins', (): BinsState => {
       const res = await http.get<{ bins: VOneBin[] }>('/one/bins')
 
       all.value = res.bins
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error.message)
     } finally {
       isLoading.value = false
     }

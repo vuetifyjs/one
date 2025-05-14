@@ -21,6 +21,7 @@ export interface ProductsState {
 
 export const useProductsStore = defineStore('products', (): ProductsState => {
   const http = useHttpStore()
+  const queue = useQueueStore()
   const all = ref<ShopifyProduct[]>([])
 
   const themes = computed(() => all.value.filter(b => b.product_type === 'Themes'))
@@ -34,8 +35,8 @@ export const useProductsStore = defineStore('products', (): ProductsState => {
       const res = await http.get<{ products: ShopifyProduct[] }>('/one/shopify/products')
 
       all.value = res.products
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error.message)
     }
 
     return all.value
