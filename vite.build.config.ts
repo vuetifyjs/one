@@ -16,7 +16,7 @@ export default defineConfig({
       template: { transformAssetUrls },
     }),
     Components({
-      dirs: ['components'],
+      dirs: ['./src/components'],
       dts: false,
     }),
     Vuetify({
@@ -39,8 +39,8 @@ export default defineConfig({
         },
       ],
       dirs: [
-        './stores',
-        './composables',
+        './src/stores',
+        './src/composables',
       ],
       dts: true,
       eslintrc: {
@@ -65,7 +65,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, './src/index.ts'),
       name: 'VuetifyOne',
       fileName: 'index',
       formats: ['es'],
