@@ -113,7 +113,7 @@
 
     const metadata = banner.value?.metadata ?? { link: '' }
 
-    if (metadata.link.indexOf('?one=') === -1) return
+    if (!metadata.link.includes('?one=')) return
 
     e.preventDefault()
     e.stopPropagation()
@@ -129,7 +129,7 @@
     return {
       href: metadata.link.startsWith('http') ? metadata.link : undefined,
       target: metadata.link.startsWith('http') ? '_blank' : undefined,
-      to: !metadata.link.startsWith('http') ? metadata.link : undefined,
+      to: metadata.link.startsWith('http') ? undefined : metadata.link,
       ...banner.value?.metadata.attributes,
       onClick,
     }

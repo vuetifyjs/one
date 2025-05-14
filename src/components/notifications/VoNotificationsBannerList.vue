@@ -4,7 +4,7 @@
     height="100%"
     lines="three"
   >
-    <div v-if="!items.length" class="pt-16">
+    <div v-if="items.length === 0" class="pt-16">
       <v-empty-state
 
         icon="$vuetify"
@@ -114,11 +114,11 @@
 </template>
 
 <script setup lang="ts">
-  // Icons
-  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
-
   // Types
   import type { VOneBanner } from '@/stores/banners'
+
+  // Icons
+  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 
   interface Props {
     items: VOneBanner[]
@@ -137,10 +137,10 @@
   }
 
   function onClick (banner: VOneBanner) {
-    if (!isRead(banner.slug)) {
-      user.notifications.last.banner.push(banner.slug)
-    } else {
+    if (isRead(banner.slug)) {
       user.notifications.last.banner = user.notifications.last.banner.filter(slug => slug !== banner.slug)
+    } else {
+      user.notifications.last.banner.push(banner.slug)
     }
   }
 </script>

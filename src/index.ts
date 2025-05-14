@@ -1,5 +1,7 @@
 // Components
 import VoAppBar from '@/components/app/VoAppBar.vue'
+import VoScript from '@/components/app/VoScript.vue'
+import VoSocialFooter from '@/components/app/VoSocialFooter.vue'
 import VoAuthBtn from '@/components/auth/VoAuthBtn.vue'
 import VoAuthCard from '@/components/auth/VoAuthCard.vue'
 import VoAuthDialog from '@/components/auth/VoAuthDialog.vue'
@@ -9,45 +11,45 @@ import VoIconIssues from '@/components/icon/VoIconIssues.vue'
 import VoNotificationsBanner from '@/components/notifications/VoNotificationsBanner.vue'
 import VoPromotionsCardHighlight from '@/components/promotions/VoPromotionsCardHighlight.vue'
 import VoPromotionsCardVuetify from '@/components/promotions/VoPromotionsCardVuetify.vue'
+
 import VoPromotionsFooter from '@/components/promotions/VoPromotionsFooter.vue'
-import VoScript from '@/components/app/VoScript.vue'
-import VoSocialFooter from '@/components/app/VoSocialFooter.vue'
 import VoSpot from '@/components/spots/VoSpot.vue'
 
 // Types
 import type { App } from 'vue'
 import type { PiniaPluginContext } from 'pinia'
 
-export type { VOneIdentity, VOneSponsorship, VOneUser } from '@/stores/auth'
-export type { VOneBanner } from '@/stores/banners'
-export type { VOneBin } from '@/stores/bins'
-export type { VOneSendowlDownload, VOneSendowlDownloadItem } from '@/stores/downloads'
-export type { VOneNotification } from '@/stores/notifications'
-export type { ShopifyProduct } from '@/stores/products'
-export type { VOnePromotion } from '@/stores/promotions'
-export type { VOneSuit } from '@/stores/settings'
-export type { VOneSponsor } from '@/stores/sponsors'
-export type { VOneSpot } from '@/stores/spots'
-export type { VOneTeam } from '@/stores/team'
-
 // Icons
 export { aliases } from '@/icons'
+export type { VOneIdentity, VOneSponsorship, VOneUser } from '@/stores/auth'
 
 // Stores
 export { useAuthStore } from '@/stores/auth'
+export type { VOneBanner } from '@/stores/banners'
 export { useBannersStore } from '@/stores/banners'
+export type { VOneBin } from '@/stores/bins'
 export { useBinsStore } from '@/stores/bins'
+export type { VOneSendowlDownload, VOneSendowlDownloadItem } from '@/stores/downloads'
 export { useDownloadsStore } from '@/stores/downloads'
 export { useHttpStore } from '@/stores/http'
+export type { VOneNotification } from '@/stores/notifications'
+
 export { useNotificationsStore } from '@/stores/notifications'
+
 export { useOneStore } from '@/stores/one'
+export type { ShopifyProduct } from '@/stores/products'
 export { useProductsStore } from '@/stores/products'
+export type { VOnePromotion } from '@/stores/promotions'
 export { usePromotionsStore } from '@/stores/promotions'
 export { useQueueStore } from '@/stores/queue'
+export type { VOneSuit } from '@/stores/settings'
 export { useSettingsStore } from '@/stores/settings'
 export { useSiteStore } from '@/stores/site'
+export type { VOneSponsor } from '@/stores/sponsors'
 export { useSponsorsStore } from '@/stores/sponsors'
+export type { VOneSpot } from '@/stores/spots'
 export { useSpotsStore } from '@/stores/spots'
+export type { VOneTeam } from '@/stores/team'
 export { useTeamStore } from '@/stores/team'
 export { useUserStore } from '@/stores/user'
 
@@ -78,7 +80,9 @@ export function one (id: string[], url: string) {
 
     store.url = url
 
-    if (store.$id !== 'site') return
+    if (store.$id !== 'site') {
+      return
+    }
 
     store.id = id
   }

@@ -64,11 +64,11 @@
 </template>
 
 <script setup lang="ts">
-  // Icons
-  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
-
   // Types
   import type { VOneNotification } from '@/stores/notifications'
+
+  // Icons
+  import { mdiEmailOpenOutline, mdiEmailVariant, mdiOpenInNew } from '@mdi/js'
 
   interface Props {
     demo?: boolean
@@ -88,12 +88,12 @@
     return {
       href: metadata.action.startsWith('http') ? metadata.action : undefined,
       target: metadata.action.startsWith('http') ? '_blank' : undefined,
-      to: !metadata.action.startsWith('http') ? metadata.action : undefined,
+      to: metadata.action.startsWith('http') ? undefined : metadata.action,
       ...props.notification.metadata.attributes,
       onClick () {
         if (
-          props.demo ||
-          user.notifications.read.includes(props.notification.slug)
+          props.demo
+          || user.notifications.read.includes(props.notification.slug)
         ) return
 
         user.notifications.read.push(props.notification.slug)
@@ -108,10 +108,10 @@
   function onClick (notification: VOneNotification) {
     if (props.demo) return
 
-    if (!isRead(notification.slug)) {
-      user.notifications.read.push(notification.slug)
-    } else {
+    if (isRead(notification.slug)) {
       user.notifications.read = user.notifications.read.filter(slug => slug !== notification.slug)
+    } else {
+      user.notifications.read.push(notification.slug)
     }
   }
 </script>

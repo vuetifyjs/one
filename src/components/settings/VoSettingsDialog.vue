@@ -128,8 +128,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed } from 'vue'
   // Icons
   import {
     mdiCog,
@@ -142,6 +140,8 @@
     mdiWeatherNight,
     mdiWhiteBalanceSunny,
   } from '@mdi/js'
+  // Utilities
+  import { computed } from 'vue'
 
   const dialog = defineModel('modelValue', { type: Boolean })
   const one = useOneStore()
