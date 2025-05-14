@@ -18,7 +18,10 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (isAuthenticated && to.path !== '/user/dashboard') {
-    return next('/user/dashboard')
+    return next({
+      path: '/user/dashboard',
+      query: to.query,
+    })
   }
 
   return next()
