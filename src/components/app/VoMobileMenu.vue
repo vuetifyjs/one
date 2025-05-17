@@ -1,5 +1,11 @@
 <template>
-  <v-menu v-model="one.mobileMenu" :close-on-content-click="false">
+  <v-menu
+    v-model="one.mobileMenu"
+    :close-on-content-click="false"
+    :max-height="500"
+    :max-width="450"
+    :min-width="300"
+  >
     <template #activator="{ props }">
       <v-btn v-bind="props" :icon="`svg:${mdiDotsVertical}`" />
     </template>
@@ -40,11 +46,11 @@
   import { mdiDotsVertical } from '@mdi/js';
 
   const slots = defineSlots<{
-    default?(props: void): void;
-    prepend?(props: void): void;
-    title?(props: void): void;
-    extension?(props: void): void;
-    append?(props: void): void;
+    default?(): void;
+    prepend?(): void;
+    title?(): void;
+    extension?(): void;
+    append?(): void;
   }>();
 
   const one = useOneStore();

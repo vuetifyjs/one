@@ -9,34 +9,38 @@
         <v-img :src="image" width="128" />
       </router-link>
 
-      <slot v-if="!isMobile" name="prepend" />
+      <slot name="prepend-fixed" />
+
+      <slot v-if="!one.mobileBreakpoint" name="prepend" />
     </template>
 
-    <template v-if="!isMobile && slots.title" #title>
+    <template v-if="!one.mobileBreakpoint && slots.title" #title>
       <slot name="title" />
     </template>
 
-    <slot v-if="!isMobile" />
+    <slot v-if="!one.mobileBreakpoint" />
 
-    <template v-if="!isMobile && slots.extension" #extension>
+    <template v-if="!one.mobileBreakpoint && slots.extension" #extension>
       <slot name="extension" />
     </template>
 
     <template #append>
+      <!-- Fixed append slot - always visible -->
+      <slot name="append-fixed" />
+
       <!-- Mobile menu for smaller screens -->
-      <template v-if="isMobile">
+      <template v-if="one.mobileBreakpoint">
         <VoMobileMenu>
           <template v-for="(_, key) in slots" :key="key" #[key]>
-            <slot :name="key" v-bind="exposed" />
+            <slot :name="key" />
           </template>
         </VoMobileMenu>
       </template>
 
-      <!-- Desktop append slot -->
-      <slot v-else name="append" v-bind="exposed" />
+      <slot v-else name="append" />
 
       <v-divider
-        v-if="slots.append"
+        v-if="'append' in slots || 'append-fixed' in slots"
         class="align-self-center h-100 mx-2 mx-sm-4"
         length="20"
         vertical
@@ -53,27 +57,26 @@
   interface Props {
     logo: string;
   }
-  interface ScopedSlotsProps {
-    isMobile?: boolean;
-  }
 
   const props = defineProps<Props>();
   const slots = defineSlots<{
-    default?(props: ScopedSlotsProps): any;
-    prepend?(props: ScopedSlotsProps): any;
-    title?(props: ScopedSlotsProps): any;
-    extension?(props: ScopedSlotsProps): any;
-    append?(props: ScopedSlotsProps): any;
+    default?(): any;
+    prepend?(): any;
+    title?(): any;
+    extension?(): any;
+    append?(): any;
+
+    // Fixed slots that will always be visible
+    'prepend-fixed'?(): any;
+    'append-fixed'?(): any;
   }>();
 
   const theme = useTheme();
-  const display = useDisplay();
 
   const settings = useSettingsStore();
+  const one = useOneStore();
 
-  const isMobile = computed(() => display.mdAndDown.value);
-  const exposed = computed(() => ({ isMobile: isMobile.value }));
   const image = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/${props.logo}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
-  })
+  });
 </script>
