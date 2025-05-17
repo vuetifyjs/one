@@ -18,6 +18,8 @@
 
     <VoSubscriptionListItem v-if="auth.user" />
 
+    <VoMcpListItem v-if="one.isSubscriber" />
+
     <VoSettingsListItem />
 
     <VoAuthLogoutNavItem v-if="auth.user" />
