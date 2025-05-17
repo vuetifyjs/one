@@ -30,6 +30,7 @@ declare module 'vue' {
     VoIconBin: typeof import('./src/components/icon/VoIconBin.vue')['default']
     VoIconIssues: typeof import('./src/components/icon/VoIconIssues.vue')['default']
     VoListItem: typeof import('./src/components/app/VoListItem.vue')['default']
+    VoMobileMenu: typeof import('./src/components/app/VoMobileMenu.vue')['default']
     VoNotificationsBadge: typeof import('./src/components/notifications/VoNotificationsBadge.vue')['default']
     VoNotificationsBanner: typeof import('./src/components/notifications/VoNotificationsBanner.vue')['default']
     VoNotificationsBannerList: typeof import('./src/components/notifications/VoNotificationsBannerList.vue')['default']
