@@ -3,7 +3,6 @@
     v-model="one.mobileMenu"
     :close-on-content-click="false"
     :max-height="500"
-    :max-width="450"
     :min-width="300"
   >
     <template #activator="{ props }">
