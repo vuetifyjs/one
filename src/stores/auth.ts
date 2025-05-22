@@ -224,7 +224,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
       await verify(true)
       user.value = null
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error logging out')
     } finally {
       router.push({
         path: '/',

@@ -252,7 +252,7 @@ export const useOneStore = defineStore('one', (): OneState => {
       access.value = res.access
       team.team = auth.user?.team ?? null
     } catch (error: any) {
-      queue.showError(error?.message ?? 'An unexpected error has occurred')
+      queue.showError(error?.message ?? 'Error verifying subscription')
     } finally {
       isLoading.value = false
     }
