@@ -31,6 +31,7 @@ export interface NotificationsState {
 export const useNotificationsStore = defineStore('notifications', (): NotificationsState => {
   const http = useHttpStore()
   const user = useUserStore()
+  const queue = useQueueStore()
 
   const all = ref<VOneNotification[]>([])
   const isLoading = shallowRef(false)
@@ -45,8 +46,8 @@ export const useNotificationsStore = defineStore('notifications', (): Notificati
       const res = await http.get<{ notifications: VOneNotification[] }>('/one/notifications')
 
       all.value = res.notifications
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error fetching notifications')
     } finally {
       isLoading.value = false
     }

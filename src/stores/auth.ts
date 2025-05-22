@@ -56,6 +56,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
   const isLoading = shallowRef(false)
   const one = useOneStore()
   const team = useTeamStore()
+  const queue = useQueueStore()
 
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
@@ -90,7 +91,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
     try {
       await http.post('/user/settings', { settings: userStore.$state })
     } catch (error: any) {
-      console.error(error)
+      queue.showError(error?.message ?? 'Error syncing settings')
     }
   }
 
@@ -133,6 +134,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
       verify.promise = null
     })
   }
+
   verify.promise = null as Promise<void> | null
 
   async function login (provider: 'github' | 'discord' | 'shopify' = 'github') {
@@ -165,6 +167,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
     let interval = -1
     let timeout = -1
+
     function messageHandler (e: MessageEvent) {
       if (e.origin !== http.url) {
         return
@@ -221,7 +224,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
       await verify(true)
       user.value = null
     } catch (error: any) {
-      console.error(error)
+      queue.showError(error?.message ?? 'Error logging out')
     } finally {
       router.push({
         path: '/',

@@ -25,6 +25,7 @@ export interface DownloadsState {
 
 export const useDownloadsStore = defineStore('downloads', () => {
   const http = useHttpStore()
+  const queue = useQueueStore()
   const all = ref<VOneSendowlDownload[]>([])
   const isLoading = shallowRef(false)
 
@@ -39,8 +40,8 @@ export const useDownloadsStore = defineStore('downloads', () => {
       const res = await http.get<{ downloads: VOneSendowlDownload[] }>('/one/sendowl/downloads')
 
       all.value = res.downloads
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error fetching downloads')
     } finally {
       isLoading.value = false
     }
