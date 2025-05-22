@@ -42,15 +42,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { mdiDotsVertical } from '@mdi/js';
+  import { mdiDotsVertical } from '@mdi/js'
 
   const slots = defineSlots<{
-    default?(): void;
-    prepend?(): void;
-    title?(): void;
-    extension?(): void;
-    append?(): void;
-  }>();
+    default?: () => void
+    prepend?: () => void
+    title?: () => void
+    extension?: () => void
+    append?: () => void
+  }>()
 
-  const one = useOneStore();
+  const one = useOneStore()
 </script>

@@ -11,16 +11,16 @@
 
       <slot name="prepend-fixed" />
 
-      <slot v-if="!one.mobileBreakpoint" name="prepend" />
+      <slot v-if="!one.mobileBreakpoint.value" name="prepend" />
     </template>
 
-    <template v-if="!one.mobileBreakpoint && slots.title" #title>
+    <template v-if="!one.mobileBreakpoint.value && slots.title" #title>
       <slot name="title" />
     </template>
 
-    <slot v-if="!one.mobileBreakpoint" />
+    <slot v-if="!one.mobileBreakpoint.value" />
 
-    <template v-if="!one.mobileBreakpoint && slots.extension" #extension>
+    <template v-if="!one.mobileBreakpoint.value && slots.extension" #extension>
       <slot name="extension" />
     </template>
 
@@ -29,7 +29,7 @@
       <slot name="append-fixed" />
 
       <!-- Mobile menu for smaller screens -->
-      <template v-if="one.mobileBreakpoint">
+      <template v-if="one.mobileBreakpoint.value">
         <VoMobileMenu>
           <template v-for="(_, key) in slots" :key="key" #[key]>
             <slot :name="key" />
@@ -55,28 +55,28 @@
 <script lang="ts" setup>
   // Types
   interface Props {
-    logo: string;
+    logo: string
   }
 
-  const props = defineProps<Props>();
+  const props = defineProps<Props>()
   const slots = defineSlots<{
-    default?(): any;
-    prepend?(): any;
-    title?(): any;
-    extension?(): any;
-    append?(): any;
+    'default'?: () => any
+    'prepend'?: () => any
+    'title'?: () => any
+    'extension'?: () => any
+    'append'?: () => any
 
     // Fixed slots that will always be visible
-    'prepend-fixed'?(): any;
-    'append-fixed'?(): any;
-  }>();
+    'prepend-fixed'?: () => any
+    'append-fixed'?: () => any
+  }>()
 
-  const theme = useTheme();
+  const theme = useTheme()
 
-  const settings = useSettingsStore();
-  const one = useOneStore();
+  const settings = useSettingsStore()
+  const one = useOneStore()
 
   const image = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/${props.logo}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
-  });
+  })
 </script>
