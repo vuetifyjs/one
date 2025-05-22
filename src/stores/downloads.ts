@@ -41,7 +41,7 @@ export const useDownloadsStore = defineStore('downloads', () => {
 
       all.value = res.downloads
     } catch (error: any) {
-      queue.showError(error?.message ?? 'An unexpected error has occurred')
+      queue.showError(error?.message ?? 'Error fetching downloads')
     } finally {
       isLoading.value = false
     }

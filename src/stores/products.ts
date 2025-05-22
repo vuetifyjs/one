@@ -36,7 +36,7 @@ export const useProductsStore = defineStore('products', (): ProductsState => {
 
       all.value = res.products
     } catch (error: any) {
-      queue.showError(error?.message ?? 'An unexpected error has occurred')
+      queue.showError(error?.message ?? 'Error fetching products')
     }
 
     return all.value

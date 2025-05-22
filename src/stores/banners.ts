@@ -108,7 +108,7 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
 
       all.value = res.banners
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error fetching banners')
     } finally {
       isLoading.value = false
     }

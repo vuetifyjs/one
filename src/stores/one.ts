@@ -177,7 +177,7 @@ export const useOneStore = defineStore('one', (): OneState => {
       params.delete('team')
       history.pushState(null, '', url.toString())
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error activating subscription, Please contact support')
     } finally {
       isLoading.value = false
     }
@@ -209,7 +209,7 @@ export const useOneStore = defineStore('one', (): OneState => {
 
       auth.user = res.user
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error cancelling subscription, Please contact support')
     } finally {
       isLoading.value = false
     }
@@ -231,7 +231,7 @@ export const useOneStore = defineStore('one', (): OneState => {
 
       await verify()
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error modifying subscription')
     } finally {
       isLoading.value = false
     }
@@ -268,7 +268,7 @@ export const useOneStore = defineStore('one', (): OneState => {
       invoices.value = res.invoices
       return res
     } catch (error: any) {
-      queue.showError(error?.message ?? 'An unexpected error has occurred')
+      queue.showError(error?.message ?? 'Error fetching subscription info')
     } finally {
       isLoading.value = false
     }
