@@ -74,7 +74,7 @@ export const useSponsorsStore = defineStore('sponsors', (): SponsorState => {
 
       all.value = res.sponsors
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'An unexpected error has occurred')
     } finally {
       isLoading.value = false
     }

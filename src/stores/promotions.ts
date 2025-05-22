@@ -57,7 +57,7 @@ export const usePromotionsStore = defineStore('promotions', () => {
 
       all.value = res.promotions
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'An unexpected error has occurred')
     } finally {
       isLoading.value = false
       hasLoaded.value = true

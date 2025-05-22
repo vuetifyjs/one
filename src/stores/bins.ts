@@ -36,7 +36,7 @@ export const useBinsStore = defineStore('bins', (): BinsState => {
 
       all.value = res.bins
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'An unexpected error has occurred')
     } finally {
       isLoading.value = false
     }

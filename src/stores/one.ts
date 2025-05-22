@@ -252,7 +252,7 @@ export const useOneStore = defineStore('one', (): OneState => {
       access.value = res.access
       team.team = auth.user?.team ?? null
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'An unexpected error has occurred')
     } finally {
       isLoading.value = false
     }
@@ -268,7 +268,7 @@ export const useOneStore = defineStore('one', (): OneState => {
       invoices.value = res.invoices
       return res
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'An unexpected error has occurred')
     } finally {
       isLoading.value = false
     }

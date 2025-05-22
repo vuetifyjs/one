@@ -67,7 +67,7 @@ export const useSpotsStore = defineStore('spots', (): SpotState => {
 
       all.value = res.spots
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'An unexpected error has occurred')
     } finally {
       isLoading.value = false
     }

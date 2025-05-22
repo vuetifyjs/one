@@ -36,7 +36,7 @@ export const useProductsStore = defineStore('products', (): ProductsState => {
 
       all.value = res.products
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'An unexpected error has occurred')
     }
 
     return all.value
