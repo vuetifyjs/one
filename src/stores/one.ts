@@ -47,6 +47,8 @@ interface OneState {
   hasBilling: ComputedRef<boolean>
   isLoading: ShallowRef<boolean>
   isOpen: ShallowRef<boolean>
+  mobileMenu: ShallowRef<boolean>
+  mobileBreakpoint: { value: Ref<boolean> }
   isSubscriber: ComputedRef<boolean>
 
   github: ComputedRef<VOneSponsorship | undefined>
@@ -62,6 +64,7 @@ interface OneState {
   subscribe: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) => Promise<void>
   subscriptionInfo: () => Promise<any>
   verify: () => Promise<void>
+  syncMobileBreakpoint: (newVal: ShallowRef<boolean>) => void
 }
 
 export const useOneStore = defineStore('one', (): OneState => {
@@ -75,6 +78,8 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
+  const mobileMenu = shallowRef(false)
+  const mobileBreakpoint = { value: shallowRef(false) }
   const info = ref<Info>()
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
@@ -283,6 +288,10 @@ export const useOneStore = defineStore('one', (): OneState => {
     })
   }
 
+  function syncMobileBreakpoint (newVal: Ref<boolean>) {
+    mobileBreakpoint.value = newVal
+  }
+
   return {
     info,
     interval,
@@ -297,6 +306,8 @@ export const useOneStore = defineStore('one', (): OneState => {
     hasBilling,
     isLoading,
     isOpen,
+    mobileMenu,
+    mobileBreakpoint,
     isSubscriber,
 
     github,
@@ -312,5 +323,6 @@ export const useOneStore = defineStore('one', (): OneState => {
     subscribe,
     subscriptionInfo,
     verify,
+    syncMobileBreakpoint,
   }
 })
