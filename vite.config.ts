@@ -15,7 +15,7 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineConfig({
   plugins: [
     VueRouter({
-      dts: './src/typed-router.ts',
+      dts: './src/typed-router.d.ts',
     }),
     Vue({
       template: { transformAssetUrls },
