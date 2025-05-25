@@ -6,11 +6,6 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const DEFAULT_BANNER: typeof import('./lib/stores/banners')['DEFAULT_BANNER']
-  const DEFAULT_NOTIFICATION: typeof import('./lib/stores/notifications')['DEFAULT_NOTIFICATION']
-  const DEFAULT_PROMOTION: typeof import('./lib/stores/promotions')['DEFAULT_PROMOTION']
-  const DEFAULT_SPONSOR: typeof import('./lib/stores/sponsors')['DEFAULT_SPONSOR']
-  const DEFAULT_SPOT: typeof import('./lib/stores/spots')['DEFAULT_SPOT']
   const DEFAULT_USER: typeof import('./src/stores/user')['DEFAULT_USER']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
@@ -32,7 +27,6 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
-  const isWithinRange: typeof import('./src/util/dates')['isWithinRange']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
   const mapState: typeof import('pinia')['mapState']
@@ -71,7 +65,6 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toValue: typeof import('vue')['toValue']
-  const trackEvent: typeof import('./src/util/helpers')['trackEvent']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
