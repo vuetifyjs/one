@@ -84,6 +84,8 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
   })
 
   async function sync () {
+    await nextTick()
+
     if (!user.value || !userStore.syncSettings) {
       return
     }
