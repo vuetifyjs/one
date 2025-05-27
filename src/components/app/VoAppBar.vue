@@ -29,6 +29,10 @@
 
       <template v-if="isMobile">
         <VoMobileMenu>
+          <template #activator="menuProps">
+            <slot name="menu-activator" v-bind="menuProps" />
+          </template>
+
           <template v-for="(_, key) in slots" :key="key" #[key]>
             <slot :name="key" />
           </template>
@@ -64,6 +68,8 @@
 
     'prepend-fixed'?: () => any
     'append-fixed'?: () => any
+
+    'menu-activator'?: (props: Record<string, any>) => any
   }>()
 
   const theme = useTheme()

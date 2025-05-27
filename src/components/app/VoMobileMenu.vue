@@ -6,7 +6,9 @@
     :min-width="300"
   >
     <template #activator="{ props }">
-      <v-btn v-bind="props" :icon="`svg:${mdiDotsVertical}`" />
+      <slot name="activator" v-bind="props">
+        <v-btn v-bind="props" :icon="`svg:${mdiDotsVertical}`" size="small" />
+      </slot>
     </template>
 
     <v-card class="pa-4">
@@ -50,6 +52,7 @@
     title?: () => void
     extension?: () => void
     append?: () => void
+    activator?: (props: Record<string, any>) => void
   }>()
 
   const one = useOneStore()
