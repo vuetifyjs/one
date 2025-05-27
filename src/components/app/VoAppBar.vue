@@ -25,7 +25,6 @@
     </template>
 
     <template #append>
-      <!-- Fixed append slot - always visible -->
       <slot name="append-fixed" />
 
       <template v-if="isMobile">
@@ -44,8 +43,6 @@
         length="20"
         vertical
       />
-
-      <!-- Leads to one dropdown dialog -->
       <VoAuthBtn />
     </template>
   </v-app-bar>
@@ -65,7 +62,6 @@
     'extension'?: () => any
     'append'?: () => any
 
-    // Fixed slots that will always be visible
     'prepend-fixed'?: () => any
     'append-fixed'?: () => any
   }>()
