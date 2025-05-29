@@ -7,7 +7,7 @@
       <v-dialog v-slot="{ isActive }" activator="parent" max-width="700">
         <v-card
           prepend-icon="mdi-file-document"
-          title="Usage Instructions"
+          title="Quick Start"
         >
           <template #append>
             <v-icon-btn
@@ -19,20 +19,15 @@
           <v-divider />
 
           <v-card-text>
-            <h3>Use with Claude</h3>
-            TODO:
-          </v-card-text>
+            To get started with your favorite IDE or AI agent, simply run the following command from
+            your home
+            directory
+            <div class="bg-grey-darken-3 w-75 rounded pa-1 my-2">
+              <code>npx -y @vuetify/mcp config --api-key="YOUR_KEY" </code>
+            </div>
+            Follow the on-screen prompts to complete the setup
 
-          <v-card-text>
-            <h3>Use with Cursor</h3>
-            TODO:
           </v-card-text>
-
-          <v-card-text>
-            <h3>Use with VSCode</h3>
-            TODO:
-          </v-card-text>
-
           <v-card-actions>
             <v-spacer />
 
