@@ -15,7 +15,7 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineConfig({
   plugins: [
     VueRouter({
-      dts: true,
+      dts: './src/typed-router.d.ts',
     }),
     Vue({
       template: { transformAssetUrls },
@@ -23,7 +23,7 @@ export default defineConfig({
     Layouts(),
     Components({
       dirs: ['src/components'],
-      dts: true,
+      dts: './src/components.d.ts',
     }),
     Vuetify({ autoImport: true }),
     ViteFonts({
@@ -58,7 +58,7 @@ export default defineConfig({
         './src/composables',
         './src/util',
       ],
-      dts: true,
+      dts: './src/auto-imports.d.ts',
       eslintrc: {
         enabled: true,
       },

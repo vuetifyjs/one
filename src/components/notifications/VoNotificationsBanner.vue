@@ -10,10 +10,10 @@
     order="-1"
   >
     <v-list-item
-      v-bind="link"
       :active="false"
       class="flex-grow-1 py-6"
       lines="two"
+      v-bind="link"
       @click="onClick"
     >
       <template #prepend>
@@ -41,17 +41,17 @@
         <v-hover v-if="mdAndUp && banner.metadata.link && banner.metadata.link_text">
           <template #default="{ isHovering, props: activatorProps }">
             <v-btn
-              v-bind="{
-                ...activatorProps,
-                ...link
-              }"
               :append-icon="`svg:${mdiOpenInNew}`"
               class="text-none me-2"
               :color="banner.metadata.link_color"
               :elevation="isHovering ? 8 : 0"
               :title="banner.metadata.link_text"
+              v-bind="{
+                ...activatorProps,
+                ...link
+              }"
               variant="elevated"
-              @click="onClick"
+              @click.stop="onClick"
             >
               {{ banner.metadata.link_text }}
             </v-btn>
@@ -73,8 +73,8 @@
   </v-app-bar>
 </template>
 
-<script setup lang="ts">
-  // Icons
+<script lang="ts" setup>
+// Icons
   import { mdiOpenInNew } from '@mdi/js'
 
   // Types
@@ -107,9 +107,7 @@
   async function onClick (e: MouseEvent | KeyboardEvent) {
     if (!banner.value) return
 
-    onClose()
-
-    await nextTick()
+    setTimeout(() => onClose(), 500)
 
     const metadata = banner.value?.metadata ?? { link: '' }
 
@@ -131,7 +129,6 @@
       target: metadata.link.startsWith('http') ? '_blank' : undefined,
       to: metadata.link.startsWith('http') ? undefined : metadata.link,
       ...banner.value?.metadata.attributes,
-      onClick,
     }
   })
 
@@ -180,6 +177,7 @@
     rgb(0% 0% 0% / 0) 100%
   );
 }
+
 .v-list-item-subtitle {
   color: currentColor;
   opacity: var(--v-high-emphasis-opacity);

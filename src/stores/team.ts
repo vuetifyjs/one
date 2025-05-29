@@ -83,7 +83,7 @@ export const useTeamStore = defineStore('team', () => {
       await http.post('/one/team/remove', { userId: id })
       team.value.members = team.value.members.filter((member: VOneTeam['members'][number]) => member.id !== id)
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error removing user from team')
     } finally {
       isLoading.value = false
     }
@@ -96,7 +96,7 @@ export const useTeamStore = defineStore('team', () => {
       await http.post('/one/team/leave', { teamId: team.value?.id })
       await auth.verify(true)
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error leaving team')
     } finally {
       isLoading.value = false
     }
@@ -111,7 +111,7 @@ export const useTeamStore = defineStore('team', () => {
 
       clearTeamQuery()
     } catch (error: any) {
-      queue.showError(error.message)
+      queue.showError(error?.message ?? 'Error joining team')
     } finally {
       isLoading.value = false
     }

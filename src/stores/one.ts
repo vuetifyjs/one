@@ -71,6 +71,7 @@ export const useOneStore = defineStore('one', (): OneState => {
   const auth = useAuthStore()
   const http = useHttpStore()
   const team = useTeamStore()
+  const queue = useQueueStore()
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
@@ -175,8 +176,8 @@ export const useOneStore = defineStore('one', (): OneState => {
       params.delete('session_id')
       params.delete('team')
       history.pushState(null, '', url.toString())
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error activating subscription, Please contact support')
     } finally {
       isLoading.value = false
     }
@@ -207,8 +208,8 @@ export const useOneStore = defineStore('one', (): OneState => {
       )
 
       auth.user = res.user
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error cancelling subscription, Please contact support')
     } finally {
       isLoading.value = false
     }
@@ -229,8 +230,8 @@ export const useOneStore = defineStore('one', (): OneState => {
       })
 
       await verify()
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error modifying subscription')
     } finally {
       isLoading.value = false
     }
@@ -250,8 +251,8 @@ export const useOneStore = defineStore('one', (): OneState => {
       auth.user = res.user
       access.value = res.access
       team.team = auth.user?.team ?? null
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error verifying subscription')
     } finally {
       isLoading.value = false
     }
@@ -266,8 +267,8 @@ export const useOneStore = defineStore('one', (): OneState => {
       info.value = res.subscription
       invoices.value = res.invoices
       return res
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error fetching subscription info')
     } finally {
       isLoading.value = false
     }

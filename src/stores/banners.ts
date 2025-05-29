@@ -48,6 +48,7 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
   const http = useHttpStore()
   const site = useSiteStore()
   const user = useUserStore()
+  const queue = useQueueStore()
 
   const all = ref<VOneBanner[]>([])
   const isLoading = shallowRef(false)
@@ -106,8 +107,8 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       const res = await http.get<{ banners: VOneBanner[] }>('/one/banners')
 
       all.value = res.banners
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error fetching banners')
     } finally {
       isLoading.value = false
     }

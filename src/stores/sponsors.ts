@@ -41,6 +41,7 @@ export type SponsorState = {
 
 export const useSponsorsStore = defineStore('sponsors', (): SponsorState => {
   const http = useHttpStore()
+  const queue = useQueueStore()
 
   const sponsors = ref<VOneSponsor[]>([])
   const all = ref<VOneSponsor[]>([])
@@ -72,8 +73,8 @@ export const useSponsorsStore = defineStore('sponsors', (): SponsorState => {
       const res = await http.get<{ sponsors: VOneSponsor[] }>('/one/sponsors')
 
       all.value = res.sponsors
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error fetching sponsors')
     } finally {
       isLoading.value = false
     }

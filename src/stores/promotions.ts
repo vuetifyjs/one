@@ -31,6 +31,7 @@ export interface VOnePromotion {
 
 export const usePromotionsStore = defineStore('promotions', () => {
   const http = useHttpStore()
+  const queue = useQueueStore()
 
   const all = ref<VOnePromotion[]>([])
   const isLoading = shallowRef(false)
@@ -55,8 +56,8 @@ export const usePromotionsStore = defineStore('promotions', () => {
       const res = await http.get<{ promotions: VOnePromotion[] }>('/one/promotions')
 
       all.value = res.promotions
-    } catch {
-      //
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error fetching promotions')
     } finally {
       isLoading.value = false
       hasLoaded.value = true
