@@ -22,13 +22,12 @@
     <tbody>
       <tr>
         <td>
-          {{ props.apiKey.accessToken.slice(0, 5) }}...{{ props.apiKey.accessToken.slice(-4) }}
+          {{ props.apiKey.apiKey.slice(0, 5) }}...{{ props.apiKey.apiKey.slice(-4) }}
         </td>
 
         <td>{{ new Date(props.apiKey.createdAt).toLocaleDateString('en-US').slice(0, 8) }}</td>
 
         <td>{{ new Date(props.apiKey.updatedAt).toLocaleDateString('en-US').slice(0, 8) }}</td>
-
 
       </tr>
     </tbody>
