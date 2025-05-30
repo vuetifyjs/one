@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-slot="{ isActive }" v-model="dialog" max-width="500">
-    <v-card prepend-icon="mdi-hand-okay" title="Save your Key">
+    <v-card :prepend-icon="`svg:${mdiShieldKeyOutline}`" title="Save your Key">
       <template #append>
         <v-icon-btn icon="mdi-close" @click="isActive.value = false" />
       </template>
@@ -31,13 +31,13 @@
               variant="flat"
               @click="onClickCopy"
             >
+              Copy
+
               <template #prepend>
                 <v-fade-transition hide-on-leave>
                   <v-icon :key="String(copied)" />
                 </v-fade-transition>
               </template>
-
-              Copy
             </v-btn>
           </template>
         </v-text-field>
@@ -60,22 +60,17 @@
 </template>
 
 <script lang="ts" setup>
+  import { mdiShieldKeyOutline } from '@mdi/js'
 
   const copied = shallowRef(false)
   const apiKeyField = ref()
-  const dialog = defineModel('modelValue', { type: Boolean })
+  const dialog = defineModel<boolean>('modelValue')
 
-  const props = defineProps({
-    apiKey: {
-      type: String,
-      required: true,
-    },
-  })
+  const { apiKey } = defineProps<{ apiKey: string }>()
 
   function onClickCopy () {
-
     copied.value = true
-    navigator.clipboard.writeText(props.apiKey)
+    navigator.clipboard.writeText(apiKey)
 
     setTimeout(() => (copied.value = false), 1000)
   }

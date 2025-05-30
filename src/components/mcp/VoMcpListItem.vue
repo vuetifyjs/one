@@ -10,8 +10,6 @@
 </template>
 
 <script lang="ts" setup>
-
-// Icons
   import { mdiKeyVariant } from '@mdi/js'
 
   const dialog = shallowRef(false)
