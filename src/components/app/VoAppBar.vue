@@ -11,23 +11,23 @@
 
       <slot name="prepend-fixed" />
 
-      <slot v-if="!one.mobileBreakpoint" name="prepend" />
+      <slot v-if="!mobile" name="prepend" />
     </template>
 
-    <template v-if="!one.mobileBreakpoint && slots.title" #title>
+    <template v-if="!mobile && slots.title" #title>
       <slot name="title" />
     </template>
 
-    <slot v-if="!one.mobileBreakpoint" />
+    <slot v-if="!mobile" />
 
-    <template v-if="!one.mobileBreakpoint && slots.extension" #extension>
+    <template v-if="!mobile && slots.extension" #extension>
       <slot name="extension" />
     </template>
 
     <template #append>
       <slot name="append-fixed" />
 
-      <template v-if="one.mobileBreakpoint">
+      <template v-if="mobile">
         <VoMobileMenu>
           <template #activator="menuProps">
             <slot name="menu-activator" v-bind="menuProps" />
@@ -75,7 +75,8 @@
   const theme = useTheme()
 
   const settings = useSettingsStore()
-  const one = useOneStore()
+
+  const { mobile } = useDisplay()
 
   const image = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/${props.logo}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
