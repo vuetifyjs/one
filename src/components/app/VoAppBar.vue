@@ -11,23 +11,23 @@
 
       <slot name="prepend-fixed" />
 
-      <slot v-if="!mobile" name="prepend" />
+      <slot v-if="!isMobile" name="prepend" />
     </template>
 
-    <template v-if="!mobile && slots.title" #title>
+    <template v-if="!isMobile && slots.title" #title>
       <slot name="title" />
     </template>
 
-    <slot v-if="!mobile" />
+    <slot v-if="!isMobile" />
 
-    <template v-if="!mobile && slots.extension" #extension>
+    <template v-if="!isMobile && slots.extension" #extension>
       <slot name="extension" />
     </template>
 
     <template #append>
       <slot name="append-fixed" />
 
-      <template v-if="mobile">
+      <template v-if="isMobile">
         <VoMobileMenu>
           <template #activator="menuProps">
             <slot name="menu-activator" v-bind="menuProps" />
@@ -56,6 +56,7 @@
   // Types
   interface Props {
     logo: string
+    responsive?: boolean
   }
 
   const props = defineProps<Props>()
@@ -77,6 +78,8 @@
   const settings = useSettingsStore()
 
   const { mobile } = useDisplay()
+  
+  const isMobile = computed(() => props.responsive == true && mobile.value)
 
   const image = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/${props.logo}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
