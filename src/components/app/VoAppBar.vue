@@ -28,7 +28,7 @@
       <slot name="append-fixed" />
 
       <template v-if="isMobile">
-        <VoMobileMenu>
+        <VoMobileMenu v-model="mobileMenu">
           <template #activator="menuProps">
             <slot name="menu-activator" v-bind="menuProps" />
           </template>
@@ -60,6 +60,7 @@
   }
 
   const props = defineProps<Props>()
+  const mobileMenu = defineModel<boolean>('mobileMenu', { default: false })
   const slots = defineSlots<{
     'default'?: () => any
     'prepend'?: () => any
@@ -78,7 +79,7 @@
   const settings = useSettingsStore()
 
   const { mobile } = useDisplay()
-  
+
   const isMobile = computed(() => props.responsive == true && mobile.value)
 
   const image = computed(() => {

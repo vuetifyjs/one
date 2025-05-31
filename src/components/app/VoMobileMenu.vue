@@ -1,6 +1,6 @@
 <template>
   <v-menu
-    v-model="one.mobileMenu"
+    v-model="mobileMenu"
     :close-on-content-click="false"
     :max-height="500"
     :min-width="300"
@@ -46,6 +46,7 @@
 <script lang="ts" setup>
   import { mdiDotsVertical } from '@mdi/js'
 
+  const mobileMenu = defineModel<boolean>()
   const slots = defineSlots<{
     default?: () => void
     prepend?: () => void
@@ -54,6 +55,4 @@
     append?: () => void
     activator?: (props: Record<string, any>) => void
   }>()
-
-  const one = useOneStore()
 </script>
