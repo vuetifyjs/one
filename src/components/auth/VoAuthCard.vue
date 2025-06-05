@@ -33,11 +33,13 @@
 
       <VoAuthDiscord class="mb-3" />
 
-      <VoAuthShopify />
+      <VoAuthShopify class="mb-3" />
+
+      <VoAuthOpenCollective />
     </v-list>
   </v-card>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   const auth = useAuthStore()
 </script>

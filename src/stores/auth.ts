@@ -139,7 +139,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
   verify.promise = null as Promise<void> | null
 
-  async function login (provider: 'github' | 'discord' | 'shopify' = 'github') {
+  async function login (provider: 'github' | 'discord' | 'shopify' | 'opencollective' = 'github') {
     isLoading.value = true
 
     const redirectUrl = `${http.url}/auth/${provider}/redirect`
