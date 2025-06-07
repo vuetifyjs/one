@@ -9,7 +9,7 @@ export interface QueueState {
   showError: (text: Snackbar) => void
 }
 
-export const useQueueStore = defineStore('Queue', (): QueueState => {
+export const useQueueStore = defineStore('queue', (): QueueState => {
   const queue = ref<Snackbar[]>([])
 
   function show (text: Snackbar) {
