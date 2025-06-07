@@ -26,10 +26,10 @@
           density="comfortable"
           flat
           href="https://bin.vuetifyjs.com"
-          icon
+          icon="$vuetify-bin"
           target="_blank"
         >
-          <VoIconBin />
+          <v-icon />
 
           <v-tooltip
             activator="parent"
@@ -43,11 +43,47 @@
           :color="user.colors.one"
           density="comfortable"
           flat
-          href="https://issues.vuetifyjs.com"
-          icon
+          href="https://studio.vuetifyjs.com"
+          icon="$vuetify-studio"
           target="_blank"
         >
-          <VoIconIssues />
+          <v-icon />
+
+          <v-tooltip
+            activator="parent"
+            location="top"
+            text="Vuetify Studio"
+          />
+        </v-btn>
+
+        <v-btn
+          class="text-caption"
+          :color="user.colors.one"
+          density="comfortable"
+          flat
+          href="https://snips.vuetifyjs.com"
+          icon="$vuetify-snips"
+          target="_blank"
+        >
+          <v-icon />
+
+          <v-tooltip
+            activator="parent"
+            location="top"
+            text="Vuetify Snips"
+          />
+        </v-btn>
+
+        <v-btn
+          class="text-caption"
+          :color="user.colors.one"
+          density="comfortable"
+          flat
+          href="https://issues.vuetifyjs.com"
+          icon="$vuetify-issues"
+          target="_blank"
+        >
+          <v-icon />
 
           <v-tooltip
             activator="parent"
