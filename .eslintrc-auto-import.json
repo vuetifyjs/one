@@ -139,6 +139,8 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "useCopy": true,
+    "useApiKeyStore": true
   }
 }

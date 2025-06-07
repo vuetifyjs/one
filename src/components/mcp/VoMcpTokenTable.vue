@@ -26,9 +26,9 @@
               v-bind="hoverProps"
               :color="isHovering || copied ? 'primary' : undefined"
               slim
-              :text="`${apiKey.apiKey.slice(0, 6)}...${apiKey.apiKey.slice(-6)}`"
+              :text="api.key ? api.trim : ''"
               :variant="isHovering || copied ? 'tonal' : 'text'"
-              @click="onClickCopy"
+              @click="copy(api.key)"
             >
               <template #append>
                 <v-icon :icon="copied ? '$success' : `svg:${mdiContentCopy}`" :opacity="isHovering || copied ? 1 : 0" />
@@ -37,9 +37,9 @@
           </v-hover>
         </td>
 
-        <td>{{ date.format(apiKey.createdAt, 'fullDate') }}</td>
+        <td>{{ api.accessToken ? date.format(api.accessToken.createdAt, 'fullDate') : '' }}</td>
 
-        <td class="text-end">{{ date.format(apiKey.updatedAt, 'fullDate') }}</td>
+        <td class="text-end">{{ api.accessToken ? date.format(api.accessToken.updatedAt, 'fullDate') : '' }}</td>
       </tr>
     </tbody>
   </v-table>
@@ -48,23 +48,7 @@
 <script lang="ts" setup>
   import { mdiContentCopy } from '@mdi/js'
 
-  const { apiKey } = defineProps<{
-    apiKey: {
-      id: string
-      apiKey: string
-      createdAt: string
-      updatedAt: string
-    }
-  }>()
-
-  const copied = shallowRef(false)
+  const api = useApiKeyStore()
+  const { copy, copied } = useCopy(2000)
   const date = useDate()
-
-  function onClickCopy () {
-    navigator.clipboard.writeText(apiKey.apiKey)
-    copied.value = true
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  }
 </script>

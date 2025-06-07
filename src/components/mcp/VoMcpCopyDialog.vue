@@ -16,10 +16,9 @@
         </p>
 
         <v-text-field
-          v-if="apiKey"
-          :ref="el => apiKeyField = el"
+          v-if="api.key"
           color="success"
-          :model-value="apiKey"
+          :model-value="api.key"
           variant="outlined"
         >
           <template #append-inner>
@@ -29,7 +28,7 @@
               :prepend-icon="copied ? 'mdi-check' : 'mdi-content-copy'"
               size="small"
               variant="flat"
-              @click="onClickCopy"
+              @click="copy(api.key)"
             >
               Copy
 
@@ -62,16 +61,7 @@
 <script lang="ts" setup>
   import { mdiShieldKeyOutline } from '@mdi/js'
 
-  const copied = shallowRef(false)
-  const apiKeyField = ref()
+  const api = useApiKeyStore()
+  const { copy, copied } = useCopy()
   const dialog = defineModel<boolean>('modelValue')
-
-  const { apiKey } = defineProps<{ apiKey: string }>()
-
-  function onClickCopy () {
-    copied.value = true
-    navigator.clipboard.writeText(apiKey)
-
-    setTimeout(() => (copied.value = false), 1000)
-  }
 </script>

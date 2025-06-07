@@ -2,8 +2,8 @@
   <VoDialog
     v-model="dialog"
     height="auto"
-    :prepend-icon="`svg:${mdiKeyVariant}`"
-    title="MCP Access"
+    :prepend-icon="`svg:${mdiKey}`"
+    title="API Key"
   >
     <v-layout>
       <v-main>
@@ -22,10 +22,10 @@
 
             <VoMcpHowTo />
 
-            <v-row class="my-4" justify="center">
+            <v-row v-if="!api.key || !api.regenerated" class="my-4" justify="center">
               <v-col cols="auto">
                 <v-btn
-                  v-if="!apiKey?.apiKey"
+                  v-if="!api.key"
                   color="success"
                   :prepend-icon="`svg:${mdiPlus}`"
                   text="Generate API Key"
@@ -34,9 +34,9 @@
                 />
 
                 <v-btn
-                  v-else-if="!regenerated"
+                  v-else-if="!api.regenerated"
                   color="success"
-                  :prepend-icon="`svg:${mdiPlus}`"
+                  :prepend-icon="`svg:${mdiRefresh}`"
                   text="Regenerate API Key"
                   variant="flat"
                   @click="onClickGenerateKey(true)"
@@ -44,10 +44,10 @@
               </v-col>
             </v-row>
 
-            <template v-if="apiKey?.apiKey">
-              <VoMcpTokenTable :api-key="apiKey" />
+            <template v-if="api.key">
+              <VoMcpTokenTable />
 
-              <VoMcpCopyDialog v-model="copyDialog" :api-key="apiKey.apiKey" />
+              <VoMcpCopyDialog v-model="copyDialog" />
             </template>
           </v-card-text>
         </div>
@@ -57,35 +57,19 @@
 </template>
 
 <script lang="ts" setup>
-  import { mdiKeyVariant, mdiPlus } from '@mdi/js'
+  import { mdiKey, mdiPlus, mdiRefresh } from '@mdi/js'
 
-  interface AccessToken {
-    id: string
-    apiKey: string
-    createdAt: string
-    updatedAt: string
-  }
-
-  const http = useHttpStore()
-  const apiKey = ref<AccessToken | null>(null)
+  const api = useApiKeyStore()
   const copyDialog = shallowRef(false)
-  const regenerated = shallowRef(false)
 
   const dialog = defineModel<boolean>('modelValue')
 
   async function onClickGenerateKey (regenerate = false) {
-    if (!regenerated.value && regenerate) regenerated.value = true
-
-    const slug = regenerate ? 'regenerate' : 'generate'
-    const token = await http[regenerate ? 'post' : 'fetch'](`/one/mcp/${slug}`)
-    apiKey.value = token
+    await api.generate(regenerate)
     copyDialog.value = true
   }
 
   watch(dialog, async val => {
-    if (val) {
-      const res = await http.fetch('/one/mcp/getToken')
-      if (res.apiKey) apiKey.value = res
-    }
+    if (val) await api.fetch()
   })
 </script>
