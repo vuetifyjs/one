@@ -14,9 +14,9 @@
       @click.prevent.stop="onClickAvatar"
     >
       <v-img
-        v-if="auth.user && user.avatar"
+        v-if="auth.user && user.one.avatar"
         alt="User avatar"
-        :src="user.avatar"
+        :src="user.one.avatar"
       />
 
       <v-icon
@@ -41,7 +41,7 @@
                 :key="i"
               >
                 <v-btn
-                  :active="user.avatar === avatar"
+                  :active="user.one.avatar === avatar"
                   icon
                   variant="flat"
                   @click="onClickSelectAvatar(avatar)"
@@ -101,7 +101,7 @@
   })
 
   function onClickSelectAvatar (avatar: string) {
-    user.avatar = avatar
+    user.one.avatar = avatar
   }
 
   function onClickAvatar () {

@@ -16,7 +16,7 @@
     >
       <v-avatar
         v-if="auth.user"
-        :image="user.avatar || auth.user.picture || ''"
+        :image="user.one.avatar || auth.user.picture || ''"
       />
 
       <template v-else>
@@ -51,9 +51,9 @@
 
   const color = computed(() => {
     return one.isOpen || !auth.user
-      ? (user.colors.one === 'surface-light'
+      ? (user.one.colors.primary === 'surface-light'
         ? 'primary'
-        : user.colors.one)
+        : user.one.colors.primary)
       : 'surface-light'
   })
 

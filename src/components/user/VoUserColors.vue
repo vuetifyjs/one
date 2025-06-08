@@ -1,6 +1,6 @@
 <template>
   <v-img
-    :color="auth.user ? user.colors.one : 'surface-light'"
+    :color="auth.user ? user.one.colors.primary : 'surface-light'"
     content-class="d-flex align-start justify-end pa-2"
     cover
     flat
@@ -20,7 +20,7 @@
             class="ms-2 me-1"
             color="inherit"
             density="comfortable"
-            :disabled="user.colors.one === 'surface-light'"
+            :disabled="user.one.colors.primary === 'surface-light'"
             :icon="`svg:${mdiArrowULeftBottom}`"
             title="Revert to Default"
             variant="text"
@@ -55,12 +55,12 @@
       hide-canvas
       hide-inputs
       hide-sliders
-      :model-value="user.colors.one !== 'surface-light' ? user.colors.one : undefined"
+      :model-value="user.one.colors.primary !== 'surface-light' ? user.one.colors.primary : undefined"
       rounded="0"
       show-swatches
       swatches-max-height="200"
       width="278"
-      @update:model-value="user.colors.one = $event"
+      @update:model-value="user.one.colors.primary = $event"
     />
   </v-expand-transition>
 </template>
@@ -76,6 +76,6 @@
   const colors = shallowRef(false)
 
   function reset () {
-    user.colors.one = 'surface-light'
+    user.one.colors.primary = 'surface-light'
   }
 </script>

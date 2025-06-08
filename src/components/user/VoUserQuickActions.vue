@@ -1,10 +1,10 @@
 <template>
   <v-expand-transition>
-    <div v-if="user.quickbar">
+    <div v-if="user.one.quicklinks">
       <div class="d-flex align-center justify-center pa-1 ga-2">
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://play.vuetifyjs.com"
@@ -22,7 +22,7 @@
 
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://bin.vuetifyjs.com"
@@ -40,7 +40,7 @@
 
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://studio.vuetifyjs.com"
@@ -58,7 +58,7 @@
 
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://snips.vuetifyjs.com"
@@ -76,7 +76,7 @@
 
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://issues.vuetifyjs.com"

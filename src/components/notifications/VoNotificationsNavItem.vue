@@ -1,6 +1,6 @@
 <template>
   <VoListItem
-    v-if="user.notifications.show"
+    v-if="user.one.notifications.enabled"
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiBellOutline}`"

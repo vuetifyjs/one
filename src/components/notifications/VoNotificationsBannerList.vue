@@ -133,14 +133,14 @@
   defineProps<Props>()
 
   function isRead (slug: string) {
-    return user.notifications.last.banner.includes(slug)
+    return user.one.banners.read.includes(slug)
   }
 
   function onClick (banner: VOneBanner) {
     if (isRead(banner.slug)) {
-      user.notifications.last.banner = user.notifications.last.banner.filter(slug => slug !== banner.slug)
+      user.one.banners.read = user.one.banners.read.filter(slug => slug !== banner.slug)
     } else {
-      user.notifications.last.banner.push(banner.slug)
+      user.one.banners.read.push(banner.slug)
     }
   }
 </script>

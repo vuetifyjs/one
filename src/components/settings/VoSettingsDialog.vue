@@ -12,7 +12,7 @@
             title="Theme"
           />
 
-          <v-item-group v-model="user.theme" mandatory>
+          <v-item-group v-model="user.one.theme" mandatory>
             <v-row dense>
               <v-col
                 v-for="(item, i) in items"
@@ -73,7 +73,7 @@
 
           <VoSwitch
             v-if="one.isSubscriber"
-            v-model="user.disableAds"
+            v-model="disableAds"
             class="mb-2"
             label="Disable Ads"
             messages="Disable traditional advertisements on all documentation pages."
@@ -81,12 +81,12 @@
 
           <v-expand-transition>
             <div
-              v-show="user.disableAds"
+              v-show="disableAds"
               class="ms-5"
             >
               <div class="pb-2">
                 <VoSwitch
-                  v-model="user.showHouseAds"
+                  v-model="user.one.ads.house"
                   label="Show House Ads"
                   messages="These advertisements are for Vuetify products and services only."
                 />
@@ -95,7 +95,7 @@
           </v-expand-transition>
 
           <VoSwitch
-            v-model="user.quickbar"
+            v-model="user.one.quicklinks"
             label="Enable Quick Actions"
             messages="Quick actions are located on the Vuetify One user menu and provide quick access to common tasks."
           />
@@ -110,14 +110,14 @@
           />
 
           <VoSwitch
-            v-model="user.notifications.show"
+            v-model="user.one.notifications.enabled"
             class="mb-2"
             label="Enable Notifications"
             messages="Notifications are short form messages that provide information about new releases, updates, and other important information."
           />
 
           <VoSwitch
-            v-model="user.notifications.banners"
+            v-model="user.one.banners.enabled"
             label="Enable Banners"
             messages="Banners are located at the top of the screen and provide a callout for important information."
           />
@@ -220,6 +220,13 @@
     { title: 'Releases', items: releases.value },
   ]))
 
+  const disableAds = computed({
+    get: () => !user.one.ads.enabled,
+    set: (value: boolean) => {
+      user.one.ads.enabled = !value
+    },
+  })
+
   const query = useQuery<{ one: string }>()
 
   watch(query, async () => {
@@ -235,7 +242,7 @@
   function onClick (toggle?: () => void, theme?: any) {
     if (theme.disabled) return
 
-    user.theme = theme.value
+    user.one.theme = theme.value
 
     toggle?.()
   }

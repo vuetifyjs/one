@@ -9,25 +9,25 @@
         class="mb-0"
         :link="!!auth.user"
         nav
-        :prepend-icon="`svg:${auth.user && user.syncSettings ? mdiSync : mdiSyncOff}`"
+        :prepend-icon="`svg:${auth.user && user.one.sync ? mdiSync : mdiSyncOff}`"
         rounded="b-0"
         slim
-        :title="auth.user && user.syncSettings ? 'Sync is on' : 'Sync is paused'"
+        :title="auth.user && user.one.sync ? 'Sync is on' : 'Sync is paused'"
         @click="onClickSync"
       >
         <template #append>
           <v-fade-transition>
             <v-switch
-              v-if="auth.user && (social || !user.syncSettings)"
-              v-model="user.syncSettings"
-              :color="user.syncSettings ? 'success' : undefined"
+              v-if="auth.user && (social || !user.one.sync)"
+              v-model="user.one.sync"
+              :color="user.one.sync ? 'success' : undefined"
               density="compact"
               hide-details
               inset
               @click.stop
             >
               <template #thumb>
-                <v-avatar :color="user.syncSettings ? 'success' : undefined" />
+                <v-avatar :color="user.one.sync ? 'success' : undefined" />
               </template>
             </v-switch>
           </v-fade-transition>

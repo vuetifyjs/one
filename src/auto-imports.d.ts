@@ -150,7 +150,8 @@ declare global {
   export type { VOneTeam, TeamState } from './stores/team'
   import('./stores/team')
   // @ts-ignore
-  export type { RootState, SavedState } from './stores/user'
+  export type { RootState } from './stores/user'
+  export type { OldRootState, SavedState } from './stores/migrations'
   import('./stores/user')
 }
 

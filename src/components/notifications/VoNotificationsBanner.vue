@@ -94,14 +94,14 @@
   const hasPromotion = computed(() => {
     if (props.demo) return true
 
-    return !banner.value || !user.notifications.last.banner.includes(banner.value.slug)
+    return !banner.value || !user.one.banners.read.includes(banner.value.slug)
   })
 
   function onClose () {
     if (props.demo) return
     if (!banner.value) return
 
-    user.notifications.last.banner.push(banner.value.slug)
+    user.one.banners.read.push(banner.value.slug)
   }
 
   async function onClick (e: MouseEvent | KeyboardEvent) {

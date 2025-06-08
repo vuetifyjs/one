@@ -93,25 +93,25 @@
       onClick () {
         if (
           props.demo
-          || user.notifications.read.includes(props.notification.slug)
+          || user.one.notifications.read.includes(props.notification.slug)
         ) return
 
-        user.notifications.read.push(props.notification.slug)
+        user.one.notifications.read.push(props.notification.slug)
       },
     }
   })
 
   function isRead (slug: string) {
-    return user.notifications.read.includes(slug)
+    return user.one.notifications.read.includes(slug)
   }
 
   function onClick (notification: VOneNotification) {
     if (props.demo) return
 
     if (isRead(notification.slug)) {
-      user.notifications.read = user.notifications.read.filter(slug => slug !== notification.slug)
+      user.one.notifications.read = user.one.notifications.read.filter(slug => slug !== notification.slug)
     } else {
-      user.notifications.read.push(notification.slug)
+      user.one.notifications.read.push(notification.slug)
     }
   }
 </script>

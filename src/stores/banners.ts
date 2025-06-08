@@ -57,7 +57,7 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
     if (server.value) {
       return server.value
     }
-    if (!user.notifications.banners) {
+    if (!user.one.banners.enabled) {
       return undefined
     }
 
@@ -71,7 +71,7 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       if (!active) {
         return false
       }
-      if (user.notifications.last.banner.includes(slug)) {
+      if (user.one.banners.read.includes(slug)) {
         return false
       }
       if (

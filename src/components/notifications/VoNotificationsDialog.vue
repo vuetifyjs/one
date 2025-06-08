@@ -42,7 +42,7 @@
           </VoListItem>
 
           <VoListItem
-            v-if="banners.all.length > 0 && user.notifications.banners"
+            v-if="banners.all.length > 0 && user.one.banners.enabled"
             :prepend-icon="`svg:${mdiBillboard}`"
             title="Banners"
             value="banners"

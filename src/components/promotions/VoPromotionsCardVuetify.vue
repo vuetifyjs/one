@@ -61,10 +61,10 @@
   const user = useUserStore()
 
   const promotion = computed(() => {
-    if (auth.user && user.disableAds && !user.showHouseAds) return undefined
+    if (auth.user && !user.one.ads.enabled && !user.one.ads.house) return undefined
 
     if (props.slug) return promotions.all.find(p => p.slug === props.slug)
 
-    return promotions.random(user.disableAds && user.showHouseAds ? promotions.discoverable : promotions.all)
+    return promotions.random(!user.one.ads.enabled && user.one.ads.house ? promotions.discoverable : promotions.all)
   })
 </script>
