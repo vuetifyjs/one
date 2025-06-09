@@ -94,7 +94,7 @@
   const hasPromotion = computed(() => {
     if (props.demo) return true
 
-    return !banner.value || !user.one.banners.read.includes(banner.value.slug)
+    return !!banner.value && !user.one.banners.read.includes(banner.value.slug)
   })
 
   function onClose () {
@@ -102,12 +102,13 @@
     if (!banner.value) return
 
     user.one.banners.read.push(banner.value.slug)
+    user.one.banners.last = new Date().toISOString()
   }
 
   async function onClick (e: MouseEvent | KeyboardEvent) {
     if (!banner.value) return
 
-    setTimeout(() => onClose(), 500)
+    user.one.banners.last = new Date().toISOString()
 
     const metadata = banner.value?.metadata ?? { link: '' }
 

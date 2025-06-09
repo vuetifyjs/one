@@ -61,6 +61,15 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       return undefined
     }
 
+    if (user.one.banners.last) {
+      const last = new Date(user.one.banners.last)
+      const ago = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+
+      if (last > ago) {
+        return undefined
+      }
+    }
+
     return all.value.find(({
       slug,
       metadata: {
