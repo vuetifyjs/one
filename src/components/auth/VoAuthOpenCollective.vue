@@ -1,6 +1,6 @@
 <template>
   <v-list-item
-    base-color="#3385FF"
+    base-color="#1258e2"
     :prepend-icon="`svg:${mdiAccountGroupOutline}`"
     rounded="pill"
     slim
