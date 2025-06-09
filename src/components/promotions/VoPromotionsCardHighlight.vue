@@ -44,7 +44,7 @@
   const user = useUserStore()
 
   const promotion = computed(() => {
-    if (auth.user && user.disableAds) return undefined
+    if (auth.user && !user.one.ads.enabled) return undefined
 
     if (props.slug) return promotions.all.find(p => p.slug === props.slug)
 

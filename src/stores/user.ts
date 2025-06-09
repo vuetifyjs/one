@@ -1,152 +1,70 @@
-// Types
-import type { VOneSuit } from './settings'
-
 // Utilities
 import { merge } from 'lodash-es'
+import { migrateUserData, type RootState } from './migrations'
 
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'
 
-export type RootState = {
-  v: 2 | 3 | 4 | 5
-  api: 'link-only' | 'inline'
-  avatar: string
-  dev: boolean
-  disableAds: boolean
-  composition: ('options' | 'composition')
-  pwaRefresh: boolean
-  slashSearch: boolean
-  syncSettings: boolean
-  showHouseAds: boolean
-  theme: string
-  mixedTheme: boolean
-  direction: 'rtl' | 'ltr'
-  quickbar: boolean
-  railDrawer: boolean
-  pins: boolean
-  pinned: Record<string, unknown>[]
-  suits: {
-    show: boolean
-    elements: (keyof VOneSuit)[]
-    suit: string
-  }
-  colors: {
-    one: string
-  }
-  notifications: {
-    show: boolean
-    banners: boolean
-    read: string[]
-    last: {
-      banner: string[]
-      v2banner: null | number
-      install: null | number
-      notification: null | number
-      promotion: null | number
-      jobs: null | number
-    }
-  }
-}
-
-export type SavedState = {
-  api: boolean
-  drawer: { alphabetical: boolean, mini: boolean }
-  last: {
-    install: null | number
-    notification: null | number
-    promotion: null | number
-    jobs: null | number
-  }
-  pwaRefresh: boolean
-  rtl: boolean
-  theme: {
-    dark: boolean
-    system: boolean
-    mixed: boolean
-  }
-} | {
-  api: 'link-only' | 'inline'
-  pwaRefresh: boolean
-  theme: string
-  mixedTheme: boolean
-  direction: 'rtl' | 'ltr'
-  notifications: {
-    read: string[]
-    last: {
-      install: null | number
-      notification: null | number
-      promotion: null | number
-      jobs: null | number
-    }
-  }
-} | {
-  v: 1
-  api: 'link-only' | 'inline'
-  dev?: boolean
-  composition?: ('options' | 'composition') | ('options' | 'composition')[]
-  pwaRefresh: boolean
-  theme: string
-  mixedTheme: boolean
-  direction: 'rtl' | 'ltr'
-  notifications: {
-    show?: boolean
-    read: string[]
-    last: {
-      banner?: null | number | string[]
-      v2banner?: null | number
-      install: null | number
-      notification: null | number
-      promotion: null | number
-      jobs: null | number
-    }
-  }
-} | RootState
-
 export const DEFAULT_USER: RootState = {
-  v: 5,
-  api: 'link-only',
-  avatar: '',
-  dev: false,
-  disableAds: false,
-  composition: 'composition',
-  pwaRefresh: true,
-  theme: 'system',
-  mixedTheme: true,
-  direction: 'ltr',
-  pins: false,
-  pinned: [],
-  slashSearch: false,
-  syncSettings: true,
-  showHouseAds: false,
-  quickbar: false,
-  railDrawer: false,
-  suits: {
-    show: false,
-    elements: ['app-bar'],
-    suit: '',
-  },
-  colors: {
-    one: 'surface-light',
-  },
-  notifications: {
-    show: true,
-    banners: true,
-    read: [],
-    last: {
-      banner: [],
-      v2banner: null,
-      install: null,
-      notification: null,
-      promotion: null,
-      jobs: null,
+  version: 6,
+  ecosystem: {
+    bin: {
+      wordWrap: false,
     },
+    play: {
+      showErrors: true,
+      wordWrap: false,
+    },
+    docs: {
+      api: 'link-only',
+      composition: 'composition',
+      pins: {
+        enabled: false,
+        pinned: [],
+      },
+      mixedTheme: true,
+      favorites: [],
+      slashSearch: false,
+      railDrawer: false,
+    },
+  },
+  one: {
+    avatar: '',
+    ads: {
+      enabled: true,
+      house: false,
+    },
+    command: {},
+    theme: 'system',
+    direction: 'ltr',
+    colors: {
+      primary: 'surface-light',
+    },
+    suits: {
+      enabled: false,
+      elements: ['app-bar'],
+      suit: '',
+    },
+    notifications: {
+      enabled: true,
+      read: [],
+      last: '',
+    },
+    banners: {
+      enabled: true,
+      read: [],
+      last: '',
+    },
+    quicklinks: false,
+    sync: true,
+    devmode: false,
   },
 }
 
 export const useUserStore = defineStore('user', () => {
-  const state = reactive(merge({}, DEFAULT_USER))
+  const state = reactive(structuredClone(DEFAULT_USER))
 
-  watch(state, save)
+  watch(state, save, { deep: true })
 
   function load () {
     if (!IN_BROWSER) {
@@ -154,66 +72,29 @@ export const useUserStore = defineStore('user', () => {
     }
 
     const stored = localStorage.getItem('vuetify@user')
-    const data = stored ? JSON.parse(stored) : {}
-    let needsRefresh = data.v === state.v
 
-    if (!data.v) {
-      data.pwaRefresh = true
-      if (typeof data.api === 'boolean') {
-        data.api = data.api ? 'inline' : 'link-only'
-      }
-      if (typeof data.rtl === 'boolean') {
-        data.direction = data.rtl ? 'rtl' : 'ltr'
-        delete data.rtl
-      }
-      if (typeof data.theme === 'object') {
-        data.mixedTheme = data.theme.mixed
-        data.theme = data.theme.system
-          ? 'system'
-          : (data.theme.dark
-              ? 'dark'
-              : 'light')
-      }
-      if (Array.isArray(data.notifications)) {
-        data.notifications = { read: data.notifications }
-      }
-      if (typeof data.last === 'object') {
-        data.notifications.last = data.last
-        delete data.last
-      }
+    if (!stored) {
+      return
     }
 
-    if (data.v === 1) {
-      if (Array.isArray(data.composition)) {
-        data.composition = 'composition'
+    try {
+      const data = JSON.parse(stored)
+
+      if (data.version >= 6) {
+        const currentState = {
+          version: 6,
+          ecosystem: merge(DEFAULT_USER.ecosystem, data.ecosystem || {}),
+          one: merge(DEFAULT_USER.one, data.one || {}),
+        }
+        Object.assign(state, currentState)
+      } else {
+        const migratedState = migrateUserData(data)
+        Object.assign(state, migratedState)
       }
-      if (!Array.isArray(data.notifications.last.banner)) {
-        data.notifications = data.notifications || {}
-        data.notifications.last = data.notifications.last || {}
-        data.notifications.last.banner = []
-      }
-    }
 
-    if (data.v === 2) {
-      data.syncSettings = true
-      data.disableAds = false
-      data.v = 3
-    }
-
-    if (data.v === 3) {
-      data.quickbar = false
-    }
-
-    if (data.v === 4) {
-      data.suits = DEFAULT_USER.suits
-      data.notifications.banners = DEFAULT_USER.notifications.banners
-      needsRefresh = true
-    }
-
-    data.v = state.v
-    Object.assign(state, merge(state, data))
-    if (needsRefresh) {
       save()
+    } catch (error) {
+      console.error('Failed to load user settings:', error)
     }
   }
 
@@ -230,8 +111,7 @@ export const useUserStore = defineStore('user', () => {
       return
     }
 
-    Object.assign(state, merge({}, DEFAULT_USER))
-
+    Object.assign(state, structuredClone(DEFAULT_USER))
     save()
   }
 

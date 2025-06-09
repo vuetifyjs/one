@@ -16,6 +16,6 @@
   const user = useUserStore()
 
   const items = computed(() => {
-    return user.notifications.show ? notifications.unread.length : 0
+    return user.one.notifications.enabled ? notifications.unread.length : 0
   })
 </script>

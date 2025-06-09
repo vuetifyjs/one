@@ -4,6 +4,32 @@
     :prepend-icon="`svg:${mdiBell}`"
     title="Notifications"
   >
+    <template #append>
+      <v-btn
+        v-if="list[0] === 'read'"
+        v-tooltip:start="'Mark All as Read'"
+        class="me-2"
+        density="comfortable"
+        :disabled="notifications.unread.length === 0"
+        :icon="`svg:${mdiEmailOpenOutline}`"
+        size="small"
+        variant="text"
+        @click="markAllAsRead"
+      />
+
+      <v-btn
+        v-if="list[0] === 'unread'"
+        v-tooltip:start="'Mark All as Unread'"
+        class="me-2"
+        density="comfortable"
+        :disabled="notifications.read.length === 0"
+        :icon="`svg:${mdiEmailVariant}`"
+        size="small"
+        variant="text"
+        @click="markAllAsUnread"
+      />
+    </template>
+
     <v-layout>
       <v-navigation-drawer
         :location="display.mobile.value ? 'top' : 'start'"
@@ -42,7 +68,7 @@
           </VoListItem>
 
           <VoListItem
-            v-if="banners.all.length > 0 && user.notifications.banners"
+            v-if="banners.all.length > 0 && user.one.banners.enabled"
             :prepend-icon="`svg:${mdiBillboard}`"
             title="Banners"
             value="banners"
@@ -75,7 +101,7 @@
 
 <script setup lang="ts">
   // Icons
-  import { mdiBell, mdiBillboard, mdiInboxFullOutline, mdiInboxOutline } from '@mdi/js'
+  import { mdiBell, mdiBillboard, mdiInboxFullOutline, mdiInboxOutline, mdiEmailOpenOutline, mdiEmailVariant } from '@mdi/js'
 
   const display = useDisplay()
   const query = useQuery<{ one: string }>()
@@ -87,6 +113,15 @@
 
   const list = shallowRef(['read'])
   const dialog = defineModel('modelValue', { type: Boolean })
+
+  function markAllAsRead () {
+    const unread = notifications.unread.map(n => n.slug)
+    user.one.notifications.read.push(...unread)
+  }
+
+  function markAllAsUnread () {
+    user.one.notifications.read = []
+  }
 
   watch(query, async () => {
     if (query.value.one !== 'notifications') {

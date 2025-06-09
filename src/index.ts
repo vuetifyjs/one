@@ -6,8 +6,6 @@ import VoAuthBtn from '@/components/auth/VoAuthBtn.vue'
 import VoAuthCard from '@/components/auth/VoAuthCard.vue'
 import VoAuthDialog from '@/components/auth/VoAuthDialog.vue'
 import VoAuthListItem from '@/components/auth/VoAuthListItem.vue'
-import VoIconBin from '@/components/icon/VoIconBin.vue'
-import VoIconIssues from '@/components/icon/VoIconIssues.vue'
 import VoNotificationsBanner from '@/components/notifications/VoNotificationsBanner.vue'
 import VoPromotionsCardHighlight from '@/components/promotions/VoPromotionsCardHighlight.vue'
 import VoPromotionsCardVuetify from '@/components/promotions/VoPromotionsCardVuetify.vue'
@@ -60,8 +58,6 @@ export function createOne () {
     app.component('VoAuthCard', VoAuthCard)
     app.component('VoAuthDialog', VoAuthDialog)
     app.component('VoAuthListItem', VoAuthListItem)
-    app.component('VoIconBin', VoIconBin)
-    app.component('VoIconIssues', VoIconIssues)
     app.component('VoNotificationsBanner', VoNotificationsBanner)
     app.component('VoPromotionsCardHighlight', VoPromotionsCardHighlight)
     app.component('VoPromotionsCardVuetify', VoPromotionsCardVuetify)

@@ -36,8 +36,8 @@ export const useNotificationsStore = defineStore('notifications', (): Notificati
   const all = ref<VOneNotification[]>([])
   const isLoading = shallowRef(false)
 
-  const unread = computed(() => all.value.filter(n => !user.notifications.read.includes(n.slug)))
-  const read = computed(() => all.value.filter(n => user.notifications.read.includes(n.slug)))
+  const unread = computed(() => all.value.filter(n => !user.one.notifications.read.includes(n.slug)))
+  const read = computed(() => all.value.filter(n => user.one.notifications.read.includes(n.slug)))
 
   async function index () {
     try {

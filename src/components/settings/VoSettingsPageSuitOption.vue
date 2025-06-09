@@ -1,15 +1,15 @@
 <template>
   <VoSwitch
-    v-model="user.suits.show"
+    v-model="user.one.suits.enabled"
     class="mb-2"
     label="Enable Page suits"
     messages="Customize layout elements with a unique background, styled after one of our themed releases."
   />
 
   <v-expand-transition>
-    <div v-if="user.suits.show">
+    <div v-if="user.one.suits.enabled">
       <v-select
-        v-model="user.suits.suit"
+        v-model="user.one.suits.suit"
         clearable
         density="compact"
         item-props
@@ -28,7 +28,7 @@
       <VoDialogSubheader text="Select your suit elements to display the background image:" />
 
       <v-chip-group
-        v-model="user.suits.elements"
+        v-model="user.one.suits.elements"
         color="primary"
         filter
         multiple

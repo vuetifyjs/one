@@ -1,48 +1,54 @@
 <template>
-  <p class="mb-4">
-    View how to use this API Key to power your local MCP tools
-    <a class="d-inline-block" href="#" @click.stop.prevent="">
-      here
-      <v-dialog v-slot="{ isActive }" activator="parent" max-width="700">
-        <v-card
-          :prepend-icon="`svg:${mdiFileDocument}`"
-          title="Quick Start"
-        >
-          <template #append>
-            <v-icon-btn
-              icon="$close"
-              @click="isActive.value = false"
+  <v-expansion-panels bg-color="surface-variant" class="mb-4" variant="accordion">
+    <v-expansion-panel>
+      <template #title>
+        <v-icon :icon="`svg:${mdiFileDocument}`" opacity="0.6" start />
+
+        How to Use Your API Key with Vuetify MCP
+      </template>
+
+      <v-expansion-panel-text class="bg-surface-light rounded-b">
+        <strong>View setup instructions for your local MCP tools</strong>
+
+        <p class="mb-4 mt-2">
+          To get started with your favorite IDE or AI agent, simply run the following command from your home directory:
+        </p>
+
+        <div class="my-4">
+          <code class="bg-surface-variant rounded pa-2 d-block">
+            {{ displayInstall }}
+
+            <v-icon
+              class="ms-2"
+              end
+              :icon="copied ? '$success' : `svg:${mdiContentCopy}`"
+              size="1em"
+              @click="copy(install)"
             />
-          </template>
+          </code>
+        </div>
 
-          <v-divider />
-
-          <v-card-text>
-            To get started with your favorite IDE or AI agent, simply run the following command from your home directory
-            <div class="bg-grey-darken-3 w-75 rounded pa-1 my-2">
-              <code>npx -y @vuetify/mcp config --api-key="YOUR_KEY" </code>
-            </div>
-            Follow the on-screen prompts to complete the setup
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer />
-
-            <v-btn
-              class="text-none"
-              color="surface-variant"
-              size="small"
-              text="Close"
-              variant="flat"
-              @click="isActive.value = false"
-            />
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </a>
-  </p>
+        <p>Follow the on-screen prompts to complete the setup.</p>
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
 
 <script lang="ts" setup>
-  import { mdiFileDocument } from '@mdi/js'
+  import { mdiFileDocument, mdiContentCopy } from '@mdi/js'
+
+  const api = useApiKeyStore()
+  const { copy, copied } = useCopy()
+
+  const install = computed(() => {
+    const key = api.key || 'YOUR_KEY'
+
+    return `npx -y @vuetify/mcp config --api-key="${key}"`
+  })
+
+  const displayInstall = computed(() => {
+    if (!api.key) return install.value
+
+    return `npx -y @vuetify/mcp config --api-key="${api.trim}"`
+  })
 </script>

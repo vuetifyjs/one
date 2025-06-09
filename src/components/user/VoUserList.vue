@@ -8,8 +8,6 @@
 
     <VoNotificationsNavItem />
 
-    <VoStudioNavItem />
-
     <VoTeamListItem v-if="team.hasTeamAccess" />
 
     <VoDownloadsNavItem v-if="one.shopify" />

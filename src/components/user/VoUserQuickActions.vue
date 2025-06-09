@@ -1,10 +1,10 @@
 <template>
   <v-expand-transition>
-    <div v-if="user.quickbar">
+    <div v-if="user.one.quicklinks">
       <div class="d-flex align-center justify-center pa-1 ga-2">
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://play.vuetifyjs.com"
@@ -22,14 +22,14 @@
 
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://bin.vuetifyjs.com"
-          icon
+          icon="$vuetify-bin"
           target="_blank"
         >
-          <VoIconBin />
+          <v-icon />
 
           <v-tooltip
             activator="parent"
@@ -40,14 +40,50 @@
 
         <v-btn
           class="text-caption"
-          :color="user.colors.one"
+          :color="user.one.colors.primary"
+          density="comfortable"
+          flat
+          href="https://studio.vuetifyjs.com"
+          icon="$vuetify-studio"
+          target="_blank"
+        >
+          <v-icon />
+
+          <v-tooltip
+            activator="parent"
+            location="top"
+            text="Vuetify Studio"
+          />
+        </v-btn>
+
+        <v-btn
+          class="text-caption"
+          :color="user.one.colors.primary"
+          density="comfortable"
+          flat
+          href="https://snips.vuetifyjs.com"
+          icon="$vuetify-snips"
+          target="_blank"
+        >
+          <v-icon />
+
+          <v-tooltip
+            activator="parent"
+            location="top"
+            text="Vuetify Snips"
+          />
+        </v-btn>
+
+        <v-btn
+          class="text-caption"
+          :color="user.one.colors.primary"
           density="comfortable"
           flat
           href="https://issues.vuetifyjs.com"
-          icon
+          icon="$vuetify-issues"
           target="_blank"
         >
-          <VoIconIssues />
+          <v-icon />
 
           <v-tooltip
             activator="parent"

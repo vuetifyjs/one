@@ -239,15 +239,16 @@ export const useSettingsStore = defineStore('settings', (): SettingsState => {
   } as Record<string, VOneSuit>
 
   const suit = computed(() => {
-    if (!user.suits.suit || !user.suits.show || !one.isSubscriber) {
+    if (!user.one.suits.suit || !user.one.suits.enabled || !one.isSubscriber) {
       return {}
     }
 
-    const _suit = suits[user.suits.suit.toLowerCase()]
+    const _suit = suits[user.one.suits.suit.toLowerCase()]
     const suit = {} as Partial<VOneSuit>
 
-    for (const val of user.suits.elements) {
-      suit[val] = _suit[val]
+    for (const val of user.one.suits.elements) {
+      const key = val as keyof VOneSuit
+      suit[key] = _suit[key]
     }
 
     return suit
@@ -258,15 +259,15 @@ export const useSettingsStore = defineStore('settings', (): SettingsState => {
     ...themes,
   } as any
 
-  watch(() => user.theme, val => {
+  watch(() => user.one.theme, val => {
     if (val === 'system') {
       theme.global.name.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     } else {
       theme.global.name.value = val
-      user.suits.suit = suits[val] ? val : ''
+      user.one.suits.suit = suits[val] ? val : ''
     }
 
-    user.theme = val
+    user.one.theme = val
   }, { immediate: true })
 
   return {

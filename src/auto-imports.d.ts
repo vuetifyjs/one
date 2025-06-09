@@ -67,10 +67,12 @@ declare global {
   const toValue: typeof import('vue')['toValue']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
+  const useApiKeyStore: typeof import('./stores/api-key')['useApiKeyStore']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAuthStore: typeof import('./stores/auth')['useAuthStore']
   const useBannersStore: typeof import('./stores/banners')['useBannersStore']
   const useBinsStore: typeof import('./stores/bins')['useBinsStore']
+  const useCopy: typeof import('./composables/useCopy')['useCopy']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDate: typeof import('vuetify')['useDate']
@@ -148,7 +150,8 @@ declare global {
   export type { VOneTeam, TeamState } from './stores/team'
   import('./stores/team')
   // @ts-ignore
-  export type { RootState, SavedState } from './stores/user'
+  export type { RootState } from './stores/user'
+  export type { OldRootState, SavedState } from './stores/migrations'
   import('./stores/user')
 }
 
@@ -218,10 +221,12 @@ declare module 'vue' {
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
+    readonly useApiKeyStore: UnwrapRef<typeof import('./stores/api-key')['useApiKeyStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAuthStore: UnwrapRef<typeof import('./stores/auth')['useAuthStore']>
     readonly useBannersStore: UnwrapRef<typeof import('./stores/banners')['useBannersStore']>
     readonly useBinsStore: UnwrapRef<typeof import('./stores/bins')['useBinsStore']>
+    readonly useCopy: UnwrapRef<typeof import('./composables/useCopy')['useCopy']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>

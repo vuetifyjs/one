@@ -57,8 +57,17 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
     if (server.value) {
       return server.value
     }
-    if (!user.notifications.banners) {
+    if (!user.one.banners.enabled) {
       return undefined
+    }
+
+    if (user.one.banners.last) {
+      const last = new Date(user.one.banners.last)
+      const ago = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+
+      if (last > ago) {
+        return undefined
+      }
     }
 
     return all.value.find(({
@@ -71,7 +80,7 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       if (!active) {
         return false
       }
-      if (user.notifications.last.banner.includes(slug)) {
+      if (user.one.banners.read.includes(slug)) {
         return false
       }
       if (

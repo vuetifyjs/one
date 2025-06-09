@@ -28,8 +28,6 @@ declare module 'vue' {
     VoDownloadsNavItem: typeof import('./components/downloads/VoDownloadsNavItem.vue')['default']
     VoDownloadsTable: typeof import('./components/downloads/VoDownloadsTable.vue')['default']
     VoFooter: typeof import('./components/app/VoFooter.vue')['default']
-    VoIconBin: typeof import('./components/icon/VoIconBin.vue')['default']
-    VoIconIssues: typeof import('./components/icon/VoIconIssues.vue')['default']
     VoListItem: typeof import('./components/app/VoListItem.vue')['default']
     VoMcpCopyDialog: typeof import('./components/mcp/VoMcpCopyDialog.vue')['default']
     VoMcpDialog: typeof import('./components/mcp/VoMcpDialog.vue')['default']

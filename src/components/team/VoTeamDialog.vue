@@ -80,7 +80,7 @@
                                 v-tooltip="'Copy Team link'"
                                 :icon="`svg:${copied ? mdiCheck : mdiContentCopy}`"
                                 size="small"
-                                @click="onClickCopy"
+                                @click="copy(invite)"
                               />
                             </template>
                           </v-text-field>
@@ -200,10 +200,10 @@
   const one = useOneStore()
   const teamStore = useTeamStore()
   const http = useHttpStore()
+  const { copy, copied } = useCopy()
   const team = computed(() => teamStore.team)
   const query = useQuery<{ one: string, team: string }>()
 
-  const copied = shallowRef(false)
   const reset = shallowRef(false)
 
   const headers = [
@@ -222,16 +222,6 @@
   const invite = computed(() => `https://one.vuetifyjs.com/?invite=${teamStore.team?.inviteCode}`)
 
   const dialog = defineModel('modelValue', { type: Boolean })
-
-  function onClickCopy () {
-    copied.value = true
-
-    navigator.clipboard.writeText(invite.value)
-
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  }
 
   async function onClickReset () {
     reset.value = true
