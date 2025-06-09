@@ -11,9 +11,11 @@
     <VoSponsorshipsTimelineItemGithub />
 
     <VoSponsorshipsTimelineItemDiscord />
+
+    <VoSponsorshipsTimelineItemOpencollective />
   </v-timeline>
 </template>
 
 <script lang="ts" setup>
-  //
+//
 </script>

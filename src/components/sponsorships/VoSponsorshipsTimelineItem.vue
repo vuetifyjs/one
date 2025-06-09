@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-  // Types
+// Types
   import type { VOneSponsorship } from '@/stores/auth'
 
   // Icons
@@ -74,8 +74,9 @@
   const settings = useSettingsStore()
 
   const tier = computed(() => {
-    const amount = Number.parseFloat(String((props.sponsorship?.amount ?? 0) / 100)).toFixed(2)
-
+    const amount = props.sponsorship?.platform === 'opencollective'
+      ? Number.parseFloat(String(props.sponsorship?.amount ?? 0)).toFixed(2)
+      : Number.parseFloat(String((props.sponsorship?.amount ?? 0) / 100)).toFixed(2)
     return `$${amount} /${props.sponsorship?.interval}`
   })
 </script>
