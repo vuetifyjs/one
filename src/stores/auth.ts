@@ -41,7 +41,7 @@ export interface AuthState {
   isLoading: ShallowRef<boolean>
   verify: (force?: boolean) => Promise<void>
   findIdentity: (provider: string) => VOneIdentity | undefined
-  login: (provider?: 'github' | 'discord' | 'shopify') => Promise<void>
+  login: (provider?: 'github' | 'discord' | 'shopify' | 'opencollective') => Promise<void>
   logout: (identity?: string) => Promise<void>
   lastLoginProvider: () => string | null
   sync: () => Promise<void>
