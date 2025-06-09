@@ -53,7 +53,6 @@
                 rounded="b"
               >
                 <v-tooltip
-                  v-if="banner.metadata.site.some(s => site.id.includes(s))"
                   location="bottom"
                   :text="isRead(banner.slug) ? 'Mark as unread' : 'Mark as read'"
                 >
@@ -64,7 +63,6 @@
                         v-bind="tooltipActivatorProps"
                         class="ms-auto float-right"
                         :icon="`svg:${!isRead(banner.slug) ? mdiEmailOpenOutline : mdiEmailVariant}`"
-                        mdi-email-variant
                         size="small"
                         variant="text"
                         @click="onClick(banner)"
@@ -128,7 +126,6 @@
   const display = useDisplay()
 
   const user = useUserStore()
-  const site = useSiteStore()
 
   defineProps<Props>()
 
