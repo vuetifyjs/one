@@ -52,6 +52,7 @@ interface OneState {
   github: ComputedRef<VOneSponsorship | undefined>
   discord: ComputedRef<VOneSponsorship | undefined>
   shopify: ComputedRef<VOneIdentity | undefined>
+  opencollective: ComputedRef<VOneSponsorship | undefined>
   one: ComputedRef<VOneSponsorship | undefined>
 
   activate: () => Promise<void>
@@ -107,6 +108,9 @@ export const useOneStore = defineStore('one', (): OneState => {
   const discord = computed(() => {
     return auth.user?.sponsorships.find(s => s.platform === 'discord' && s.isActive)
   })
+  const opencollective = computed(() => {
+    return auth.user?.sponsorships.find(s => s.platform === 'opencollective' && s.isActive)
+  })
   const shopify = computed(() => {
     return auth.user?.identities.find(i => i.provider === 'shopify')
   })
@@ -117,6 +121,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     || subscription.value?.isActive
     || github.value?.isActive
     || discord.value?.isActive
+    || opencollective.value?.isActive
     || monthlyTotal.value >= 2.99
   ))
 
@@ -299,6 +304,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     isOpen,
     isSubscriber,
 
+    opencollective,
     github,
     discord,
     shopify,
