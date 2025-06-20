@@ -120,14 +120,6 @@ export const useOneStore = defineStore('one', (): OneState => {
     || monthlyTotal.value >= 2.99
   ))
 
-  // TODO: move this out because auth depends on it
-  // and auth is used outside of Vue instances
-  onMounted(async () => {
-    if (sessionId.value) {
-      await activate()
-    }
-  })
-
   watch(isOpen, resetQuery)
   watch(sessionId, async val => {
     if (!val) {
