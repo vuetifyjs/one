@@ -33,6 +33,7 @@ declare global {
   const mapStores: typeof import('pinia')['mapStores']
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
+  const migrateUserData: typeof import('./stores/migrations')['migrateUserData']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -123,6 +124,9 @@ declare global {
   export type { VOneSendowlDownloadItem, VOneSendowlDownload, DownloadsState } from './stores/downloads'
   import('./stores/downloads')
   // @ts-ignore
+  export type { OldRootState, SavedState, RootState } from './stores/migrations'
+  import('./stores/migrations')
+  // @ts-ignore
   export type { VOneNotification, NotificationsState } from './stores/notifications'
   import('./stores/notifications')
   // @ts-ignore
@@ -149,10 +153,6 @@ declare global {
   // @ts-ignore
   export type { VOneTeam, TeamState } from './stores/team'
   import('./stores/team')
-  // @ts-ignore
-  export type { RootState } from './stores/user'
-  export type { OldRootState, SavedState } from './stores/migrations'
-  import('./stores/user')
 }
 
 // for vue template auto import
@@ -187,6 +187,7 @@ declare module 'vue' {
     readonly mapStores: UnwrapRef<typeof import('pinia')['mapStores']>
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly migrateUserData: UnwrapRef<typeof import('./stores/migrations')['migrateUserData']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>

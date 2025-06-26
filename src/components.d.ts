@@ -33,6 +33,7 @@ declare module 'vue' {
     VoMcpHowTo: typeof import('./components/mcp/VoMcpHowTo.vue')['default']
     VoMcpListItem: typeof import('./components/mcp/VoMcpListItem.vue')['default']
     VoMcpTokenTable: typeof import('./components/mcp/VoMcpTokenTable.vue')['default']
+    VoMobileMenu: typeof import('./components/app/VoMobileMenu.vue')['default']
     VoNotificationsBadge: typeof import('./components/notifications/VoNotificationsBadge.vue')['default']
     VoNotificationsBanner: typeof import('./components/notifications/VoNotificationsBanner.vue')['default']
     VoNotificationsBannerList: typeof import('./components/notifications/VoNotificationsBannerList.vue')['default']

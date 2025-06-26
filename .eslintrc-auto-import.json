@@ -16,6 +16,7 @@
     "MaybeRef": true,
     "MaybeRefOrGetter": true,
     "NotificationsState": true,
+    "OldRootState": true,
     "ProductsState": true,
     "PropType": true,
     "QueueState": true,
@@ -71,6 +72,7 @@
     "mapStores": true,
     "mapWritableState": true,
     "markRaw": true,
+    "migrateUserData": true,
     "nextTick": true,
     "onActivated": true,
     "onBeforeMount": true,
@@ -105,10 +107,12 @@
     "toValue": true,
     "triggerRef": true,
     "unref": true,
+    "useApiKeyStore": true,
     "useAttrs": true,
     "useAuthStore": true,
     "useBannersStore": true,
     "useBinsStore": true,
+    "useCopy": true,
     "useCssModule": true,
     "useCssVars": true,
     "useDate": true,
@@ -139,8 +143,6 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "useCopy": true,
-    "useApiKeyStore": true
+    "watchSyncEffect": true
   }
 }
