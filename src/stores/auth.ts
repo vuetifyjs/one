@@ -92,6 +92,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
     try {
       await http.post('/user/settings', { settings: userStore.$state })
+      await verify(true)
     } catch (error: any) {
       queue.showError(error?.message ?? 'Error syncing settings')
     }
