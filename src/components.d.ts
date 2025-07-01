@@ -60,8 +60,6 @@ declare module 'vue' {
     VoSponsorshipsTimelineItemGithub: typeof import('./components/sponsorships/VoSponsorshipsTimelineItemGithub.vue')['default']
     VoSponsorshipsTimelineItemOne: typeof import('./components/sponsorships/VoSponsorshipsTimelineItemOne.vue')['default']
     VoSpot: typeof import('./components/spots/VoSpot.vue')['default']
-    VoStudioDialog: typeof import('./components/studio/VoStudioDialog.vue')['default']
-    VoStudioNavItem: typeof import('./components/studio/VoStudioNavItem.vue')['default']
     VoSubscriptionDialog: typeof import('./components/subscription/VoSubscriptionDialog.vue')['default']
     VoSubscriptionInvoices: typeof import('./components/subscription/VoSubscriptionInvoices.vue')['default']
     VoSubscriptionListItem: typeof import('./components/subscription/VoSubscriptionListItem.vue')['default']
