@@ -28,7 +28,7 @@
     "release": "pnpm build:dev && pnpm version && git push --follow-tags",
     "watch": "pnpm build:dev --watch",
     "preview": "vite preview",
-    "lint": "eslint . --ext .ts,.vue",
+    "lint": "eslint . --ext .ts,.vue && vue-tsc --pretty -p tsconfig.json --noEmit",
     "lint:fix": "eslint . --ext .ts,.vue --fix",
     "test": "vitest",
     "coverage": "vitest run --coverage",
