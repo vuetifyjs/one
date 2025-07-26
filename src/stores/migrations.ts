@@ -1,4 +1,5 @@
 import type { VOneSuit } from './settings'
+import type { SortItem } from 'vuetify/lib/components/VDataTable/composables/sort.d.ts'
 
 export type OldRootState = {
   v: 2 | 3 | 4 | 5
@@ -100,10 +101,15 @@ export interface RootState {
   ecosystem: {
     bin: {
       wordWrap: boolean
+      dashboard?: DashboardState
     }
     play: {
       showErrors: boolean
       wordWrap: boolean
+      dashboard?: DashboardState
+    }
+    studio: {
+      dashboard?: DashboardState
     }
     docs: {
       api: 'link-only' | 'inline'
@@ -151,6 +157,12 @@ export interface RootState {
     sync: boolean
     devmode: boolean
   }
+}
+
+export interface DashboardState {
+  [key: string]: any
+  sortBy: SortItem[]
+  itemsPerPage: number
 }
 
 const migrations = [
@@ -230,6 +242,7 @@ const migrateV5ToV6 = (v5Data: any): RootState => ({
       showErrors: true,
       wordWrap: false,
     },
+    studio: {},
     docs: {
       api: v5Data.api || 'link-only',
       composition: v5Data.composition || 'composition',

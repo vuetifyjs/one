@@ -6,6 +6,7 @@
     "ComponentPublicInstance": true,
     "ComputedRef": true,
     "DEFAULT_USER": true,
+    "DashboardState": true,
     "DirectiveBinding": true,
     "DownloadsState": true,
     "EffectScope": true,
