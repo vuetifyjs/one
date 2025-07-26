@@ -108,7 +108,7 @@ export interface RootState {
       wordWrap: boolean
       dashboard?: DashboardState
     }
-    studio: {
+    studio?: {
       dashboard?: DashboardState
     }
     docs: {
@@ -242,7 +242,6 @@ const migrateV5ToV6 = (v5Data: any): RootState => ({
       showErrors: true,
       wordWrap: false,
     },
-    studio: {},
     docs: {
       api: v5Data.api || 'link-only',
       composition: v5Data.composition || 'composition',
