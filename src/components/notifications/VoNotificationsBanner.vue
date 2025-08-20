@@ -1,6 +1,7 @@
 <template>
   <v-app-bar
     v-if="banner"
+    class="vo-notifications-banner"
     :color="banner.metadata.color"
     flat
     :height="height"
