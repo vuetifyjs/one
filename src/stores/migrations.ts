@@ -1,5 +1,5 @@
 import type { VOneSuit } from './settings'
-import type { SortItem } from 'vuetify/lib/components/VDataTable/composables/sort.d.ts'
+import type { DataTableSortItem } from 'vuetify'
 
 export type OldRootState = {
   v: 2 | 3 | 4 | 5
@@ -161,7 +161,7 @@ export interface RootState {
 
 export interface DashboardState {
   [key: string]: any
-  sortBy: SortItem[]
+  sortBy: DataTableSortItem[]
   itemsPerPage: number
 }
 
