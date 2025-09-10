@@ -261,9 +261,9 @@ export const useSettingsStore = defineStore('settings', (): SettingsState => {
 
   watch(() => user.one.theme, val => {
     if (val === 'system') {
-      theme.global.name.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      theme.change(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
     } else {
-      theme.global.name.value = val
+      theme.change(val)
       user.one.suits.suit = suits[val] ? val : ''
     }
 
