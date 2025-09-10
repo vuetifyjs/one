@@ -3,6 +3,7 @@ node_modules
 /dist
 /.knit
 knit.lock
+/types-temp
 
 # local env files
 .env.local
