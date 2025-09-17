@@ -17,7 +17,7 @@
     },
     "./stores/auth": "./dist/stores/auth.js",
     "./styles": {
-      "import": "./dist/index.css"
+      "import": "./dist/one.css"
     },
     "./subpath/*": "./dist/subpath/*.js"
   },
