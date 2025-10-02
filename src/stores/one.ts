@@ -73,8 +73,8 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
-  const info = ref<Info>()
-  const invoices = ref<Invoice[]>([])
+  const info = ref<Info | null>()
+  const invoices = ref<Invoice[]| null>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
   const subscriptionType = computed(() => info.value?.items[0].plan.type)
