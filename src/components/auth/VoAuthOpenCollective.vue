@@ -26,7 +26,7 @@
   const auth = useAuthStore()
 
   const hasIdentity = computed(() => {
-    return auth.user && auth.findIdentity('openCollective')
+    return auth.user && auth.findIdentity('opencollective')
   })
 
   const text = computed(() => {
