@@ -62,7 +62,6 @@ interface OneState {
   resetQuery: () => void
   subscribe: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) => Promise<void>
   subscriptionInfo: () => Promise<any>
-  verify: () => Promise<void>
 }
 
 export const useOneStore = defineStore('one', (): OneState => {
@@ -71,13 +70,12 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const auth = useAuthStore()
   const http = useHttpStore()
-  const team = useTeamStore()
   const queue = useQueueStore()
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
-  const info = ref<Info>()
-  const invoices = ref<Invoice[]>([])
+  const info = ref<Info | null>()
+  const invoices = ref<Invoice[]| null>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
   const subscriptionType = computed(() => info.value?.items[0].plan.type)
@@ -91,10 +89,12 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const monthlyTotal = computed(() => {
     return auth.user?.sponsorships.reduce((acc: number, s) => {
-      if (!s.isActive || s.interval === 'once' || s.platform === 'stripe') {
+      if (!s.isActive || s.interval === 'once') {
         return acc
       }
-      const amount = ['teamMonth', 'soloMonth'].includes(s.interval) ? s.amount : s.amount / 12
+      const amount = s.interval === 'month'
+        ? s.amount
+        : s.amount / 12
       return acc + amount / 100
     }, 0) ?? 0
   })
@@ -119,19 +119,8 @@ export const useOneStore = defineStore('one', (): OneState => {
     !http.url
     || auth.user?.isAdmin
     || subscription.value?.isActive
-    || github.value?.isActive
-    || discord.value?.isActive
-    || opencollective.value?.isActive
-    || monthlyTotal.value >= 2.99
+    || access.value.some(v => ['one', 'one/team'].includes(v))
   ))
-
-  // TODO: move this out because auth depends on it
-  // and auth is used outside of Vue instances
-  onMounted(async () => {
-    if (sessionId.value) {
-      await activate()
-    }
-  })
 
   watch(isOpen, resetQuery)
   watch(sessionId, async val => {
@@ -159,14 +148,6 @@ export const useOneStore = defineStore('one', (): OneState => {
       unwatch()
     })
   }, { immediate: true })
-
-  watch(isSubscriber, (val, oldVal) => {
-    if (val === false && oldVal !== true) {
-      return
-    }
-
-    verify()
-  })
 
   async function activate () {
     try {
@@ -208,11 +189,10 @@ export const useOneStore = defineStore('one', (): OneState => {
     try {
       isLoading.value = true
 
-      const res = await http.post(
+      await http.post(
         `/one/cancel?subscriptionId=${subscription.value?.tierName}`,
       )
-
-      auth.user = res.user
+      await auth.verify(true)
     } catch (error: any) {
       queue.showError(error?.message ?? 'Error cancelling subscription, Please contact support')
     } finally {
@@ -234,30 +214,9 @@ export const useOneStore = defineStore('one', (): OneState => {
         type,
       })
 
-      await verify()
+      await auth.verify(true)
     } catch (error: any) {
       queue.showError(error?.message ?? 'Error modifying subscription')
-    } finally {
-      isLoading.value = false
-    }
-  }
-
-  async function verify () {
-    if (!subscription.value) {
-      return
-    }
-
-    try {
-      isLoading.value = true
-
-      const res = await http.post(
-        `/one/verify?subscriptionId=${subscription.value?.tierName}`,
-      )
-      auth.user = res.user
-      access.value = res.access
-      team.team = auth.user?.team ?? null
-    } catch (error: any) {
-      queue.showError(error?.message ?? 'Error verifying subscription')
     } finally {
       isLoading.value = false
     }
@@ -317,6 +276,5 @@ export const useOneStore = defineStore('one', (): OneState => {
     resetQuery,
     subscribe,
     subscriptionInfo,
-    verify,
   }
 })

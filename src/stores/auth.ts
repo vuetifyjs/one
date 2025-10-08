@@ -25,6 +25,7 @@ export interface VOneIdentity {
 export interface VOneUser {
   id: string
   isAdmin: boolean
+  role: 'super' | 'admin' | 'editor' | 'user'
   name: string
   picture: string
   settings: Record<string, any> | null
@@ -92,6 +93,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
     try {
       await http.post('/user/settings', { settings: userStore.$state })
+      await verify(true)
     } catch (error: any) {
       queue.showError(error?.message ?? 'Error syncing settings')
     }

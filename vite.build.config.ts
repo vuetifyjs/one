@@ -65,9 +65,13 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, './src/index.ts'),
-      name: 'VuetifyOne',
-      fileName: 'index',
+      // entry: resolve(__dirname, './src/index.ts'),
+      // name: 'VuetifyOne',
+      // fileName: 'index',
+      entry: {
+        'index': resolve(__dirname, './src/index.ts'),
+        'stores/auth': resolve(__dirname, './src/stores/auth.ts'),
+      },
       formats: ['es'],
     },
     rollupOptions: {

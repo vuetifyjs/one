@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router/auto'
+// eslint-disable-next-line import/no-duplicates
+import { createRouter, createWebHistory } from 'vue-router'
+// eslint-disable-next-line import/no-duplicates
 import { routes } from 'vue-router/auto-routes'
 import { useAuthStore } from '@/stores/auth'
 
