@@ -1,4 +1,5 @@
 import type { VOneSuit } from './settings'
+import type { DataTableSortItem } from 'vuetify'
 
 export type OldRootState = {
   v: 2 | 3 | 4 | 5
@@ -100,10 +101,15 @@ export interface RootState {
   ecosystem: {
     bin: {
       wordWrap: boolean
+      dashboard?: DashboardState
     }
     play: {
       showErrors: boolean
       wordWrap: boolean
+      dashboard?: DashboardState
+    }
+    studio?: {
+      dashboard?: DashboardState
     }
     docs: {
       api: 'link-only' | 'inline'
@@ -151,6 +157,12 @@ export interface RootState {
     sync: boolean
     devmode: boolean
   }
+}
+
+export interface DashboardState {
+  [key: string]: any
+  sortBy: DataTableSortItem[]
+  itemsPerPage: number
 }
 
 const migrations = [
