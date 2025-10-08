@@ -74,9 +74,7 @@
   const settings = useSettingsStore()
 
   const tier = computed(() => {
-    const amount = props.sponsorship?.platform === 'opencollective'
-      ? Number.parseFloat(String(props.sponsorship?.amount ?? 0)).toFixed(2)
-      : Number.parseFloat(String((props.sponsorship?.amount ?? 0) / 100)).toFixed(2)
+    const amount = Number.parseFloat(String((props.sponsorship?.amount ?? 0) / 100)).toFixed(2)
     return `$${amount} /${props.sponsorship?.interval}`
   })
 </script>
