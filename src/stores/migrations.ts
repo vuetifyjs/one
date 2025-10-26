@@ -235,65 +235,67 @@ const migrations = [
   },
 ]
 
-const migrateV5ToV6 = (v5Data: any): RootState => ({
-  version: 6,
-  ecosystem: {
-    bin: {
-      wordWrap: false,
-    },
-    play: {
-      showErrors: true,
-      wordWrap: false,
-    },
-    studio: {},
-    link: {},
-    docs: {
-      api: v5Data.api || 'link-only',
-      composition: v5Data.composition || 'composition',
-      pins: {
-        enabled: v5Data.pins || false,
-        pinned: Array.isArray(v5Data.pinned) ? v5Data.pinned.map((p: any) => p.name || p).filter(Boolean) : [],
+function migrateV5ToV6 (v5Data: any): RootState {
+  return ({
+    version: 6,
+    ecosystem: {
+      bin: {
+        wordWrap: false,
       },
-      mixedTheme: v5Data.mixedTheme ?? true,
-      favorites: [],
-      slashSearch: v5Data.slashSearch || false,
-      railDrawer: v5Data.railDrawer || false,
+      play: {
+        showErrors: true,
+        wordWrap: false,
+      },
+      studio: {},
+      link: {},
+      docs: {
+        api: v5Data.api || 'link-only',
+        composition: v5Data.composition || 'composition',
+        pins: {
+          enabled: v5Data.pins || false,
+          pinned: Array.isArray(v5Data.pinned) ? v5Data.pinned.map((p: any) => p.name || p).filter(Boolean) : [],
+        },
+        mixedTheme: v5Data.mixedTheme ?? true,
+        favorites: [],
+        slashSearch: v5Data.slashSearch || false,
+        railDrawer: v5Data.railDrawer || false,
+      },
     },
-  },
-  one: {
-    avatar: v5Data.avatar || '',
-    ads: {
-      enabled: !v5Data.disableAds,
-      house: v5Data.showHouseAds || false,
+    one: {
+      avatar: v5Data.avatar || '',
+      ads: {
+        enabled: !v5Data.disableAds,
+        house: v5Data.showHouseAds || false,
+      },
+      command: {},
+      theme: v5Data.theme || 'system',
+      direction: v5Data.direction || 'ltr',
+      colors: {
+        primary: v5Data.colors?.one || 'surface-light',
+      },
+      suits: {
+        enabled: v5Data.suits?.show || false,
+        elements: v5Data.suits?.elements || ['app-bar'],
+        suit: v5Data.suits?.suit || '',
+      },
+      notifications: {
+        enabled: v5Data.notifications?.show ?? true,
+        read: v5Data.notifications?.read || [],
+        last: '',
+      },
+      banners: {
+        enabled: v5Data.notifications?.banners ?? true,
+        read: v5Data.notifications?.last?.banner || [],
+        last: '',
+      },
+      quicklinks: v5Data.quickbar || false,
+      sync: v5Data.syncSettings ?? true,
+      devmode: v5Data.dev || false,
     },
-    command: {},
-    theme: v5Data.theme || 'system',
-    direction: v5Data.direction || 'ltr',
-    colors: {
-      primary: v5Data.colors?.one || 'surface-light',
-    },
-    suits: {
-      enabled: v5Data.suits?.show || false,
-      elements: v5Data.suits?.elements || ['app-bar'],
-      suit: v5Data.suits?.suit || '',
-    },
-    notifications: {
-      enabled: v5Data.notifications?.show ?? true,
-      read: v5Data.notifications?.read || [],
-      last: '',
-    },
-    banners: {
-      enabled: v5Data.notifications?.banners ?? true,
-      read: v5Data.notifications?.last?.banner || [],
-      last: '',
-    },
-    quicklinks: v5Data.quickbar || false,
-    sync: v5Data.syncSettings ?? true,
-    devmode: v5Data.dev || false,
-  },
-})
+  })
+}
 
-export const migrateUserData = (data: any): RootState => {
+export function migrateUserData (data: any): RootState {
   const migratedData = migrations.reduce((acc, migration) => migration(acc), data)
   return migrateV5ToV6(migratedData)
 }
