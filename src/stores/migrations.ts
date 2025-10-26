@@ -108,10 +108,10 @@ export interface RootState {
       wordWrap: boolean
       dashboard?: DashboardState
     }
-    studio: {
+    studio?: {
       dashboard?: DashboardState
     }
-    link: {
+    link?: {
       dashboard?: DashboardState
     }
     docs: {
