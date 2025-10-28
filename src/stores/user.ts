@@ -15,6 +15,8 @@ export const DEFAULT_USER: RootState = {
       showErrors: true,
       wordWrap: false,
     },
+    studio: {},
+    link: {},
     docs: {
       api: 'link-only',
       composition: 'composition',
