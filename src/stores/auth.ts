@@ -27,6 +27,7 @@ export interface VOneUser {
   isAdmin: boolean
   role: 'super' | 'admin' | 'editor' | 'user'
   name: string
+  shortid: string
   picture: string
   settings: Record<string, any> | null
   createdAt: string
