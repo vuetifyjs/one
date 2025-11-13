@@ -1,7 +1,7 @@
 <template>
   <v-expand-transition>
     <div v-if="user.one.quicklinks">
-      <div class="d-flex align-center justify-center pa-1 ga-2">
+      <div class="d-flex align-center justify-center pa-1 ga-1">
         <v-btn
           class="text-caption"
           :color="user.one.colors.primary"
@@ -71,6 +71,24 @@
             activator="parent"
             location="top"
             text="Vuetify Snips"
+          />
+        </v-btn>
+
+        <v-btn
+          class="text-caption"
+          :color="user.one.colors.primary"
+          density="comfortable"
+          flat
+          href="https://link.vuetifyjs.com"
+          icon="$vuetify-link"
+          target="_blank"
+        >
+          <v-icon />
+
+          <v-tooltip
+            activator="parent"
+            location="top"
+            text="Vuetify Link"
           />
         </v-btn>
 
