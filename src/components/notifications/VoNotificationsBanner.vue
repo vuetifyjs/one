@@ -24,6 +24,7 @@
           :image="banner.metadata.images.logo.url"
           size="x-large"
           tile
+          variant="text"
         />
       </template>
 
