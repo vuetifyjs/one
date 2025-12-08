@@ -16,7 +16,7 @@
 
     <VoSubscriptionListItem v-if="auth.user" />
 
-    <VoMcpListItem v-if="auth.user?.isAdmin" />
+    <VoMcpListItem v-if="one.isSubscriber" />
 
     <VoSettingsListItem />
 
