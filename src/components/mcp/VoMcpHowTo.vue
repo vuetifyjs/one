@@ -8,10 +8,10 @@
       </template>
 
       <v-expansion-panel-text class="bg-surface-light rounded-b">
-        <strong>View setup instructions for your local MCP tools</strong>
+        <strong>Quick Setup</strong>
 
         <p class="mb-4 mt-2">
-          To get started with your favorite IDE or AI agent, simply run the following command from your home directory:
+          Run the following command to configure your favorite IDE or AI agent:
         </p>
 
         <div class="my-4">
@@ -28,7 +28,17 @@
           </code>
         </div>
 
-        <p>Follow the on-screen prompts to complete the setup.</p>
+        <p class="mb-2">Follow the on-screen prompts to complete the setup.</p>
+
+        <p>
+          For hosted server setup, manual configuration, or troubleshooting, see the
+          <a
+            class="text-primary"
+            href="https://github.com/vuetifyjs/mcp#authentication"
+            rel="noopener"
+            target="_blank"
+          >full documentation</a>.
+        </p>
       </v-expansion-panel-text>
     </v-expansion-panel>
   </v-expansion-panels>
