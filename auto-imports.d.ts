@@ -36,6 +36,7 @@ declare global {
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
   const migrateUserData: typeof import('./src/stores/migrations')['migrateUserData']
+  const migrateV6ToV7: typeof import('./src/stores/migrations')['migrateV6ToV7']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -192,6 +193,7 @@ declare module 'vue' {
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly migrateUserData: UnwrapRef<typeof import('./src/stores/migrations')['migrateUserData']>
+    readonly migrateV6ToV7: UnwrapRef<typeof import('./src/stores/migrations')['migrateV6ToV7']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
