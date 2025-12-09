@@ -97,7 +97,7 @@ export type SavedState = {
 } | OldRootState
 
 export interface RootState {
-  version: 6
+  version: 7
   ecosystem: {
     bin: {
       wordWrap: boolean
@@ -125,6 +125,9 @@ export interface RootState {
       favorites: string[]
       slashSearch: boolean
       railDrawer: boolean
+    }
+    mcp: {
+      seen: boolean
     }
   }
   one: {
@@ -235,7 +238,7 @@ const migrations = [
   },
 ]
 
-function migrateV5ToV6 (v5Data: any): RootState {
+function migrateV5ToV6 (v5Data: any) {
   return ({
     version: 6,
     ecosystem: {
@@ -295,7 +298,21 @@ function migrateV5ToV6 (v5Data: any): RootState {
   })
 }
 
+export function migrateV6ToV7 (v6Data: any): RootState {
+  return {
+    ...v6Data,
+    version: 7,
+    ecosystem: {
+      ...v6Data.ecosystem,
+      mcp: {
+        seen: false,
+      },
+    },
+  }
+}
+
 export function migrateUserData (data: any): RootState {
   const migratedData = migrations.reduce((acc, migration) => migration(acc), data)
-  return migrateV5ToV6(migratedData)
+  const v6Data = migrateV5ToV6(migratedData)
+  return migrateV6ToV7(v6Data)
 }

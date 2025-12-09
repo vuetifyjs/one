@@ -1,3 +1,8 @@
+// Utilities
+import { merge } from 'lodash-es'
+import { DEFAULT_USER, useUserStore } from './user'
+import { migrateV6ToV7 } from './migrations'
+
 // Types
 import type { Ref, ShallowRef } from 'vue'
 import type { VOneTeam } from './team'
@@ -74,7 +79,17 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
     externalUpdate = true
 
-    Object.assign(userStore, user.settings)
+    // Migrate server settings if needed and merge with defaults
+    let settings = user.settings
+    if (settings.version === 6) {
+      settings = migrateV6ToV7(settings)
+    }
+    const merged = {
+      version: 7,
+      ecosystem: merge(structuredClone(DEFAULT_USER.ecosystem), settings.ecosystem || {}),
+      one: merge(structuredClone(DEFAULT_USER.one), settings.one || {}),
+    }
+    Object.assign(userStore, merged)
   })
 
   userStore.$subscribe(() => {
