@@ -26,15 +26,14 @@
     "build": "vite build --config vite.build.config.ts && pnpm build:types",
     "build:dev": "vite build --mode development --config vite.config.ts ",
     "build:types": "rimraf types-temp && vue-tsc --pretty -p tsconfig.json && rollup --config rollup.types.config.js && rimraf types-temp",
-    "release": "pnpm build:dev && pnpm version && git push --follow-tags",
+    "release": "pnpm build:dev && bumpp -r",
     "watch": "pnpm build:dev --watch",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.vue && vue-tsc --pretty -p tsconfig.json --noEmit",
     "lint:fix": "eslint . --ext .ts,.vue --fix",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "prepublishOnly": "pnpm build",
-    "postversion": "git push --follow-tags"
+    "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
     "@mdi/js": "7.4.47",
@@ -52,6 +51,7 @@
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/eslint-plugin": "^1.3.9",
     "@vueuse/router": "^13.9.0",
+    "bumpp": "^10.1.0",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog-vuetify": "^2.0.2",
     "conventional-github-releaser": "^3.1.5",
