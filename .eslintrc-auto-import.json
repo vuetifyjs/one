@@ -77,6 +77,7 @@
     "mapWritableState": true,
     "markRaw": true,
     "migrateUserData": true,
+    "migrateV6ToV7": true,
     "nextTick": true,
     "onActivated": true,
     "onBeforeMount": true,
