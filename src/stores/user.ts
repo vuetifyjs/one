@@ -9,7 +9,7 @@ export const DEFAULT_USER: RootState = {
   version: 7,
   ecosystem: {
     bin: {
-      wordWrap: false,
+      wordWrap: true,
     },
     play: {
       showErrors: true,
