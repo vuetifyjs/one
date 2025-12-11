@@ -9,6 +9,7 @@
     "DashboardState": true,
     "DirectiveBinding": true,
     "DownloadsState": true,
+    "EcosystemSettings": true,
     "EffectScope": true,
     "ExtractDefaultPropTypes": true,
     "ExtractPropTypes": true,

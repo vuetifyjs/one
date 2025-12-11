@@ -127,7 +127,7 @@ declare global {
   export type { VOneSendowlDownloadItem, VOneSendowlDownload, DownloadsState } from './src/stores/downloads'
   import('./src/stores/downloads')
   // @ts-ignore
-  export type { OldRootState, SavedState, RootState, DashboardState } from './src/stores/migrations'
+  export type { OldRootState, SavedState, EcosystemSettings, RootState, DashboardState } from './src/stores/migrations'
   import('./src/stores/migrations')
   // @ts-ignore
   export type { VOneNotification, NotificationsState } from './src/stores/notifications'

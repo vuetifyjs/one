@@ -96,25 +96,29 @@ export type SavedState = {
   }
 } | OldRootState
 
+export interface EcosystemSettings {
+  [key: string]: unknown
+}
+
 export interface RootState {
   version: 7
   ecosystem: {
-    bin: {
+    bin: EcosystemSettings & {
       wordWrap: boolean
       dashboard?: DashboardState
     }
-    play: {
+    play: EcosystemSettings & {
       showErrors: boolean
       wordWrap: boolean
       dashboard?: DashboardState
     }
-    studio?: {
+    studio: EcosystemSettings & {
       dashboard?: DashboardState
     }
-    link?: {
+    link: EcosystemSettings & {
       dashboard?: DashboardState
     }
-    docs: {
+    docs: EcosystemSettings & {
       api: 'link-only' | 'inline'
       composition: 'composition' | 'options'
       pins: {
@@ -126,7 +130,7 @@ export interface RootState {
       slashSearch: boolean
       railDrawer: boolean
     }
-    mcp: {
+    mcp: EcosystemSettings & {
       seen: boolean
     }
   }
