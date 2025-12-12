@@ -3,6 +3,7 @@
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiCogOutline}`"
+    rounded="lg"
     title="Settings"
   >
     <VoSettingsDialog v-model="dialog" />

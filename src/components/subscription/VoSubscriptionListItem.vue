@@ -3,6 +3,7 @@
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiCreditCardOutline}`"
+    rounded="lg"
     title="Subscriptions"
   >
     <VoSubscriptionDialog v-model="dialog" />

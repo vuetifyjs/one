@@ -5,6 +5,7 @@
     link
     :loading="isLoggingout"
     :prepend-icon="`svg:${mdiLogoutVariant}`"
+    rounded="lg"
     title="Logout"
     @click="onClick"
   />

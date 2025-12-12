@@ -12,6 +12,7 @@
         class="overflow-hidden"
         height="inherit"
         :prepend-icon="prependIcon"
+        :rounded="isFullscreen || display.xs.value ? 0 : 'lg'"
         :title="title"
       >
         <template v-if="$slots.prepend" #prepend>

@@ -3,6 +3,7 @@
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiAccountGroupOutline}`"
+    rounded="lg"
     title="My Team"
   >
     <VoTeamDialog v-model="dialog" />

@@ -1,6 +1,10 @@
 <template>
   <v-dialog v-slot="{ isActive }" v-model="dialog" max-width="500">
-    <v-card :prepend-icon="`svg:${mdiShieldKeyOutline}`" title="Save your Key">
+    <v-card
+      :prepend-icon="`svg:${mdiShieldKeyOutline}`"
+      rounded="lg"
+      title="Save your Key"
+    >
       <template #append>
         <v-icon-btn icon="mdi-close" @click="isActive.value = false" />
       </template>

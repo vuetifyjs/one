@@ -2,6 +2,7 @@
   <v-card
     class="pt-6 pb-8 px-4 px-sm-8 mx-auto"
     max-width="480"
+    rounded="lg"
   >
     <div class="text-center">
       <v-avatar

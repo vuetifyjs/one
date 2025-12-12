@@ -3,6 +3,7 @@
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiHandHeartOutline}`"
+    rounded="lg"
     title="Sponsorships"
   >
     <VoSponsorshipsDialog v-model="dialog" />

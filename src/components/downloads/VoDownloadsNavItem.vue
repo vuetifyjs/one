@@ -3,6 +3,7 @@
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiTrayArrowDown}`"
+    rounded="lg"
     title="Downloads"
   >
     <VoDialog

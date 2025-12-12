@@ -3,6 +3,7 @@
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiKeyOutline}`"
+    rounded="lg"
     title="API Key"
   >
     <template v-if="!user.ecosystem.mcp.seen" #append>
