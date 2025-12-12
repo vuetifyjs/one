@@ -96,8 +96,8 @@
 
           <VoSwitch
             v-model="user.one.quicklinks"
-            label="Enable Quick Actions"
-            messages="Quick actions are located on the Vuetify One user menu and provide quick access to common tasks."
+            label="Show Pinned Ecosystem Links"
+            messages="Display your pinned ecosystem links below your avatar in the user menu."
           />
         </v-card-text>
 

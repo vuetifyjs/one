@@ -4,11 +4,13 @@
     content-class="d-flex align-start justify-end pa-2"
     cover
     flat
-    height="88"
+    height="84"
     rounded="0"
   >
     <div class="d-flex flex-grow-1 justify-end fill-height align-start">
       <VoUserBadges />
+
+      <VoUserPinnedEcosystem />
 
       <v-expand-x-transition>
         <div

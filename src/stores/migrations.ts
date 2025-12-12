@@ -164,6 +164,10 @@ export interface RootState {
       last: string
     }
     quicklinks: boolean
+    ecosystem: {
+      pinned: string[]
+      seen: boolean
+    }
     sync: boolean
     devmode: boolean
   }

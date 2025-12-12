@@ -198,6 +198,8 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
       if (e.data.status === 'success') {
         if (!user.value) {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
+          dialog.value = false
+          router.push('/user/dashboard')
         }
         user.value = e.data.body.user
         one.access = e.data.body.access

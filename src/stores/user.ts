@@ -61,6 +61,10 @@ export const DEFAULT_USER: RootState = {
       last: '',
     },
     quicklinks: false,
+    ecosystem: {
+      pinned: [] as string[],
+      seen: false,
+    },
     sync: true,
     devmode: false,
   },
