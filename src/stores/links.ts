@@ -47,8 +47,6 @@ export interface LinksState {
 export const useLinksStore = defineStore('links', (): LinksState => {
   const http = useHttpStore()
   const queue = useQueueStore()
-  const auth = useAuthStore()
-  const one = useOneStore()
 
   const all = ref<VOneLink[]>([])
   const isLoading = shallowRef(false)
@@ -57,7 +55,12 @@ export const useLinksStore = defineStore('links', (): LinksState => {
   const favorites = computed(() => all.value.filter(l => l.favorite))
   const pinned = computed(() => all.value.filter(l => l.pinned))
 
-  const canCreate = computed(() => auth.user?.isAdmin || one.isSubscriber)
+  // Lazily access auth/one stores to avoid lifecycle hook issues
+  const canCreate = computed(() => {
+    const auth = useAuthStore()
+    const one = useOneStore()
+    return auth.user?.isAdmin || one.isSubscriber
+  })
 
   async function index () {
     try {

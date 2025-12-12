@@ -87,6 +87,7 @@ declare global {
   const useHttpStore: typeof import('./stores/http')['useHttpStore']
   const useId: typeof import('vue')['useId']
   const useLink: typeof import('vue-router')['useLink']
+  const useLinksStore: typeof import('./stores/links')['useLinksStore']
   const useModel: typeof import('vue')['useModel']
   const useNotificationsStore: typeof import('./stores/notifications')['useNotificationsStore']
   const useOneStore: typeof import('./stores/one')['useOneStore']
@@ -128,6 +129,9 @@ declare global {
   // @ts-ignore
   export type { VOneSendowlDownloadItem, VOneSendowlDownload, DownloadsState } from './stores/downloads'
   import('./stores/downloads')
+  // @ts-ignore
+  export type { VOneLink, CreateLinkOptions, LinksState } from './stores/links'
+  import('./stores/links')
   // @ts-ignore
   export type { OldRootState, SavedState, EcosystemSettings, RootState, DashboardState } from './stores/migrations'
   import('./stores/migrations')
@@ -249,6 +253,7 @@ declare module 'vue' {
     readonly useHttpStore: UnwrapRef<typeof import('./stores/http')['useHttpStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
+    readonly useLinksStore: UnwrapRef<typeof import('./stores/links')['useLinksStore']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useNotificationsStore: UnwrapRef<typeof import('./stores/notifications')['useNotificationsStore']>
     readonly useOneStore: UnwrapRef<typeof import('./stores/one')['useOneStore']>
