@@ -30,6 +30,8 @@ export { useBinsStore } from '@/stores/bins'
 export type { VOneSendowlDownload, VOneSendowlDownloadItem } from '@/stores/downloads'
 export { useDownloadsStore } from '@/stores/downloads'
 export { useHttpStore } from '@/stores/http'
+export type { CreateLinkOptions, VOneLink } from '@/stores/links'
+export { useLinksStore } from '@/stores/links'
 export type { VOneNotification } from '@/stores/notifications'
 
 export { useNotificationsStore } from '@/stores/notifications'

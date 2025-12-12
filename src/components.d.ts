@@ -78,6 +78,5 @@ declare module 'vue' {
     VoUserList: typeof import('./components/user/VoUserList.vue')['default']
     VoUserMenu: typeof import('./components/user/VoUserMenu.vue')['default']
     VoUserPinnedEcosystem: typeof import('./components/user/VoUserPinnedEcosystem.vue')['default']
-    VoUserQuickActions: typeof import('./components/user/VoUserQuickActions.vue')['default']
   }
 }
