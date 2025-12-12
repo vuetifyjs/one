@@ -10,7 +10,17 @@ export const useHttpStore = defineStore('http', {
       })
 
       if (!res.ok) {
-        throw new Error(await res.text())
+        const text = await res.text()
+        let message = text || `HTTP ${res.status}`
+
+        try {
+          const json = JSON.parse(text)
+          message = json.message || json.error || text
+        } catch {
+          // Not JSON, use text as-is
+        }
+
+        throw new Error(message)
       }
 
       if (res.status === 204) {
