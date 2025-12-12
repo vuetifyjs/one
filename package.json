@@ -82,17 +82,9 @@
     "vue-tsc": "^3.0.6",
     "vuetify": "^3.10.0"
   },
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.25.0",
   "dependencies": {
     "vite-plugin-pages": "^0.33.1",
     "vite-plugin-vue-layouts-next": "^1.0.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "core-js",
-      "esbuild",
-      "unrs-resolver"
-    ]
   }
 }
