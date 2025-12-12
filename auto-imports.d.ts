@@ -7,6 +7,7 @@
 export {}
 declare global {
   const DEFAULT_USER: typeof import('./src/stores/user')['DEFAULT_USER']
+  const ECOSYSTEM_ACTIONS: typeof import('./src/composables/ecosystem')['ECOSYSTEM_ACTIONS']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
@@ -82,6 +83,7 @@ declare global {
   const useDate: typeof import('vuetify')['useDate']
   const useDisplay: typeof import('vuetify')['useDisplay']
   const useDownloadsStore: typeof import('./src/stores/downloads')['useDownloadsStore']
+  const useEcosystem: typeof import('./src/composables/ecosystem')['useEcosystem']
   const useHttpStore: typeof import('./src/stores/http')['useHttpStore']
   const useId: typeof import('vue')['useId']
   const useLink: typeof import('vue-router')['useLink']
@@ -156,6 +158,9 @@ declare global {
   // @ts-ignore
   export type { VOneTeam, TeamState } from './src/stores/team'
   import('./src/stores/team')
+  // @ts-ignore
+  export type { EcosystemAction } from './src/composables/ecosystem'
+  import('./src/composables/ecosystem')
 }
 
 // for vue template auto import
@@ -164,6 +169,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly DEFAULT_USER: UnwrapRef<typeof import('./src/stores/user')['DEFAULT_USER']>
+    readonly ECOSYSTEM_ACTIONS: UnwrapRef<typeof import('./src/composables/ecosystem')['ECOSYSTEM_ACTIONS']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -239,6 +245,7 @@ declare module 'vue' {
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
     readonly useDownloadsStore: UnwrapRef<typeof import('./src/stores/downloads')['useDownloadsStore']>
+    readonly useEcosystem: UnwrapRef<typeof import('./src/composables/ecosystem')['useEcosystem']>
     readonly useHttpStore: UnwrapRef<typeof import('./src/stores/http')['useHttpStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
