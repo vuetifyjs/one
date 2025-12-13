@@ -46,6 +46,7 @@
     "VOneLink": true,
     "VOneNotification": true,
     "VOnePromotion": true,
+    "VOneRole": true,
     "VOneSendowlDownload": true,
     "VOneSendowlDownloadItem": true,
     "VOneSponsor": true,

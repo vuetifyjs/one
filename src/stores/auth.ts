@@ -27,10 +27,12 @@ export interface VOneIdentity {
   primary: boolean
 }
 
+export type VOneRole = 'super' | 'admin' | 'editor' | 'user'
+
 export interface VOneUser {
   id: string
   isAdmin: boolean
-  role: 'super' | 'admin' | 'editor' | 'user'
+  role: VOneRole
   name: string
   shortid: string
   picture: string
@@ -46,6 +48,10 @@ export interface AuthState {
   url: string
   dialog: Ref<boolean>
   isLoading: ShallowRef<boolean>
+  isAuthenticated: Ref<boolean>
+  isSuper: Ref<boolean>
+  isAdmin: Ref<boolean>
+  isEditor: Ref<boolean>
   verify: (force?: boolean) => Promise<void>
   findIdentity: (provider: string) => VOneIdentity | undefined
   login: (provider?: 'github' | 'discord' | 'shopify') => Promise<void>
@@ -64,6 +70,11 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
   const one = useOneStore()
   const team = useTeamStore()
   const queue = useQueueStore()
+
+  const isAuthenticated = toRef(() => !!user.value)
+  const isSuper = toRef(() => user.value?.role === 'super')
+  const isAdmin = toRef(() => ['super', 'admin'].includes(user.value?.role ?? ''))
+  const isEditor = toRef(() => ['super', 'admin', 'editor'].includes(user.value?.role ?? ''))
 
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
@@ -271,6 +282,10 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
     url: http.url,
     dialog,
     isLoading,
+    isAuthenticated,
+    isSuper,
+    isAdmin,
+    isEditor,
     verify,
     findIdentity,
     login,

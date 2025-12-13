@@ -113,7 +113,7 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const isSubscriber = computed(() => (
     !http.url
-    || auth.user?.isAdmin
+    || auth.isAdmin
     || subscription.value?.isActive
     || access.value.some(v => ['one', 'one/team'].includes(v))
   ))
