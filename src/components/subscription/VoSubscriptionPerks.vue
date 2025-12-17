@@ -59,9 +59,9 @@
   const { type } = defineProps<Props>()
 
   const upnext = [
-    'Access to the Vuetify MCP server',
-    'Team wide Playgrounds, Bins, and Studios',
-    'Receive a special label on GitHub created issues and pull requests',
+    'Embeddable playgrounds for your own documentation',
+    'Team shared workspaces for bins and playgrounds',
+    'Real-time collaboration on bins and playgrounds',
   ]
 
   const dialog = shallowRef(false)
@@ -70,13 +70,10 @@
 
   const perks = computed(() => {
     const array = [
-      'Ad Free Experience on all Vuetify properties',
-      'Save and share across our platforms <a href="https://play.vuetifyjs.com" target="_blank">VPlay</a>, <a href="https://bin.vuetifyjs.com" target="_blank">VBin</a>, and <a href="https://studio.vuetifyjs.com" target="_blank">VStudio</a>',
-      'Pinned Navigation Items and Rail drawer in <a href="https://vuetifyjs.com/" target="_blank">Documentation</a>',
-      'Customize Navigation components with Page Suits',
-      'Custom Vuetify One menu avatar',
-      // Broken right now
-      // 'Special role in the <a href="https://discord.vuetifyjs.com/" target="_blank">Vuetify Discord</a>',
+      'Ad-free experience on all Vuetify properties',
+      'Save and share across <a href="https://play.vuetifyjs.com" target="_blank">Vuetify Play</a>, <a href="https://bin.vuetifyjs.com" target="_blank">Vuetify Bin</a>, <a href="https://studio.vuetifyjs.com" target="_blank">Vuetify Studio</a>, and <a href="https://link.vuetifyjs.com" target="_blank">Vuetify Link</a>',
+      'Pinned pages and rail navigation in <a href="https://vuetifyjs.com/" target="_blank">Documentation</a>',
+      'Vuetify MCP API key for AI-assisted development',
     ]
 
     if (type === 'team') {
