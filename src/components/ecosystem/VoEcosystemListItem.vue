@@ -28,7 +28,7 @@
       v-model="isOpen"
       activator="parent"
       :close-on-content-click="false"
-      :offset="[16, 0]"
+      :offset="[16, 16]"
       submenu
     >
       <VoEcosystemMenu />

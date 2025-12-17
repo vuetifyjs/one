@@ -22,6 +22,13 @@ export const ECOSYSTEM_ACTIONS: EcosystemAction[] = [
     icon: '$vuetify-bin',
   },
   {
+    id: 'create',
+    name: 'Vuetify Create',
+    description: 'Project scaffolding tool',
+    href: 'https://github.com/vuetifyjs/create/',
+    icon: '$vuetify-create',
+  },
+  {
     id: 'studio',
     name: 'Vuetify Studio',
     description: 'Visual theme builder',
@@ -62,6 +69,13 @@ export const ECOSYSTEM_ACTIONS: EcosystemAction[] = [
     description: 'Premium themes and templates',
     href: 'https://store.vuetifyjs.com',
     icon: '$vuetify-store',
+  },
+  {
+    id: 'figma',
+    name: 'Vuetify Figma',
+    description: 'Figma design resources',
+    href: 'https://www.figma.com/community/file/768809027799962739',
+    icon: '$vuetify-figma',
   },
 ]
 
