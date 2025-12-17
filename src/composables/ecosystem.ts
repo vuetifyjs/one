@@ -43,6 +43,13 @@ export const ECOSYSTEM_ACTIONS: EcosystemAction[] = [
     icon: '$vuetify-link',
   },
   {
+    id: 'mcp',
+    name: 'Vuetify MCP',
+    description: 'MCP library for chat bots',
+    href: 'https://github.com/vuetifyjs/mcp/',
+    icon: '$vuetify-mcp',
+  },
+  {
     id: 'issues',
     name: 'Vuetify Issues',
     description: 'Bug tracker and feature requests',
