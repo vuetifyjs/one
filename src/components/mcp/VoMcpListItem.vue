@@ -4,7 +4,7 @@
     link
     :prepend-icon="`svg:${mdiKeyOutline}`"
     rounded="lg"
-    title="API Key"
+    title="MCP API Key"
   >
     <template v-if="!user.ecosystem.mcp.seen" #append>
       <v-chip color="success" size="x-small" variant="flat">NEW</v-chip>
