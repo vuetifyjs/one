@@ -92,6 +92,7 @@ declare global {
   const useNotificationsStore: typeof import('./src/stores/notifications')['useNotificationsStore']
   const useOneStore: typeof import('./src/stores/one')['useOneStore']
   const useParams: typeof import('./src/composables/route')['useParams']
+  const usePlaysStore: typeof import('./src/stores/plays')['usePlaysStore']
   const useProductsStore: typeof import('./src/stores/products')['useProductsStore']
   const usePromotionsStore: typeof import('./src/stores/promotions')['usePromotionsStore']
   const useQuery: typeof import('./src/composables/route')['useQuery']
@@ -138,6 +139,9 @@ declare global {
   // @ts-ignore
   export type { VOneNotification, NotificationsState } from './src/stores/notifications'
   import('./src/stores/notifications')
+  // @ts-ignore
+  export type { VOnePlay, PlaysState } from './src/stores/plays'
+  import('./src/stores/plays')
   // @ts-ignore
   export type { ShopifyProduct, ProductsState } from './src/stores/products'
   import('./src/stores/products')
@@ -258,6 +262,7 @@ declare module 'vue' {
     readonly useNotificationsStore: UnwrapRef<typeof import('./src/stores/notifications')['useNotificationsStore']>
     readonly useOneStore: UnwrapRef<typeof import('./src/stores/one')['useOneStore']>
     readonly useParams: UnwrapRef<typeof import('./src/composables/route')['useParams']>
+    readonly usePlaysStore: UnwrapRef<typeof import('./src/stores/plays')['usePlaysStore']>
     readonly useProductsStore: UnwrapRef<typeof import('./src/stores/products')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./src/stores/promotions')['usePromotionsStore']>
     readonly useQuery: UnwrapRef<typeof import('./src/composables/route')['useQuery']>

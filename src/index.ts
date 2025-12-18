@@ -33,10 +33,12 @@ export { useHttpStore } from '@/stores/http'
 export type { CreateLinkOptions, VOneLink } from '@/stores/links'
 export { useLinksStore } from '@/stores/links'
 export type { VOneNotification } from '@/stores/notifications'
-
 export { useNotificationsStore } from '@/stores/notifications'
-
 export { useOneStore } from '@/stores/one'
+
+export type { VOnePlay } from '@/stores/plays'
+
+export { usePlaysStore } from '@/stores/plays'
 export type { ShopifyProduct } from '@/stores/products'
 export { useProductsStore } from '@/stores/products'
 export type { VOnePromotion } from '@/stores/promotions'
