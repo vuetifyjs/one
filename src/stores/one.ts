@@ -56,6 +56,7 @@ interface OneState {
 
   activate: () => Promise<void>
   cancel: () => Promise<void>
+  claimOrganization: (platform: 'opencollective' | 'github') => Promise<boolean>
   manage: () => Promise<void>
   modify: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) => Promise<void>
   resetQuery: () => void
@@ -243,6 +244,26 @@ export const useOneStore = defineStore('one', (): OneState => {
     })
   }
 
+  async function claimOrganization (platform: 'opencollective' | 'github') {
+    try {
+      isLoading.value = true
+
+      await http.post(`/one/organization/${platform}/claim`)
+      await auth.verify(true)
+
+      queue.showSuccess('Organization sponsorship claimed successfully!')
+      return true
+    } catch (error: any) {
+      queue.showError(
+        error?.message
+        ?? 'Someone from your team has already claimed this organization. If they have a team subscription, ask them to invite you',
+      )
+      return false
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   return {
     info,
     interval,
@@ -266,6 +287,7 @@ export const useOneStore = defineStore('one', (): OneState => {
 
     activate,
     cancel,
+    claimOrganization,
     manage,
     modify,
     resetQuery,
