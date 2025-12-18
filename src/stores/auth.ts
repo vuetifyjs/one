@@ -7,6 +7,9 @@ import { migrateV6ToV7 } from './migrations'
 import type { Ref, ShallowRef } from 'vue'
 import type { VOneTeam } from './team'
 
+// Globals
+const IN_BROWSER = typeof window !== 'undefined'
+
 export interface VOneSponsorship {
   id: string
   platform: string
@@ -78,7 +81,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
-    if (!user?.settings) {
+    if (!IN_BROWSER || !user?.settings) {
       return
     }
 
@@ -272,10 +275,15 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
   }
 
   function lastLoginProvider () {
+    if (!IN_BROWSER) {
+      return null
+    }
     return localStorage.getItem('vuetify@lastLoginProvider')
   }
 
-  verify()
+  if (IN_BROWSER) {
+    verify()
+  }
 
   return {
     user,
