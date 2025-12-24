@@ -32,7 +32,7 @@ interface Invoice {
 }
 
 interface OneState {
-  info: Ref<Info | undefined>
+  info: Ref<Info | null>
   interval: ComputedRef<SubscriptionItemPlan['interval'] | undefined>
   subscriptionType: ComputedRef<SubscriptionItemPlan['type'] | undefined>
   access: Ref<string[]>
@@ -74,8 +74,8 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const isLoading = shallowRef(false)
   const isOpen = shallowRef(false)
-  const info = ref<Info | null>()
-  const invoices = ref<Invoice[]| null>([])
+  const info = ref<Info | null>(null)
+  const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
   const subscriptionType = computed(() => info.value?.items[0].plan.type)
@@ -117,7 +117,7 @@ export const useOneStore = defineStore('one', (): OneState => {
 
   const isSubscriber = computed(() => (
     !http.url
-    || auth.user?.isAdmin
+    || auth.isAdmin
     || subscription.value?.isActive
     || access.value.some(v => ['one', 'one/team'].includes(v))
   ))

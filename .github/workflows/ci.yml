@@ -11,19 +11,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
-      - uses: pnpm/action-setup@v4
-      - run: pnpm i --frozen-lockfile
+          fetch-depth: 0
+      - uses: vuetifyjs/setup-action@master
       - run: pnpm build
         env:
           VITE_API_SERVER_URL: https://api.vuetifyjs.com
-      - run: npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}
-        env:
-          NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
+      - run: npm install -g npm@latest
       - run: npm publish
       - name: GitHub release
         run: pnpm conventional-github-releaser -p vuetify

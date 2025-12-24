@@ -1,6 +1,7 @@
 <template>
   <VoListItem
     :prepend-icon="`svg:${mdiViewDashboardOutline}`"
+    rounded="lg"
     title="Dashboard"
     to="/user/dashboard"
     @click="onClick"

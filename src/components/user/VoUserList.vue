@@ -8,6 +8,8 @@
 
     <VoNotificationsNavItem />
 
+    <VoEcosystemListItem />
+
     <VoTeamListItem v-if="team.hasTeamAccess" />
 
     <VoDownloadsNavItem v-if="one.shopify" />
@@ -16,7 +18,7 @@
 
     <VoSubscriptionListItem v-if="auth.user" />
 
-    <VoMcpListItem v-if="auth.user?.isAdmin" />
+    <VoMcpListItem v-if="one.isSubscriber" />
 
     <VoSettingsListItem />
 

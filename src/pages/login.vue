@@ -1,4 +1,9 @@
 <template>
   <vo-app-bar logo="vone" />
-  <vo-auth-card />
+
+  <v-empty-state
+    headline="Please Login"
+    icon="$vuetify"
+    title="to access Playground"
+  />
 </template>

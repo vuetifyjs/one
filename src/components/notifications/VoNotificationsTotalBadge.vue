@@ -1,21 +1,19 @@
 <template>
   <v-badge
     color="error"
-    :content="items"
-    :dot="!!auth.user"
+    dot
     location="start top"
-    :model-value="items > 0"
+    :model-value="hasUnread"
   >
     <slot />
   </v-badge>
 </template>
 
 <script setup lang="ts">
-  const auth = useAuthStore()
   const notifications = useNotificationsStore()
   const user = useUserStore()
 
-  const items = computed(() => {
-    return user.one.notifications.enabled ? notifications.unread.length : 0
+  const hasUnread = toRef(() => {
+    return user.one.notifications.enabled && notifications.unread.length > 0
   })
 </script>

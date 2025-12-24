@@ -4,6 +4,7 @@
     :active="dialog"
     link
     :prepend-icon="`svg:${mdiBellOutline}`"
+    rounded="lg"
     title="Notifications"
   >
     <template v-if="notifications.unread.length > 0" #prepend>

@@ -7,6 +7,7 @@
 export {}
 declare global {
   const DEFAULT_USER: typeof import('./stores/user')['DEFAULT_USER']
+  const ECOSYSTEM_ACTIONS: typeof import('./composables/ecosystem')['ECOSYSTEM_ACTIONS']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
@@ -36,6 +37,7 @@ declare global {
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
   const migrateUserData: typeof import('./stores/migrations')['migrateUserData']
+  const migrateV6ToV7: typeof import('./stores/migrations')['migrateV6ToV7']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -81,13 +83,16 @@ declare global {
   const useDate: typeof import('vuetify')['useDate']
   const useDisplay: typeof import('vuetify')['useDisplay']
   const useDownloadsStore: typeof import('./stores/downloads')['useDownloadsStore']
+  const useEcosystem: typeof import('./composables/ecosystem')['useEcosystem']
   const useHttpStore: typeof import('./stores/http')['useHttpStore']
   const useId: typeof import('vue')['useId']
   const useLink: typeof import('vue-router')['useLink']
+  const useLinksStore: typeof import('./stores/links')['useLinksStore']
   const useModel: typeof import('vue')['useModel']
   const useNotificationsStore: typeof import('./stores/notifications')['useNotificationsStore']
   const useOneStore: typeof import('./stores/one')['useOneStore']
   const useParams: typeof import('./composables/route')['useParams']
+  const usePlaysStore: typeof import('./stores/plays')['usePlaysStore']
   const useProductsStore: typeof import('./stores/products')['useProductsStore']
   const usePromotionsStore: typeof import('./stores/promotions')['usePromotionsStore']
   const useQuery: typeof import('./composables/route')['useQuery']
@@ -114,7 +119,7 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { VOneSponsorship, VOneIdentity, VOneUser, AuthState } from './stores/auth'
+  export type { VOneSponsorship, VOneIdentity, VOneRole, VOneUser, AuthState } from './stores/auth'
   import('./stores/auth')
   // @ts-ignore
   export type { VOneBanner } from './stores/banners'
@@ -126,11 +131,17 @@ declare global {
   export type { VOneSendowlDownloadItem, VOneSendowlDownload, DownloadsState } from './stores/downloads'
   import('./stores/downloads')
   // @ts-ignore
-  export type { OldRootState, SavedState, RootState } from './stores/migrations'
+  export type { VOneLink, CreateLinkOptions, LinksState } from './stores/links'
+  import('./stores/links')
+  // @ts-ignore
+  export type { OldRootState, SavedState, EcosystemSettings, RootState, DashboardState } from './stores/migrations'
   import('./stores/migrations')
   // @ts-ignore
   export type { VOneNotification, NotificationsState } from './stores/notifications'
   import('./stores/notifications')
+  // @ts-ignore
+  export type { VOnePlay, PlaysState } from './stores/plays'
+  import('./stores/plays')
   // @ts-ignore
   export type { ShopifyProduct, ProductsState } from './stores/products'
   import('./stores/products')
@@ -155,6 +166,9 @@ declare global {
   // @ts-ignore
   export type { VOneTeam, TeamState } from './stores/team'
   import('./stores/team')
+  // @ts-ignore
+  export type { EcosystemAction } from './composables/ecosystem'
+  import('./composables/ecosystem')
 }
 
 // for vue template auto import
@@ -163,6 +177,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly DEFAULT_USER: UnwrapRef<typeof import('./stores/user')['DEFAULT_USER']>
+    readonly ECOSYSTEM_ACTIONS: UnwrapRef<typeof import('./composables/ecosystem')['ECOSYSTEM_ACTIONS']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -192,6 +207,7 @@ declare module 'vue' {
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly migrateUserData: UnwrapRef<typeof import('./stores/migrations')['migrateUserData']>
+    readonly migrateV6ToV7: UnwrapRef<typeof import('./stores/migrations')['migrateV6ToV7']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
@@ -237,13 +253,16 @@ declare module 'vue' {
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
     readonly useDownloadsStore: UnwrapRef<typeof import('./stores/downloads')['useDownloadsStore']>
+    readonly useEcosystem: UnwrapRef<typeof import('./composables/ecosystem')['useEcosystem']>
     readonly useHttpStore: UnwrapRef<typeof import('./stores/http')['useHttpStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
+    readonly useLinksStore: UnwrapRef<typeof import('./stores/links')['useLinksStore']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useNotificationsStore: UnwrapRef<typeof import('./stores/notifications')['useNotificationsStore']>
     readonly useOneStore: UnwrapRef<typeof import('./stores/one')['useOneStore']>
     readonly useParams: UnwrapRef<typeof import('./composables/route')['useParams']>
+    readonly usePlaysStore: UnwrapRef<typeof import('./stores/plays')['usePlaysStore']>
     readonly useProductsStore: UnwrapRef<typeof import('./stores/products')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./stores/promotions')['usePromotionsStore']>
     readonly useQuery: UnwrapRef<typeof import('./composables/route')['useQuery']>

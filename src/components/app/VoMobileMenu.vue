@@ -11,7 +11,7 @@
       </slot>
     </template>
 
-    <v-card class="pa-4">
+    <v-card class="pa-4" rounded="lg">
       <template v-if="slots.prepend">
         <div class="mb-3">
           <slot name="prepend" />

@@ -1,5 +1,12 @@
 <template>
-  <VoNotificationsTotalBadge :offset-y="auth.user ? 5 : 0">
+  <v-badge
+    :color="badgeColor"
+    dot
+    location="end top"
+    :model-value="showBadge"
+    :offset-x="auth.user ? -2 : 0"
+    :offset-y="auth.user ? 5 : 0"
+  >
     <VoBtn
       v-bind="{
         [`${lgAndUp ? 'append-' : ''}icon`]: !auth.user ? `svg:${mdiLogin}` : undefined,
@@ -13,6 +20,7 @@
       :size="smAndUp ? 'default' : 'small'"
       style="transition: .2s ease;"
       :variant="!auth.user ? 'flat' : one.isOpen ? 'outlined' : 'text'"
+      @click="onClick"
     >
       <v-avatar
         v-if="auth.user"
@@ -24,9 +32,9 @@
         <v-icon v-else :icon="`svg:${mdiLogin}`" />
       </template>
 
-      <VoUserMenu />
+      <VoUserMenu v-if="auth.user" />
     </VoBtn>
-  </VoNotificationsTotalBadge>
+  </v-badge>
 
   <VoAuthDialog />
   <VoTeamInvite />
@@ -44,10 +52,11 @@
   })
 
   const auth = useAuthStore()
+  const notifications = useNotificationsStore()
   const one = useOneStore()
   const user = useUserStore()
 
-  const { lgAndUp } = useDisplay()
+  const { lgAndUp, smAndUp } = useDisplay()
 
   const color = computed(() => {
     return one.isOpen || !auth.user
@@ -57,5 +66,14 @@
       : 'surface-light'
   })
 
-  const { smAndUp } = useDisplay()
+  const hasUnread = toRef(() => user.one.notifications.enabled && notifications.unread.length > 0)
+  const hasMcpNew = toRef(() => one.isSubscriber && !user.ecosystem.mcp.seen)
+  const showBadge = toRef(() => !!auth.user && (hasUnread.value || hasMcpNew.value))
+  const badgeColor = toRef(() => hasMcpNew.value ? 'success' : 'error')
+
+  function onClick () {
+    if (!auth.user) {
+      auth.dialog = true
+    }
+  }
 </script>

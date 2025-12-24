@@ -27,6 +27,8 @@ declare module 'vue' {
     VoDialogSubheader: typeof import('./components/app/VoDialogSubheader.vue')['default']
     VoDownloadsNavItem: typeof import('./components/downloads/VoDownloadsNavItem.vue')['default']
     VoDownloadsTable: typeof import('./components/downloads/VoDownloadsTable.vue')['default']
+    VoEcosystemListItem: typeof import('./components/ecosystem/VoEcosystemListItem.vue')['default']
+    VoEcosystemMenu: typeof import('./components/ecosystem/VoEcosystemMenu.vue')['default']
     VoFooter: typeof import('./components/app/VoFooter.vue')['default']
     VoListItem: typeof import('./components/app/VoListItem.vue')['default']
     VoMcpCopyDialog: typeof import('./components/mcp/VoMcpCopyDialog.vue')['default']
@@ -77,6 +79,6 @@ declare module 'vue' {
     VoUserColors: typeof import('./components/user/VoUserColors.vue')['default']
     VoUserList: typeof import('./components/user/VoUserList.vue')['default']
     VoUserMenu: typeof import('./components/user/VoUserMenu.vue')['default']
-    VoUserQuickActions: typeof import('./components/user/VoUserQuickActions.vue')['default']
+    VoUserPinnedEcosystem: typeof import('./components/user/VoUserPinnedEcosystem.vue')['default']
   }
 }

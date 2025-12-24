@@ -5,7 +5,7 @@
     name="vo-app-bar"
   >
     <template #prepend>
-      <router-link class="ps-2" to="/">
+      <router-link class="ps-2 ps-md-5" to="/">
         <v-img :src="image" width="128" />
       </router-link>
 
@@ -48,6 +48,7 @@
         vertical
       />
       <VoAuthBtn />
+      <div class="pe-md-3" />
     </template>
   </v-app-bar>
 </template>

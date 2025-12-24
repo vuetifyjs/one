@@ -1,20 +1,22 @@
 // Utilities
 import { merge } from 'lodash-es'
-import { migrateUserData, type RootState } from './migrations'
+import { migrateUserData, migrateV6ToV7, type RootState } from './migrations'
 
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'
 
 export const DEFAULT_USER: RootState = {
-  version: 6,
+  version: 7,
   ecosystem: {
     bin: {
-      wordWrap: false,
+      wordWrap: true,
     },
     play: {
       showErrors: true,
       wordWrap: false,
     },
+    studio: {},
+    link: {},
     docs: {
       api: 'link-only',
       composition: 'composition',
@@ -26,6 +28,9 @@ export const DEFAULT_USER: RootState = {
       favorites: [],
       slashSearch: false,
       railDrawer: false,
+    },
+    mcp: {
+      seen: false,
     },
   },
   one: {
@@ -56,6 +61,10 @@ export const DEFAULT_USER: RootState = {
       last: '',
     },
     quicklinks: false,
+    ecosystem: {
+      pinned: [] as string[],
+      seen: false,
+    },
     sync: true,
     devmode: false,
   },
@@ -80,11 +89,19 @@ export const useUserStore = defineStore('user', () => {
     try {
       const data = JSON.parse(stored)
 
-      if (data.version >= 6) {
+      if (data.version >= 7) {
         const currentState = {
-          version: 6,
-          ecosystem: merge(DEFAULT_USER.ecosystem, data.ecosystem || {}),
-          one: merge(DEFAULT_USER.one, data.one || {}),
+          version: 7,
+          ecosystem: merge(structuredClone(DEFAULT_USER.ecosystem), data.ecosystem || {}),
+          one: merge(structuredClone(DEFAULT_USER.one), data.one || {}),
+        }
+        Object.assign(state, currentState)
+      } else if (data.version === 6) {
+        const migrated = migrateV6ToV7(data)
+        const currentState = {
+          version: 7,
+          ecosystem: merge(structuredClone(DEFAULT_USER.ecosystem), migrated.ecosystem || {}),
+          one: merge(structuredClone(DEFAULT_USER.one), migrated.one || {}),
         }
         Object.assign(state, currentState)
       } else {

@@ -7,6 +7,7 @@ export interface QueueState {
   queue: Ref<Snackbar[]>
   show: (text: Snackbar) => void
   showError: (text: Snackbar) => void
+  showSuccess: (text: Snackbar) => void
 }
 
 export const useQueueStore = defineStore('queue', (): QueueState => {
@@ -27,9 +28,18 @@ export const useQueueStore = defineStore('queue', (): QueueState => {
     })
   }
 
+  function showSuccess (text: Snackbar) {
+    show({
+      color: 'success',
+      text,
+      location: 'top end',
+    })
+  }
+
   return {
     queue,
     show,
     showError,
+    showSuccess,
   }
 })

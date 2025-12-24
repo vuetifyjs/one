@@ -1,6 +1,14 @@
+// Utilities
+import { merge } from 'lodash-es'
+import { DEFAULT_USER, useUserStore } from './user'
+import { migrateV6ToV7 } from './migrations'
+
 // Types
 import type { Ref, ShallowRef } from 'vue'
 import type { VOneTeam } from './team'
+
+// Globals
+const IN_BROWSER = typeof window !== 'undefined'
 
 export interface VOneSponsorship {
   id: string
@@ -22,11 +30,14 @@ export interface VOneIdentity {
   primary: boolean
 }
 
+export type VOneRole = 'super' | 'admin' | 'editor' | 'user'
+
 export interface VOneUser {
   id: string
   isAdmin: boolean
-  role: 'super' | 'admin' | 'editor' | 'user'
+  role: VOneRole
   name: string
+  shortid: string
   picture: string
   settings: Record<string, any> | null
   createdAt: string
@@ -40,6 +51,10 @@ export interface AuthState {
   url: string
   dialog: Ref<boolean>
   isLoading: ShallowRef<boolean>
+  isAuthenticated: Ref<boolean>
+  isSuper: Ref<boolean>
+  isAdmin: Ref<boolean>
+  isEditor: Ref<boolean>
   verify: (force?: boolean) => Promise<void>
   findIdentity: (provider: string) => VOneIdentity | undefined
   login: (provider?: 'github' | 'discord' | 'shopify' | 'opencollective') => Promise<void>
@@ -59,9 +74,14 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
   const team = useTeamStore()
   const queue = useQueueStore()
 
+  const isAuthenticated = toRef(() => !!user.value)
+  const isSuper = toRef(() => user.value?.role === 'super')
+  const isAdmin = toRef(() => ['super', 'admin'].includes(user.value?.role ?? ''))
+  const isEditor = toRef(() => ['super', 'admin', 'editor'].includes(user.value?.role ?? ''))
+
   let externalUpdate = !!lastLoginProvider()
   watch(user, user => {
-    if (!user?.settings) {
+    if (!IN_BROWSER || !user?.settings) {
       return
     }
 
@@ -73,7 +93,17 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
     externalUpdate = true
 
-    Object.assign(userStore, user.settings)
+    // Migrate server settings if needed and merge with defaults
+    let settings = user.settings
+    if (settings.version === 6) {
+      settings = migrateV6ToV7(settings)
+    }
+    const merged = {
+      version: 7,
+      ecosystem: merge(structuredClone(DEFAULT_USER.ecosystem), settings.ecosystem || {}),
+      one: merge(structuredClone(DEFAULT_USER.one), settings.one || {}),
+    }
+    Object.assign(userStore, merged)
   })
 
   userStore.$subscribe(() => {
@@ -182,6 +212,8 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
       if (e.data.status === 'success') {
         if (!user.value) {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
+          dialog.value = false
+          router.push('/user/dashboard')
         }
         user.value = e.data.body.user
         one.access = e.data.body.access
@@ -243,16 +275,25 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
   }
 
   function lastLoginProvider () {
+    if (!IN_BROWSER) {
+      return null
+    }
     return localStorage.getItem('vuetify@lastLoginProvider')
   }
 
-  verify()
+  if (IN_BROWSER) {
+    verify()
+  }
 
   return {
     user,
     url: http.url,
     dialog,
     isLoading,
+    isAuthenticated,
+    isSuper,
+    isAdmin,
+    isEditor,
     verify,
     findIdentity,
     login,

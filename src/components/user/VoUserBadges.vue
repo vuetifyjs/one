@@ -4,67 +4,39 @@
     class="align-center position-absolute ms-2 d-flex ga-2 pa-2"
     color="rgba(0,0,0,.54)"
     rounded="lg"
-    style="left: 0;"
+    style="left: 0; top: 8px;"
   >
-    <v-tooltip
+    <v-icon
       v-if="auth.user?.isAdmin"
-      location="bottom"
-      text="Vuetify Administrator"
-    >
-      <template #activator="{ props: activatorProps }">
-        <v-icon
-          color="blue"
-          icon="$vuetify"
-          v-bind="activatorProps"
-          size="16"
-        />
-      </template>
-    </v-tooltip>
+      v-tooltip:bottom="'Vuetify Administrator'"
+      color="blue"
+      icon="$vuetify"
+      size="16"
+    />
 
-    <v-tooltip
+    <v-icon
       v-if="one.isSubscriber"
-      location="bottom"
-      text="Vuetify One Subscriber"
-    >
-      <template #activator="{ props: activatorProps }">
-        <v-icon
-          color="amber-darken-2"
-          :icon="`svg:${mdiCrown}`"
-          v-bind="activatorProps"
-          size="16"
-        />
-      </template>
-    </v-tooltip>
+      v-tooltip:bottom="'Vuetify One Subscriber'"
+      color="amber-darken-2"
+      :icon="`svg:${mdiCrown}`"
+      size="16"
+    />
 
-    <v-tooltip
+    <v-icon
       v-if="one.github"
-      location="bottom"
-      text="GitHub Sponsor"
-    >
-      <template #activator="{ props: activatorProps }">
-        <v-icon
-          color="white"
-          icon="$github"
-          v-bind="activatorProps"
-          size="16"
-        />
-      </template>
-    </v-tooltip>
+      v-tooltip:bottom="'GitHub Sponsor'"
+      color="white"
+      icon="$github"
+      size="16"
+    />
 
-    <v-tooltip
+    <v-icon
       v-if="one.discord"
-      location="bottom"
-      text="Discord Subscriber"
-    >
-      <template #activator="{ props: activatorProps }">
-        <v-icon
-          color="white"
-          icon="$discord"
-          v-bind="activatorProps"
-          size="16"
-        />
-      </template>
-    </v-tooltip>
+      v-tooltip:bottom="'Discord Subscriber'"
+      color="white"
+      icon="$discord"
+      size="16"
+    />
   </v-sheet>
 </template>
 

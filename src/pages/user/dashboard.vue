@@ -36,6 +36,13 @@
               variant="outlined"
               @click="clearLastReadBanner"
             />
+
+            <v-btn
+              color="error"
+              text="Clear All New"
+              variant="outlined"
+              @click="clearAllNew"
+            />
           </div>
         </v-card-text>
       </v-card>
@@ -62,5 +69,10 @@
 
   function clearLastReadBanner () {
     user.one.banners.last = ''
+  }
+
+  function clearAllNew () {
+    user.ecosystem.mcp.seen = false
+    user.one.ecosystem.seen = false
   }
 </script>

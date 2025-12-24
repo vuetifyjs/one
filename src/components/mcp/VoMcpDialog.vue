@@ -60,6 +60,7 @@
   import { mdiKey, mdiPlus, mdiRefresh } from '@mdi/js'
 
   const api = useApiKeyStore()
+  const user = useUserStore()
   const copyDialog = shallowRef(false)
 
   const dialog = defineModel<boolean>('modelValue')
@@ -70,6 +71,9 @@
   }
 
   watch(dialog, async val => {
-    if (val) await api.fetch()
+    if (val) {
+      user.ecosystem.mcp.seen = true
+      await api.fetch()
+    }
   })
 </script>

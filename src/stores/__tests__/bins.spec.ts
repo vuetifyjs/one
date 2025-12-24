@@ -4,70 +4,61 @@ import { createPinia, setActivePinia } from 'pinia'
 import { bin } from '../__mocks__/bin'
 // Stores
 import { useBinsStore } from '../bins'
-
 import { useHttpStore } from '../http'
 
-describe('http store', () => {
+describe('bins store', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
     vi.clearAllMocks()
   })
 
-  it('has loading state when making requests', async () => {
+  it('has loading state when fetching bins', async () => {
+    const http = useHttpStore()
+    vi.spyOn(http, 'get').mockResolvedValue({ bins: [bin] })
+
     const bins = useBinsStore()
 
     expect(bins.isLoading).toBe(false)
 
-    const res = bins.get()
+    const res = bins.index()
 
     expect(bins.isLoading).toBe(true)
 
-    return res.then(() => {
-      expect(bins.isLoading).toBe(false)
-    })
+    await res
+
+    expect(bins.isLoading).toBe(false)
   })
 
-  it('gets and sets the current bin by id', () => {
+  it('fetches and sets all bins', async () => {
     const http = useHttpStore()
-
-    vi.spyOn(http, 'get').mockResolvedValue({ bin })
+    vi.spyOn(http, 'get').mockResolvedValue({ bins: [bin] })
 
     const bins = useBinsStore()
 
-    const res = bins.find('1')
+    await bins.index()
 
-    return res.then(() => {
-      expect(bins.current).toEqual(bin)
-    })
+    expect(bins.all).toEqual([bin])
   })
 
-  it('creates a new bin and sets it as current', () => {
-    const http = useHttpStore()
-
-    vi.spyOn(http, 'post').mockResolvedValue({ bin })
-
+  it('computes favorites from all bins', async () => {
     const bins = useBinsStore()
+    bins.all.push(
+      { ...bin, favorite: true },
+      { ...bin, id: '2', favorite: false },
+    )
 
-    const res = bins.create(bin)
-
-    return res.then(() => {
-      expect(bins.current).toEqual(bin)
-    })
+    expect(bins.favorites).toHaveLength(1)
+    expect(bins.favorites[0].favorite).toBe(true)
   })
 
-  it('updates an existing record in all bins', () => {
-    const http = useHttpStore()
-
-    vi.spyOn(http, 'post').mockResolvedValue({ bin })
-
+  it('computes pinned from all bins', async () => {
     const bins = useBinsStore()
+    bins.all.push(
+      { ...bin, pinned: true },
+      { ...bin, id: '2', pinned: false },
+    )
 
-    bins.all.push(bin, { ...bin, content: 'Bin 2', id: '2' })
-
-    const res = bins.update(bin, '2')
-
-    return res.then(() => {
-      expect(bins.all[1].content).toBe('Bin content')
-    })
+    expect(bins.pinned).toHaveLength(1)
+    expect(bins.pinned[0].pinned).toBe(true)
   })
 })

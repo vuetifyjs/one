@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card rounded="lg">
     <v-toolbar :title="title">
       <template v-if="$slots.prepend || prependIcon" #prepend>
         <v-icon :icon="prependIcon" />

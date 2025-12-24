@@ -1,4 +1,5 @@
 import type { VOneSuit } from './settings'
+import type { DataTableSortItem } from 'vuetify'
 
 export type OldRootState = {
   v: 2 | 3 | 4 | 5
@@ -95,17 +96,29 @@ export type SavedState = {
   }
 } | OldRootState
 
+export interface EcosystemSettings {
+  [key: string]: unknown
+}
+
 export interface RootState {
-  version: 6
+  version: 7
   ecosystem: {
-    bin: {
+    bin: EcosystemSettings & {
       wordWrap: boolean
+      dashboard?: DashboardState
     }
-    play: {
+    play: EcosystemSettings & {
       showErrors: boolean
       wordWrap: boolean
+      dashboard?: DashboardState
     }
-    docs: {
+    studio: EcosystemSettings & {
+      dashboard?: DashboardState
+    }
+    link: EcosystemSettings & {
+      dashboard?: DashboardState
+    }
+    docs: EcosystemSettings & {
       api: 'link-only' | 'inline'
       composition: 'composition' | 'options'
       pins: {
@@ -116,6 +129,9 @@ export interface RootState {
       favorites: string[]
       slashSearch: boolean
       railDrawer: boolean
+    }
+    mcp: EcosystemSettings & {
+      seen: boolean
     }
   }
   one: {
@@ -148,9 +164,19 @@ export interface RootState {
       last: string
     }
     quicklinks: boolean
+    ecosystem: {
+      pinned: string[]
+      seen: boolean
+    }
     sync: boolean
     devmode: boolean
   }
+}
+
+export interface DashboardState {
+  [key: string]: any
+  sortBy: DataTableSortItem[]
+  itemsPerPage: number
 }
 
 const migrations = [
@@ -220,7 +246,7 @@ const migrations = [
   },
 ]
 
-function migrateV5ToV6 (v5Data: any): RootState {
+function migrateV5ToV6 (v5Data: any) {
   return ({
     version: 6,
     ecosystem: {
@@ -231,6 +257,8 @@ function migrateV5ToV6 (v5Data: any): RootState {
         showErrors: true,
         wordWrap: false,
       },
+      studio: {},
+      link: {},
       docs: {
         api: v5Data.api || 'link-only',
         composition: v5Data.composition || 'composition',
@@ -278,7 +306,21 @@ function migrateV5ToV6 (v5Data: any): RootState {
   })
 }
 
+export function migrateV6ToV7 (v6Data: any): RootState {
+  return {
+    ...v6Data,
+    version: 7,
+    ecosystem: {
+      ...v6Data.ecosystem,
+      mcp: {
+        seen: false,
+      },
+    },
+  }
+}
+
 export function migrateUserData (data: any): RootState {
   const migratedData = migrations.reduce((acc, migration) => migration(acc), data)
-  return migrateV5ToV6(migratedData)
+  const v6Data = migrateV5ToV6(migratedData)
+  return migrateV6ToV7(v6Data)
 }
