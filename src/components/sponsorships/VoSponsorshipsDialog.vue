@@ -38,9 +38,25 @@
               </div>
             </template>
           </v-empty-state>
+
+          <v-divider class="my-4" />
+
+          <v-btn
+            block
+            color="primary"
+            variant="text"
+            @click="organizationDialog = true"
+          >
+            Sponsored through your organization
+          </v-btn>
         </div>
       </v-main>
     </v-layout>
+
+    <VoSponsorshipsOrganizationDialog
+      v-model="organizationDialog"
+      @success="handleOrganizationClaimSuccess"
+    />
   </VoDialog>
 </template>
 
@@ -49,6 +65,7 @@
   import { mdiHandHeart } from '@mdi/js'
 
   const dialog = defineModel('modelValue', { type: Boolean })
+  const organizationDialog = shallowRef(false)
 
   const query = useQuery<{ one: string }>()
   const one = useOneStore()
@@ -62,4 +79,9 @@
 
     dialog.value = true
   }, { immediate: true })
+
+  function handleOrganizationClaimSuccess () {
+    organizationDialog.value = false
+    dialog.value = false
+  }
 </script>
