@@ -3,6 +3,7 @@ import type { ComputedRef, Ref, ShallowRef } from 'vue'
 
 export type VOneBin = {
   id: string
+  title: string
   content: string
   favorite: boolean
   pinned: boolean
