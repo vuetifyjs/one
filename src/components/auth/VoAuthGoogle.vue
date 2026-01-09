@@ -1,25 +1,14 @@
 <template>
   <v-list-item
-    base-color="#2a2a2a"
+    base-color="#4285F4"
+    prepend-icon="mdiGoogle"
     rounded="pill"
     slim
     variant="flat"
     @click="auth.login('google')"
   >
     <template #title>
-      <span class="text-body-2">
-        <span
-          v-for="(word, index) in words"
-          :key="index"
-          :style="{ color: wordColors[index % wordColors.length] }"
-        >
-          {{ word }}{{ index < words.length - 1 ? ' ' : '' }}
-        </span>
-      </span>
-    </template>
-
-    <template #prepend>
-      <v-icon color="#4285F4" icon="mdiGoogle" />
+      <span class="text-body-2">{{ text }}</span>
     </template>
 
     <template
@@ -44,8 +33,4 @@
 
     return 'Connect Google'
   })
-
-  const words = computed(() => text.value.split(' '))
-
-  const wordColors = ['#EA4335', '#FBBC04', '#34A853']
 </script>
