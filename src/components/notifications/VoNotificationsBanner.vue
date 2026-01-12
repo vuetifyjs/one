@@ -91,6 +91,10 @@
   const user = useUserStore()
   const banners = useBannersStore()
 
+  onMounted(() => {
+    banners.index()
+  })
+
   const banner = computed(() => banners.banner)
   const height = computed(() => banner.value?.metadata.height || (banner.value?.metadata.subtext ? 88 : 48))
   const hasPromotion = computed(() => {

@@ -21,13 +21,11 @@
   // Icons
   import { mdiBellOutline } from '@mdi/js'
 
-  const banners = useBannersStore()
   const user = useUserStore()
   const notifications = useNotificationsStore()
   const dialog = shallowRef(false)
 
-  onMounted(async () => {
+  onMounted(() => {
     notifications.index()
-    banners.index()
   })
 </script>
