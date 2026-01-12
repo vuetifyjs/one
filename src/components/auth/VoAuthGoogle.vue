@@ -1,7 +1,7 @@
 <template>
   <v-list-item
     base-color="#4285F4"
-    prepend-icon="mdiGoogle"
+    :prepend-icon="`svg:${mdiGoogle}`"
     rounded="pill"
     slim
     variant="flat"
@@ -21,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+  import { mdiGoogle } from '@mdi/js'
+
   const auth = useAuthStore()
 
   const hasIdentity = computed(() => {
