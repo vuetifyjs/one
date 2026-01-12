@@ -26,6 +26,7 @@ export {
   mdiFileDocument,
   mdiFullscreen,
   mdiFullscreenExit,
+  mdiGoogle,
   mdiHandHeart,
   mdiHandHeartOutline,
   mdiInboxFullOutline,

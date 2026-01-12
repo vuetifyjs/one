@@ -57,7 +57,7 @@ export interface AuthState {
   isEditor: Ref<boolean>
   verify: (force?: boolean) => Promise<void>
   findIdentity: (provider: string) => VOneIdentity | undefined
-  login: (provider?: 'github' | 'discord' | 'shopify' | 'opencollective') => Promise<void>
+  login: (provider?: 'github' | 'discord' | 'shopify' | 'google' | 'opencollective') => Promise<void>
   logout: (identity?: string) => Promise<void>
   lastLoginProvider: () => string | null
   sync: () => Promise<void>
@@ -171,7 +171,7 @@ export const useAuthStore = defineStore('auth', (): AuthState => {
 
   verify.promise = null as Promise<void> | null
 
-  async function login (provider: 'github' | 'discord' | 'shopify' | 'opencollective' = 'github') {
+  async function login (provider: 'github' | 'discord' | 'shopify' | 'google' | 'opencollective' = 'github') {
     isLoading.value = true
 
     const redirectUrl = `${http.url}/auth/${provider}/redirect`

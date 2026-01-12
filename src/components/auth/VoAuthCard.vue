@@ -32,6 +32,8 @@
     >
       <VoAuthGithub class="mb-3" />
 
+      <VoAuthGoogle class="mb-3" />
+
       <VoAuthDiscord class="mb-3" />
 
       <VoAuthShopify class="mb-3" />

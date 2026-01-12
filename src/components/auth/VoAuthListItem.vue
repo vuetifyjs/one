@@ -43,6 +43,8 @@
           <div class="pa-4 d-flex flex-column ga-4">
             <VoAuthGithub @click="social = false" />
 
+            <VoAuthGoogle @click="social = false" />
+
             <VoAuthDiscord @click="social = false" />
 
             <VoAuthShopify @click="social = false" />

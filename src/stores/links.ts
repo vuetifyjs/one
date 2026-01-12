@@ -17,7 +17,13 @@ export interface VOneLink {
   updatedAt: string
   visits?: number
   totalVisits?: number
+  lastVisitedAt?: string | null
   scoped: boolean
+  // Content link fields
+  contentType?: 'url' | 'content'
+  payload?: string | null
+  language?: string | null
+  source?: 'bin' | 'play' | 'manual'
 }
 
 export interface CreateLinkOptions {
@@ -31,12 +37,18 @@ export interface CreateLinkOptions {
   password?: string | null
   timer?: number | null
   expiresAt?: Date | null
+  // Content link fields
+  contentType?: 'url' | 'content'
+  payload?: string | null
+  language?: string | null
+  source?: 'bin' | 'play' | 'manual'
 }
 
 export interface LinksState {
   isLoading: ShallowRef<boolean>
   isSaving: ShallowRef<boolean>
   canCreate: ComputedRef<boolean>
+  canUseCustomSlug: ComputedRef<boolean>
   pinned: ComputedRef<VOneLink[]>
   favorites: ComputedRef<VOneLink[]>
   all: Ref<VOneLink[]>
@@ -55,8 +67,16 @@ export const useLinksStore = defineStore('links', (): LinksState => {
   const favorites = computed(() => all.value.filter(l => l.favorite))
   const pinned = computed(() => all.value.filter(l => l.pinned))
 
-  // Lazily access auth/one stores to avoid lifecycle hook issues
+  // Lazily access auth store to avoid lifecycle hook issues
+  // Any authenticated user can create random links
+  // Subscribers get additional features (custom slugs, analytics)
   const canCreate = computed(() => {
+    const auth = useAuthStore()
+    return !!auth.user
+  })
+
+  // Premium features: custom slugs, password protection, timers
+  const canUseCustomSlug = computed(() => {
     const auth = useAuthStore()
     const one = useOneStore()
     return auth.user?.isAdmin || one.isSubscriber
@@ -80,7 +100,7 @@ export const useLinksStore = defineStore('links', (): LinksState => {
 
   async function create (options: CreateLinkOptions): Promise<VOneLink | undefined> {
     if (!canCreate.value) {
-      queue.showError('Must be a Vuetify One subscriber to create links')
+      queue.showError('Must be signed in to create links')
       return
     }
 
@@ -99,6 +119,11 @@ export const useLinksStore = defineStore('links', (): LinksState => {
           password: options.password ?? null,
           timer: options.timer ?? null,
           expiresAt: options.expiresAt ?? null,
+          // Content link fields
+          contentType: options.contentType,
+          payload: options.payload,
+          language: options.language,
+          source: options.source,
         },
       })
 
@@ -116,6 +141,7 @@ export const useLinksStore = defineStore('links', (): LinksState => {
     isLoading,
     isSaving,
     canCreate,
+    canUseCustomSlug,
     pinned,
     favorites,
     all,
