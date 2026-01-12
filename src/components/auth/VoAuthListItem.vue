@@ -48,6 +48,8 @@
             <VoAuthDiscord @click="social = false" />
 
             <VoAuthShopify @click="social = false" />
+
+            <VoAuthOpenCollective @click="social = false" />
           </div>
         </v-sheet>
       </v-expand-transition>
@@ -56,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-  // Icons
+// Icons
   import { mdiSync, mdiSyncOff } from '@mdi/js'
 
   const auth = useAuthStore()
