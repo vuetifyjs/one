@@ -31,6 +31,17 @@ interface Invoice {
   pdf: string
 }
 
+interface Activity {
+  id: string
+  slug: string
+  title: string | null
+  createdAt: string
+  updatedAt: string
+  favorite: boolean
+  pinned: boolean
+  property: string
+}
+
 interface OneState {
   info: Ref<Info | null>
   interval: ComputedRef<SubscriptionItemPlan['interval'] | undefined>
@@ -62,6 +73,7 @@ interface OneState {
   resetQuery: () => void
   subscribe: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) => Promise<void>
   subscriptionInfo: () => Promise<any>
+  recentActivity: () => Promise<Activity[]>
 }
 
 export const useOneStore = defineStore('one', (): OneState => {
@@ -238,6 +250,19 @@ export const useOneStore = defineStore('one', (): OneState => {
     }
   }
 
+  async function recentActivity () {
+    try {
+      isLoading.value = true
+      const res = await http.get('/one/activity')
+
+      return res
+    } catch (error: any) {
+      queue.showError(error?.message ?? 'Error fetching recent activity')
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   function resetQuery () {
     router.push({
       query: {
@@ -257,6 +282,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     sessionId,
     subscription,
     monthlyTotal,
+    recentActivity,
 
     hasBilling,
     isLoading,
