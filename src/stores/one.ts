@@ -254,8 +254,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     try {
       isLoading.value = true
       const res = await http.get('/one/activity')
-
-      return res
+      return res.items
     } catch (error: any) {
       queue.showError(error?.message ?? 'Error fetching recent activity')
     } finally {
