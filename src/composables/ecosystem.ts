@@ -74,7 +74,7 @@ export const ECOSYSTEM_ACTIONS: EcosystemAction[] = [
     id: 'figma',
     name: 'Vuetify Figma',
     description: 'Figma design resources',
-    href: 'https://www.figma.com/community/file/768809027799962739',
+    href: 'https://store.vuetifyjs.com/products/vuetify-ui-kit-figma',
     icon: '$vuetify-figma',
   },
 ]
