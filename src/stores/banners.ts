@@ -87,10 +87,11 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       if (user.one.banners.read.includes(slug)) {
         return false
       }
-      if (
-        (_site.includes('dev') && import.meta.env.MODE === 'development')
-        || _site.includes('*')
-      ) {
+      // In dev mode, show all banners regardless of site
+      if (import.meta.env.MODE === 'development') {
+        return true
+      }
+      if (_site.includes('*')) {
         return true
       }
 
