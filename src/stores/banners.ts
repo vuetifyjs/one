@@ -12,7 +12,7 @@ export interface VOneBanner {
   metadata: {
     active: boolean
     closable: boolean
-    priority?: number
+    priority?: number | { key: string; value: string }
     color: string
     label: string
     height: number
@@ -99,8 +99,14 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
 
     // Sort by priority (high first), then by created_at (newest first)
     const sorted = eligible.sort((a, b) => {
-      const priorityA = a.metadata.priority ?? 0
-      const priorityB = b.metadata.priority ?? 0
+      // Handle priority as number or CosmicJS object { key, value }
+      const getPriority = (p: any) => {
+        if (typeof p === 'number') return p
+        if (p && typeof p === 'object' && 'key' in p) return Number(p.key) || 0
+        return 0
+      }
+      const priorityA = getPriority(a.metadata.priority)
+      const priorityB = getPriority(b.metadata.priority)
       if (priorityB !== priorityA) {
         return priorityB - priorityA
       }
