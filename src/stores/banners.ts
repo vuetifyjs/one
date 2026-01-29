@@ -12,6 +12,7 @@ export interface VOneBanner {
   metadata: {
     active: boolean
     closable: boolean
+    priority?: number | { key: string; value: string }
     color: string
     label: string
     height: number
@@ -61,16 +62,19 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       return undefined
     }
 
+    // Cooldown: 3 days since last banner interaction
     if (user.one.banners.last) {
       const last = new Date(user.one.banners.last)
-      const ago = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      const cooldownMs = 3 * 24 * 60 * 60 * 1000 // 3 days
+      const ago = new Date(Date.now() - cooldownMs)
 
       if (last > ago) {
         return undefined
       }
     }
 
-    return all.value.find(({
+    // Filter eligible banners
+    const eligible = all.value.filter(({
       slug,
       metadata: {
         site: _site,
@@ -83,15 +87,35 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       if (user.one.banners.read.includes(slug)) {
         return false
       }
-      if (
-        (_site.includes('dev') && import.meta.env.MODE === 'development')
-        || _site.includes('*')
-      ) {
+      // In dev mode, show all banners regardless of site
+      if (import.meta.env.MODE === 'development') {
+        return true
+      }
+      if (_site.includes('*')) {
         return true
       }
 
       return _site.some(s => site.id.includes(s))
     })
+
+    // Sort by priority (high first), then by created_at (newest first)
+    const sorted = eligible.toSorted((a, b) => {
+      // Handle priority as number, string, or CosmicJS object { key, value }
+      function getPriority (p: any) {
+        if (typeof p === 'number') return p
+        if (typeof p === 'string') return Number(p) || 0
+        if (p && typeof p === 'object' && 'key' in p) return Number(p.key) || 0
+        return 0
+      }
+      const priorityA = getPriority(a.metadata.priority)
+      const priorityB = getPriority(b.metadata.priority)
+      if (priorityB !== priorityA) {
+        return priorityB - priorityA
+      }
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    })
+
+    return sorted[0]
   })
 
   const server = computed(() => {
