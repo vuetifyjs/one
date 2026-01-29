@@ -12,6 +12,7 @@ export interface VOneBanner {
   metadata: {
     active: boolean
     closable: boolean
+    priority?: number
     color: string
     label: string
     height: number
@@ -61,16 +62,19 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       return undefined
     }
 
+    // Cooldown: 3 days since last banner interaction
     if (user.one.banners.last) {
       const last = new Date(user.one.banners.last)
-      const ago = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      const cooldownMs = 3 * 24 * 60 * 60 * 1000 // 3 days
+      const ago = new Date(Date.now() - cooldownMs)
 
       if (last > ago) {
         return undefined
       }
     }
 
-    return all.value.find(({
+    // Filter eligible banners
+    const eligible = all.value.filter(({
       slug,
       metadata: {
         site: _site,
@@ -92,6 +96,18 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
 
       return _site.some(s => site.id.includes(s))
     })
+
+    // Sort by priority (high first), then by created_at (newest first)
+    const sorted = eligible.sort((a, b) => {
+      const priorityA = a.metadata.priority ?? 0
+      const priorityB = b.metadata.priority ?? 0
+      if (priorityB !== priorityA) {
+        return priorityB - priorityA
+      }
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    })
+
+    return sorted[0]
   })
 
   const server = computed(() => {
