@@ -99,9 +99,10 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
 
     // Sort by priority (high first), then by created_at (newest first)
     const sorted = eligible.sort((a, b) => {
-      // Handle priority as number or CosmicJS object { key, value }
+      // Handle priority as number, string, or CosmicJS object { key, value }
       const getPriority = (p: any) => {
         if (typeof p === 'number') return p
+        if (typeof p === 'string') return Number(p) || 0
         if (p && typeof p === 'object' && 'key' in p) return Number(p.key) || 0
         return 0
       }
