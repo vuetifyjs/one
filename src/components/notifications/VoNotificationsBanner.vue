@@ -44,7 +44,7 @@
           <template #default="{ isHovering, props: activatorProps }">
             <v-btn
               :append-icon="`svg:${mdiOpenInNew}`"
-              class="text-none me-2"
+              class="text-none ms-4 me-2"
               :color="banner.metadata.link_color"
               :elevation="isHovering ? 8 : 0"
               :title="banner.metadata.link_text"
