@@ -1,0 +1,94 @@
+{
+  "name": "@vuetify/one",
+  "version": "2.13.2",
+  "private": false,
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuetifyjs/one",
+    "directory": "packages/one"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./stores/auth": "./dist/stores/auth.js",
+    "./styles": {
+      "import": "./dist/one.css"
+    },
+    "./subpath/*": "./dist/subpath/*.js"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --config vite.build.config.ts && pnpm build:types",
+    "build:dev": "vite build --mode development --config vite.config.ts",
+    "build:types": "rimraf types-temp && vue-tsc --pretty -p tsconfig.json && rollup --config rollup.types.config.js && rimraf types-temp",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "release": "pnpm build && bumpp",
+    "watch": "pnpm build:dev --watch",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .ts,.vue",
+    "lint:fix": "eslint . --ext .ts,.vue --fix",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "@mdi/js": "7.4.47",
+    "lodash-es": "^4.17.21",
+    "pinia": "^3.0.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.0.0",
+    "vuetify": "^3.8.0"
+  },
+  "dependencies": {
+    "@vuetify/auth": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.28.4",
+    "@fontsource/roboto": "^5.2.6",
+    "@mdi/js": "7.4.47",
+    "@rollup/plugin-alias": "^5.1.1",
+    "@types/lodash-es": "catalog:",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vueuse/router": "^13.9.0",
+    "bumpp": "catalog:",
+    "conventional-changelog-cli": "^5.0.0",
+    "conventional-changelog-vuetify": "^2.0.2",
+    "conventional-github-releaser": "^3.1.5",
+    "core-js": "^3.45.1",
+    "date-fns": "^4.1.0",
+    "jsdom": "^26.1.0",
+    "lodash-es": "catalog:",
+    "pinia": "catalog:",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.50.1",
+    "rollup-plugin-dts": "^6.2.3",
+    "sass": "catalog:",
+    "taze": "^19.6.0",
+    "typescript": "catalog:",
+    "unplugin-auto-import": "^20.1.0",
+    "unplugin-fonts": "^1.4.0",
+    "unplugin-vue-components": "^29.0.0",
+    "unplugin-vue-router": "^0.15.0",
+    "vite": "catalog:",
+    "vite-plugin-pages": "^0.33.1",
+    "vite-plugin-vue-layouts-next": "^1.0.0",
+    "vite-plugin-vuetify": "^2.1.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:",
+    "vue-tsc": "catalog:",
+    "vuetify": "catalog:"
+  }
+}

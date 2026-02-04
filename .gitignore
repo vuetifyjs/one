@@ -1,9 +1,11 @@
 .DS_Store
 node_modules
 /dist
+packages/*/dist
 /.knit
 knit.lock
 /types-temp
+packages/*/types-temp
 
 # local env files
 .env.local

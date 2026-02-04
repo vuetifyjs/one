@@ -1,19 +1,9 @@
 import vuetify from 'eslint-config-vuetify'
 
-export default vuetify(
-  {
-    perfectionist: {
-      import: false,
-    },
-  },
-  {
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-    },
-    languageOptions: {
-      globals: {
-        RequestInit: true,
-      },
-    },
-  },
-)
+export default vuetify({
+  ignores: [
+    '**/dist/**',
+    '**/node_modules/**',
+    '**/types-temp/**',
+  ],
+})

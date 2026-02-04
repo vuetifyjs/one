@@ -125,7 +125,7 @@ export const useTeamStore = defineStore('team', () => {
   }
 
   const isTeamOwner = computed(() => {
-    return auth.user?.id === auth.user?.team?.owner.id
+    return auth.user?.id === auth.user?.team?.owner?.id
   })
 
   return {

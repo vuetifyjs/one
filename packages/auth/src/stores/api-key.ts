@@ -1,13 +1,12 @@
-interface AccessToken {
-  id: string
-  apiKey: string
-  createdAt: string
-  updatedAt: string
-}
+import { computed, ref, shallowRef, readonly } from 'vue'
+import { defineStore } from 'pinia'
+import { useHttpStore } from './http'
+import type { VOneAccessToken } from '../types'
 
-export const useApiKeyStore = defineStore('api-key', () => {
+export const useApiKeyStore = defineStore('auth-api-key', () => {
   const http = useHttpStore()
-  const accessToken = ref<AccessToken | null>(null)
+
+  const accessToken = ref<VOneAccessToken | null>(null)
   const regenerated = shallowRef(false)
 
   const key = computed(() => accessToken.value?.apiKey || '')
@@ -20,7 +19,7 @@ export const useApiKeyStore = defineStore('api-key', () => {
     return `${apiKey.slice(0, 6)}...${apiKey.slice(-6)}`
   })
 
-  async function generate (regenerate = false) {
+  async function generate(regenerate = false): Promise<VOneAccessToken> {
     if (!regenerated.value && regenerate) {
       regenerated.value = true
     }
@@ -31,12 +30,16 @@ export const useApiKeyStore = defineStore('api-key', () => {
     return token
   }
 
-  async function fetch () {
-    const res = await http.fetch('/one/mcp/getToken')
-    if (res.apiKey) {
-      accessToken.value = res
+  async function fetch(): Promise<VOneAccessToken | null> {
+    try {
+      const res = await http.fetch<VOneAccessToken>('/one/mcp/getToken')
+      if (res.apiKey) {
+        accessToken.value = res
+      }
+      return res
+    } catch {
+      return null
     }
-    return res
   }
 
   return {
@@ -48,3 +51,5 @@ export const useApiKeyStore = defineStore('api-key', () => {
     fetch,
   }
 })
+
+export type ApiKeyStore = ReturnType<typeof useApiKeyStore>

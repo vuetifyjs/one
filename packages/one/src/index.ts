@@ -17,19 +17,32 @@ import VoSpot from '@/components/spots/VoSpot.vue'
 import type { App } from 'vue'
 import type { PiniaPluginContext } from 'pinia'
 
+// Re-export from @vuetify/auth
+export {
+  createAuth,
+  createAuthPlugin,
+  useApiKeyStore,
+  useDeviceStore,
+  type AuthConfig,
+  type AuthPluginOptions,
+  type VOneAccessToken,
+  type DeviceAuthStatus,
+  type DeviceCode,
+} from '@vuetify/auth'
+
 // Icons
 export { aliases } from '@/icons'
-export type { VOneIdentity, VOneSponsorship, VOneUser } from '@/stores/auth'
+export type { VOneIdentity, VOneSponsorship, VOneUser, VOneRole } from '@/stores/auth'
 
 // Stores
 export { useAuthStore } from '@/stores/auth'
+export { useHttpStore } from '@/stores/http'
 export type { VOneBanner } from '@/stores/banners'
 export { useBannersStore } from '@/stores/banners'
 export type { VOneBin } from '@/stores/bins'
 export { useBinsStore } from '@/stores/bins'
 export type { VOneSendowlDownload, VOneSendowlDownloadItem } from '@/stores/downloads'
 export { useDownloadsStore } from '@/stores/downloads'
-export { useHttpStore } from '@/stores/http'
 export type { CreateLinkOptions, VOneLink } from '@/stores/links'
 export { useLinksStore } from '@/stores/links'
 export type { VOneNotification } from '@/stores/notifications'
@@ -78,7 +91,11 @@ export function one (id: string[], url: string) {
   return function (context: PiniaPluginContext) {
     const store = context.store
 
-    store.url = url
+    // Configure HTTP stores (both @vuetify/auth's and legacy)
+    if (store.$id === 'auth-http' || store.$id === 'http') {
+      store.url = url
+      return
+    }
 
     if (store.$id !== 'site') {
       return
