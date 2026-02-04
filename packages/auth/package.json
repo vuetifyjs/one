@@ -58,6 +58,7 @@
     "vue": "^3.5.0"
   },
   "devDependencies": {
+    "happy-dom": "catalog:",
     "pinia": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",

@@ -9,6 +9,7 @@ catalog:
   bumpp: ^10.3.2
   eslint: ^9.27.0
   eslint-config-vuetify: ^4.1.0
+  happy-dom: ^20.1.0
   lodash-es: ^4.17.21
   pinia: ^3.0.3
   sass: ^1.92.1

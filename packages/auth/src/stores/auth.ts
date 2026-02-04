@@ -42,10 +42,16 @@ export const useAuthStore = defineStore('auth', () => {
       return (verify as any).promise
     }
 
+    // Skip if no URL configured
+    if (!http.url) {
+      user.value = null
+      return null
+    }
+
     if (
       !force
       && !document.cookie.includes('sx=1')
-      && location.hostname.match(/([^.]+\.[^.]+)$/)?.[1]
+      && location.hostname?.match(/([^.]+\.[^.]+)$/)?.[1]
         === new URL(http.url).hostname.match(/([^.]+\.[^.]+)$/)?.[1]
     ) {
       user.value = null
@@ -54,10 +60,19 @@ export const useAuthStore = defineStore('auth', () => {
 
     isLoading.value = true
 
-    ;(verify as any).promise = fetch(`${http.url}/auth/verify`, {
+    const fetchPromise = fetch(`${http.url}/auth/verify`, {
       credentials: 'include',
       cache: force ? 'reload' : undefined,
-    }).then(
+    })
+
+    // Guard against fetch returning undefined (can happen in tests)
+    if (!fetchPromise || typeof fetchPromise.then !== 'function') {
+      isLoading.value = false
+      user.value = null
+      return null
+    }
+
+    ;(verify as any).promise = fetchPromise.then(
       async res => {
         if (res.ok || res.status === 401) {
           const data: AuthVerifyResponse = await res.json()

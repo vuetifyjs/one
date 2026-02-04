@@ -33,10 +33,11 @@ export const useApiKeyStore = defineStore('auth-api-key', () => {
   async function fetch(): Promise<VOneAccessToken | null> {
     try {
       const res = await http.fetch<VOneAccessToken>('/one/mcp/getToken')
-      if (res.apiKey) {
+      if (res?.apiKey) {
         accessToken.value = res
+        return res
       }
-      return res
+      return null
     } catch {
       return null
     }
