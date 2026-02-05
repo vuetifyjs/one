@@ -35,7 +35,7 @@ describe('http store', () => {
 
       expect(mockFetch).toHaveBeenCalledWith(
         'https://api.example.com/test',
-        expect.objectContaining({ credentials: 'include' })
+        expect.objectContaining({ credentials: 'include' }),
       )
     })
 
@@ -126,7 +126,7 @@ describe('http store', () => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ foo: 'bar' }),
-        })
+        }),
       )
     })
   })
@@ -164,7 +164,7 @@ describe('http store', () => {
 
       expect(mockFetch).toHaveBeenCalledWith(
         'https://api.example.com/test',
-        expect.objectContaining({ method: 'DELETE' })
+        expect.objectContaining({ method: 'DELETE' }),
       )
     })
   })

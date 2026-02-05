@@ -14,7 +14,6 @@ catalog:
   pinia: ^3.0.3
   sass: ^1.92.1
   tsdown: ^0.16.8
-  tsx: ^4.21.0
   typescript: ^5.8.3
   vite: ^7.0.7
   vitest: ^3.2.4

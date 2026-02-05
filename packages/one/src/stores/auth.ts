@@ -1,28 +1,24 @@
 // Re-export types from @vuetify/auth
-export type {
-  VOneIdentity,
-  VOneSponsorship,
-  VOneUser,
-  VOneRole,
-  VOneTeam,
-  VOneTeamMember,
-  AuthProvider,
-} from '@vuetify/auth'
-
 // Import the base auth store
 import {
   useAuthStore as useBaseAuthStore,
   useHttpStore,
   type AuthVerifyResponse,
-  type VOneUser,
 } from '@vuetify/auth'
 import { merge } from 'lodash-es'
 import { DEFAULT_USER, useUserStore } from './user'
 import { migrateV6ToV7 } from './migrations'
 import type { VOneTeam } from './team'
 
-// Types
-import type { Ref, ShallowRef } from 'vue'
+export type {
+  AuthProvider,
+  VOneIdentity,
+  VOneRole,
+  VOneSponsorship,
+  VOneTeam,
+  VOneTeamMember,
+  VOneUser,
+} from '@vuetify/auth'
 
 // Globals
 const IN_BROWSER = typeof window !== 'undefined'
@@ -86,7 +82,7 @@ export const useAuthStore = defineStore('auth', () => {
     externalUpdate = false
   })
 
-  async function sync() {
+  async function sync () {
     await nextTick()
 
     if (!user.value || !userStore.one.sync) {
@@ -109,7 +105,7 @@ export const useAuthStore = defineStore('auth', () => {
         // The user's team from auth response is a partial type
         // The team store expects the full type from /one/team endpoint
         // We only set team.team if it has the full structure
-        const userTeam = response.user.team as VOneTeam & { inviteCode?: string; members?: any[]; owner?: any }
+        const userTeam = response.user.team as VOneTeam & { inviteCode?: string, members?: any[], owner?: any }
         if (userTeam.inviteCode && userTeam.members && userTeam.owner) {
           team.team = userTeam as VOneTeam
         }
@@ -120,11 +116,11 @@ export const useAuthStore = defineStore('auth', () => {
     },
   })
 
-  async function verify(force = false) {
+  async function verify (force = false) {
     return baseAuth.verify(force)
   }
 
-  async function login(provider: 'github' | 'discord' | 'shopify' | 'google' | 'opencollective' = 'github') {
+  async function login (provider: 'github' | 'discord' | 'shopify' | 'google' | 'opencollective' = 'github') {
     await baseAuth.login(provider)
 
     // After successful login (handled by callback), navigate and sync
@@ -135,7 +131,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function logout(identity?: string) {
+  async function logout (identity?: string) {
     await baseAuth.logout(identity)
 
     router.push({
@@ -144,11 +140,11 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
-  function findIdentity(provider: string) {
+  function findIdentity (provider: string) {
     return baseAuth.findIdentity(provider)
   }
 
-  function lastLoginProvider() {
+  function lastLoginProvider () {
     return baseAuth.lastLoginProvider()
   }
 

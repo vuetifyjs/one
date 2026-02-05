@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-document-cookie */
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { useAuthStore } from '../auth'
@@ -295,7 +296,7 @@ describe('auth store', () => {
       expect(mockOpen).toHaveBeenCalledWith(
         '',
         'vuetify:authorize:popup',
-        expect.stringContaining('popup')
+        expect.stringContaining('popup'),
       )
     })
 
@@ -313,7 +314,7 @@ describe('auth store', () => {
       await auth.login('shopify')
 
       expect(mockAssign).toHaveBeenCalledWith(
-        expect.stringContaining('/auth/shopify/redirect')
+        expect.stringContaining('/auth/shopify/redirect'),
       )
     })
   })

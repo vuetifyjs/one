@@ -17,41 +17,29 @@ import VoSpot from '@/components/spots/VoSpot.vue'
 import type { App } from 'vue'
 import type { PiniaPluginContext } from 'pinia'
 
-// Re-export from @vuetify/auth
-export {
-  createAuth,
-  createAuthPlugin,
-  useApiKeyStore,
-  useDeviceStore,
-  type AuthConfig,
-  type AuthPluginOptions,
-  type VOneAccessToken,
-  type DeviceAuthStatus,
-  type DeviceCode,
-} from '@vuetify/auth'
-
 // Icons
 export { aliases } from '@/icons'
-export type { VOneIdentity, VOneSponsorship, VOneUser, VOneRole } from '@/stores/auth'
 
+export type { VOneIdentity, VOneRole, VOneSponsorship, VOneUser } from '@/stores/auth'
 // Stores
 export { useAuthStore } from '@/stores/auth'
-export { useHttpStore } from '@/stores/http'
+
 export type { VOneBanner } from '@/stores/banners'
 export { useBannersStore } from '@/stores/banners'
 export type { VOneBin } from '@/stores/bins'
 export { useBinsStore } from '@/stores/bins'
 export type { VOneSendowlDownload, VOneSendowlDownloadItem } from '@/stores/downloads'
 export { useDownloadsStore } from '@/stores/downloads'
+export { useHttpStore } from '@/stores/http'
 export type { CreateLinkOptions, VOneLink } from '@/stores/links'
 export { useLinksStore } from '@/stores/links'
 export type { VOneNotification } from '@/stores/notifications'
 export { useNotificationsStore } from '@/stores/notifications'
 export { useOneStore } from '@/stores/one'
-
 export type { VOnePlay } from '@/stores/plays'
 
 export { usePlaysStore } from '@/stores/plays'
+
 export type { ShopifyProduct } from '@/stores/products'
 export { useProductsStore } from '@/stores/products'
 export type { VOnePromotion } from '@/stores/promotions'
@@ -67,6 +55,18 @@ export { useSpotsStore } from '@/stores/spots'
 export type { VOneTeam } from '@/stores/team'
 export { useTeamStore } from '@/stores/team'
 export { useUserStore } from '@/stores/user'
+// Re-export from @vuetify/auth
+export {
+  type AuthConfig,
+  type AuthPluginOptions,
+  createAuth,
+  createAuthPlugin,
+  type DeviceAuthStatus,
+  type DeviceCode,
+  useApiKeyStore,
+  useDeviceStore,
+  type VOneAccessToken,
+} from '@vuetify/auth'
 
 export function createOne () {
   function install (app: App) {

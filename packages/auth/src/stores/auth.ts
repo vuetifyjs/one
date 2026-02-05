@@ -1,4 +1,4 @@
-import { computed, ref, shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { defineStore } from 'pinia'
 import { useHttpStore } from './http'
 import type {
@@ -33,11 +33,11 @@ export const useAuthStore = defineStore('auth', () => {
   const isAdmin = computed(() => ['super', 'admin'].includes(user.value?.role ?? ''))
   const isEditor = computed(() => ['super', 'admin', 'editor'].includes(user.value?.role ?? ''))
 
-  function setCallbacks(cbs: AuthCallbacks) {
+  function setCallbacks (cbs: AuthCallbacks) {
     callbacks.value = cbs
   }
 
-  async function verify(force = false): Promise<AuthVerifyResponse | null> {
+  async function verify (force = false): Promise<AuthVerifyResponse | null> {
     if ((verify as any).promise) {
       return (verify as any).promise
     }
@@ -52,7 +52,7 @@ export const useAuthStore = defineStore('auth', () => {
       !force
       && !document.cookie.includes('sx=1')
       && location.hostname?.match(/([^.]+\.[^.]+)$/)?.[1]
-        === new URL(http.url).hostname.match(/([^.]+\.[^.]+)$/)?.[1]
+      === new URL(http.url).hostname.match(/([^.]+\.[^.]+)$/)?.[1]
     ) {
       user.value = null
       return null
@@ -86,8 +86,8 @@ export const useAuthStore = defineStore('auth', () => {
           return null
         }
       },
-      (err) => {
-        callbacks.value.onError?.(err)
+      error => {
+        callbacks.value.onError?.(error)
         return null
       },
     ).finally(() => {
@@ -98,7 +98,7 @@ export const useAuthStore = defineStore('auth', () => {
     return (verify as any).promise
   }
 
-  async function login(provider: AuthProvider = 'github') {
+  async function login (provider: AuthProvider = 'github') {
     isLoading.value = true
 
     const redirectUrl = `${http.url}/auth/${provider}/redirect`
@@ -130,7 +130,7 @@ export const useAuthStore = defineStore('auth', () => {
     let interval = -1
     let timeout = -1
 
-    function messageHandler(e: MessageEvent) {
+    function messageHandler (e: MessageEvent) {
       if (e.origin !== http.url) {
         return
       }
@@ -157,7 +157,7 @@ export const useAuthStore = defineStore('auth', () => {
       cleanup()
     }
 
-    function cleanup() {
+    function cleanup () {
       window.removeEventListener('message', messageHandler)
       window.clearInterval(interval)
       window.clearTimeout(timeout)
@@ -181,7 +181,7 @@ export const useAuthStore = defineStore('auth', () => {
     }, 120 * 1000)
   }
 
-  async function logout(identity?: string) {
+  async function logout (identity?: string) {
     isLoading.value = true
 
     const url = identity ? `/auth/${identity}/logout` : '/auth/logout'
@@ -196,11 +196,11 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function findIdentity(provider: string): VOneIdentity | undefined {
+  function findIdentity (provider: string): VOneIdentity | undefined {
     return user.value?.identities.find(i => i.provider === provider)
   }
 
-  function lastLoginProvider(): string | null {
+  function lastLoginProvider (): string | null {
     if (!IN_BROWSER) {
       return null
     }

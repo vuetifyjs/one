@@ -119,7 +119,7 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { VOneIdentity, VOneSponsorship, VOneUser, VOneRole, VOneTeamMember, AuthProvider } from './src/stores/auth'
+  export type { AuthProvider, VOneIdentity, VOneRole, VOneSponsorship, VOneTeamMember, VOneUser } from './src/stores/auth'
   import('./src/stores/auth')
   // @ts-ignore
   export type { VOneBanner } from './src/stores/banners'

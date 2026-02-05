@@ -19,7 +19,7 @@ export const useApiKeyStore = defineStore('auth-api-key', () => {
     return `${apiKey.slice(0, 6)}...${apiKey.slice(-6)}`
   })
 
-  async function generate(regenerate = false): Promise<VOneAccessToken> {
+  async function generate (regenerate = false): Promise<VOneAccessToken> {
     if (!regenerated.value && regenerate) {
       regenerated.value = true
     }
@@ -30,7 +30,7 @@ export const useApiKeyStore = defineStore('auth-api-key', () => {
     return token
   }
 
-  async function fetch(): Promise<VOneAccessToken | null> {
+  async function fetch (): Promise<VOneAccessToken | null> {
     try {
       const res = await http.fetch<VOneAccessToken>('/one/mcp/getToken')
       if (res?.apiKey) {

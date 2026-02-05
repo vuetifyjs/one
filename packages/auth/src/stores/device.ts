@@ -21,7 +21,7 @@ export const useDeviceStore = defineStore('auth-device', () => {
   /**
    * Authorize a device code (called from the web UI after user authenticates)
    */
-  async function authorize(code: string): Promise<boolean> {
+  async function authorize (code: string): Promise<boolean> {
     if (!auth.isAuthenticated) {
       error.value = 'Must be authenticated to authorize device'
       return false
@@ -32,9 +32,9 @@ export const useDeviceStore = defineStore('auth-device', () => {
       await http.post(`/auth/device/${code}/authorize`)
       status.value = 'authorized'
       return true
-    } catch (err: any) {
+    } catch (error_: any) {
       status.value = 'error'
-      error.value = err.message
+      error.value = error_.message
       return false
     }
   }
@@ -42,7 +42,7 @@ export const useDeviceStore = defineStore('auth-device', () => {
   /**
    * Get the status of a device code (used by the auth page to show status)
    */
-  async function getStatus(code: string): Promise<DeviceAuthStatus> {
+  async function getStatus (code: string): Promise<DeviceAuthStatus> {
     try {
       const res = await http.get<{ status: DeviceAuthStatus }>(`/auth/device/${code}/status`)
       return res.status
@@ -51,7 +51,7 @@ export const useDeviceStore = defineStore('auth-device', () => {
     }
   }
 
-  function reset() {
+  function reset () {
     deviceCode.value = null
     status.value = 'idle'
     error.value = null
