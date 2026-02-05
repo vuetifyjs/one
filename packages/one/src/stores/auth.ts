@@ -15,7 +15,6 @@ export type {
   VOneIdentity,
   VOneRole,
   VOneSponsorship,
-  VOneTeam,
   VOneTeamMember,
   VOneUser,
 } from '@vuetify/auth'
