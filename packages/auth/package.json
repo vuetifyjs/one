@@ -51,7 +51,8 @@
   "scripts": {
     "build": "tsdown",
     "typecheck": "vue-tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
     "pinia": "^3.0.0",
