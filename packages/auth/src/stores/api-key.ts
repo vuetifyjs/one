@@ -25,7 +25,9 @@ export const useApiKeyStore = defineStore('auth-api-key', () => {
     }
 
     const slug = regenerate ? 'regenerate' : 'generate'
-    const token = await http[regenerate ? 'post' : 'fetch'](`/one/mcp/${slug}`)
+    const token = regenerate
+      ? await http.post<VOneAccessToken>(`/one/mcp/${slug}`)
+      : await http.fetch<VOneAccessToken>(`/one/mcp/${slug}`)
     accessToken.value = token
     return token
   }

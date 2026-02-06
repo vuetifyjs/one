@@ -55,3 +55,5 @@ export const useHttpStore = defineStore('auth-http', {
     },
   },
 })
+
+export type HttpStore = ReturnType<typeof useHttpStore>

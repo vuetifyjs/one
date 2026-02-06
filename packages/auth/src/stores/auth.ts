@@ -20,13 +20,34 @@ export interface AuthStoreState {
   isEditor: boolean
 }
 
+/**
+ * Generate a cryptographic random state for OAuth CSRF protection
+ */
+function generateOAuthState (): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID()
+  }
+  // Fallback for older browsers
+  return Math.random().toString(36).slice(2) + Date.now().toString(36)
+}
+
+/**
+ * Check if session cookie exists (more robust than string includes)
+ */
+function hasSessionCookie (): boolean {
+  return document.cookie.split(';').some(c => c.trim().startsWith('sx='))
+}
+
 export const useAuthStore = defineStore('auth', () => {
   const http = useHttpStore()
 
   const dialog = ref(false)
   const user = ref<VOneUser | null>(null)
   const isLoading = shallowRef(false)
-  const callbacks = ref<AuthCallbacks>({})
+  const callbacks = shallowRef<AuthCallbacks>({})
+
+  // Promise cache for deduplicating concurrent verify calls
+  const verifyPromise = shallowRef<Promise<AuthVerifyResponse | null> | null>(null)
 
   const isAuthenticated = computed(() => !!user.value)
   const isSuper = computed(() => user.value?.role === 'super')
@@ -38,8 +59,9 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function verify (force = false): Promise<AuthVerifyResponse | null> {
-    if ((verify as any).promise) {
-      return (verify as any).promise
+    // Deduplicate concurrent calls
+    if (verifyPromise.value) {
+      return verifyPromise.value
     }
 
     // Skip if no URL configured
@@ -50,7 +72,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     if (
       !force
-      && !document.cookie.includes('sx=1')
+      && !hasSessionCookie()
       && location.hostname?.match(/([^.]+\.[^.]+)$/)?.[1]
       === new URL(http.url).hostname.match(/([^.]+\.[^.]+)$/)?.[1]
     ) {
@@ -72,7 +94,7 @@ export const useAuthStore = defineStore('auth', () => {
       return null
     }
 
-    ;(verify as any).promise = fetchPromise.then(
+    verifyPromise.value = fetchPromise.then(
       async res => {
         if (res.ok || res.status === 401) {
           const data: AuthVerifyResponse = await res.json()
@@ -82,7 +104,8 @@ export const useAuthStore = defineStore('auth', () => {
 
           return data
         } else {
-          console.error(res.statusText)
+          const error = new Error(res.statusText || `HTTP ${res.status}`)
+          callbacks.value.onError?.(error)
           return null
         }
       },
@@ -92,19 +115,25 @@ export const useAuthStore = defineStore('auth', () => {
       },
     ).finally(() => {
       isLoading.value = false
-      ;(verify as any).promise = null
+      verifyPromise.value = null
     })
 
-    return (verify as any).promise
+    return verifyPromise.value
   }
 
   async function login (provider: AuthProvider = 'github') {
     isLoading.value = true
 
-    const redirectUrl = `${http.url}/auth/${provider}/redirect`
+    // Generate state for CSRF protection
+    const state = generateOAuthState()
+    if (IN_BROWSER) {
+      sessionStorage.setItem('vuetify@oauth_state', state)
+    }
+
+    const redirectUrl = `${http.url}/auth/${provider}/redirect?state=${encodeURIComponent(state)}`
 
     if (provider === 'shopify') {
-      window.location.assign(redirectUrl + '?next=' + encodeURIComponent(window.location.href))
+      window.location.assign(redirectUrl + '&next=' + encodeURIComponent(window.location.href))
       return
     }
 
@@ -120,7 +149,8 @@ export const useAuthStore = defineStore('auth', () => {
     )
 
     if (!ctx) {
-      console.error('Failed to open popup')
+      const error = new Error('Failed to open popup')
+      callbacks.value.onError?.(error)
       isLoading.value = false
       return
     }
@@ -131,12 +161,26 @@ export const useAuthStore = defineStore('auth', () => {
     let timeout = -1
 
     function messageHandler (e: MessageEvent) {
+      // Validate origin
       if (e.origin !== http.url) {
         return
       }
       if (e.data?.type !== 'auth-response') {
         return
       }
+
+      // Validate state to prevent CSRF
+      const expectedState = sessionStorage.getItem('vuetify@oauth_state')
+      if (expectedState && e.data.state !== expectedState) {
+        console.error('OAuth state mismatch - possible CSRF attempt')
+        callbacks.value.onError?.(new Error('OAuth state mismatch'))
+        cleanup()
+        return
+      }
+
+      // Clear state after use
+      sessionStorage.removeItem('vuetify@oauth_state')
+
       if (e.data.status === 'success') {
         if (!user.value) {
           localStorage.setItem('vuetify@lastLoginProvider', provider)
@@ -150,8 +194,8 @@ export const useAuthStore = defineStore('auth', () => {
           access: e.data.body.access ?? [],
         })
       } else {
-        console.error(e.data.message)
-        callbacks.value.onError?.(new Error(e.data.message))
+        const error = new Error(e.data.message || 'Authentication failed')
+        callbacks.value.onError?.(error)
       }
 
       cleanup()
@@ -169,15 +213,16 @@ export const useAuthStore = defineStore('auth', () => {
     window.addEventListener('message', messageHandler)
     interval = window.setInterval(() => {
       if (!ctx || ctx.closed) {
-        console.error('Auth popup closed')
+        callbacks.value.onError?.(new Error('Auth popup closed'))
         cleanup()
       } else {
-        ctx.postMessage({ type: 'auth-request' }, '*')
+        // Use specific origin instead of wildcard for security
+        ctx.postMessage({ type: 'auth-request' }, http.url)
       }
     }, 1000)
     timeout = window.setTimeout(() => {
       cleanup()
-      console.error('Auth timed out')
+      callbacks.value.onError?.(new Error('Auth timed out'))
     }, 120 * 1000)
   }
 

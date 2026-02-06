@@ -9,6 +9,7 @@ describe('auth store', () => {
     setActivePinia(createPinia())
     vi.restoreAllMocks()
     localStorage.clear()
+    sessionStorage.clear()
     // Clear cookies
     document.cookie = 'sx=; expires=Thu, 01 Jan 1970 00:00:00 GMT'
   })

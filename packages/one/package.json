@@ -20,11 +20,11 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./stores/auth": "./dist/stores/auth.js",
-    "./styles": {
-      "import": "./dist/one.css"
+    "./stores/auth": {
+      "types": "./dist/stores/auth.d.ts",
+      "default": "./dist/stores/auth.js"
     },
-    "./subpath/*": "./dist/subpath/*.js"
+    "./styles": "./dist/one.css"
   },
   "scripts": {
     "dev": "vite",

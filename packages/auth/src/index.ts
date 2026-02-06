@@ -10,6 +10,7 @@ export {
   type DeviceAuthStatus,
   type DeviceCode,
   type DeviceStore,
+  type HttpStore,
   useApiKeyStore,
   useAuthStore,
   useDeviceStore,
