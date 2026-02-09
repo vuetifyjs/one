@@ -35,26 +35,43 @@ export type {
 export interface AuthPluginOptions extends AuthConfig {}
 
 /**
- * Creates a Pinia plugin that configures the auth stores with the API URL
+ * Creates a Pinia plugin that configures the auth stores with the API URL.
+ *
+ * @remarks
+ * The auth store does NOT auto-verify on creation. Consumers must call
+ * `useAuthStore().verify()` explicitly after the Pinia plugin has
+ * configured the HTTP store URL. This prevents requests to unconfigured
+ * endpoints and gives consumers control over timing.
  */
 export function createAuthPlugin (options: AuthPluginOptions) {
   return function authPlugin (context: PiniaPluginContext) {
-    if (context.store.$id === 'auth-http') {
+    if (context.store.$id === 'http' || context.store.$id === 'auth-http') {
       context.store.url = options.apiUrl
     }
   }
 }
 
 /**
- * Vue plugin for @vuetify/auth
- * Automatically configures the HTTP store with the API URL
+ * Creates auth configuration for a Vue + Pinia app.
+ *
+ * Returns a Pinia plugin that configures the HTTP base URL.
+ * After installing, call `useAuthStore().verify()` to check session state.
+ *
+ * @example
+ * ```ts
+ * const pinia = createPinia()
+ * pinia.use(createAuth({ apiUrl: 'https://api.vuetifyjs.com' }))
+ *
+ * // After app mount:
+ * const auth = useAuthStore()
+ * await auth.verify()
+ * ```
  */
 export function createAuth (options: AuthPluginOptions) {
+  const plugin = createAuthPlugin(options)
+
   return {
-    install (_app: App) {
-      // The actual configuration happens via the Pinia plugin
-      // This is a convenience wrapper
-    },
-    piniaPlugin: createAuthPlugin(options),
+    install: (_app: App) => { /* noop — configuration handled by Pinia plugin */ },
+    piniaPlugin: plugin,
   }
 }

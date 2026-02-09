@@ -38,7 +38,7 @@ function hasSessionCookie (): boolean {
   return document.cookie.split(';').some(c => c.trim().startsWith('sx='))
 }
 
-export const useAuthStore = defineStore('auth', () => {
+export const useAuthStore = defineStore('auth-core', () => {
   const http = useHttpStore()
 
   const dialog = ref(false)
@@ -250,10 +250,6 @@ export const useAuthStore = defineStore('auth', () => {
       return null
     }
     return localStorage.getItem('vuetify@lastLoginProvider')
-  }
-
-  if (IN_BROWSER) {
-    verify()
   }
 
   return {

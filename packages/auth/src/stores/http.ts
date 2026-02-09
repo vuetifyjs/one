@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useHttpStore = defineStore('auth-http', {
+export const useHttpStore = defineStore('http', {
   state: () => ({
     url: '',
   }),
