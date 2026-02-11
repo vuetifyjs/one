@@ -91,8 +91,7 @@ export function one (id: string[], url: string) {
   return function (context: PiniaPluginContext) {
     const store = context.store
 
-    // Configure HTTP stores (both @vuetify/auth's and legacy)
-    if (store.$id === 'auth-http' || store.$id === 'http') {
+    if (store.$id === 'http') {
       store.url = url
       return
     }

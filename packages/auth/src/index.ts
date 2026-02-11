@@ -45,7 +45,7 @@ export interface AuthPluginOptions extends AuthConfig {}
  */
 export function createAuthPlugin (options: AuthPluginOptions) {
   return function authPlugin (context: PiniaPluginContext) {
-    if (context.store.$id === 'http' || context.store.$id === 'auth-http') {
+    if (context.store.$id === 'http') {
       context.store.url = options.apiUrl
     }
   }

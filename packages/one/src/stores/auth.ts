@@ -5,10 +5,9 @@ import {
   useHttpStore,
   type AuthVerifyResponse,
 } from '@vuetify/auth'
-import { merge } from 'lodash-es'
+import { debounce, merge } from 'lodash-es'
 import { DEFAULT_USER, useUserStore } from './user'
 import { migrateV6ToV7 } from './migrations'
-import type { VOneTeam } from './team'
 
 export type {
   AuthProvider,
@@ -73,9 +72,11 @@ export const useAuthStore = defineStore('auth', () => {
     Object.assign(userStore, merged)
   })
 
+  const debouncedSync = debounce(sync, 500)
+
   userStore.$subscribe(() => {
     if (!externalUpdate) {
-      sync()
+      debouncedSync()
     }
 
     externalUpdate = false
@@ -100,13 +101,14 @@ export const useAuthStore = defineStore('auth', () => {
   baseAuth.setCallbacks({
     onAuth: (response: AuthVerifyResponse) => {
       one.access = response.access
-      if (response.user?.team) {
-        // The user's team from auth response is a partial type
-        // The team store expects the full type from /one/team endpoint
-        // We only set team.team if it has the full structure
-        const userTeam = response.user.team as VOneTeam & { inviteCode?: string, members?: any[], owner?: any }
-        if (userTeam.inviteCode && userTeam.members && userTeam.owner) {
-          team.team = userTeam as VOneTeam
+      const authTeam = response.user?.team
+      if (authTeam?.inviteCode && authTeam.members && authTeam.owner) {
+        team.team = {
+          id: authTeam.id,
+          name: authTeam.name,
+          inviteCode: authTeam.inviteCode,
+          members: authTeam.members,
+          owner: authTeam.owner,
         }
       }
     },
