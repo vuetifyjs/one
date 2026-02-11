@@ -1,6 +1,6 @@
 {
   "globals": {
-    "AuthState": true,
+    "AuthProvider": true,
     "BinsState": true,
     "Component": true,
     "ComponentPublicInstance": true,
@@ -56,6 +56,7 @@
     "VOneSpot": true,
     "VOneSuit": true,
     "VOneTeam": true,
+    "VOneTeamMember": true,
     "VOneUser": true,
     "WritableComputedRef": true,
     "acceptHMRUpdate": true,

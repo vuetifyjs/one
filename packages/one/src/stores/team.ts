@@ -1,20 +1,13 @@
 // Types
 import type { ComputedRef, Ref, ShallowRef } from 'vue'
+import type { VOneTeamMember } from '@vuetify/auth'
 
 export type VOneTeam = {
   id: string
   name: string
   inviteCode: string
-  members: {
-    id: string
-    name: string
-    picture: string
-  }[]
-  owner: {
-    id: string
-    name: string
-    picture: string
-  }
+  members: VOneTeamMember[]
+  owner: VOneTeamMember
 }
 
 export interface TeamState {
@@ -125,7 +118,7 @@ export const useTeamStore = defineStore('team', () => {
   }
 
   const isTeamOwner = computed(() => {
-    return auth.user?.id === auth.user?.team?.owner.id
+    return auth.user?.id === auth.user?.team?.owner?.id
   })
 
   return {

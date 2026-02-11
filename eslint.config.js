@@ -7,6 +7,13 @@ export default vuetify(
     },
   },
   {
+    ignores: [
+      '**/dist/**',
+      '**/node_modules/**',
+      '**/types-temp/**',
+    ],
+  },
+  {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
     },

@@ -18,12 +18,33 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: vuetifyjs/setup-action@master
-      - run: pnpm build
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
         env:
           VITE_API_SERVER_URL: https://api.vuetifyjs.com
-      - run: npm install -g npm@latest
-      - run: npm publish
+
+      - name: Update NPM
+        run: npm install -g npm@latest
+
+      - name: Publish to NPM
+        run: pnpm -r publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: GitHub release
         run: pnpm conventional-github-releaser -p vuetify
         env:

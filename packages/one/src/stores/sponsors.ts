@@ -73,6 +73,7 @@ export const useSponsorsStore = defineStore('sponsors', (): SponsorState => {
       const res = await http.get<{ sponsors: VOneSponsor[] }>('/one/sponsors')
 
       all.value = res.sponsors
+      sponsors.value = res.sponsors.filter(s => s.metadata.active && s.status === 'published')
     } catch (error: any) {
       queue.showError(error?.message ?? 'Error fetching sponsors')
     } finally {
