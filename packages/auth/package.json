@@ -52,7 +52,7 @@
     "build": "tsdown",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
-    "release": "pnpm build && bumpp",
+    "release": "pnpm build && bumpp --tag \"@vuetify/auth@%s\"",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
