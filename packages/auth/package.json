@@ -52,6 +52,7 @@
     "build": "tsdown",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
+    "release": "pnpm build && bumpp",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
