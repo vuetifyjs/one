@@ -82,6 +82,7 @@
   // Types
   interface Props {
     demo?: boolean
+    site?: string
   }
 
   const props = defineProps<Props>()
@@ -89,9 +90,14 @@
   const { mdAndUp } = useDisplay()
   const router = useRouter()
   const user = useUserStore()
+  const siteStore = useSiteStore()
   const banners = useBannersStore()
 
   onMounted(() => {
+    if (props.site && !siteStore.id.includes(props.site)) {
+      siteStore.id.push(props.site)
+    }
+
     banners.index()
   })
 
