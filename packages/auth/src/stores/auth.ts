@@ -21,17 +21,6 @@ export interface AuthStoreState {
 }
 
 /**
- * Generate a cryptographic random state for OAuth CSRF protection
- */
-function generateOAuthState (): string {
-  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-    return crypto.randomUUID()
-  }
-  // Fallback for older browsers
-  return Math.random().toString(36).slice(2) + Date.now().toString(36)
-}
-
-/**
  * Check if session cookie exists (more robust than string includes)
  */
 function hasSessionCookie (): boolean {
@@ -124,16 +113,10 @@ export const useAuthStore = defineStore('auth-core', () => {
   async function login (provider: AuthProvider = 'github') {
     isLoading.value = true
 
-    // Generate state for CSRF protection
-    const state = generateOAuthState()
-    if (IN_BROWSER) {
-      sessionStorage.setItem('vuetify@oauth_state', state)
-    }
-
-    const redirectUrl = `${http.url}/auth/${provider}/redirect?state=${encodeURIComponent(state)}`
+    const redirectUrl = `${http.url}/auth/${provider}/redirect`
 
     if (provider === 'shopify') {
-      window.location.assign(redirectUrl + '&next=' + encodeURIComponent(window.location.href))
+      window.location.assign(redirectUrl + '?next=' + encodeURIComponent(window.location.href))
       return
     }
 
@@ -168,18 +151,6 @@ export const useAuthStore = defineStore('auth-core', () => {
       if (e.data?.type !== 'auth-response') {
         return
       }
-
-      // Validate state to prevent CSRF
-      const expectedState = sessionStorage.getItem('vuetify@oauth_state')
-      if (expectedState && e.data.state !== expectedState) {
-        console.error('OAuth state mismatch - possible CSRF attempt')
-        callbacks.value.onError?.(new Error('OAuth state mismatch'))
-        cleanup()
-        return
-      }
-
-      // Clear state after use
-      sessionStorage.removeItem('vuetify@oauth_state')
 
       if (e.data.status === 'success') {
         if (!user.value) {
