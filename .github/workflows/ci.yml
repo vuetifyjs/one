@@ -1,7 +1,9 @@
 name: CI
 on:
   push:
-    tags: [v*]
+    tags:
+      - 'v*'
+      - '@vuetify/auth@*'
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -10,7 +12,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
+    if: github.repository_owner == 'vuetifyjs'
     permissions:
       contents: write
       id-token: write
@@ -40,12 +42,20 @@ jobs:
       - name: Update NPM
         run: npm install -g npm@latest
 
-      - name: Publish to NPM
+      - name: Publish to NPM (all packages)
+        if: startsWith(github.ref, 'refs/tags/v')
         run: pnpm -r publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Publish to NPM (auth only)
+        if: startsWith(github.ref, 'refs/tags/@vuetify/auth@')
+        run: pnpm --filter @vuetify/auth publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
         run: pnpm conventional-github-releaser -p vuetify
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
