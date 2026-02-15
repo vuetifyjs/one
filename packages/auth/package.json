@@ -17,35 +17,16 @@
   "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "development": "./src/index.ts",
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
     },
     "./stores": {
-      "development": "./src/stores/index.ts",
       "types": "./dist/stores/index.d.mts",
       "default": "./dist/stores/index.mjs"
     },
     "./types": {
-      "development": "./src/types/index.ts",
       "types": "./dist/types/index.d.mts",
       "default": "./dist/types/index.mjs"
-    }
-  },
-  "publishConfig": {
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "./stores": {
-        "types": "./dist/stores/index.d.mts",
-        "default": "./dist/stores/index.mjs"
-      },
-      "./types": {
-        "types": "./dist/types/index.d.mts",
-        "default": "./dist/types/index.mjs"
-      }
     }
   },
   "scripts": {
