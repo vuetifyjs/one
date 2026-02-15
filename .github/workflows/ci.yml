@@ -50,7 +50,7 @@ jobs:
 
       - name: Publish to NPM (auth only)
         if: startsWith(github.ref, 'refs/tags/@vuetify/auth@')
-        run: cd packages/auth && npm publish --access public
+        run: pnpm -r publish --access public --no-git-checks --filter @vuetify/auth
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
