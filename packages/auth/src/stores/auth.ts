@@ -126,7 +126,7 @@ export const useAuthStore = defineStore('auth-core', () => {
     const top = window.screenY + (window.innerHeight - height) / 2
 
     const ctx = window.open(
-      '',
+      redirectUrl,
       'vuetify:authorize:popup',
       `popup,left=${left},top=${top},width=${width},height=${height},resizable`,
     )
@@ -137,8 +137,6 @@ export const useAuthStore = defineStore('auth-core', () => {
       isLoading.value = false
       return
     }
-
-    ctx.location.href = redirectUrl
 
     let interval = -1
     let timeout = -1
