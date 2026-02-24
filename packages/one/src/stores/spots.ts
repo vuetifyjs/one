@@ -15,7 +15,7 @@ export interface VOneSpot {
     href: string
     start_date: string
     sponsor: string
-    site: ('*' | 'dev' | 'vbin' | 'vplay' | 'docs' | 'home' | 'server')[]
+    site: ('*' | 'dev' | 'vbin' | 'vplay' | 'docs' | 'home' | 'server' | 'v3')[]
     end_date: string
     image: {
       url: string

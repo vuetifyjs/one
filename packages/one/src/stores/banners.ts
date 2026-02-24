@@ -33,7 +33,7 @@ export interface VOneBanner {
         url: string
       } | null
     }
-    site: ('*' | 'dev' | 'vbin' | 'vplay' | 'docs' | 'home' | 'server')[]
+    site: ('*' | 'dev' | 'vbin' | 'vplay' | 'docs' | 'home' | 'server' | 'v3')[]
   }
 }
 
