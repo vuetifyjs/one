@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/auth",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Authentication for Vuetify services",
   "license": "MIT",
   "type": "module",
