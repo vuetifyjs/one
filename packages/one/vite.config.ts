@@ -83,6 +83,7 @@ export default defineConfig({
       '.vue',
     ],
   },
+  envDir: fileURLToPath(new URL('../..', import.meta.url)),
   server: {
     port: 3000,
   },

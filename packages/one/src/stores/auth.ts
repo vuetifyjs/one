@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Proxy state from base auth
   const user = toRef(() => baseAuth.user)
-  const dialog = toRef(() => baseAuth.dialog)
+  const dialog = toRef(baseAuth, 'dialog')
   const isLoading = toRef(() => baseAuth.isLoading)
   const isAuthenticated = toRef(() => baseAuth.isAuthenticated)
   const isSuper = toRef(() => baseAuth.isSuper)
