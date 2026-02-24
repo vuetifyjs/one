@@ -22,7 +22,7 @@
 
             <VoMcpHowTo />
 
-            <v-row v-if="!api.key || !api.regenerated" class="my-4" justify="center">
+            <v-row v-if="!api.key || !api.regenerated" class="my-4 justify-center">
               <v-col cols="auto">
                 <v-btn
                   v-if="!api.key"

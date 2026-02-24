@@ -19,9 +19,9 @@
         style="max-width: 300px;"
         variant="outlined"
       >
-        <template #selection="{ item }">
-          <v-icon :icon="item.props.prependIcon" size="x-small" start />
-          {{ item.title }}
+        <template #selection="{ item, internalItem }">
+          <v-icon :icon="internalItem.props.prependIcon" size="x-small" start />
+          {{ internalItem.title }}
         </template>
       </v-select>
 

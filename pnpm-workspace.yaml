@@ -20,7 +20,7 @@ catalog:
   vue: ^3.5.13
   vue-router: ^4.5.1
   vue-tsc: ^3.0.6
-  vuetify: ^3.8.0
+  vuetify: ^4.0.0
 
 catalogMode: strict
 
@@ -31,3 +31,6 @@ ignoredBuiltDependencies:
   - unrs-resolver
 
 minimumReleaseAge: 4320
+
+minimumReleaseAgeExclude:
+  - vuetify

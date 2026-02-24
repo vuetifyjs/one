@@ -13,7 +13,7 @@
           />
 
           <v-item-group v-model="user.one.theme" mandatory>
-            <v-row dense>
+            <v-row density="compact">
               <v-col
                 v-for="(item, i) in items"
                 :key="i"
