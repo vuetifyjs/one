@@ -5,6 +5,7 @@
     mdiCog,
     mdiCreditCard,
     mdiHandHeart,
+    mdiHistory,
     mdiKey,
   } from '@mdi/js'
 
@@ -21,6 +22,7 @@
   }
 
   const tabs = [
+    { value: 'activity', title: 'Recent Activity', icon: mdiHistory },
     { value: 'subscriptions', title: 'Subscriptions', icon: mdiCreditCard },
     { value: 'sponsorships', title: 'Sponsorships', icon: mdiHandHeart },
     { value: 'team', title: 'Team', icon: mdiAccountGroup },
@@ -35,7 +37,7 @@
     const legacy = route.query.one as string
     if (legacy && LEGACY_MAP[legacy]) return LEGACY_MAP[legacy]
 
-    return 'subscriptions'
+    return 'activity'
   }
 
   const tab = shallowRef(resolve())
@@ -49,6 +51,8 @@
 
     router.replace({ query: { tab: value } })
   })
+
+
 </script>
 
 <template>
@@ -57,40 +61,50 @@
   <vo-notifications-banner />
 
   <v-main>
-    <v-container class="py-8" max-width="960">
-      <v-tabs v-model="tab" grow>
-        <v-tab
-          v-for="t in tabs"
-          :key="t.value"
-          :prepend-icon="`svg:${t.icon}`"
-          :text="t.title"
-          :value="t.value"
-        />
-      </v-tabs>
+    <v-container class="py-8" max-width="1200">
+      <v-row>
+        <v-col cols="auto">
+          <v-tabs v-model="tab" direction="vertical">
+            <v-tab
+              v-for="t in tabs"
+              :key="t.value"
+              :prepend-icon="`svg:${t.icon}`"
+              :text="t.title"
+              :value="t.value"
+            />
+          </v-tabs>
+        </v-col>
 
-      <v-divider />
+        <v-divider vertical />
 
-      <v-window v-model="tab">
-        <v-window-item value="subscriptions">
-          <VoSubscriptionPanel />
-        </v-window-item>
+        <v-col>
+          <v-window v-model="tab">
+            <v-window-item value="activity">
+              <VoActivityPanel />
+            </v-window-item>
 
-        <v-window-item value="sponsorships">
-          <VoSponsorshipsPanel />
-        </v-window-item>
+            <v-window-item value="subscriptions">
+              <VoSubscriptionPanel />
+            </v-window-item>
 
-        <v-window-item value="team">
-          <VoTeamPanel />
-        </v-window-item>
+            <v-window-item value="sponsorships">
+              <VoSponsorshipsPanel />
+            </v-window-item>
 
-        <v-window-item value="mcp">
-          <VoMcpPanel />
-        </v-window-item>
+            <v-window-item value="team">
+              <VoTeamPanel />
+            </v-window-item>
 
-        <v-window-item value="settings">
-          <VoSettingsPanel />
-        </v-window-item>
-      </v-window>
+            <v-window-item value="mcp">
+              <VoMcpPanel />
+            </v-window-item>
+
+            <v-window-item value="settings">
+              <VoSettingsPanel />
+            </v-window-item>
+          </v-window>
+        </v-col>
+      </v-row>
     </v-container>
   </v-main>
 

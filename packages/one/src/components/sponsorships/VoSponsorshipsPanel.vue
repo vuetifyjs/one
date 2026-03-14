@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <div class="px-3 pb-5 d-flex flex-column h-100">
-    <v-card-text class="flex-0-0 mb-16 mb-sm-4">
+  <div class="px-3 pb-5">
+    <v-card-text>
       <VoDialogSubheader
         text="Support Vuetify through GitHub Sponsors or Discord to unlock exclusive benefits and content."
         title="Support Vuetify"
@@ -14,7 +14,6 @@
     </v-card-text>
 
     <v-empty-state
-      class="flex-1-0"
       icon="$vuetify"
       min-height="auto"
       size="128"

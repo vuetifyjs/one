@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VoActivityPanel: typeof import('./components/activity/VoActivityPanel.vue')['default']
     VoAppBar: typeof import('./components/app/VoAppBar.vue')['default']
     VoAuthBtn: typeof import('./components/auth/VoAuthBtn.vue')['default']
     VoAuthCard: typeof import('./components/auth/VoAuthCard.vue')['default']
@@ -34,6 +35,7 @@ declare module 'vue' {
     VoEcosystemListItem: typeof import('./components/ecosystem/VoEcosystemListItem.vue')['default']
     VoEcosystemMenu: typeof import('./components/ecosystem/VoEcosystemMenu.vue')['default']
     VoFooter: typeof import('./components/app/VoFooter.vue')['default']
+    VoJdenticon: typeof import('./components/activity/VoJdenticon.vue')['default']
     VoListItem: typeof import('./components/app/VoListItem.vue')['default']
     VoMcpCopyDialog: typeof import('./components/mcp/VoMcpCopyDialog.vue')['default']
     VoMcpDialog: typeof import('./components/mcp/VoMcpDialog.vue')['default']
