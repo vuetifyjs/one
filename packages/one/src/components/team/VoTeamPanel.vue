@@ -50,7 +50,6 @@
       />
 
       <v-card
-        v-if="teamStore.isTeamOwner"
         border
         class="mb-4"
         color="surface-light"
@@ -125,6 +124,16 @@
               </v-menu>
             </v-btn>
           </template>
+
+          <template v-else #append>
+            <v-btn
+              :prepend-icon="`svg:${mdiExitToApp}`"
+              rounded="lg"
+              text="Leave team"
+              width="145"
+              @click="teamStore.leaveTeam()"
+            />
+          </template>
         </v-card-item>
 
         <v-divider />
@@ -146,7 +155,7 @@
 
               <template #item.actions="{ item }">
                 <v-btn
-                  v-if="team?.owner?.id === item.id "
+                  v-if="team?.owner?.id === item.id"
                   class="me-n3"
                   color="primary"
                   density="comfortable"
@@ -158,7 +167,7 @@
                 />
 
                 <v-btn
-                  v-else
+                  v-else-if="teamStore.isTeamOwner"
                   class="me-n3"
                   color="medium-emphasis"
                   density="comfortable"
@@ -172,46 +181,6 @@
             </v-data-table>
           </v-sheet>
         </v-card-text>
-      </v-card>
-
-      <v-card
-        v-else
-        border
-        color="surface-light"
-        flat
-        max-width="1280"
-        rounded="lg"
-      >
-        <v-card-item
-          :prepend-icon="`svg:${mdiShieldLock}`"
-          subtitle="You are currently a member of a team with an All-access Pass."
-          title="My Team access"
-        >
-          <template #title>
-            <div class="d-flex align-center">
-              My Team Access
-
-              <v-chip
-                border="thin opacity-25 success"
-                class="ms-2"
-                color="success"
-                label
-                size="x-small"
-                text="Active"
-              />
-            </div>
-          </template>
-
-          <template #append>
-            <v-btn
-              :prepend-icon="`svg:${mdiExitToApp}`"
-              rounded="lg"
-              text="Leave team"
-              width="145"
-              @click="teamStore.leaveTeam()"
-            />
-          </template>
-        </v-card-item>
       </v-card>
     </v-card-text>
   </div>

@@ -2,15 +2,33 @@
   // Icons
   import {
     mdiAccountGroup,
+    mdiArrowLeft,
     mdiCog,
     mdiCreditCard,
     mdiHandHeart,
     mdiHistory,
     mdiKey,
   } from '@mdi/js'
+  import { ECOSYSTEM_ACTIONS } from '@/composables/ecosystem'
 
   const route = useRoute()
   const router = useRouter()
+
+  function resolveReferrer () {
+    const from = route.query.from as string
+    if (from) return ECOSYSTEM_ACTIONS.find(a => a.id === from)
+
+    if (!document.referrer) return undefined
+
+    try {
+      const hostname = new URL(document.referrer).hostname
+      return ECOSYSTEM_ACTIONS.find(a => new URL(a.href).hostname === hostname)
+    } catch {
+      return undefined
+    }
+  }
+
+  const referrer = shallowRef(resolveReferrer())
 
   const LEGACY_MAP: Record<string, string> = {
     team: 'team',
@@ -56,7 +74,26 @@
 </script>
 
 <template>
-  <vo-app-bar logo="vone" />
+  <vo-app-bar logo="vone">
+    <template v-if="referrer" #prepend>
+      <v-btn
+        class="text-none ms-2"
+        :href="referrer.href"
+        :prepend-icon="`svg:${mdiArrowLeft}`"
+        rounded="lg"
+        slim
+        :text="`Return to ${referrer.name}`"
+        variant="tonal"
+      >
+        <template #append>
+          <v-img
+            :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/v${referrer.id}.svg`"
+            width="18"
+          />
+        </template>
+      </v-btn>
+    </template>
+  </vo-app-bar>
 
   <vo-notifications-banner />
 
