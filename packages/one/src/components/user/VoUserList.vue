@@ -1,8 +1,3 @@
-<script lang="ts" setup>
-  const auth = useAuthStore()
-  const one = useOneStore()
-</script>
-
 <template>
   <v-list
     density="compact"
@@ -10,6 +5,8 @@
     slim
   >
     <VoDashboardNavItem v-if="auth.user" />
+
+    <VoAccountNavItem v-if="auth.user" />
 
     <VoNotificationsNavItem />
 
@@ -22,3 +19,8 @@
     <VoAuthLogoutNavItem v-if="auth.user" />
   </v-list>
 </template>
+
+<script lang="ts" setup>
+  const auth = useAuthStore()
+  const one = useOneStore()
+</script>

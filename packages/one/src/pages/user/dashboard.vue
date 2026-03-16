@@ -1,78 +1,3 @@
-<script lang="ts" setup>
-  // Icons
-  import {
-    mdiAccountGroup,
-    mdiArrowLeft,
-    mdiCog,
-    mdiCreditCard,
-    mdiHandHeart,
-    mdiHistory,
-    mdiKey,
-  } from '@mdi/js'
-  import { ECOSYSTEM_ACTIONS } from '@/composables/ecosystem'
-
-  const route = useRoute()
-  const router = useRouter()
-
-  function resolveReferrer () {
-    const from = route.query.from as string
-    if (from) return ECOSYSTEM_ACTIONS.find(a => a.id === from)
-
-    if (!document.referrer) return undefined
-
-    try {
-      const hostname = new URL(document.referrer).hostname
-      return ECOSYSTEM_ACTIONS.find(a => new URL(a.href).hostname === hostname)
-    } catch {
-      return undefined
-    }
-  }
-
-  const referrer = shallowRef(resolveReferrer())
-
-  const LEGACY_MAP: Record<string, string> = {
-    team: 'team',
-    sponsorships: 'sponsorships',
-    subscribe: 'subscriptions',
-    status: 'subscriptions',
-    mcp: 'mcp',
-    settings: 'settings',
-  }
-
-  const tabs = [
-    { value: 'activity', title: 'Recent Activity', icon: mdiHistory },
-    { value: 'subscriptions', title: 'Subscriptions', icon: mdiCreditCard },
-    { value: 'sponsorships', title: 'Sponsorships', icon: mdiHandHeart },
-    { value: 'team', title: 'Team', icon: mdiAccountGroup },
-    { value: 'mcp', title: 'MCP API Key', icon: mdiKey },
-    { value: 'settings', title: 'Settings', icon: mdiCog },
-  ]
-
-  function resolve () {
-    const tab = route.query.tab as string
-    if (tab && tabs.some(t => t.value === tab)) return tab
-
-    const legacy = route.query.one as string
-    if (legacy && LEGACY_MAP[legacy]) return LEGACY_MAP[legacy]
-
-    return 'activity'
-  }
-
-  const tab = shallowRef(resolve())
-
-  watch(() => route.query, () => {
-    tab.value = resolve()
-  })
-
-  watch(tab, value => {
-    if (route.query.tab === value) return
-
-    router.replace({ query: { tab: value } })
-  })
-
-
-</script>
-
 <template>
   <vo-app-bar logo="vone">
     <template v-if="referrer" #prepend>
@@ -147,3 +72,76 @@
 
   <vo-social-footer app />
 </template>
+
+<script lang="ts" setup>
+  // Icons
+  import {
+    mdiAccountGroup,
+    mdiArrowLeft,
+    mdiCog,
+    mdiCreditCard,
+    mdiHandHeart,
+    mdiHistory,
+    mdiKey,
+  } from '@mdi/js'
+  import { ECOSYSTEM_ACTIONS } from '@/composables/ecosystem'
+
+  const route = useRoute()
+  const router = useRouter()
+
+  function resolveReferrer () {
+    const from = route.query.from as string
+    if (from) return ECOSYSTEM_ACTIONS.find(a => a.id === from)
+
+    if (!document.referrer) return undefined
+
+    try {
+      const hostname = new URL(document.referrer).hostname
+      return ECOSYSTEM_ACTIONS.find(a => new URL(a.href).hostname === hostname)
+    } catch {
+      return undefined
+    }
+  }
+
+  const referrer = shallowRef(resolveReferrer())
+
+  const LEGACY_MAP: Record<string, string> = {
+    team: 'team',
+    sponsorships: 'sponsorships',
+    subscribe: 'subscriptions',
+    status: 'subscriptions',
+    mcp: 'mcp',
+    settings: 'settings',
+  }
+
+  const tabs = [
+    { value: 'activity', title: 'Recent Activity', icon: mdiHistory },
+    { value: 'subscriptions', title: 'Subscriptions', icon: mdiCreditCard },
+    { value: 'sponsorships', title: 'Sponsorships', icon: mdiHandHeart },
+    { value: 'team', title: 'Team', icon: mdiAccountGroup },
+    { value: 'mcp', title: 'MCP API Key', icon: mdiKey },
+    { value: 'settings', title: 'Settings', icon: mdiCog },
+  ]
+
+  function resolve () {
+    const tab = route.query.tab as string
+    if (tab && tabs.some(t => t.value === tab)) return tab
+
+    const legacy = route.query.one as string
+    if (legacy && LEGACY_MAP[legacy]) return LEGACY_MAP[legacy]
+
+    return 'activity'
+  }
+
+  const tab = shallowRef(resolve())
+
+  watch(() => route.query, () => {
+    tab.value = resolve()
+  })
+
+  watch(tab, value => {
+    if (route.query.tab === value) return
+
+    router.replace({ query: { tab: value } })
+  })
+</script>
