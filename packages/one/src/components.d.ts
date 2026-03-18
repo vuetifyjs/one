@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VoAccountNavItem: typeof import('./components/VoAccountNavItem.vue')['default']
     VoActivityPanel: typeof import('./components/activity/VoActivityPanel.vue')['default']
     VoAppBar: typeof import('./components/app/VoAppBar.vue')['default']
     VoAuthBtn: typeof import('./components/auth/VoAuthBtn.vue')['default']
