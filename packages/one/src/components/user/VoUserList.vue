@@ -6,19 +6,13 @@
   >
     <VoDashboardNavItem v-if="auth.user" />
 
+    <VoAccountNavItem v-if="auth.user" />
+
     <VoNotificationsNavItem />
 
     <VoEcosystemListItem />
 
-    <VoTeamListItem v-if="team.hasTeamAccess" />
-
     <VoDownloadsNavItem v-if="one.shopify" />
-
-    <VoSponsorshipsListItem />
-
-    <VoSubscriptionListItem v-if="auth.user" />
-
-    <VoMcpListItem v-if="one.isSubscriber" />
 
     <VoSettingsListItem />
 
@@ -29,6 +23,4 @@
 <script lang="ts" setup>
   const auth = useAuthStore()
   const one = useOneStore()
-  const team = useTeamStore()
-
 </script>

@@ -50,7 +50,8 @@
     "vuetify": "^4.0.0"
   },
   "dependencies": {
-    "@vuetify/auth": "workspace:*"
+    "@vuetify/auth": "workspace:*",
+    "jdenticon": "catalog:"
   },
   "devDependencies": {
     "@babel/types": "^7.28.4",
