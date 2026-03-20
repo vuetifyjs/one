@@ -59,6 +59,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build site
+        run: pnpm --filter @vuetify/one build:site
+        env:
+          VITE_API_SERVER_URL: https://api.vuetifyjs.com
+
       - uses: vuetifyjs/coolify-action@master
         with:
           imageName: one
