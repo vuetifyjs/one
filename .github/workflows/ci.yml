@@ -61,6 +61,7 @@ jobs:
       - uses: vuetifyjs/coolify-action@master
         with:
           imageName: one
+          dockerfilePath: packages/one/Dockerfile
           token: ${{ secrets.GITHUB_TOKEN  }}
           coolifyWebhook: ${{ secrets.COOLIFY_WEBHOOK }}
           coolifySecret: ${{ secrets.COOLIFY_TOKEN }}
