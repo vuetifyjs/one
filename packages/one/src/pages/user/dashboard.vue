@@ -24,8 +24,25 @@
 
   <v-main>
     <v-container class="py-8" max-width="1200">
+      <v-tabs
+        v-if="mobile"
+        v-model="tab"
+        center-active
+        show-arrows
+      >
+        <v-tab
+          v-for="t in tabs"
+          :key="t.value"
+          :prepend-icon="`svg:${t.icon}`"
+          :text="t.title"
+          :value="t.value"
+        />
+      </v-tabs>
+
+      <v-divider v-if="mobile" class="mb-6" />
+
       <v-row>
-        <v-col cols="auto">
+        <v-col v-if="!mobile" cols="auto">
           <v-tabs v-model="tab" direction="vertical">
             <v-tab
               v-for="t in tabs"
@@ -37,7 +54,7 @@
           </v-tabs>
         </v-col>
 
-        <v-divider vertical />
+        <v-divider v-if="!mobile" vertical />
 
         <v-col>
           <v-window v-model="tab">
@@ -86,6 +103,7 @@
   } from '@mdi/js'
   import { ECOSYSTEM_ACTIONS } from '@/composables/ecosystem'
 
+  const { mobile } = useDisplay()
   const route = useRoute()
   const router = useRouter()
 
