@@ -53,10 +53,11 @@
   import { mdiCheck, mdiRocketOutline } from '@mdi/js'
 
   interface Props {
+    snips?: boolean
     type?: 'solo' | 'team'
   }
 
-  const { type } = defineProps<Props>()
+  const { snips, type } = defineProps<Props>()
 
   const upnext = [
     'Embeddable playgrounds for your own documentation',
@@ -78,6 +79,10 @@
 
     if (type === 'team') {
       array.unshift('Invite up to 25 team members')
+    }
+
+    if (snips) {
+      array.push('Access to <a href="https://snips.vuetifyjs.com" target="_blank">Snips</a> All Access')
     }
 
     return array

@@ -8,6 +8,7 @@ interface SubscriptionItemPlan {
   currency: string
   interval: 'month' | 'year'
   type: 'solo' | 'team'
+  snips?: boolean
 }
 
 interface SubscriptionItem {
@@ -69,9 +70,10 @@ interface OneState {
   activate: () => Promise<void>
   cancel: () => Promise<void>
   manage: () => Promise<void>
-  modify: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) => Promise<void>
+  hasSnips: ComputedRef<boolean>
+  modify: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips?: boolean) => Promise<void>
   resetQuery: () => void
-  subscribe: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) => Promise<void>
+  subscribe: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips?: boolean) => Promise<void>
   subscriptionInfo: () => Promise<any>
   recentActivity: () => Promise<Activity[]>
 }
@@ -91,6 +93,7 @@ export const useOneStore = defineStore('one', (): OneState => {
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
   const subscriptionType = computed(() => info.value?.items[0].plan.type)
+  const hasSnips = computed(() => !!info.value?.items[0].plan.snips)
 
   const access = ref<string[]>([])
 
@@ -185,11 +188,15 @@ export const useOneStore = defineStore('one', (): OneState => {
     window.open(`${http.url}/one/manage`, '_blank')
   }
 
-  async function subscribe (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) {
+  async function subscribe (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips = false) {
     isLoading.value = true
     const url = new URL('/one/subscribe', http.url)
     url.searchParams.set('interval', interval)
     url.searchParams.set('type', type)
+
+    if (snips) {
+      url.searchParams.set('snips', 'true')
+    }
     window.location.href = url.toString()
   }
 
@@ -212,7 +219,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     }
   }
 
-  async function modify (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type']) {
+  async function modify (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips = false) {
     if (!subscription.value) {
       return
     }
@@ -224,6 +231,7 @@ export const useOneStore = defineStore('one', (): OneState => {
         subscriptionId: subscription.value.tierName,
         interval,
         type,
+        snips,
       })
 
       await auth.verify(true)
@@ -284,6 +292,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     recentActivity,
 
     hasBilling,
+    hasSnips,
     isLoading,
     isOpen,
     isSubscriber,

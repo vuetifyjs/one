@@ -46,14 +46,23 @@
     </v-row>
   </v-item-group>
 
-  <v-switch
-    v-model="interval"
-    false-value="month"
-    hide-details
-    inset
-    label="Yearly Billing (save 20%)"
-    true-value="year"
-  />
+  <div class="d-flex ga-4">
+    <v-switch
+      v-model="interval"
+      false-value="month"
+      hide-details
+      inset
+      label="Yearly Billing (save 20%)"
+      true-value="year"
+    />
+
+    <v-switch
+      v-model="snips"
+      hide-details
+      inset
+      label="Add Snips"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -63,6 +72,7 @@
   const dialog = shallowRef(false)
   const interval = defineModel<'month' | 'year'>('interval', { default: 'year' })
   const type = defineModel<'solo' | 'team'>('type', { default: 'solo' })
+  const snips = defineModel<boolean>('snips', { default: false })
   const one = useOneStore()
   const team = useTeamStore()
 
