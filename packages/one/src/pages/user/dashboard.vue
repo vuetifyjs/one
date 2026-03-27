@@ -1,5 +1,9 @@
 <template>
   <vo-app-bar logo="vone">
+    <template #prepend-fixed>
+      <v-app-bar-nav-icon v-if="mobile" @click="drawer = !drawer" />
+    </template>
+
     <template v-if="referrer" #prepend>
       <v-btn
         class="text-none ms-2"
@@ -22,72 +26,63 @@
 
   <vo-notifications-banner />
 
+  <v-navigation-drawer
+    v-model="drawer"
+    :permanent="!mobile"
+    :temporary="mobile"
+    width="280"
+  >
+    <v-list
+      v-model:selected="selected"
+      class="pa-4"
+      density="compact"
+      mandatory
+      nav
+    >
+      <v-list-item
+        v-for="t in tabs"
+        :key="t.value"
+        border
+        class="mb-2"
+        :prepend-icon="`svg:${t.icon}`"
+        rounded="lg"
+        :title="t.title"
+        :value="t.value"
+      />
+    </v-list>
+  </v-navigation-drawer>
+
   <v-main>
     <v-container class="py-8" max-width="1200">
-      <v-tabs
-        v-if="mobile"
-        v-model="tab"
-        center-active
-        show-arrows
-      >
-        <v-tab
-          v-for="t in tabs"
-          :key="t.value"
-          :prepend-icon="`svg:${t.icon}`"
-          :text="t.title"
-          :value="t.value"
-        />
-      </v-tabs>
+      <v-window v-model="tab">
+        <v-window-item value="activity">
+          <VoActivityPanel />
+        </v-window-item>
 
-      <v-divider v-if="mobile" class="mb-6" />
+        <v-window-item value="subscriptions">
+          <VoSubscriptionPanel />
+        </v-window-item>
 
-      <v-row>
-        <v-col v-if="!mobile" cols="auto">
-          <v-tabs v-model="tab" direction="vertical">
-            <v-tab
-              v-for="t in tabs"
-              :key="t.value"
-              :prepend-icon="`svg:${t.icon}`"
-              :text="t.title"
-              :value="t.value"
-            />
-          </v-tabs>
-        </v-col>
+        <v-window-item value="sponsorships">
+          <VoSponsorshipsPanel />
+        </v-window-item>
 
-        <v-divider v-if="!mobile" vertical />
+        <v-window-item value="team">
+          <VoTeamPanel />
+        </v-window-item>
 
-        <v-col>
-          <v-window v-model="tab">
-            <v-window-item value="activity">
-              <VoActivityPanel />
-            </v-window-item>
+        <v-window-item value="mcp">
+          <VoMcpPanel />
+        </v-window-item>
 
-            <v-window-item value="subscriptions">
-              <VoSubscriptionPanel />
-            </v-window-item>
-
-            <v-window-item value="sponsorships">
-              <VoSponsorshipsPanel />
-            </v-window-item>
-
-            <v-window-item value="team">
-              <VoTeamPanel />
-            </v-window-item>
-
-            <v-window-item value="mcp">
-              <VoMcpPanel />
-            </v-window-item>
-
-            <v-window-item value="settings">
-              <VoSettingsPanel />
-            </v-window-item>
-          </v-window>
-        </v-col>
-      </v-row>
+        <v-window-item value="settings">
+          <VoSettingsPanel />
+        </v-window-item>
+      </v-window>
     </v-container>
   </v-main>
 
-  <vo-social-footer app />
+  <vo-social-footer app order="-1" />
 </template>
 
 <script lang="ts" setup>
@@ -100,6 +95,7 @@
     mdiHandHeart,
     mdiHistory,
     mdiKey,
+    mdiMenu,
   } from '@mdi/js'
   import { ECOSYSTEM_ACTIONS } from '@/composables/ecosystem'
 
@@ -152,6 +148,14 @@
   }
 
   const tab = shallowRef(resolve())
+  const drawer = shallowRef(!mobile.value)
+
+  const selected = computed({
+    get: () => [tab.value],
+    set: (val: string[]) => {
+      if (val.length) tab.value = val[0]
+    },
+  })
 
   watch(() => route.query, () => {
     tab.value = resolve()
@@ -161,5 +165,7 @@
     if (route.query.tab === value) return
 
     router.replace({ query: { tab: value } })
+
+    if (mobile.value) drawer.value = false
   })
 </script>
