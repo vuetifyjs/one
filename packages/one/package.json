@@ -24,7 +24,10 @@
       "types": "./dist/stores/auth.d.ts",
       "default": "./dist/stores/auth.js"
     },
-    "./styles": "./dist/one.css"
+    "./styles": {
+      "types": "./dist/styles.d.ts",
+      "default": "./dist/one.css"
+    }
   },
   "scripts": {
     "dev": "vite",
