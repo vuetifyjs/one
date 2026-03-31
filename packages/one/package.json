@@ -1,6 +1,6 @@
 {
   "name": "@vuetify/one",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "private": false,
   "type": "module",
   "license": "MIT",
@@ -24,7 +24,10 @@
       "types": "./dist/stores/auth.d.ts",
       "default": "./dist/stores/auth.js"
     },
-    "./styles": "./dist/one.css"
+    "./styles": {
+      "types": "./dist/styles.d.ts",
+      "default": "./dist/one.css"
+    }
   },
   "scripts": {
     "dev": "vite",
