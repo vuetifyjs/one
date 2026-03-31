@@ -40,7 +40,7 @@
     </v-sheet>
   </div>
 
-  <v-row>
+  <v-row justify="center">
     <v-col
       v-for="(plan, i) in plans"
       :key="i"
@@ -49,76 +49,109 @@
     >
       <v-card
         :border="type === plan.type ? 'sm primary opacity-50' : 'sm'"
-        class="pa-8 d-flex flex-column mx-auto"
+        class="px-3 pb-4 d-flex flex-column mx-auto h-100"
         :color="type === plan.type ? 'primary' : undefined"
-        :disabled="plan.type === 'team' && disableTeam"
+        :disabled="plan.type === 'team' && !team.isTeamOwner && team.hasTeamAccess"
         flat
-        height="500"
         max-width="450"
         rounded="xl"
         :variant="type === plan.type ? 'tonal' : 'flat'"
-        @click="!plan.isCustom && (type = plan.type)"
+        @click="type = plan.type"
       >
-        <p class="mb-4 font-weight-bold">{{ plan.title }}</p>
+        <h2 class="mb-1 font-weight-bold">{{ plan.title }}</h2>
 
         <p class="text-subtitle-2 pb-3">
           {{ plan.subtitle }}
         </p>
 
         <div class="text-h4 mb-4 font-weight-bold">
-          {{ plan.isCustom ? 'Custom' : '$' + prices[plan.type][interval] }}
+          ${{ prices[plan.type][interval] }}
         </div>
-
-        <v-switch
-          v-if="!plan.isCustom"
-          v-model="snips"
-          class="mb-2"
-          color="primary"
-          density="compact"
-          hide-details
-          inset
-          label="Add Snips"
-          @click.stop
-        />
 
         <v-btn
           class="mb-5 text-none mx-auto"
-          :color="plan.isCustom ? 'surface-variant' : 'primary'"
+          color="primary-darken-2"
           max-height="36"
-          :text="plan.isCustom ? 'Contact Sales' : 'Select plan'"
-          variant="flat"
+          :text="type === plan.type ? 'Selected' : 'Select plan'"
+          :variant="type === plan.type ? 'flat' : 'tonal'"
           width="100%"
-          @click.stop="handleSelectPlan(plan)"
+          @click.stop="type = plan.type"
         />
 
         <v-list-item
-          v-for="(feature, index) in getFeatures(plan)"
+          v-for="(feature, index) in plan.features"
           :key="index"
           class="px-0 text-body-2"
         >
           <template #prepend>
             <v-icon
-              class="mr-2"
-              :color="plan.isCustom ? 'default' : 'primary'"
-              icon="mdi-check"
-              size="small"
+              :color="feature.new ? 'success' : feature.soon ? 'warning' : 'info-lighten-3'"
+              :icon="feature.new ? 'mdi-new-box' : feature.soon ? 'mdi-clock-outline' : 'mdi-check-circle'"
+              size="20"
             />
           </template>
 
-          <span v-html="feature" />
+          <span class="text-body-2" v-html="feature.text" />
+
+          <template v-if="feature.soon" #append>
+            <v-chip
+              color="warning"
+              size="x-small"
+              text="Soon"
+              variant="tonal"
+            />
+          </template>
         </v-list-item>
+      </v-card>
+    </v-col>
+  </v-row>
+
+  <v-row v-if="interval === 'month'" justify="center">
+    <v-col
+      cols="12"
+      lg="8"
+      class="d-flex justify-center"
+    >
+      <v-card
+        border="sm"
+        class="pa-4 d-flex align-center"
+        flat
+        rounded="xl"
+        @click="snips = !snips"
+      >
+        <div>
+          <div class="text-subtitle-2 font-weight-bold">Add Snips</div>
+
+          <div class="text-caption text-medium-emphasis">
+            Access to all premium code snippets — {{ type === 'team' ? '$49.99' : '$19.99' }}/month
+          </div>
+        </div>
+
+        <v-switch
+          v-model="snips"
+          class="ml-4 flex-grow-0"
+          color="primary"
+          density="compact"
+          hide-details
+          inset
+        />
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts" setup>
+  interface Feature {
+    text: string
+    soon?: boolean
+    new?: boolean
+  }
+
   interface Plan {
     title: string
     subtitle: string
     type: 'solo' | 'team'
-    features: string[]
-    isCustom?: boolean
+    features: Feature[]
   }
 
   const interval = defineModel<'month' | 'year'>('interval', { default: 'year' })
@@ -126,8 +159,6 @@
   const snips = defineModel<boolean>('snips', { default: false })
 
   const team = useTeamStore()
-
-  const disableTeam = computed(() => team.hasTeamAccess && !team.isTeamOwner)
 
   const prices = {
     solo: {
@@ -146,10 +177,13 @@
       subtitle: 'Perfect for individual developers working on personal or freelance projects.',
       type: 'solo',
       features: [
-        'Ad-free experience on all Vuetify properties',
-        'Save and share across Play, Bin, Studio, Link',
-        'Pinned pages and rail navigation in Documentation',
-        'Vuetify MCP API key for AI-assisted development',
+        { text: 'Ad-free experience across all Vuetify properties' },
+        { text: 'Private playgrounds, bins, links, and studios with cloud sync' },
+        { text: 'Premium documentation features (pinned nav, rail menu, copy page as markdown)' },
+        { text: 'Early access to new tools and features' },
+        { text: 'Vuetify MCP API (access to your one data anywhere that supports MCP)', new: true },
+        { text: 'Share live updates on Bins and Playgrounds', soon: true },
+        { text: 'Embed playgrounds in your own documentation', soon: true },
       ],
     },
     {
@@ -157,44 +191,13 @@
       subtitle: 'Ideal for teams who want to collaborate and share resources across projects.',
       type: 'team',
       features: [
-        'Invite up to 25 team members',
-        'Ad-free experience on all Vuetify properties',
-        'Save and share across Play, Bin, Studio, Link',
-        'Pinned pages and rail navigation in Documentation',
-        'Vuetify MCP API key for AI-assisted development',
+        { text: 'Everything in Solo, for up to 25 members' },
+        { text: 'Centralized team billing and member management' },
+        { text: 'Shared playgrounds and code snippets' },
+        { text: 'Team shared Private Bins and Playgrounds', soon: true },
+        { text: 'Usage analytics dashboard', soon: true },
       ],
-    },
-    {
-      title: 'Enterprise',
-      subtitle: 'Custom solutions for large organizations with specific requirements.',
-      type: 'solo',
-      features: [
-        'Unlimited team members',
-        'Priority support',
-        'Custom integrations',
-        'Dedicated account manager',
-        'SLA guarantees',
-      ],
-      isCustom: true,
     },
   ]
 
-  function getFeatures (plan: Plan) {
-    const features = [...plan.features]
-
-    if (snips.value && !plan.isCustom) {
-      features.push('Access to <a href="https://snips.vuetifyjs.com" target="_blank">Snips</a> All Access')
-    }
-
-    return features
-  }
-
-  function handleSelectPlan (plan: Plan) {
-    if (plan.isCustom) {
-      window.open('mailto:support@vuetifyjs.com?subject=Enterprise%20Inquiry', '_blank')
-      return
-    }
-
-    type.value = plan.type
-  }
 </script>
