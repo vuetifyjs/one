@@ -7,8 +7,7 @@ interface SubscriptionItemPlan {
   amount: number
   currency: string
   interval: 'month' | 'year'
-  type: 'solo' | 'team'
-  snips?: boolean
+  type: 'solo' | 'team' | 'snips-addon'
 }
 
 interface SubscriptionItem {
@@ -93,7 +92,7 @@ export const useOneStore = defineStore('one', (): OneState => {
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
   const subscriptionType = computed(() => info.value?.items[0].plan.type)
-  const hasSnips = computed(() => !!info.value?.items[0].plan.snips)
+  const hasSnips = computed(() => !!info.value?.items.some(item => item.plan.type === 'snips-addon'))
 
   const access = ref<string[]>([])
 
