@@ -51,7 +51,7 @@
         :border="type === plan.type ? 'sm primary opacity-50' : 'sm'"
         class="px-3 pb-4 d-flex flex-column mx-auto h-100"
         :color="type === plan.type ? 'primary' : undefined"
-        :disabled="plan.type === 'team' && !team.isTeamOwner && team.hasTeamAccess"
+        :disabled="plan.type === 'team' && disableTeam"
         flat
         max-width="450"
         rounded="xl"
@@ -91,7 +91,19 @@
             />
           </template>
 
-          <span class="text-body-2" v-html="feature.text" />
+          <span class="text-body-2">
+            <template v-for="(part, p) in toParts(feature.text)" :key="p">
+              <a
+                v-if="typeof part !== 'string'"
+                :href="part.href"
+                rel="noopener noreferrer"
+                target="_blank"
+                @click.stop
+              >{{ part.label }}</a>
+
+              <template v-else>{{ part }}</template>
+            </template>
+          </span>
 
           <template v-if="feature.soon" #append>
             <v-chip
@@ -108,9 +120,9 @@
 
   <v-row v-if="interval === 'month'" justify="center">
     <v-col
+      class="d-flex justify-center"
       cols="12"
       lg="8"
-      class="d-flex justify-center"
     >
       <v-card
         border="sm"
@@ -123,7 +135,7 @@
           <div class="text-subtitle-2 font-weight-bold">Add Snips</div>
 
           <div class="text-caption text-medium-emphasis">
-            Access to all premium code snippets — {{ type === 'team' ? '$49.99' : '$19.99' }}/month
+            Access to all premium code snippets — ${{ prices.snips[type] }}/month
           </div>
         </div>
 
@@ -138,11 +150,43 @@
       </v-card>
     </v-col>
   </v-row>
+
+  <v-responsive class="mx-auto mt-8" max-width="700">
+    <v-label class="font-weight-black">Up Next</v-label>
+
+    <div class="mb-3 text-caption text-medium-emphasis">
+      The following features are in development and coming soon:
+    </div>
+
+    <v-list class="py-0" density="compact" :lines="false" nav>
+      <VoListItem
+        v-for="(item, i) in upnext"
+        :key="i"
+        class="mb-0"
+        :prepend-icon="`svg:${mdiRocketOutline}`"
+      >
+        <template #prepend>
+          <v-icon class="mx-n2" size="small" />
+        </template>
+
+        <template #title>{{ item }}</template>
+      </VoListItem>
+    </v-list>
+  </v-responsive>
 </template>
 
 <script lang="ts" setup>
+  import { mdiRocketOutline } from '@mdi/js'
+
+  interface Link {
+    href: string
+    label: string
+  }
+
+  type TextPart = string | Link
+
   interface Feature {
-    text: string
+    text: string | TextPart[]
     soon?: boolean
     new?: boolean
   }
@@ -160,6 +204,18 @@
 
   const team = useTeamStore()
 
+  const disableTeam = computed(() => !team.isTeamOwner && team.hasTeamAccess)
+
+  function toParts (text: string | TextPart[]): TextPart[] {
+    return typeof text === 'string' ? [text] : text
+  }
+
+  const upnext = [
+    'Embeddable playgrounds for your own documentation',
+    'Team shared workspaces for bins and playgrounds',
+    'Real-time collaboration on bins and playgrounds',
+  ]
+
   const prices = {
     solo: {
       month: '2.99 /month',
@@ -169,7 +225,15 @@
       month: '29.99 /month',
       year: '299.99 /year',
     },
+    snips: {
+      solo: '19.99',
+      team: '49.99',
+    },
   }
+
+  watch(interval, val => {
+    if (val === 'year') snips.value = false
+  })
 
   const plans: Plan[] = [
     {
@@ -199,5 +263,4 @@
       ],
     },
   ]
-
 </script>

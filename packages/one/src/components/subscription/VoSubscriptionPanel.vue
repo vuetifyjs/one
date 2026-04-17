@@ -13,10 +13,10 @@
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
   const isUpdatingSubscription = shallowRef<boolean | null>(false)
 
-  watch([interval, type, snips], ([interval, type, snips]) => {
+  watch([interval, type, snips], ([nextInterval, nextType, nextSnips]) => {
     if (!one.isSubscriber || !one.interval || !one.subscriptionType) return
 
-    isUpdatingSubscription.value = interval !== one.interval || type !== one.subscriptionType || snips !== one.hasSnips
+    isUpdatingSubscription.value = nextInterval !== one.interval || nextType !== one.subscriptionType || nextSnips !== one.hasSnips
   })
 
   watchEffect(() => {
@@ -32,7 +32,7 @@
   })
 
   async function onClickModify () {
-    await one.modify(interval.value!, type.value!, snips.value)
+    await one.modify(interval.value!, type.value!, snips.value ? ['snips'] : [])
     await one.subscriptionInfo()
 
     isUpdatingSubscription.value = null
@@ -58,8 +58,6 @@
       <v-window :model-value="window">
         <v-window-item value="subscribe">
           <VoSubscriptionSubscribe v-model:interval="interval" v-model:snips="snips" v-model:type="type" />
-          <br>
-          <VoSubscriptionPerks :snips="snips" :type="type" />
         </v-window-item>
 
         <v-window-item value="status">
@@ -92,7 +90,7 @@
         prepend-icon="$vuetify"
         size="default"
         text="Activate Subscription"
-        @click="one.subscribe(interval!, type!, snips)"
+        @click="one.subscribe(interval!, type!, snips ? ['snips'] : [])"
       />
 
       <VoBtn

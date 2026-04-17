@@ -2,12 +2,14 @@
 import type { ComputedRef, Ref, ShallowRef } from 'vue'
 import type { VOneIdentity, VOneSponsorship } from './auth'
 
+type BasePlanType = 'solo' | 'team'
+
 interface SubscriptionItemPlan {
   id: string
   amount: number
   currency: string
   interval: 'month' | 'year'
-  type: 'solo' | 'team' | 'snips-addon'
+  type: BasePlanType | 'snips-addon'
 }
 
 interface SubscriptionItem {
@@ -45,7 +47,8 @@ interface Activity {
 interface OneState {
   info: Ref<Info | null>
   interval: ComputedRef<SubscriptionItemPlan['interval'] | undefined>
-  subscriptionType: ComputedRef<SubscriptionItemPlan['type'] | undefined>
+  subscriptionType: ComputedRef<BasePlanType | undefined>
+  addons: ComputedRef<string[]>
   access: Ref<string[]>
   invoices: Ref<Invoice[]>
   sessionId: ComputedRef<string | undefined>
@@ -70,9 +73,9 @@ interface OneState {
   cancel: () => Promise<void>
   manage: () => Promise<void>
   hasSnips: ComputedRef<boolean>
-  modify: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips?: boolean) => Promise<void>
+  modify: (interval: SubscriptionItemPlan['interval'], type: BasePlanType, addons?: string[]) => Promise<void>
   resetQuery: () => void
-  subscribe: (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips?: boolean) => Promise<void>
+  subscribe: (interval: SubscriptionItemPlan['interval'], type: BasePlanType, addons?: string[]) => Promise<void>
   subscriptionInfo: () => Promise<any>
   recentActivity: () => Promise<Activity[]>
 }
@@ -91,8 +94,16 @@ export const useOneStore = defineStore('one', (): OneState => {
   const invoices = ref<Invoice[]>([])
   const sessionId = computed(() => query.value.session_id)
   const interval = computed(() => info.value?.items[0].plan.interval)
-  const subscriptionType = computed(() => info.value?.items[0].plan.type)
-  const hasSnips = computed(() => !!info.value?.items.some(item => item.plan.type === 'snips-addon'))
+  const subscriptionType = computed<BasePlanType | undefined>(() => {
+    const base = info.value?.items.find(item => item.plan.type !== 'snips-addon')
+    return base?.plan.type as BasePlanType | undefined
+  })
+  const addons = computed(() => {
+    return info.value?.items
+      .filter(item => item.plan.type.endsWith('-addon'))
+      .map(item => item.plan.type.replace('-addon', '')) ?? []
+  })
+  const hasSnips = computed(() => addons.value.includes('snips'))
 
   const access = ref<string[]>([])
 
@@ -187,13 +198,13 @@ export const useOneStore = defineStore('one', (): OneState => {
     window.open(`${http.url}/one/manage`, '_blank')
   }
 
-  async function subscribe (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips = false) {
+  async function subscribe (interval: SubscriptionItemPlan['interval'], type: BasePlanType, addons: string[] = []) {
     isLoading.value = true
     const url = new URL('/one/subscribe', http.url)
     url.searchParams.set('interval', interval)
     url.searchParams.set('type', type)
 
-    if (snips) {
+    if (addons.includes('snips')) {
       url.searchParams.set('snips', 'true')
     }
     window.location.href = url.toString()
@@ -218,7 +229,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     }
   }
 
-  async function modify (interval: SubscriptionItemPlan['interval'], type: SubscriptionItemPlan['type'], snips = false) {
+  async function modify (interval: SubscriptionItemPlan['interval'], type: BasePlanType, addons?: string[]) {
     if (!subscription.value) {
       return
     }
@@ -226,12 +237,17 @@ export const useOneStore = defineStore('one', (): OneState => {
     try {
       isLoading.value = true
 
-      await http.post('/one/modify', {
+      const body: Record<string, any> = {
         subscriptionId: subscription.value.tierName,
         interval,
         type,
-        snips,
-      })
+      }
+
+      if (addons !== undefined) {
+        body.snips = addons.includes('snips')
+      }
+
+      await http.post('/one/modify', body)
 
       await auth.verify(true)
     } catch (error: any) {
@@ -282,6 +298,7 @@ export const useOneStore = defineStore('one', (): OneState => {
     info,
     interval,
     subscriptionType,
+    addons,
     access,
 
     invoices,
