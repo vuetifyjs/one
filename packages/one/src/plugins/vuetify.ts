@@ -19,7 +19,7 @@ import * as mdiSvg from './icons'
 import type { IconProps } from 'vuetify'
 
 // Utilities
-import { camelize, h } from 'vue'
+import { camelize, h, capitalize } from 'vue'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
@@ -118,7 +118,7 @@ export default createVuetify({
       mdiSvg: mdi,
       mdi: {
         component: (props: IconProps) => {
-          const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
+          const icon = mdiSvg['mdi' + capitalize(camelize(props.icon as string)) as keyof typeof mdiSvg]
 
           return h(components.VSvgIcon, {
             ...props,
