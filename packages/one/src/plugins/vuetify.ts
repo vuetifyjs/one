@@ -4,18 +4,22 @@
  * Framework documentation: https://vuetifyjs.com`
  */
 
-// Composables
-import type { IconProps } from 'vuetify'
-
-import { camelize, h } from 'vue'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import { VIconBtn } from 'vuetify/labs/VIconBtn'
-import { aliases as oneAliases } from '@/icons'
-import * as mdiSvg from './icons'
 // Styles
 import 'vuetify/styles'
+
+// Framework
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import { VIconBtn } from 'vuetify/labs/VIconBtn'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import { aliases as oneAliases } from '@/icons'
+import * as mdiSvg from './icons'
+
+// Types
+import type { IconProps } from 'vuetify'
+
+// Utilities
+import { camelize, h } from 'vue'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({

@@ -1,13 +1,11 @@
 // Composables
 import { createApp } from 'vue'
 
-// Components
-import App from './App.vue'
-
 // Plugins
 import { registerPlugins } from './plugins'
 
-// Styles
+// Components
+import App from './App.vue'
 
 const app = createApp(App)
 

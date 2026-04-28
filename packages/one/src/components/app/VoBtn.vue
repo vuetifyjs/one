@@ -1,6 +1,5 @@
 <template>
   <v-btn
-    class="text-none font-weight-regular"
     color="primary"
     size="small"
     :style="{
