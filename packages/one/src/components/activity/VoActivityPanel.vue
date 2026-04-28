@@ -75,7 +75,7 @@
         hide-details
         label="Search"
         max-width="300"
-        prepend-inner-icon="$mdiMagnify"
+        prepend-inner-icon="mdi-magnify"
         rounded="lg"
         variant="outlined"
         flat
