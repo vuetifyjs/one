@@ -9,18 +9,20 @@
   const one = useOneStore()
   const interval = shallowRef(one.interval)
   const type = shallowRef(one.subscriptionType)
+  const snips = shallowRef(one.hasSnips)
   const window = shallowRef(one.hasBilling ? 'status' : 'subscribe')
   const isUpdatingSubscription = shallowRef<boolean | null>(false)
 
-  watch([interval, type], ([interval, type]) => {
+  watch([interval, type, snips], ([nextInterval, nextType, nextSnips]) => {
     if (!one.isSubscriber || !one.interval || !one.subscriptionType) return
 
-    isUpdatingSubscription.value = interval !== one.interval || type !== one.subscriptionType
+    isUpdatingSubscription.value = nextInterval !== one.interval || nextType !== one.subscriptionType || nextSnips !== one.hasSnips
   })
 
   watchEffect(() => {
     interval.value = one.interval ?? 'year'
     type.value = one.subscriptionType ?? 'solo'
+    snips.value = one.hasSnips
   })
 
   onMounted(() => {
@@ -30,7 +32,7 @@
   })
 
   async function onClickModify () {
-    await one.modify(interval.value!, type.value!)
+    await one.modify(interval.value!, type.value!, snips.value ? ['snips'] : [])
     await one.subscriptionInfo()
 
     isUpdatingSubscription.value = null
@@ -55,9 +57,7 @@
 
       <v-window :model-value="window">
         <v-window-item value="subscribe">
-          <VoSubscriptionSubscribe v-model:interval="interval" v-model:type="type" />
-          <br>
-          <VoSubscriptionPerks :type="type" />
+          <VoSubscriptionSubscribe v-model:interval="interval" v-model:snips="snips" v-model:type="type" />
         </v-window-item>
 
         <v-window-item value="status">
@@ -90,7 +90,7 @@
         prepend-icon="$vuetify"
         size="default"
         text="Activate Subscription"
-        @click="one.subscribe(interval!, type!)"
+        @click="one.subscribe(interval!, type!, snips ? ['snips'] : [])"
       />
 
       <VoBtn
