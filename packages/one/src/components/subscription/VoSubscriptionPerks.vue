@@ -1,7 +1,7 @@
 <template>
   <v-label class="font-weight-black">Perks</v-label>
 
-  <div class="mb-3 text-caption text-medium-emphasis">
+  <div class="mb-3 text-body-small text-medium-emphasis">
     The Vuetify One subscription comes with the following perks:
   </div>
 
@@ -26,7 +26,7 @@
 
   <v-label class="font-weight-black">Up Next</v-label>
 
-  <div class="mb-3 text-caption text-medium-emphasis">
+  <div class="mb-3 text-body-small text-medium-emphasis">
     The following features are in development and coming soon:
   </div>
 

@@ -6,7 +6,7 @@
         class="py-4 mb-0"
       >
         <template #prepend>
-          <div class="ps-3 text-subtitle-2 pe-2">{{ notification.metadata.emoji }}</div>
+          <div class="ps-3 text-title-small pe-2">{{ notification.metadata.emoji }}</div>
         </template>
 
         <template #append>
@@ -33,15 +33,15 @@
           </v-responsive>
         </template>
 
-        <v-list-item-title class="text-wrap text-h6 mb-1">
+        <v-list-item-title class="text-wrap text-title-large mb-1">
           <div class=" text-truncate">{{ notification.title }}</div>
         </v-list-item-title>
 
-        <div class="text-caption font-weight-bold text-medium-emphasis">
+        <div class="text-body-small font-weight-bold text-medium-emphasis">
           {{ date.format(notification.created_at, 'fullDateWithWeekday') }}
         </div>
 
-        <div class="text-disabled text-caption my-2">
+        <div class="text-disabled text-body-small my-2">
           {{ notification.metadata.text }}
         </div>
 

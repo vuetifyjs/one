@@ -15,7 +15,7 @@
           sticky
         >
           <template #item.date="{ item }">
-            <div class="text-caption">
+            <div class="text-body-small">
               {{ date.format(new Date(item.date * 1000), 'fullDateWithWeekday') }}
             </div>
           </template>

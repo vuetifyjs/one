@@ -49,7 +49,7 @@
             value="read"
           >
             <template v-if="notifications.unread.length > 0" #append>
-              <span class="text-caption">
+              <span class="text-body-small">
                 {{ notifications.unread.length }}
               </span>
             </template>
@@ -61,7 +61,7 @@
             value="unread"
           >
             <template v-if="notifications.read.length > 0" #append>
-              <span class="text-caption">
+              <span class="text-body-small">
                 {{ notifications.read.length }}
               </span>
             </template>

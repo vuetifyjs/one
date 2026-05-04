@@ -20,7 +20,7 @@
 
       <template v-if="slots.title">
         <v-divider v-if="slots.prepend" class="mb-3" />
-        <div class="text-h6 mb-3">
+        <div class="text-title-large mb-3">
           <slot name="title" />
         </div>
       </template>

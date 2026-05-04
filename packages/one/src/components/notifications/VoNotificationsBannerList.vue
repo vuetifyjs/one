@@ -71,15 +71,15 @@
                   </template>
                 </v-tooltip>
 
-                <div class="text-subtitle-1 font-weight-bold">
+                <div class="text-body-large font-weight-bold">
                   {{ banner.metadata.text }}
                 </div>
 
-                <div class="text-caption font-weight-bold text-medium-emphasis">
+                <div class="text-body-small font-weight-bold text-medium-emphasis">
                   {{ date.format(banner.created_at, 'fullDateWithWeekday') }}
                 </div>
 
-                <div class="text-disabled text-caption mt-2 mb-3">
+                <div class="text-disabled text-body-small mt-2 mb-3">
                   {{ banner.metadata.subtext }}
                 </div>
 

@@ -3,7 +3,7 @@
     {{ title }}
   </v-label>
 
-  <div v-if="text" class="mb-3 text-caption text-medium-emphasis">
+  <div v-if="text" class="mb-3 text-body-small text-medium-emphasis">
     {{ text }}
   </div>
 </template>

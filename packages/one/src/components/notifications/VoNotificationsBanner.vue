@@ -30,7 +30,7 @@
 
       <v-list-item-title
         v-if="banner.metadata.text"
-        class="text-subtitle-2 text-md-subtitle-1 font-weight-medium"
+        class="text-title-small text-md-body-large font-weight-medium"
       >
         {{ banner.metadata.text }}
       </v-list-item-title>

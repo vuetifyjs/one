@@ -24,7 +24,7 @@
     </a>
 
     <div
-      class="text-caption text-disabled"
+      class="text-body-small text-disabled"
       style="position: absolute; right: 16px;"
     >
       &copy; 2016-{{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">Vuetify, LLC</span>
