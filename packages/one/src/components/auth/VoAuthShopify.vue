@@ -8,14 +8,14 @@
     @click="auth.login('shopify')"
   >
     <template #title>
-      <span class="text-body-2">{{ text }}</span>
+      <span class="text-body-medium">{{ text }}</span>
     </template>
 
     <template
       v-if="(!auth.user && auth.lastLoginProvider() === 'shopify')"
       #subtitle
     >
-      <div class="text-caption mt-n1">Last Used</div>
+      <div class="text-body-small mt-n1">Last Used</div>
     </template>
   </v-list-item>
 </template>

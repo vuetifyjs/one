@@ -39,7 +39,7 @@
         />
 
         <div class="d-flex align-start ga-4">
-          <div class="text-caption on-surface-light">
+          <div class="text-body-small on-surface-light">
             {{ promotion.metadata?.text }}
           </div>
         </div>

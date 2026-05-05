@@ -29,7 +29,7 @@
       </template>
 
       <template #text>
-        <div class="text-caption text-medium-emphasis">
+        <div class="text-body-small text-medium-emphasis">
           {{ one.isSubscriber ? 'You are currently receiving benefits of Vuetify One.' : 'Login to activate Vuetify One benefits' }}
         </div>
       </template>

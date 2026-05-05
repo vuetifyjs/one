@@ -20,7 +20,7 @@
               <span class="mx-1 hidden-sm-and-down">—</span>
 
               <span class="me-1">
-                ${{ one.info.items[0].plan.amount / 100 }}<span class="text-medium-emphasis text-caption">/{{ one.interval }}</span>
+                ${{ one.info.items[0].plan.amount / 100 }}<span class="text-medium-emphasis text-body-small">/{{ one.interval }}</span>
               </span>
 
               <VoBtn
@@ -65,7 +65,7 @@
         </template>
       </v-card>
 
-      <div class="d-flex align-start justify-space-between text-caption py-2">
+      <div class="d-flex align-start justify-space-between text-body-small py-2">
         <div>
           <template v-if="one.info?.status === 'active'">
             Your plan renews on <span class="font-weight-bold">

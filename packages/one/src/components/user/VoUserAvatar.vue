@@ -58,7 +58,7 @@
       </v-expand-transition>
     </div>
 
-    <div class="text-h6">
+    <div class="text-title-large">
       {{ auth.user?.name ?? 'Guest' }}
     </div>
   </div>
