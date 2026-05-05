@@ -45,7 +45,7 @@
       v-for="(plan, i) in plans"
       :key="i"
       cols="12"
-      lg="4"
+      md="6"
     >
       <v-card
         :border="type === plan.type ? 'sm primary opacity-50' : 'sm'"
