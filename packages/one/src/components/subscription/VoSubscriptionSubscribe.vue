@@ -40,20 +40,16 @@
     </v-sheet>
   </div>
 
-  <v-row justify="center">
-    <v-col
-      v-for="(plan, i) in plans"
-      :key="i"
-      cols="12"
-      md="6"
-    >
+  <div class="d-flex flex-wrap justify-center ga-4">
+    <template v-for="(plan, i) in plans" :key="i">
       <v-card
         :border="type === plan.type ? 'sm primary opacity-50' : 'sm'"
-        class="px-3 pb-4 d-flex flex-column mx-auto h-100"
+        class="px-3 pb-4 d-flex flex-column flex-1-1-0"
         :color="type === plan.type ? 'primary' : undefined"
         :disabled="plan.type === 'team' && disableTeam"
         flat
-        max-width="450"
+        max-width="400"
+        min-width="250"
         rounded="xl"
         :variant="type === plan.type ? 'tonal' : 'flat'"
         @click="type = plan.type"
@@ -115,41 +111,36 @@
           </template>
         </v-list-item>
       </v-card>
-    </v-col>
-  </v-row>
+    </template>
+  </div>
 
-  <v-row v-if="interval === 'month'" justify="center">
-    <v-col
-      class="d-flex justify-center"
-      cols="12"
-      lg="8"
+  <div v-if="interval === 'month'" class="d-flex justify-center mt-4">
+    <v-card
+      border="sm"
+      class="pa-4 d-flex align-center flex-1-1-0"
+      flat
+      max-width="450"
+      rounded="xl"
+      @click="snips = !snips"
     >
-      <v-card
-        border="sm"
-        class="pa-4 d-flex align-center"
-        flat
-        rounded="xl"
-        @click="snips = !snips"
-      >
-        <div>
-          <div class="text-subtitle-2 font-weight-bold">Add Snips</div>
+      <div>
+        <div class="text-subtitle-2 font-weight-bold">Add Snips</div>
 
-          <div class="text-caption text-medium-emphasis">
-            Access to all premium code snippets — ${{ prices.snips[type] }}/month
-          </div>
+        <div class="text-caption text-medium-emphasis">
+          Access to all premium code snippets — ${{ prices.snips[type] }}/month
         </div>
+      </div>
 
-        <v-switch
-          v-model="snips"
-          class="ml-4 flex-grow-0"
-          color="primary"
-          density="compact"
-          hide-details
-          inset
-        />
-      </v-card>
-    </v-col>
-  </v-row>
+      <v-switch
+        v-model="snips"
+        class="ml-4 flex-grow-0"
+        color="primary"
+        density="compact"
+        hide-details
+        inset
+      />
+    </v-card>
+  </div>
 
   <v-responsive class="mx-auto mt-8" max-width="700">
     <v-label class="font-weight-black">Up Next</v-label>
