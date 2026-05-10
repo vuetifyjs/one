@@ -56,8 +56,6 @@
       <v-window :model-value="window">
         <v-window-item value="subscribe">
           <VoSubscriptionSubscribe v-model:interval="interval" v-model:type="type" />
-          <br>
-          <VoSubscriptionPerks :type="type" />
         </v-window-item>
 
         <v-window-item value="status">
