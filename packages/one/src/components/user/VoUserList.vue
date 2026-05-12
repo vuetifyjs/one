@@ -14,6 +14,8 @@
 
     <VoDownloadsNavItem v-if="one.shopify" />
 
+    <VoSubscriptionListItem v-if="auth.user" />
+
     <VoSettingsListItem />
 
     <VoAuthLogoutNavItem v-if="auth.user" />

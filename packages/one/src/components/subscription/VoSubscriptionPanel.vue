@@ -48,16 +48,16 @@
 <template>
   <div class="px-3">
     <v-card-text>
-      <VoDialogSubheader
-        text="The Vuetify One subscription is a great way to support the Vuetify team and get access to exclusive features and content."
-        title="Vuetify One"
-      />
+      <div class="text-center">
+        <VoDialogSubheader
+          text="The Vuetify One subscription is a great way to support the Vuetify team and get access to exclusive features and content."
+          title="Vuetify One"
+        />
+      </div>
 
       <v-window :model-value="window">
         <v-window-item value="subscribe">
           <VoSubscriptionSubscribe v-model:interval="interval" v-model:type="type" />
-          <br>
-          <VoSubscriptionPerks :type="type" />
         </v-window-item>
 
         <v-window-item value="status">
