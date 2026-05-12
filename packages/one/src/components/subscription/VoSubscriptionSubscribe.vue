@@ -82,7 +82,7 @@
           <template #prepend>
             <v-icon
               :color="feature.new ? 'success' : feature.soon ? 'warning' : 'info-lighten-3'"
-              :icon="feature.new ? 'mdi-new-box' : feature.soon ? 'mdi-clock-outline' : 'mdi-check-circle'"
+              :icon="`svg:${feature.new ? mdiNewBox : feature.soon ? mdiClockOutline : mdiCheckCircle}`"
               size="20"
             />
           </template>
@@ -140,7 +140,7 @@
 
 <script lang="ts" setup>
   // Icons
-  import { mdiRocketOutline } from '@mdi/js'
+  import { mdiCheckCircle, mdiClockOutline, mdiNewBox, mdiRocketOutline } from '@mdi/js'
 
   interface Link {
     href: string
