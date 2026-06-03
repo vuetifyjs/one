@@ -138,9 +138,9 @@
     const metadata = banner.value?.metadata ?? { link: '' }
 
     return {
-      href: metadata.link.startsWith('http') ? metadata.link : undefined,
-      target: metadata.link.startsWith('http') ? '_blank' : undefined,
-      to: metadata.link.startsWith('http') ? undefined : metadata.link,
+      href: metadata.link?.startsWith('http') ? metadata.link : undefined,
+      target: metadata.link?.startsWith('http') ? '_blank' : undefined,
+      to: metadata.link?.startsWith('http') ? undefined : metadata.link,
       ...banner.value?.metadata.attributes,
     }
   })
