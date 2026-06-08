@@ -61,7 +61,7 @@ export default {
 ## Store Integration
 
 ```js
-import { useAuthStore, useOneStore, useProductsStore } from '@vuetify/one'
+import { useAuthStore, useOneStore } from '@vuetify/one'
 
 const authStore = useAuthStore()
 const oneStore = useOneStore()

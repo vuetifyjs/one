@@ -36,8 +36,6 @@
 
       <VoAuthDiscord class="mb-3" />
 
-      <VoAuthShopify class="mb-3" />
-
       <VoAuthOpenCollective />
     </v-list>
   </v-card>

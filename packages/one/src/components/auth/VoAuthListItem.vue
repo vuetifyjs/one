@@ -47,8 +47,6 @@
 
             <VoAuthDiscord @click="social = false" />
 
-            <VoAuthShopify @click="social = false" />
-
             <VoAuthOpenCollective @click="social = false" />
           </div>
         </v-sheet>
