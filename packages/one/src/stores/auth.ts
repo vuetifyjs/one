@@ -121,7 +121,7 @@ export const useAuthStore = defineStore('auth', () => {
     return baseAuth.verify(force)
   }
 
-  async function login (provider: 'github' | 'discord' | 'shopify' | 'google' | 'opencollective' = 'github') {
+  async function login (provider: 'github' | 'discord' | 'google' | 'opencollective' = 'github') {
     await baseAuth.login(provider)
 
     // After successful login (handled by callback), navigate and sync

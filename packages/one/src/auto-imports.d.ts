@@ -82,7 +82,6 @@ declare global {
   const useCssVars: typeof import('vue').useCssVars
   const useDate: typeof import('vuetify').useDate
   const useDisplay: typeof import('vuetify').useDisplay
-  const useDownloadsStore: typeof import('./stores/downloads').useDownloadsStore
   const useEcosystem: typeof import('./composables/ecosystem').useEcosystem
   const useHttpStore: typeof import('./stores/http').useHttpStore
   const useId: typeof import('vue').useId
@@ -93,7 +92,6 @@ declare global {
   const useOneStore: typeof import('./stores/one').useOneStore
   const useParams: typeof import('./composables/route').useParams
   const usePlaysStore: typeof import('./stores/plays').usePlaysStore
-  const useProductsStore: typeof import('./stores/products').useProductsStore
   const usePromotionsStore: typeof import('./stores/promotions').usePromotionsStore
   const useQuery: typeof import('./composables/route').useQuery
   const useQueueStore: typeof import('./stores/queue').useQueueStore
@@ -128,9 +126,6 @@ declare global {
   export type { VOneBin, BinsState } from './stores/bins'
   import('./stores/bins')
   // @ts-ignore
-  export type { VOneSendowlDownloadItem, VOneSendowlDownload, DownloadsState } from './stores/downloads'
-  import('./stores/downloads')
-  // @ts-ignore
   export type { VOneLink, CreateLinkOptions, LinksState } from './stores/links'
   import('./stores/links')
   // @ts-ignore
@@ -142,9 +137,6 @@ declare global {
   // @ts-ignore
   export type { VOnePlay, PlaysState } from './stores/plays'
   import('./stores/plays')
-  // @ts-ignore
-  export type { ShopifyProduct, ProductsState } from './stores/products'
-  import('./stores/products')
   // @ts-ignore
   export type { VOnePromotion } from './stores/promotions'
   import('./stores/promotions')
@@ -252,7 +244,6 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDate: UnwrapRef<typeof import('vuetify')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>
-    readonly useDownloadsStore: UnwrapRef<typeof import('./stores/downloads')['useDownloadsStore']>
     readonly useEcosystem: UnwrapRef<typeof import('./composables/ecosystem')['useEcosystem']>
     readonly useHttpStore: UnwrapRef<typeof import('./stores/http')['useHttpStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
@@ -263,7 +254,6 @@ declare module 'vue' {
     readonly useOneStore: UnwrapRef<typeof import('./stores/one')['useOneStore']>
     readonly useParams: UnwrapRef<typeof import('./composables/route')['useParams']>
     readonly usePlaysStore: UnwrapRef<typeof import('./stores/plays')['usePlaysStore']>
-    readonly useProductsStore: UnwrapRef<typeof import('./stores/products')['useProductsStore']>
     readonly usePromotionsStore: UnwrapRef<typeof import('./stores/promotions')['usePromotionsStore']>
     readonly useQuery: UnwrapRef<typeof import('./composables/route')['useQuery']>
     readonly useQueueStore: UnwrapRef<typeof import('./stores/queue')['useQueueStore']>

@@ -47,7 +47,6 @@ export {
   mdiReload,
   mdiRocketOutline,
   mdiShieldStarOutline,
-  mdiStorefront,
   mdiSync,
   mdiSyncOff,
   mdiTagMultiple,

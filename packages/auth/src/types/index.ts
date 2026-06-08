@@ -56,7 +56,7 @@ export interface VOneAccessToken {
   updatedAt: string
 }
 
-export type AuthProvider = 'github' | 'discord' | 'shopify' | 'google' | 'opencollective'
+export type AuthProvider = 'github' | 'discord' | 'google' | 'opencollective'
 
 export interface AuthConfig {
   /** Base URL for the Vuetify API */

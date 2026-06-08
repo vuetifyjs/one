@@ -277,7 +277,7 @@ describe('auth store', () => {
   })
 
   describe('login', () => {
-    it('opens popup for non-shopify providers', async () => {
+    it('opens popup for all providers', async () => {
       const http = useHttpStore()
       http.url = 'https://api.vuetifyjs.com'
 
@@ -298,24 +298,6 @@ describe('auth store', () => {
         '',
         'vuetify:authorize:popup',
         expect.stringContaining('popup'),
-      )
-    })
-
-    it('redirects for shopify provider', async () => {
-      const http = useHttpStore()
-      http.url = 'https://api.vuetifyjs.com'
-
-      const mockAssign = vi.fn()
-      vi.stubGlobal('location', {
-        href: 'https://vuetifyjs.com/current',
-        assign: mockAssign,
-      })
-
-      const auth = useAuthStore()
-      await auth.login('shopify')
-
-      expect(mockAssign).toHaveBeenCalledWith(
-        expect.stringContaining('/auth/shopify/redirect'),
       )
     })
   })

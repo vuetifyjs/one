@@ -115,11 +115,6 @@ export const useAuthStore = defineStore('auth-core', () => {
 
     const redirectUrl = `${http.url}/auth/${provider}/redirect`
 
-    if (provider === 'shopify') {
-      window.location.assign(redirectUrl + '?next=' + encodeURIComponent(window.location.href))
-      return
-    }
-
     const width = 400
     const height = 600
     const left = window.screenX + (window.innerWidth - width) / 2

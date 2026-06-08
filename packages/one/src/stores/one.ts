@@ -1,6 +1,6 @@
 // Types
 import type { ComputedRef, Ref, ShallowRef } from 'vue'
-import type { VOneIdentity, VOneSponsorship } from './auth'
+import type { VOneSponsorship } from './auth'
 
 interface SubscriptionItemPlan {
   id: string
@@ -62,7 +62,6 @@ interface OneState {
 
   github: ComputedRef<VOneSponsorship | undefined>
   discord: ComputedRef<VOneSponsorship | undefined>
-  shopify: ComputedRef<VOneIdentity | undefined>
   opencollective: ComputedRef<VOneSponsorship | undefined>
   one: ComputedRef<VOneSponsorship | undefined>
 
@@ -123,10 +122,6 @@ export const useOneStore = defineStore('one', (): OneState => {
   const opencollective = computed(() => {
     return auth.user?.sponsorships.find(s => s.platform === 'opencollective' && s.isActive)
   })
-  const shopify = computed(() => {
-    return auth.user?.identities.find(i => i.provider === 'shopify')
-  })
-
   const isSubscriber = computed(() => (
     !http.url
     || auth.isAdmin
@@ -291,7 +286,6 @@ export const useOneStore = defineStore('one', (): OneState => {
     opencollective,
     github,
     discord,
-    shopify,
     one,
 
     activate,

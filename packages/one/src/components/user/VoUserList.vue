@@ -12,8 +12,6 @@
 
     <VoEcosystemListItem />
 
-    <VoDownloadsNavItem v-if="one.shopify" />
-
     <VoSettingsListItem />
 
     <VoAuthLogoutNavItem v-if="auth.user" />
@@ -22,5 +20,4 @@
 
 <script lang="ts" setup>
   const auth = useAuthStore()
-  const one = useOneStore()
 </script>
