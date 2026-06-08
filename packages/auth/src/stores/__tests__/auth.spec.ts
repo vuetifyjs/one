@@ -295,7 +295,7 @@ describe('auth store', () => {
       await new Promise(resolve => setTimeout(resolve, 10))
 
       expect(mockOpen).toHaveBeenCalledWith(
-        '',
+        'https://api.vuetifyjs.com/auth/github/redirect',
         'vuetify:authorize:popup',
         expect.stringContaining('popup'),
       )
