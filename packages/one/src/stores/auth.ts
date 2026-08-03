@@ -127,6 +127,15 @@ export const useAuthStore = defineStore('auth', () => {
     // After successful login (handled by callback), navigate and sync
     if (baseAuth.user) {
       baseAuth.dialog = false
+
+      // OAuth2 flow: redirect back to the authorization server instead of dashboard
+      const redirectUri = router.currentRoute.value.query.redirect_uri as string | undefined
+      const apiBase = import.meta.env.VITE_API_SERVER_URL as string
+      if (redirectUri && apiBase && redirectUri.startsWith(apiBase + '/')) {
+        window.location.href = redirectUri
+        return
+      }
+
       router.push('/user/dashboard')
       sync()
     }

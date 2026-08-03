@@ -19,6 +19,9 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (isAuthenticated && to.path !== '/user/dashboard') {
+    if (to.path === '/login' && to.query.redirect_uri) {
+      return next()
+    }
     return next({
       path: '/user/dashboard',
       query: to.query,
