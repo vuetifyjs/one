@@ -94,7 +94,7 @@
     mdiCreditCard,
     mdiHandHeart,
     mdiHistory,
-    mdiKey,
+    mdiConnection,
     mdiMenu,
   } from '@mdi/js'
   import { ECOSYSTEM_ACTIONS } from '@/composables/ecosystem'
@@ -133,7 +133,7 @@
     { value: 'subscriptions', title: 'Subscriptions', icon: mdiCreditCard },
     { value: 'sponsorships', title: 'Sponsorships', icon: mdiHandHeart },
     { value: 'team', title: 'Team', icon: mdiAccountGroup },
-    { value: 'mcp', title: 'MCP API Key', icon: mdiKey },
+    { value: 'mcp', title: 'MCP Access', icon: mdiConnection },
     { value: 'settings', title: 'Settings', icon: mdiCog },
   ]
 

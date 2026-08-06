@@ -1,15 +1,13 @@
 <script lang="ts" setup>
-  import { mdiKey } from '@mdi/js'
+  import { mdiConnection } from '@mdi/js'
 
   const dialog = defineModel<boolean>('modelValue')
 
-  const api = useApiKeyStore()
   const user = useUserStore()
 
-  watch(dialog, async val => {
+  watch(dialog, val => {
     if (val) {
       user.ecosystem.mcp.seen = true
-      await api.fetch()
     }
   })
 </script>
@@ -18,8 +16,8 @@
   <VoDialog
     v-model="dialog"
     height="auto"
-    :prepend-icon="`svg:${mdiKey}`"
-    title="API Key"
+    :prepend-icon="`svg:${mdiConnection}`"
+    title="MCP Access"
   >
     <v-layout>
       <v-main>
