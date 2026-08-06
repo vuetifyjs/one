@@ -43,6 +43,10 @@ export const useAuthStore = defineStore('auth', () => {
   const isAdmin = toRef(() => baseAuth.isAdmin)
   const isEditor = toRef(() => baseAuth.isEditor)
 
+  // Opt-in: when set, the auth dialog cannot be dismissed. Off by default so
+  // apps consuming @vuetify/one keep the normal dismissable dialog.
+  const persistent = shallowRef(false)
+
   let externalUpdate = !!baseAuth.lastLoginProvider()
 
   // Watch for user changes and sync settings
@@ -163,6 +167,7 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     url: http.url,
     dialog,
+    persistent,
     isLoading,
     isAuthenticated,
     isSuper,
