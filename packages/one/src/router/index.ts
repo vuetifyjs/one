@@ -22,6 +22,9 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login' && to.query.redirect_uri) {
       return next()
     }
+    if (to.path === '/oauth/consent') {
+      return next()
+    }
     return next({
       path: '/user/dashboard',
       query: to.query,
