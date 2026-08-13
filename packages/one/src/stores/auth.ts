@@ -43,6 +43,10 @@ export const useAuthStore = defineStore('auth', () => {
   const isAdmin = toRef(() => baseAuth.isAdmin)
   const isEditor = toRef(() => baseAuth.isEditor)
 
+  // Opt-in: when set, the auth dialog cannot be dismissed. Off by default so
+  // apps consuming @vuetify/one keep the normal dismissable dialog.
+  const persistent = shallowRef(false)
+
   let externalUpdate = !!baseAuth.lastLoginProvider()
 
   // Watch for user changes and sync settings
@@ -127,6 +131,15 @@ export const useAuthStore = defineStore('auth', () => {
     // After successful login (handled by callback), navigate and sync
     if (baseAuth.user) {
       baseAuth.dialog = false
+
+      // OAuth2 flow: redirect back to the authorization server instead of dashboard
+      const redirectUri = router.currentRoute.value.query.redirect_uri as string | undefined
+      const apiBase = import.meta.env.VITE_API_SERVER_URL as string
+      if (redirectUri && apiBase && redirectUri.startsWith(apiBase + '/')) {
+        window.location.href = redirectUri
+        return
+      }
+
       router.push('/user/dashboard')
       sync()
     }
@@ -154,6 +167,7 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     url: http.url,
     dialog,
+    persistent,
     isLoading,
     isAuthenticated,
     isSuper,

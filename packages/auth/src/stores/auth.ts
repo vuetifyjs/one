@@ -136,6 +136,14 @@ export const useAuthStore = defineStore('auth-core', () => {
     let interval = -1
     let timeout = -1
 
+    // Resolves once the popup reports back, errors, or times out. Without this
+    // login() returned while the popup was still open, so callers awaiting it
+    // saw a null user and skipped their post-login work.
+    let settle!: () => void
+    const finished = new Promise<void>(resolve => {
+      settle = resolve
+    })
+
     function messageHandler (e: MessageEvent) {
       // Validate origin
       if (e.origin !== http.url) {
@@ -172,6 +180,8 @@ export const useAuthStore = defineStore('auth-core', () => {
       ctx?.close()
 
       isLoading.value = false
+
+      settle()
     }
 
     window.addEventListener('message', messageHandler)
@@ -188,6 +198,8 @@ export const useAuthStore = defineStore('auth-core', () => {
       cleanup()
       callbacks.value.onError?.(new Error('Auth timed out'))
     }, 120 * 1000)
+
+    await finished
   }
 
   async function logout (identity?: string) {
