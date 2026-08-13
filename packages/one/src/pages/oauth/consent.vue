@@ -12,9 +12,13 @@
           </v-card-text>
 
           <v-card-actions class="pa-6 pt-0">
-            <v-btn variant="outlined" @click="deny">Decline</v-btn>
+            <form method="POST" :action="`${apiBase}/oauth/authorize/deny`">
+              <v-btn type="submit" variant="outlined">Decline</v-btn>
+            </form>
             <v-spacer />
-            <v-btn color="primary" variant="flat" @click="approve">Allow</v-btn>
+            <form method="POST" :action="`${apiBase}/oauth/authorize/approve`">
+              <v-btn type="submit" color="primary" variant="flat">Allow</v-btn>
+            </form>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -23,22 +27,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+  import { toRef } from 'vue'
+  import { useRoute } from 'vue-router'
 
-const route = useRoute()
+  const route = useRoute()
 
-const pending = computed(() => route.query.pending as string)
-const clientId = computed(() => route.query.client_id as string)
-const displayName = computed(() => (route.query.client_name as string) || clientId.value || 'An external application')
+  const clientId = toRef(() => route.query.client_id as string)
+  const displayName = toRef(() => (route.query.client_name as string) || clientId.value || 'An external application')
 
-const apiBase = import.meta.env.VITE_API_SERVER_URL as string
-
-function approve () {
-  window.location.href = `${apiBase}/oauth/authorize/approve?pending=${encodeURIComponent(pending.value)}`
-}
-
-function deny () {
-  window.location.href = `${apiBase}/oauth/authorize/deny?pending=${encodeURIComponent(pending.value)}`
-}
+  const apiBase = import.meta.env.VITE_API_SERVER_URL as string
 </script>
