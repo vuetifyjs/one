@@ -10,7 +10,6 @@ import 'vuetify/styles'
 // Framework
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
-import { VIconBtn } from 'vuetify/labs/VIconBtn'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import { aliases as oneAliases } from '@/icons'
 import * as mdiSvg from './icons'
@@ -27,7 +26,7 @@ export default createVuetify({
     AppChip: components.VChip,
   },
   components: {
-    VIconBtn,
+    VIconBtn: components.VIconBtn,
   },
   defaults: {
     global: {
