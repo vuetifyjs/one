@@ -25,6 +25,7 @@ export interface VOneBanner {
     start_date: string
     end_date: string
     bg_blur: number | null
+    ignore_delay?: boolean | null
     images: {
       bg: {
         url: string
@@ -62,15 +63,15 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       return undefined
     }
 
-    // Cooldown: 3 days since last banner interaction
+    // Cooldown: 3 days since last banner interaction.
+    // metadata.ignore_delay === true skips this global gate only.
+    let cooling = false
     if (user.one.banners.last) {
       const last = new Date(user.one.banners.last)
       const cooldownMs = 3 * 24 * 60 * 60 * 1000 // 3 days
       const ago = new Date(Date.now() - cooldownMs)
 
-      if (last > ago) {
-        return undefined
-      }
+      cooling = last > ago
     }
 
     // Filter eligible banners
@@ -79,9 +80,13 @@ export const useBannersStore = defineStore('banners', (): BannerState => {
       metadata: {
         site: _site,
         active,
+        ignore_delay,
       },
     }) => {
       if (!active) {
+        return false
+      }
+      if (cooling && ignore_delay !== true) {
         return false
       }
       if (user.one.banners.read.includes(slug)) {
